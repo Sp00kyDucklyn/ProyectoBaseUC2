@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,10 +35,10 @@ public class Persona implements Serializable {
     private Date fechaNa;
     private int telefono;
     
-    @OneToMany (mappedBy="Tramite")
+    @OneToMany (mappedBy="Persona", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Tramite> tramites;
     
-    @OneToMany(mappedBy="Vehiculo")
+    @OneToMany(mappedBy="Persona", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Vehiculo> vehiculos;
 
     public Persona() {
@@ -50,6 +51,17 @@ public class Persona implements Serializable {
         this.apellidoM = apellidoM;
         this.fechaNa = fechaNa;
         this.telefono = telefono;
+    }
+    
+    public Persona(Integer id, String nombre, String apellidoP, String apellidoM, Date fechaNa, int telefono, List<Tramite> tramites, List<Vehiculo> vehiculos) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellidoP = apellidoP;
+        this.apellidoM = apellidoM;
+        this.fechaNa = fechaNa;
+        this.telefono = telefono;
+        this.tramites = tramites;
+        this.vehiculos = vehiculos;
     }
 
     public Integer getId() {
@@ -123,6 +135,22 @@ public class Persona implements Serializable {
 
     public void setTelefono(int telefono) {
         this.telefono = telefono;
+    }
+
+    public List<Tramite> getTramites() {
+        return tramites;
+    }
+
+    public void setTramites(List<Tramite> tramites) {
+        this.tramites = tramites;
+    }
+
+    public List<Vehiculo> getVehiculos() {
+        return vehiculos;
+    }
+
+    public void setVehiculos(List<Vehiculo> vehiculos) {
+        this.vehiculos = vehiculos;
     }
     
 }

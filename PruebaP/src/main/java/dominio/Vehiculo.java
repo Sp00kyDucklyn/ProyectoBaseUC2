@@ -7,6 +7,7 @@ package dominio;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -38,6 +39,7 @@ public class Vehiculo implements Serializable {
     private Persona persona;
     
     @OneToOne
+    (cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private Placa placa;
 
     public Vehiculo() {

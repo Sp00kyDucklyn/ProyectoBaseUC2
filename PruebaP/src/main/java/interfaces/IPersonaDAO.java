@@ -5,6 +5,10 @@
 package interfaces;
 
 import dominio.Persona;
+import dominio.Tramite;
+import dominio.Vehiculo;
+import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -12,7 +16,7 @@ import dominio.Persona;
  */
 public interface IPersonaDAO {
     
-  public void crearPersona(Persona persona);
+  public void crearPersona(Integer id, String nombre, String apellidoP, String apellidoM, Date fechaNa, int telefono, List<Tramite> tramites, List<Vehiculo> vehiculos);
   
           
 }
