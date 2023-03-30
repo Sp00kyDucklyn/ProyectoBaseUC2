@@ -45,13 +45,15 @@ public class Vehiculo implements Serializable {
     public Vehiculo() {
     }
 
-    public Vehiculo(Integer id, String marca, String linea, String color, Date anio, String numPlacas) {
+    public Vehiculo(Integer id, String marca, String linea, String color, Date anio, String numPlacas, Persona persona, Placa placa) {
         this.id = id;
         this.marca = marca;
         this.linea = linea;
         this.color = color;
         this.anio = anio;
         this.numPlacas = numPlacas;
+        this.persona = persona;
+        this.placa = placa;
     }
     
     public Integer getId() {
@@ -125,6 +127,22 @@ public class Vehiculo implements Serializable {
 
     public void setNumPlacas(String numPlacas) {
         this.numPlacas = numPlacas;
+    }
+
+    public Persona getPersona() {
+        return persona;
+    }
+
+    public void setPersona(Persona persona) {
+        this.persona = persona;
+    }
+
+    public Placa getPlaca() {
+        return placa;
+    }
+
+    public void setPlaca(Placa placa) {
+        this.placa = placa;
     }
     
 }

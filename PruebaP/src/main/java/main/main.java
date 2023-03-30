@@ -25,19 +25,20 @@ public class main {
     public static void main(String[] args) {
         // TODO code application logic here
        PersonaDAO dao = new PersonaDAO(); //instanciamos la clase DAO
-        List<Tramite> tramites = new ArrayList<>(); //creamos una lista de tramites
-        List<Vehiculo> vehiculos = new ArrayList<>(); //creamos una lista de vehiculos
+        PersonaDAO personaDAO = new PersonaDAO();
+        Persona persona = new Persona();
+        persona.setId(1);
+        persona.setNombre("Juan");
+        persona.setApellidoP("Perez");
+        persona.setApellidoM("Gomez");
+        persona.setFechaNa(new Date());
+        persona.setTelefono(1234567890);
+        persona.setTramites(new ArrayList<Tramite>(0));
+        persona.setVehiculos(new ArrayList<Vehiculo>(0));
         
-        //creamos algunos objetos Tramite y Vehiculo para agregar a la persona
-        Tramite tramite1 = new Tramite();
-        Vehiculo vehiculo1 = new Vehiculo();
+        personaDAO.crearPersona(persona);
         
-        //agregamos los objetos a las listas
-        tramites.add(tramite1);
-        vehiculos.add(vehiculo1);
-        
-        //llamamos al método crearPersona de la clase DAO
-        dao.crearPersona(1, "Juan", "Perez", "García", new Date(), 1234567890, tramites, vehiculos);
+        System.out.println("Persona creada exitosamente");
     }
         
     

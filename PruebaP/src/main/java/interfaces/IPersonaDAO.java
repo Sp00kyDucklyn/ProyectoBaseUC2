@@ -16,7 +16,9 @@ import java.util.List;
  */
 public interface IPersonaDAO {
     
-  public void crearPersona(Integer id, String nombre, String apellidoP, String apellidoM, Date fechaNa, int telefono, List<Tramite> tramites, List<Vehiculo> vehiculos);
+  public void crearPersona(Persona persona);
   
+  public List<Tramite> listaTramite();
+  public List<Vehiculo> listaVehiculo();
           
 }

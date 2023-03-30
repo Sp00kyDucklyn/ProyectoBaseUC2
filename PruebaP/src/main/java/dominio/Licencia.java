@@ -44,16 +44,6 @@ public class Licencia extends Tramite implements Serializable {
         this.numeroLic = numeroLic;
     }
 
-    public Licencia(Integer id_Lic, int vigencia, Date fechaEx, String discapacitado, Estado estado, int numeroLic, Integer id, double costo) {
-        super(id, costo);
-        this.id = id_Lic;
-        this.vigencia = vigencia;
-        this.fechaEx = fechaEx;
-        this.discapacitado = discapacitado;
-        this.estado = estado;
-        this.numeroLic = numeroLic;
-    }
-
     public Integer getId() {
         return id;
     }

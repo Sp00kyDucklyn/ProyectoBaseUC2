@@ -40,15 +40,6 @@ public class Placa extends Tramite implements Serializable{
         this.estado = estado;
     }
 
-    public Placa(Integer id_Pl, Date fechaE, Date fechaR, int numPlacaNu, Estado estado, Integer id, double costo) {
-        super(id, costo);
-        this.id = id_Pl;
-        this.fechaE = fechaE;
-        this.fechaR = fechaR;
-        this.numPlacaNu = numPlacaNu;
-        this.estado = estado;
-    }
-    
     public Integer getId() {
         return id;
     }

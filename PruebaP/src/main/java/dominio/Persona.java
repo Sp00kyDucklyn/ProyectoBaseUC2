@@ -5,6 +5,7 @@
 package dominio;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -44,6 +45,15 @@ public class Persona implements Serializable {
     public Persona() {
     }
 
+//    public Persona(Integer id, String nombre, String apellidoP, String apellidoM, Date fechaNa, int telefono) {
+//        this.id = id;
+//        this.nombre = nombre;
+//        this.apellidoP = apellidoP;
+//        this.apellidoM = apellidoM;
+//        this.fechaNa = fechaNa;
+//        this.telefono = telefono;
+//    }
+    
     public Persona(Integer id, String nombre, String apellidoP, String apellidoM, Date fechaNa, int telefono) {
         this.id = id;
         this.nombre = nombre;
@@ -51,17 +61,8 @@ public class Persona implements Serializable {
         this.apellidoM = apellidoM;
         this.fechaNa = fechaNa;
         this.telefono = telefono;
-    }
-    
-    public Persona(Integer id, String nombre, String apellidoP, String apellidoM, Date fechaNa, int telefono, List<Tramite> tramites, List<Vehiculo> vehiculos) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellidoP = apellidoP;
-        this.apellidoM = apellidoM;
-        this.fechaNa = fechaNa;
-        this.telefono = telefono;
-        this.tramites = tramites;
-        this.vehiculos = vehiculos;
+        this.tramites = new ArrayList<>();
+        this.vehiculos = new ArrayList<>();
     }
 
     public Integer getId() {

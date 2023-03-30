@@ -34,9 +34,10 @@ public class Tramite implements Serializable {
     public Tramite() {
     }
 
-    public Tramite(Integer id, double costo) {
+    public Tramite(Integer id, double costo, Persona persona) {
         this.id = id;
         this.costo = costo;
+        this.persona = persona;
     }
 
     public Integer getId() {
@@ -78,6 +79,14 @@ public class Tramite implements Serializable {
 
     public void setCosto(double costo) {
         this.costo = costo;
+    }
+
+    public Persona getPersona() {
+        return persona;
+    }
+
+    public void setPersona(Persona persona) {
+        this.persona = persona;
     }
     
 }
