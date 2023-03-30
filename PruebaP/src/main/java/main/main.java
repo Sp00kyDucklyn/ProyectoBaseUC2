@@ -5,6 +5,7 @@
 package main;
 
 import dao.PersonaDAO;
+import dao.VehiculoDAO;
 import dominio.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,6 +13,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import pantallas.MenuPrincipal;
 
 /**
  *
@@ -23,7 +25,10 @@ public class main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+//            MenuPrincipal mp = new MenuPrincipal();  <-- PROBAR PANTALLAS
+//            mp.setVisible(true);
+        
        PersonaDAO dao = new PersonaDAO(); //instanciamos la clase DAO
         PersonaDAO personaDAO = new PersonaDAO();
         Persona persona = new Persona();
@@ -38,7 +43,31 @@ public class main {
         
         personaDAO.crearPersona(persona);
         
+
         System.out.println("Persona creada exitosamente");
+
+//        
+//        //agregamos los objetos a las listas
+//        tramites.add(tramite1);
+//        vehiculos.add(vehiculo1);
+//        
+//        //llamamos al método crearPersona de la clase DAO
+//        dao.crearPersona(1, "Juan", "Perez", "García", new Date(), 1234567890, tramites, vehiculos);
+
+      
+        VehiculoDAO vDao = new VehiculoDAO();
+        Vehiculo vehiculo = new Vehiculo();
+        vehiculo.setId(1);
+        vehiculo.setNumPlacas("111-AAA");
+        vehiculo.setMarca("Jeep");
+        vehiculo.setLinea("Patriot");
+        vehiculo.setColor("Blanco");
+        vehiculo.setAnio(new Date(2015));
+        vehiculo.setPersona(persona);
+        vDao.crearVehiculo(vehiculo);
+        
+        System.out.println("Vehiculo creado exitosamente");
+        
     }
         
     
