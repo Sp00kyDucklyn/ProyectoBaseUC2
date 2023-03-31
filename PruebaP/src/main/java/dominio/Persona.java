@@ -12,16 +12,22 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author hoshi
  */
 @Entity
+@Table(name="personas")
 public class Persona implements Serializable {
 
     @Id
@@ -36,8 +42,13 @@ public class Persona implements Serializable {
     private Date fechaNa;
     private int telefono;
     
-    @OneToMany (mappedBy="Persona", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    private List<Tramite> tramites;
+    @ManyToMany
+    @JoinTable(name = "persona_tramites", 
+            joinColumns = @JoinColumn(name="id_persona", nullable = false, unique= true,
+            foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key(id_persona) references personas(id_persona)")),
+            inverseJoinColumns = @JoinColumn( name="id_tramite", nullable = false, unique = true, 
+            foreignKey= @ForeignKey(foreignKeyDefinition = "foreign key(id_tramite) references tramites(id_tramite)")))
+    private List<Tramite> tramites = new ArrayList();
     
     @OneToMany(mappedBy="Persona", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Vehiculo> vehiculos;
@@ -71,31 +82,6 @@ public class Persona implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Persona)) {
-            return false;
-        }
-        Persona other = (Persona) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "dominio.Persona[ id=" + id + " ]";
     }
 
     public String getNombre() {
@@ -153,5 +139,7 @@ public class Persona implements Serializable {
     public void setVehiculos(List<Vehiculo> vehiculos) {
         this.vehiculos = vehiculos;
     }
+    
+    
     
 }
