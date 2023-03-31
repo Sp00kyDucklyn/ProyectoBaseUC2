@@ -8,20 +8,28 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author hoshi
  */
 @Entity
-public class Tramite implements Serializable {
+@Table(name = "tramites")
+@Inheritance (strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "tipo_tramite", discriminatorType = DiscriminatorType.STRING)
+public abstract class Tramite implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

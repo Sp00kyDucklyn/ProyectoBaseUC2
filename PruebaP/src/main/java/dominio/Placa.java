@@ -7,16 +7,20 @@ package dominio;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author hoshi
  */
 @Entity
+@Table(name = "placas")
+@DiscriminatorValue("placa")
 public class Placa extends Tramite implements Serializable{
 
     @Id
