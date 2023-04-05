@@ -4,6 +4,8 @@
  */
 package pantallas;
 
+import dao.MenuDAO;
+
 /**
  *
  * @author xfs85
@@ -28,122 +30,158 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        btnRealizacionTramite = new javax.swing.JButton();
+        btnConsulta = new javax.swing.JButton();
+        btnGeneracionReporte = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
+        btnAgregadaMasiva = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        btnRealizarTramite = new javax.swing.JButton();
-        btnConsultas = new javax.swing.JButton();
-        btnGenerarReporte = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1000, 920));
+        setPreferredSize(new java.awt.Dimension(1000, 650));
         setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setPreferredSize(new java.awt.Dimension(1000, 600));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/MenuPrincipal.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 920));
+        jPanel2.setOpaque(false);
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnRealizarTramite.setContentAreaFilled(false);
-        btnRealizarTramite.addActionListener(new java.awt.event.ActionListener() {
+        btnRealizacionTramite.setBorderPainted(false);
+        btnRealizacionTramite.setContentAreaFilled(false);
+        btnRealizacionTramite.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRealizarTramiteActionPerformed(evt);
+                btnRealizacionTramiteActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRealizarTramite, new org.netbeans.lib.awtextra.AbsoluteConstraints(795, 150, 180, 30));
+        jPanel2.add(btnRealizacionTramite, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 170, 30));
 
-        btnConsultas.setContentAreaFilled(false);
-        btnConsultas.addActionListener(new java.awt.event.ActionListener() {
+        btnConsulta.setBorderPainted(false);
+        btnConsulta.setContentAreaFilled(false);
+        btnConsulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConsultasActionPerformed(evt);
+                btnConsultaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnConsultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(795, 243, 180, 30));
+        jPanel2.add(btnConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 170, 40));
 
-        btnGenerarReporte.setContentAreaFilled(false);
-        btnGenerarReporte.addActionListener(new java.awt.event.ActionListener() {
+        btnGeneracionReporte.setBorderPainted(false);
+        btnGeneracionReporte.setContentAreaFilled(false);
+        btnGeneracionReporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGenerarReporteActionPerformed(evt);
+                btnGeneracionReporteActionPerformed(evt);
             }
         });
-        jPanel1.add(btnGenerarReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(805, 343, 160, 30));
+        jPanel2.add(btnGeneracionReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 170, 40));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 110, 210, 290));
 
+        btnSalir.setContentAreaFilled(false);
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 50, 50));
+
+        btnAgregadaMasiva.setBorderPainted(false);
+        btnAgregadaMasiva.setContentAreaFilled(false);
+        btnAgregadaMasiva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregadaMasivaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAgregadaMasiva, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 519, 130, 50));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/MenuPrincipal (2).png"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 1010, 600));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 602));
         jPanel1.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRealizarTramiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarTramiteActionPerformed
-         this.setVisible(false);
-         RegistroPersona rp = new RegistroPersona();
-         rp.setVisible(true);
-    }//GEN-LAST:event_btnRealizarTramiteActionPerformed
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
-      this.setVisible(false);
-         Consultas c = new Consultas();
-         c.setVisible(true);
-    }//GEN-LAST:event_btnConsultasActionPerformed
+    private void btnAgregadaMasivaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregadaMasivaActionPerformed
+        // TODO add your handling code here:
+        MenuDAO menu = new MenuDAO();
+        menu.llamarProcedimiento();
+    }//GEN-LAST:event_btnAgregadaMasivaActionPerformed
 
-    private void btnGenerarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarReporteActionPerformed
-      this.setVisible(false);
-         GeneracionReportes gr = new GeneracionReportes();
-         gr.setVisible(true);
-    }//GEN-LAST:event_btnGenerarReporteActionPerformed
+    private void btnRealizacionTramiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizacionTramiteActionPerformed
+        // TODO add your handling code here:
+        SeleccionTramite seleccion = new SeleccionTramite();
+        this.setVisible(false);
+        seleccion.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnRealizacionTramiteActionPerformed
+
+    private void btnConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaActionPerformed
+        // TODO add your handling code here:
+        Consultas cons = new Consultas();
+        this.setVisible(false);
+        cons.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnConsultaActionPerformed
+
+    private void btnGeneracionReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGeneracionReporteActionPerformed
+        // TODO add your handling code here:
+        GeneracionReportes repor = new GeneracionReportes();
+        this.setVisible(false);
+        repor.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnGeneracionReporteActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MenuPrincipal().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new MenuPrincipal().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnConsultas;
-    private javax.swing.JButton btnGenerarReporte;
-    private javax.swing.JButton btnRealizarTramite;
+    private javax.swing.JButton btnAgregadaMasiva;
+    private javax.swing.JButton btnConsulta;
+    private javax.swing.JButton btnGeneracionReporte;
+    private javax.swing.JButton btnRealizacionTramite;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }

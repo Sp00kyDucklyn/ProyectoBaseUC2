@@ -26,47 +26,51 @@ public class main {
      */
     public static void main(String[] args) {
         
-//            MenuPrincipal mp = new MenuPrincipal();  <-- PROBAR PANTALLAS
-//            mp.setVisible(true);
-        
-       PersonaDAO dao = new PersonaDAO(); //instanciamos la clase DAO
-        PersonaDAO personaDAO = new PersonaDAO();
-        Persona persona = new Persona();
-        persona.setId(1);
-        persona.setNombre("Juan");
-        persona.setApellidoP("Perez");
-        persona.setApellidoM("Gomez");
-        persona.setFechaNa(new Date());
-        persona.setTelefono(1234567890);
-        persona.setTramites(new ArrayList<Tramite>(0));
-        persona.setVehiculos(new ArrayList<Vehiculo>(0));
-        
-        personaDAO.crearPersona(persona);
-        
 
-        System.out.println("Persona creada exitosamente");
-
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new MenuPrincipal().setVisible(true);
+            }
+        });
+        
+//       PersonaDAO dao = new PersonaDAO(); //instanciamos la clase DAO
+//        PersonaDAO personaDAO = new PersonaDAO();
+//        Persona persona = new Persona();
+//        persona.setId(1);
+//        persona.setNombre("Juan");
+//        persona.setApellidoP("Perez");
+//        persona.setApellidoM("Gomez");
+//        persona.setFechaNa(new Date());
+//        persona.setTelefono(1234567890);
+//        persona.setTramites(new ArrayList<Tramite>(0));
+//        persona.setVehiculos(new ArrayList<Vehiculo>(0));
 //        
-//        //agregamos los objetos a las listas
-//        tramites.add(tramite1);
-//        vehiculos.add(vehiculo1);
+//        personaDAO.crearPersona(persona);
 //        
-//        //llamamos al método crearPersona de la clase DAO
-//        dao.crearPersona(1, "Juan", "Perez", "García", new Date(), 1234567890, tramites, vehiculos);
-
-      
-        VehiculoDAO vDao = new VehiculoDAO();
-        Vehiculo vehiculo = new Vehiculo();
-        vehiculo.setId(1);
-        vehiculo.setNumPlacas("111-AAA");
-        vehiculo.setMarca("Jeep");
-        vehiculo.setLinea("Patriot");
-        vehiculo.setColor("Blanco");
-        vehiculo.setAnio(new Date(2015));
-        vehiculo.setPersona(persona);
-        vDao.crearVehiculo(vehiculo);
-        
-        System.out.println("Vehiculo creado exitosamente");
+//
+//        System.out.println("Persona creada exitosamente");
+//
+////        
+////        //agregamos los objetos a las listas
+////        tramites.add(tramite1);
+////        vehiculos.add(vehiculo1);
+////        
+////        //llamamos al método crearPersona de la clase DAO
+////        dao.crearPersona(1, "Juan", "Perez", "García", new Date(), 1234567890, tramites, vehiculos);
+//
+//      
+//        VehiculoDAO vDao = new VehiculoDAO();
+//        Vehiculo vehiculo = new Vehiculo();
+//        vehiculo.setId(1);
+//        vehiculo.setNumPlacas("111-AAA");
+//        vehiculo.setMarca("Jeep");
+//        vehiculo.setLinea("Patriot");
+//        vehiculo.setColor("Blanco");
+//        vehiculo.setAnio(new Date(2015));
+//        vehiculo.setPersona(persona);
+//        vDao.crearVehiculo(vehiculo);
+//        
+//        System.out.println("Vehiculo creado exitosamente");
         
     }
         
