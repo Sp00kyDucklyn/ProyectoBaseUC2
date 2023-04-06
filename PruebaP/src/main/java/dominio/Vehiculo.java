@@ -35,7 +35,6 @@ public class Vehiculo implements Serializable {
     private String numPlacas;
     
     @ManyToOne
-    @JoinColumn(name = "id_Persona")
     private Persona persona;
     
     @OneToOne

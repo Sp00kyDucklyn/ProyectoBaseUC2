@@ -38,8 +38,8 @@ public abstract class Tramite implements Serializable {
     @Basic
     private double costo;
     
-    @ManyToMany(mappedBy = "tramites")
-    private List<Persona>personas = new ArrayList<>();
+//    @ManyToMany(mappedBy = "tramites")
+//    private List<Persona>personas = new ArrayList<>();
    
 
     public Tramite() {
@@ -67,13 +67,13 @@ public abstract class Tramite implements Serializable {
         this.costo = costo;
     }
 
-    public List<Persona> getPersonas() {
-        return personas;
-    }
-
-    public void setPersonas(List<Persona> personas) {
-        this.personas = personas;
-    }
+//    public List<Persona> getPersonas() {
+//        return personas;
+//    }
+//
+//    public void setPersonas(List<Persona> personas) {
+//        this.personas = personas;
+//    }
 
    
     

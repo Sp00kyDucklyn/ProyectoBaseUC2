@@ -18,7 +18,7 @@ public class VehiculoDAO implements IVehiculoDAO{
     private EntityManagerFactory entityManagerFactory = null;
 
     public VehiculoDAO() {
-        entityManagerFactory = Persistence.createEntityManagerFactory("ConexionPU");
+        entityManagerFactory = Persistence.createEntityManagerFactory("conexionPU");
     }
 
     public EntityManager getEntityManager(){

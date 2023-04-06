@@ -40,15 +40,9 @@ public class Persona implements Serializable {
     private String apellidoP;
     private String apellidoM;
     private Date fechaNa;
-    private int telefono;
+    private String telefono;
     
-    @ManyToMany
-    @JoinTable(name = "persona_tramites", 
-            joinColumns = @JoinColumn(name="id_persona", nullable = false, unique= true,
-            foreignKey = @ForeignKey(foreignKeyDefinition = "foreign key(id_persona) references personas(id_persona)")),
-            inverseJoinColumns = @JoinColumn( name="id_tramite", nullable = false, unique = true, 
-            foreignKey= @ForeignKey(foreignKeyDefinition = "foreign key(id_tramite) references tramites(id_tramite)")))
-    private List<Tramite> tramites = new ArrayList();
+    
     
     @OneToMany(mappedBy="Persona", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Vehiculo> vehiculos;
@@ -65,14 +59,13 @@ public class Persona implements Serializable {
 //        this.telefono = telefono;
 //    }
     
-    public Persona(Integer id, String nombre, String apellidoP, String apellidoM, Date fechaNa, int telefono) {
+    public Persona(Integer id, String nombre, String apellidoP, String apellidoM, Date fechaNa, String telefono) {
         this.id = id;
         this.nombre = nombre;
         this.apellidoP = apellidoP;
         this.apellidoM = apellidoM;
         this.fechaNa = fechaNa;
         this.telefono = telefono;
-        this.tramites = new ArrayList<>();
         this.vehiculos = new ArrayList<>();
     }
 
@@ -116,20 +109,12 @@ public class Persona implements Serializable {
         this.fechaNa = fechaNa;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
-    }
-
-    public List<Tramite> getTramites() {
-        return tramites;
-    }
-
-    public void setTramites(List<Tramite> tramites) {
-        this.tramites = tramites;
     }
 
     public List<Vehiculo> getVehiculos() {
