@@ -21,11 +21,22 @@ import javax.persistence.StoredProcedureQuery;
  * @author hoshi
  */
 public class MenuDAO implements IMenuDAO{
+    
+    private EntityManagerFactory entityManagerFactory = null;
+
+    public MenuDAO() {
+        entityManagerFactory = Persistence.createEntityManagerFactory("conexionPU");
+    }
+
+    public EntityManager getEntityManager() {
+        return entityManagerFactory.createEntityManager();
+    }
 
     @Override
     public void llamarProcedimiento() {
-       EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("conexionPU");
-       EntityManager em = emFactory.createEntityManager();
+       EntityManager em = getEntityManager();
+       em.getTransaction().begin();
+//       EntityManager.getTransaction().begin();
        
        StoredProcedureQuery storedProcedure = em.createStoredProcedureQuery("agregar_personas");
        
@@ -38,33 +49,59 @@ public class MenuDAO implements IMenuDAO{
        storedProcedure.registerStoredProcedureParameter(3, Date.class, ParameterMode.IN);
        //Nombre
        storedProcedure.registerStoredProcedureParameter(4, String.class, ParameterMode.IN);
-       //Telefono
+       //RFC
        storedProcedure.registerStoredProcedureParameter(5, String.class, ParameterMode.IN);
+       //Telefono
+       storedProcedure.registerStoredProcedureParameter(6, String.class, ParameterMode.IN);
+       
+       storedProcedure.registerStoredProcedureParameter(7, String.class, ParameterMode.IN);
        
         //Establecemos los valores de entrada con un arreglo que ya tiene 
         //A todas las personas a establecer
        String[][] personas = {
-            {"Valenzuela", "Tarazon", "2003-05-10", "Oscar", "345667890"},
-           //Marca error
-            {"Garcia", "Lopez", "1990-02-14", "Maria", "5551234567"},
-            {"Gonzalez", "Perez", "1985-10-22", "Pedro", "4447654321"},
-            {"Martinez", "Sanchez", "1977-06-05", "Luis", "7778901234"},
-            {"Hernandez", "Rivera", "1999-12-30", "Ana", "2225556789"},
-            {"Diaz", "Vazquez", "1983-09-17", "Juan", "3339994567"},
-            {"Romero", "Castillo", "1975-01-01", "Elena", "7778881234"},
-            {"Ramirez", "Gutierrez", "2005-08-08", "Miguel", "7778884567"},
-            {"Torres", "Lopez", "1994-04-20", "Sofia", "6667891234"},
-            {"Guzman", "Santos", "1992-11-12", "Carlos", "4446667890"},
-            {"Castro", "Rojas", "1979-07-26", "Laura", "3337773456"},
-            {"Reyes", "Fernandez", "2001-03-18", "David", "5554445678"},
-            {"Mendoza", "Pineda", "1988-12-05", "Jose", "3335556789"},
-            {"Ramos", "Torres", "1972-02-29", "Carmen", "7776662345"},
-            {"Sosa", "Lopez", "2008-11-17", "Diego", "2224446789"},
-            {"Orozco", "Castillo", "1981-05-15", "Fernanda", "4447772345"},
-            {"Chavez", "Mendez", "1996-09-02", "Gabriel", "5558883456"},
-            {"Medina", "Santos", "1970-07-07", "Adriana", "7774445678"},
-            {"Fuentes", "Vega", "2000-04-25", "Andres", "2227773456"},
-            {"Benitez", "Hernandez", "1998-01-13", "Jazmin", "4448881234"}};
+            {"Valenzuela", "Tarazon", "2003-05-10", "Oscar", "","345667890"},
+            {"Garcia", "Lopez", "1990-02-14", "Maria", "","5551234567"},
+            {"Gonzalez", "Perez", "1985-10-22", "Pedro", "","4447654321"},
+            {"Martinez", "Sanchez", "1977-06-05", "Luis", "","7778901234"},
+            {"Hernandez", "Rivera", "1999-12-30", "Ana", "","2225556789"},
+            {"Diaz", "Vazquez", "1983-09-17", "Juan", "","3339994567"},
+            {"Romero", "Castillo", "1975-01-01", "Elena", "","7778881234"},
+            {"Ramirez", "Gutierrez", "2005-08-08", "Miguel", "","7778884567"},
+            {"Torres", "Lopez", "1994-04-20", "Sofia", "","6667891234"},
+            {"Guzman", "Santos", "1992-11-12", "Carlos", "","4446667890"},
+            {"Castro", "Rojas", "1979-07-26", "Laura", "","3337773456"},
+            {"Reyes", "Fernandez", "2001-03-18", "David", "","5554445678"},
+            {"Mendoza", "Pineda", "1988-12-05", "Jose", "","3335556789"},
+            {"Ramos", "Torres", "1972-02-29", "Carmen", "","7776662345"},
+            {"Sosa", "Lopez", "2008-11-17", "Diego", "","2224446789"},
+            {"Orozco", "Castillo", "1981-05-15", "Fernanda", "","4447772345"},
+            {"Chavez", "Mendez", "1996-09-02", "Gabriel", "","5558883456"},
+            {"Medina", "Santos", "1970-07-07", "Adriana", "","7774445678"},
+            {"Fuentes", "Vega", "2000-04-25", "Andres", "","2227773456"},
+            {"Benitez", "Hernandez", "1998-01-13", "Jazmin", "","4448881234"}};
+       
+        String[][] tramites = {
+            {"licencia"},
+            {"licencia"},
+            {"licencia"},
+            {"licencia"},
+            {"licencia"},
+            {"licencia"},
+            {"licencia"},
+            {"licencia"},
+            {"licencia"},
+            {"licencia"},
+            {"licencia"},
+            {"placa"},
+            {"placa"},
+            {"placa"},
+            {"placa"},
+            {"licencia"},
+            {"licencia"},
+            {"licencia"},
+            {"licencia"},
+            {"placa"}
+        };
        
         for (int i = 0; i < personas.length; i++) {
             
@@ -84,15 +121,21 @@ public class MenuDAO implements IMenuDAO{
         
             storedProcedure.setParameter(4, personas[i][3]);
             storedProcedure.setParameter(5, personas[i][4]);
+            storedProcedure.setParameter(6, personas[i][5]);
+            
+            for (int j = 0; j < tramites.length; j++) {
+                
+             storedProcedure.setParameter(7, tramites[i][0]);
+            }
        
             // Ejecutamos el procedimiento almacenado
             storedProcedure.execute();
         }
        
-
+        em.getTransaction().commit();
         // Cerramos el EntityManager y el EntityManagerFactory
         em.close();
-        emFactory.close();
     }
+    
     
 }

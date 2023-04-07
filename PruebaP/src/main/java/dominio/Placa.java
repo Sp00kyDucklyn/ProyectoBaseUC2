@@ -24,7 +24,7 @@ import javax.persistence.Table;
 public class Placa extends Tramite implements Serializable{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
     @Basic
@@ -32,16 +32,18 @@ public class Placa extends Tramite implements Serializable{
     private Date fechaR;
     private int numPlacaNu;
     private Estado estado;
+    private double costo;
 
     public Placa() {
     }
 
-    public Placa(Integer id, Date fechaE, Date fechaR, int numPlacaNu, Estado estado) {
+    public Placa(Integer id, Date fechaE, Date fechaR, int numPlacaNu, Estado estado, double costo) {
         this.id = id;
         this.fechaE = fechaE;
         this.fechaR = fechaR;
         this.numPlacaNu = numPlacaNu;
         this.estado = estado;
+        this.costo = costo;
     }
 
     public Integer getId() {
@@ -107,6 +109,14 @@ public class Placa extends Tramite implements Serializable{
 
     public void setEstado(Estado estado) {
         this.estado = estado;
+    }
+
+    public double getCosto() {
+        return costo;
+    }
+
+    public void setCosto(double costo) {
+        this.costo = costo;
     }
     
 }

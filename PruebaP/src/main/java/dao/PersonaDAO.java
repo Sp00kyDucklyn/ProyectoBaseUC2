@@ -44,6 +44,11 @@ public class PersonaDAO implements IPersonaDAO{
         em.close();
     }
     }
+    
+    @Override
+    public void datosFormulatio() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     @Override
     public List<Tramite> listaTramite() {
@@ -54,9 +59,5 @@ public class PersonaDAO implements IPersonaDAO{
     public List<Vehiculo> listaVehiculo() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
-        
-
     
 }

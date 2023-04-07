@@ -45,6 +45,15 @@ public class TramitePersona implements Serializable {
     @ManyToOne()
     @JoinColumn(name = "idPersona", nullable = false)
     private Persona persona;
+
+    public TramitePersona() {
+    }
+
+    public TramitePersona(Integer id, Tramite tramite, Persona persona) {
+        this.id = id;
+        this.tramite = tramite;
+        this.persona = persona;
+    }
     
     public Integer getId() {
         return id;
@@ -74,9 +83,25 @@ public class TramitePersona implements Serializable {
         return true;
     }
 
+    public Tramite getTramite() {
+        return tramite;
+    }
+
+    public void setTramite(Tramite tramite) {
+        this.tramite = tramite;
+    }
+
+    public Persona getPersona() {
+        return persona;
+    }
+
+    public void setPersona(Persona persona) {
+        this.persona = persona;
+    }
+
     @Override
     public String toString() {
-        return "dominio.TramitePersona[ id=" + id + " ]";
+        return "TramitePersona{" + "id=" + id + ", tramite=" + tramite + ", persona=" + persona + '}';
     }
     
 }

@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
@@ -17,8 +18,8 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -32,11 +33,14 @@ import javax.persistence.Table;
 public abstract class Tramite implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    @Basic
-    private double costo;
+//    @Basic
+//    private double costo;
+    
+    @OneToMany(mappedBy= "tramite", cascade=(CascadeType.REMOVE))
+    private List<TramitePersona> TramitePersona;
     
 //    @ManyToMany(mappedBy = "tramites")
 //    private List<Persona>personas = new ArrayList<>();
@@ -45,9 +49,8 @@ public abstract class Tramite implements Serializable {
     public Tramite() {
     }
 
-    public Tramite(Integer id, double costo) {
+    public Tramite(Integer id) {
         this.id = id;
-        this.costo = costo;
       
     }
 
@@ -59,13 +62,7 @@ public abstract class Tramite implements Serializable {
         this.id = id;
     }
 
-    public double getCosto() {
-        return costo;
-    }
 
-    public void setCosto(double costo) {
-        this.costo = costo;
-    }
 
 //    public List<Persona> getPersonas() {
 //        return personas;

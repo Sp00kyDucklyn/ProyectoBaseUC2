@@ -27,47 +27,64 @@ import javax.persistence.Table;
  * @author hoshi
  */
 @Entity
-@Table(name="personas")
+@Table(name="persona")
 public class Persona implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_Persona")
+    @Column(name = "id_persona")
     private Integer id;
     
     @Basic
+    private String rfc;
     private String nombre;
     private String apellidoP;
     private String apellidoM;
     private Date fechaNa;
     private String telefono;
     
+    @OneToMany(mappedBy = "persona", cascade = (CascadeType.REMOVE))
+    private List<TramitePersona> TramitePersona;
     
-    
-    @OneToMany(mappedBy="Persona", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToMany(mappedBy="persona", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Vehiculo> vehiculos;
 
     public Persona() {
     }
 
-//    public Persona(Integer id, String nombre, String apellidoP, String apellidoM, Date fechaNa, int telefono) {
+    public Persona(String rfc, String nombre, String apellidoP, String apellidoM, Date fechaNa, String telefono) {
+        this.rfc = rfc;
+        this.nombre = nombre;
+        this.apellidoP = apellidoP;
+        this.apellidoM = apellidoM;
+        this.fechaNa = fechaNa;
+        this.telefono = telefono;
+    }
+
+    public Persona(Integer id, String rfc ,String nombre, String apellidoP, String apellidoM, Date fechaNa, String telefono, List<TramitePersona> TramitePersona, List<Vehiculo> vehiculos) {
+        this.id = id;
+        this.rfc = rfc;
+        this.nombre = nombre;
+        this.apellidoP = apellidoP;
+        this.apellidoM = apellidoM;
+        this.fechaNa = fechaNa;
+        this.telefono = telefono;
+        this.TramitePersona = TramitePersona;
+        this.vehiculos = vehiculos;
+    }
+
+    
+
+
+//    public Persona(Integer id, String nombre, String apellidoP, String apellidoM, Date fechaNa, String telefono) {
 //        this.id = id;
 //        this.nombre = nombre;
 //        this.apellidoP = apellidoP;
 //        this.apellidoM = apellidoM;
 //        this.fechaNa = fechaNa;
 //        this.telefono = telefono;
+//        this.vehiculos = new ArrayList<>();
 //    }
-    
-    public Persona(Integer id, String nombre, String apellidoP, String apellidoM, Date fechaNa, String telefono) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellidoP = apellidoP;
-        this.apellidoM = apellidoM;
-        this.fechaNa = fechaNa;
-        this.telefono = telefono;
-        this.vehiculos = new ArrayList<>();
-    }
 
     public Integer getId() {
         return id;
@@ -124,7 +141,21 @@ public class Persona implements Serializable {
     public void setVehiculos(List<Vehiculo> vehiculos) {
         this.vehiculos = vehiculos;
     }
-    
-    
+
+    public List<TramitePersona> getTramitePersona() {
+        return TramitePersona;
+    }
+
+    public void setTramitePersona(List<TramitePersona> TramitePersona) {
+        this.TramitePersona = TramitePersona;
+    }
+
+    public String getRfc() {
+        return rfc;
+    }
+
+    public void setRfc(String rfc) {
+        this.rfc = rfc;
+    }
     
 }
