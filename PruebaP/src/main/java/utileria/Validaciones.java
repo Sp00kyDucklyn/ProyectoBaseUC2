@@ -5,6 +5,8 @@
 package utileria;
 
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -77,4 +79,14 @@ public class Validaciones {
         dialog.setAlwaysOnTop(true);
         dialog.setVisible(true);
     }
+    
+    // Esta validación nos puede ayudar en las placas y numero de serie 
+    // de un vehiculo
+   public static boolean validarCadena(String cadena) {
+        Pattern pattern = Pattern.compile("^[A-Za-z]{3}-[0-9]{3}$");
+        Matcher matcher = pattern.matcher(cadena);
+        return matcher.matches();
+    } 
+    
+    
 }

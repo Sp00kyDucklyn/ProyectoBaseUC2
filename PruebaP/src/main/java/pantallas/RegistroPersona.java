@@ -167,7 +167,6 @@ public class RegistroPersona extends javax.swing.JFrame {
         cmbDisc.setEditable(true);
         cmbDisc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "si", "no" }));
         cmbDisc.setBorder(null);
-        cmbDisc.setOpaque(false);
         jPanel1.add(cmbDisc, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 456, 180, 30));
 
         btnVolver.setContentAreaFilled(false);

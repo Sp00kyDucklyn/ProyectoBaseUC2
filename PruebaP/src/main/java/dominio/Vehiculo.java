@@ -28,11 +28,11 @@ public class Vehiculo implements Serializable {
     private Integer id;
     
     @Basic
+    private String numSerie;
     private String marca;
     private String linea;
     private String color;
-    private Date anio;
-    private String numPlacas;
+    private String anio;
     
     @ManyToOne
     private Persona persona;
@@ -44,16 +44,14 @@ public class Vehiculo implements Serializable {
     public Vehiculo() {
     }
 
-    public Vehiculo(Integer id, String marca, String linea, String color, Date anio, String numPlacas, Persona persona, Placa placa) {
-        this.id = id;
+    public Vehiculo(String numSerie, String marca, String linea, String color, String anio) {
+        this.numSerie = numSerie;
         this.marca = marca;
         this.linea = linea;
         this.color = color;
         this.anio = anio;
-        this.numPlacas = numPlacas;
-        this.persona = persona;
-        this.placa = placa;
     }
+
     
     public Integer getId() {
         return id;
@@ -112,21 +110,14 @@ public class Vehiculo implements Serializable {
         this.color = color;
     }
 
-    public Date getAnio() {
+    public String getAnio() {
         return anio;
     }
 
-    public void setAnio(Date anio) {
+    public void setAnio(String anio) {
         this.anio = anio;
     }
 
-    public String getNumPlacas() {
-        return numPlacas;
-    }
-
-    public void setNumPlacas(String numPlacas) {
-        this.numPlacas = numPlacas;
-    }
 
     public Persona getPersona() {
         return persona;
@@ -143,5 +134,14 @@ public class Vehiculo implements Serializable {
     public void setPlaca(Placa placa) {
         this.placa = placa;
     }
+
+    public String getNumSerie() {
+        return numSerie;
+    }
+
+    public void setNumSerie(String numSerie) {
+        this.numSerie = numSerie;
+    }
+    
     
 }

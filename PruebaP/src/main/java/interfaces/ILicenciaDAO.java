@@ -4,11 +4,13 @@
  */
 package interfaces;
 
+import dominio.Licencia;
+
 /**
  *
  * @author hoshi
  */
 public interface ILicenciaDAO {
     
-    
+    public void crearLicencia(Licencia licencia);
 }
