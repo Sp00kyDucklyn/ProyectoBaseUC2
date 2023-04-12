@@ -37,10 +37,15 @@ public class Persona implements Serializable {
     
     @Basic
     private String rfc;
+   
     private String nombre;
+    
     private String apellidoP;
+    
     private String apellidoM;
+    
     private Date fechaNa;
+   
     private String telefono;
     
     @OneToMany(mappedBy = "persona", cascade = (CascadeType.REMOVE))
