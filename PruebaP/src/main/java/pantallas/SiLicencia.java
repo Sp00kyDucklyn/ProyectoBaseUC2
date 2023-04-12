@@ -4,6 +4,15 @@
  */
 package pantallas;
 
+import dao.LicenciaDAO;
+import dominio.Persona;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import javax.swing.JOptionPane;
+import utileria.Validaciones;
+
 /**
  *
  * @author xfs85
@@ -13,9 +22,15 @@ public class SiLicencia extends javax.swing.JFrame {
     /**
      * Creates new form SiLicencia
      */
+    Persona persona = new Persona ();
+    LicenciaDAO licenciaDAO = new LicenciaDAO();
+    
     public SiLicencia() {
         initComponents();
     }
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,9 +42,12 @@ public class SiLicencia extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        btnCancelarRegistro = new javax.swing.JButton();
+        btnAceptarRegistro = new javax.swing.JButton();
+        btnBuscarRFC = new javax.swing.JButton();
         txtRfc = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
+        lblCosto = new javax.swing.JLabel();
+        cmbVigencia = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -38,14 +56,37 @@ public class SiLicencia extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(1000, 621));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtRfc.setEditable(false);
-        jPanel1.add(txtRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 152, 190, 30));
+        btnCancelarRegistro.setText("Cancelar");
+        jPanel1.add(btnCancelarRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 460, -1, 30));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "1 año", "2 años", "3 años" }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 110, -1));
+        btnAceptarRegistro.setText("Aceptar");
+        jPanel1.add(btnAceptarRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 460, -1, 30));
 
-        jTextField1.setEditable(false);
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 370, 180, 30));
+        btnBuscarRFC.setText("Buscar RFC");
+        btnBuscarRFC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarRFCActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnBuscarRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 159, -1, 30));
+
+        txtRfc.setBorder(null);
+        txtRfc.setOpaque(false);
+        txtRfc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRfcActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 142, 210, 50));
+        jPanel1.add(lblCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 370, 210, 30));
+
+        cmbVigencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "1 año", "2 años", "3 años" }));
+        cmbVigencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbVigenciaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cmbVigencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 110, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/SiLicencia.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -53,7 +94,52 @@ public class SiLicencia extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 598));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cmbVigenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbVigenciaActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_cmbVigenciaActionPerformed
+
+    private void txtRfcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRfcActionPerformed
+        // TODO add your handling code here:
+      
+    }//GEN-LAST:event_txtRfcActionPerformed
+
+    private void btnBuscarRFCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarRFCActionPerformed
+        // TODO add your handling code here:
+       String rfc = txtRfc.getText();
+        
+        List<Persona> personas = licenciaDAO.llamarRFC(rfc);
+        Validaciones val = new Validaciones();
+        
+        // Verificar si se encontró alguna persona con el RFC buscado
+        if (personas.isEmpty()) {
+            val.mostrarMensaje("No se encontro el rfc", "Error", "Busqueda de rfc");
+            
+            int confirmacion = JOptionPane.YES_NO_CANCEL_OPTION;
+            JOptionPane.showConfirmDialog(this, "¿Quiere registrarlo?", "Registro", confirmacion);
+            
+            if(confirmacion == 1){
+                this.setVisible(false);
+                RegistroPersona registro = new RegistroPersona();
+                registro.setVisible(true);
+                this.dispose();
+                
+            } else if(confirmacion == 0){
+                this.setVisible(false);
+                MenuPrincipal menu = new MenuPrincipal();
+                menu.setVisible(true);
+                this.dispose();
+                
+            }else;
+            
+        } else {
+            Persona personaEncontrada = personas.get(0);
+            val.mostrarMensaje("Se encontró a la persona con el RFC ingresado: " + personaEncontrada.getNombre(), "Info", "Busqueda de rfc");
+        }
+    }//GEN-LAST:event_btnBuscarRFCActionPerformed
 
     /**
      * @param args the command line arguments
@@ -91,10 +177,13 @@ public class SiLicencia extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btnAceptarRegistro;
+    private javax.swing.JButton btnBuscarRFC;
+    private javax.swing.JButton btnCancelarRegistro;
+    private javax.swing.JComboBox<String> cmbVigencia;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblCosto;
     private javax.swing.JTextField txtRfc;
     // End of variables declaration//GEN-END:variables
 }

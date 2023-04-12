@@ -116,6 +116,7 @@ public class SiPlaca extends javax.swing.JFrame {
         txtLinea = new javax.swing.JTextField();
         txtAnio = new javax.swing.JTextField();
         txtColor = new javax.swing.JTextField();
+        btnSiguiente = new javax.swing.JButton();
         botonGuardar = new javax.swing.JButton();
         botonCancelar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -156,7 +157,17 @@ public class SiPlaca extends javax.swing.JFrame {
         txtColor.setBorder(null);
         jPanel1.add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 422, 190, 30));
 
-        botonGuardar.setText("Guardar");
+        btnSiguiente.setBorder(null);
+        btnSiguiente.setContentAreaFilled(false);
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguienteActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 570, 50, 40));
+
+        botonGuardar.setBorder(null);
+        botonGuardar.setContentAreaFilled(false);
         botonGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonGuardarActionPerformed(evt);
@@ -164,7 +175,8 @@ public class SiPlaca extends javax.swing.JFrame {
         });
         jPanel1.add(botonGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 553, 170, 30));
 
-        botonCancelar.setText("Cancelar");
+        botonCancelar.setBorder(null);
+        botonCancelar.setContentAreaFilled(false);
         botonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonCancelarActionPerformed(evt);
@@ -206,6 +218,14 @@ public class SiPlaca extends javax.swing.JFrame {
          this.dispose();
     }//GEN-LAST:event_botonCancelarActionPerformed
 
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        SiPlaca2 placa = new SiPlaca2();
+        placa.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSiguienteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -244,6 +264,7 @@ public class SiPlaca extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonCancelar;
     private javax.swing.JButton botonGuardar;
+    private javax.swing.JButton btnSiguiente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtAnio;

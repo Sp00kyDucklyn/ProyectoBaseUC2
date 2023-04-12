@@ -52,6 +52,17 @@ public class Vehiculo implements Serializable {
         this.anio = anio;
     }
 
+    public Vehiculo(Integer id, String numSerie, String marca, String linea, String color, String anio, Persona persona, Placa placa) {
+        this.id = id;
+        this.numSerie = numSerie;
+        this.marca = marca;
+        this.linea = linea;
+        this.color = color;
+        this.anio = anio;
+        this.persona = persona;
+        this.placa = placa;
+    }
+
     
     public Integer getId() {
         return id;

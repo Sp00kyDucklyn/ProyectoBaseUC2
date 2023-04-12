@@ -30,24 +30,33 @@ public class Licencia extends Tramite implements Serializable {
     private Integer id;
     
     @Basic
-    private int vigencia;
-    private Date fechaEx;
+    //Lo pone el usuario
+    private Vigencia vigencia;
+    //Lo obtiene de la fecha del sistema
+    private Date fechaExpedicion;
+    //Lo calcula el sistema
+    private Date fechaVencimiento;
+    //Lo pongo yo en registro persona
     private String discapacitado;
-    private Estado estado;
+    //Lo produce el sistema
+    private String estado;
+    //Lo produce el sistema
     private int numeroLic;
+    //Se calcula solo(en teoria)
     private double costo;
 
     public Licencia() {
     }
 
-    public Licencia(Integer id, int vigencia, Date fechaEx, String discapacitado, Estado estado, int numeroLic, double costo) {
+    public Licencia(Integer id, Vigencia vigencia, Date fechaExpedicion, Date fechaVencimiento, String discapacitado, String estado, int numeroLic, double costo) {
         this.id = id;
         this.vigencia = vigencia;
-        this.fechaEx = fechaEx;
+        this.fechaExpedicion = fechaExpedicion;
+        this.fechaVencimiento = fechaVencimiento;
         this.discapacitado = discapacitado;
         this.estado = estado;
         this.numeroLic = numeroLic;
-        this.costo= costo;
+        this.costo = costo;
     }
 
     public Integer getId() {
@@ -83,20 +92,20 @@ public class Licencia extends Tramite implements Serializable {
         return "dominio.Licencia[ id=" + id + " ]";
     }
 
-    public int getVigencia() {
+    public Vigencia getVigencia() {
         return vigencia;
     }
 
-    public void setVigencia(int vigencia) {
+    public void setVigencia(Vigencia vigencia) {
         this.vigencia = vigencia;
     }
 
-    public Date getFechaEx() {
-        return fechaEx;
+    public Date getFechaExpedicion() {
+        return fechaExpedicion;
     }
 
-    public void setFechaEx(Date fechaEx) {
-        this.fechaEx = fechaEx;
+    public void setFechaExpedicion(Date fechaExpedicion) {
+        this.fechaExpedicion = fechaExpedicion;
     }
 
     public String getDiscapacitado() {
@@ -107,11 +116,11 @@ public class Licencia extends Tramite implements Serializable {
         this.discapacitado = discapacitado;
     }
 
-    public Estado getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Estado estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 
@@ -129,6 +138,14 @@ public class Licencia extends Tramite implements Serializable {
 
     public void setCosto(double costo) {
         this.costo = costo;
+    }
+
+    public Date getFechaVencimiento() {
+        return fechaVencimiento;
+    }
+
+    public void setFechaVencimiento(Date fechaVencimiento) {
+        this.fechaVencimiento = fechaVencimiento;
     }
     
 }

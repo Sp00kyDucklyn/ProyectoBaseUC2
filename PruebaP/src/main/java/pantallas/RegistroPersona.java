@@ -39,7 +39,7 @@ public class RegistroPersona extends javax.swing.JFrame {
         List<String> erroresVaidacion = this.validarDatosFormulario(datosFormulario);
         if(!erroresVaidacion.isEmpty()){
             this.mostrarErroresValidacion(erroresVaidacion);
-//            return;
+//            return persona;
         }
         
         
@@ -113,8 +113,6 @@ public class RegistroPersona extends javax.swing.JFrame {
 //        }
 //         
          return erroresValidacion;
-        //Yo podria meter expresiones regulares, se puede hacer clase de 
-        //validaciones
     }
 
     /**
@@ -133,6 +131,7 @@ public class RegistroPersona extends javax.swing.JFrame {
         txtApellidoP = new javax.swing.JTextField();
         txtRfc = new javax.swing.JTextField();
         txtApellidoM = new javax.swing.JTextField();
+        btnSiguiente = new javax.swing.JButton();
         cmbDisc = new javax.swing.JComboBox<>();
         btnVolver = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
@@ -164,6 +163,15 @@ public class RegistroPersona extends javax.swing.JFrame {
         txtApellidoM.setBorder(null);
         jPanel1.add(txtApellidoM, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 280, 200, 40));
 
+        btnSiguiente.setBorder(null);
+        btnSiguiente.setContentAreaFilled(false);
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguienteActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 550, 50, 40));
+
         cmbDisc.setEditable(true);
         cmbDisc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "si", "no" }));
         cmbDisc.setBorder(null);
@@ -179,6 +187,11 @@ public class RegistroPersona extends javax.swing.JFrame {
 
         btnCancelar.setBorderPainted(false);
         btnCancelar.setContentAreaFilled(false);
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(343, 529, 200, 40));
 
         btnGuardar.setBorder(null);
@@ -202,6 +215,7 @@ public class RegistroPersona extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        
         try {
             //Crear objeto Persona
             personaDAO.crearPersona(this.agregarPersona());
@@ -220,6 +234,19 @@ public class RegistroPersona extends javax.swing.JFrame {
          seleccion.setVisible(true);
          this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        SiLicencia licencia = new SiLicencia();
+        licencia.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSiguienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -259,6 +286,7 @@ public class RegistroPersona extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnSiguiente;
     private javax.swing.JButton btnVolver;
     private javax.swing.JComboBox<String> cmbDisc;
     private javax.swing.JLabel jLabel1;

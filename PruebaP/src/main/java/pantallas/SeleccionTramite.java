@@ -49,7 +49,9 @@ public class SeleccionTramite extends javax.swing.JFrame {
 
         panOpciones = new javax.swing.JPanel();
         btnRegistro = new javax.swing.JButton();
+        btnPlacas = new javax.swing.JButton();
         btnPersona = new javax.swing.JButton();
+        btnLicencia = new javax.swing.JButton();
         btnVehiculo = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
         btnRenovacion = new javax.swing.JButton();
@@ -62,7 +64,8 @@ public class SeleccionTramite extends javax.swing.JFrame {
         panOpciones.setPreferredSize(new java.awt.Dimension(800, 600));
         panOpciones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnRegistro.setText("jButton1");
+        btnRegistro.setBorder(null);
+        btnRegistro.setContentAreaFilled(false);
         btnRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnRegistroMouseClicked(evt);
@@ -73,9 +76,17 @@ public class SeleccionTramite extends javax.swing.JFrame {
                 btnRegistroActionPerformed(evt);
             }
         });
-        panOpciones.add(btnRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 230, 190, -1));
+        panOpciones.add(btnRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 230, 200, 30));
 
-        btnPersona.setText("jButton1");
+        btnPlacas.setText("Placas");
+        btnPlacas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPlacasActionPerformed(evt);
+            }
+        });
+        panOpciones.add(btnPlacas, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 440, -1, -1));
+
+        btnPersona.setText("Persona");
         btnPersona.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPersonaActionPerformed(evt);
@@ -83,7 +94,16 @@ public class SeleccionTramite extends javax.swing.JFrame {
         });
         panOpciones.add(btnPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 440, -1, -1));
 
-        btnVehiculo.setText("jButton1");
+        btnLicencia.setText("Licencia");
+        btnLicencia.setToolTipText("");
+        btnLicencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLicenciaActionPerformed(evt);
+            }
+        });
+        panOpciones.add(btnLicencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 440, -1, -1));
+
+        btnVehiculo.setText("Vehiculo");
         btnVehiculo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVehiculoActionPerformed(evt);
@@ -100,7 +120,9 @@ public class SeleccionTramite extends javax.swing.JFrame {
         });
         panOpciones.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 19, 30, 40));
 
-        btnRenovacion.setText("jButton1");
+        btnRenovacion.setBorder(null);
+        btnRenovacion.setContentAreaFilled(false);
+        btnRenovacion.setOpaque(false);
         btnRenovacion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnRenovacionMouseClicked(evt);
@@ -111,7 +133,7 @@ public class SeleccionTramite extends javax.swing.JFrame {
                 btnRenovacionActionPerformed(evt);
             }
         });
-        panOpciones.add(btnRenovacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, 190, -1));
+        panOpciones.add(btnRenovacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, 190, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/Cuadro1 (1).png"))); // NOI18N
         panOpciones.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 1000, -1));
@@ -131,7 +153,13 @@ public class SeleccionTramite extends javax.swing.JFrame {
 
     private void btnRenovacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRenovacionActionPerformed
         // TODO add your handling code here:
-        
+         if(btnRenovacion.isSelected()){
+            btnLicencia.setVisible(false);
+            btnPlacas.setVisible(false);
+        }else{
+            btnLicencia.setVisible(true);
+            btnPlacas.setVisible(true);
+        }
     }//GEN-LAST:event_btnRenovacionActionPerformed
 
     private void btnRenovacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRenovacionMouseClicked
@@ -141,6 +169,10 @@ public class SeleccionTramite extends javax.swing.JFrame {
 
     private void btnVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVehiculoActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
+        SiPlaca vehiculo = new SiPlaca();
+        vehiculo.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnVehiculoActionPerformed
 
     private void btnRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistroMouseClicked
@@ -151,9 +183,7 @@ public class SeleccionTramite extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistroMouseClicked
 
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
-        // TODO add your handling code here:
-        
-            
+        // TODO add your handling code here:   
         if(btnRegistro.isSelected()){
             btnPersona.setVisible(false);
             btnVehiculo.setVisible(false);
@@ -170,6 +200,22 @@ public class SeleccionTramite extends javax.swing.JFrame {
         registro.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnPersonaActionPerformed
+
+    private void btnPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlacasActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        SiPlaca2 placa = new SiPlaca2();
+        placa.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnPlacasActionPerformed
+
+    private void btnLicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLicenciaActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        SiLicencia licencia = new SiLicencia();
+        licencia.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnLicenciaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -207,7 +253,9 @@ public class SeleccionTramite extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLicencia;
     private javax.swing.JButton btnPersona;
+    private javax.swing.JButton btnPlacas;
     private javax.swing.JButton btnRegistro;
     private javax.swing.JButton btnRenovacion;
     private javax.swing.JButton btnVehiculo;

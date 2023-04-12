@@ -5,6 +5,8 @@
 package interfaces;
 
 import dominio.Licencia;
+import dominio.Persona;
+import java.util.List;
 
 /**
  *
@@ -13,4 +15,10 @@ import dominio.Licencia;
 public interface ILicenciaDAO {
     
     public void crearLicencia(Licencia licencia);
+    
+    public List<Persona> llamarRFC(String rfc);
+    
+    public void costo();
+    
+    public void licenciaVigente();
 }
