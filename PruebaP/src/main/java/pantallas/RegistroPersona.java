@@ -49,8 +49,8 @@ public class RegistroPersona extends javax.swing.JFrame {
          String apellidoM = datosFormulario.get("apellidoM");
          Date fechaNa = new SimpleDateFormat("yyyy-MM-dd").parse(datosFormulario.get("fechaNa"));
          String telefono = datosFormulario.get("telefono");
-
-         Persona persona = new Persona(rfc, nombre, apellidoP, apellidoM, fechaNa, telefono);
+         
+         Persona persona = new Persona(rfc, nombre , apellidoP, apellidoM, fechaNa, telefono);
 
          return persona;
     }
@@ -73,7 +73,6 @@ public class RegistroPersona extends javax.swing.JFrame {
         Date fechaNa = txtFechaNa.getDate();
         //Transformar numero de telefono a numero
         String numTelefono = txtNumT.getText();
-        String discapacitado = (String)cmbDisc.getSelectedItem();
         //Primero es mejor guardarlo en String, validarlo y luego convertirlo a int
 //        String precio = this.jTextField2.getText();
         // Crear instancia de SimpleDateFormat con el formato deseado
@@ -90,7 +89,6 @@ public class RegistroPersona extends javax.swing.JFrame {
         datosFormulario.put("rfc", rfc);
         datosFormulario.put("fechaNa", fechaNaString);
         datosFormulario.put("numTelefono", numTelefono);
-        datosFormulario.put("discapacitado", discapacitado);
         
         //Estos datos se extraen como strings y posteriormente se validan
         return datosFormulario;
@@ -101,11 +99,53 @@ public class RegistroPersona extends javax.swing.JFrame {
         
         List<String> erroresValidacion = new LinkedList<>();
         String nombre = datosFormulario.get("nombre");
+        String apellidoP = datosFormulario.get("apellidoP");
+        String apellidoM = datosFormulario.get("apellidoM");
+        String rfc = datosFormulario.get("rfc");
+        String fechaNa = datosFormulario.get("fechaNa");
+        String numTelefono = datosFormulario.get("numTelefono");
+        
         if(Validaciones.esTextoVacio(nombre)){
-            erroresValidacion.add("El nombre esta vacio");
+            erroresValidacion.add("Un campo esta vacio");
         }
         if(Validaciones.excedeLimite(nombre,50)){
-            erroresValidacion.add("El nombre excede el limite de caracteres");
+            erroresValidacion.add("Un campo excede el limite de caracteres");
+        }
+        
+        
+        if(Validaciones.esTextoVacio(apellidoP)){
+            erroresValidacion.add("Un campo esta vacio");
+        }
+        if(Validaciones.excedeLimite(apellidoP,50)){
+            erroresValidacion.add("Un campo excede el limite de caracteres");
+        }
+        
+        if(Validaciones.esTextoVacio(apellidoM)){
+            erroresValidacion.add("Un campo esta vacio");
+        }
+        if(Validaciones.excedeLimite(apellidoM,50)){
+            erroresValidacion.add("Un campo excede el limite de caracteres");
+        }
+        
+        if(Validaciones.esTextoVacio(rfc)){
+            erroresValidacion.add("Un campo esta vacio");
+        }
+        if(Validaciones.excedeLimite(rfc,50)){
+            erroresValidacion.add("Un campo excede el limite de caracteres");
+        }
+        
+        if(Validaciones.esTextoVacio(fechaNa)){
+            erroresValidacion.add("Un campo esta vacio");
+        }
+        if(Validaciones.excedeLimite(fechaNa,50)){
+            erroresValidacion.add("Un campo excede el limite de caracteres");
+        }
+        
+        if(Validaciones.esTextoVacio(numTelefono)){
+            erroresValidacion.add("Un campo esta vacio");
+        }
+        if(Validaciones.excedeLimite(numTelefono,50)){
+            erroresValidacion.add("Un campo excede el limite de caracteres");
         }
 //        String numeroT = datosFormulario.get("precio");
 //         if(ValidadorDatos.esEntero(precio)){
@@ -132,7 +172,6 @@ public class RegistroPersona extends javax.swing.JFrame {
         txtRfc = new javax.swing.JTextField();
         txtApellidoM = new javax.swing.JTextField();
         btnSiguiente = new javax.swing.JButton();
-        cmbDisc = new javax.swing.JComboBox<>();
         btnVolver = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
@@ -172,11 +211,6 @@ public class RegistroPersona extends javax.swing.JFrame {
         });
         jPanel1.add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 550, 50, 40));
 
-        cmbDisc.setEditable(true);
-        cmbDisc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "si", "no" }));
-        cmbDisc.setBorder(null);
-        jPanel1.add(cmbDisc, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 456, 180, 30));
-
         btnVolver.setContentAreaFilled(false);
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -215,7 +249,7 @@ public class RegistroPersona extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        
+       
         try {
             //Crear objeto Persona
             personaDAO.crearPersona(this.agregarPersona());
@@ -288,7 +322,6 @@ public class RegistroPersona extends javax.swing.JFrame {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JButton btnVolver;
-    private javax.swing.JComboBox<String> cmbDisc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtApellidoM;

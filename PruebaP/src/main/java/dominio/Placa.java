@@ -28,22 +28,21 @@ public class Placa extends Tramite implements Serializable{
     private Integer id;
     
     @Basic
-    private Date fechaE;
-    private Date fechaR;
-    private int numPlacaNu;
-    private Estado estado;
-    private double costo;
+    private Date fechaExpedicion;
+    private Date fechaVencimiento;
+    private String numPlacaNu;
+    private String estado;
+    //private double costo;
 
     public Placa() {
     }
 
-    public Placa(Integer id, Date fechaE, Date fechaR, int numPlacaNu, Estado estado, double costo) {
+    public Placa(Integer id, Date fechaExpedicion, Date fechaVencimiento, String numPlacaNu, String estado) {
         this.id = id;
-        this.fechaE = fechaE;
-        this.fechaR = fechaR;
+        this.fechaExpedicion = fechaExpedicion;
+        this.fechaVencimiento = fechaVencimiento;
         this.numPlacaNu = numPlacaNu;
         this.estado = estado;
-        this.costo = costo;
     }
 
     public Integer getId() {
@@ -79,44 +78,44 @@ public class Placa extends Tramite implements Serializable{
         return "dominio.Placa[ id=" + id + " ]";
     }
 
-    public Date getFechaE() {
-        return fechaE;
+    public Date getFechaExpedicion() {
+        return fechaExpedicion;
     }
 
-    public void setFechaE(Date fechaE) {
-        this.fechaE = fechaE;
+    public void setFechaExpedicion(Date fechaExpedicion) {
+        this.fechaExpedicion = fechaExpedicion;
     }
 
-    public Date getFechaR() {
-        return fechaR;
+    public Date getFechaVencimiento() {
+        return fechaVencimiento;
     }
 
-    public void setFechaR(Date fechaR) {
-        this.fechaR = fechaR;
+    public void setFechaVencimiento(Date fechaVencimiento) {
+        this.fechaVencimiento = fechaVencimiento;
     }
 
-    public int getNumPlacaNu() {
+    public String getNumPlacaNu() {
         return numPlacaNu;
     }
 
-    public void setNumPlacaNu(int numPlacaNu) {
+    public void setNumPlacaNu(String numPlacaNu) {
         this.numPlacaNu = numPlacaNu;
     }
 
-    public Estado getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Estado estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 
-    public double getCosto() {
-        return costo;
-    }
-
-    public void setCosto(double costo) {
-        this.costo = costo;
-    }
+//    public double getCosto() {
+//        return costo;
+//    }
+//
+//    public void setCosto(double costo) {
+//        this.costo = costo;
+//    }
     
 }

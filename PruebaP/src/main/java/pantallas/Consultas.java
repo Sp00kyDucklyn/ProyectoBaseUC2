@@ -16,6 +16,10 @@ public class Consultas extends javax.swing.JFrame {
     public Consultas() {
         initComponents();
     }
+    
+    private void buscarPersonas() {
+       
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,7 +31,12 @@ public class Consultas extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        btnBusqueda = new javax.swing.JButton();
+        txtBusqueda = new javax.swing.JTextField();
         btnRegresarMenu = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -35,6 +44,23 @@ public class Consultas extends javax.swing.JFrame {
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1000, 600));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnBusqueda.setBorder(null);
+        btnBusqueda.setContentAreaFilled(false);
+        btnBusqueda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBusquedaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(767, 90, 30, 30));
+
+        txtBusqueda.setBorder(null);
+        txtBusqueda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBusquedaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 430, 30));
 
         btnRegresarMenu.setBorder(null);
         btnRegresarMenu.setContentAreaFilled(false);
@@ -44,6 +70,24 @@ public class Consultas extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnRegresarMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 40, 30));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "nombres", "rfc", "fecha nacimiento" }));
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 90, 140, 30));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 860, 440));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/Consultas.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -60,6 +104,16 @@ public class Consultas extends javax.swing.JFrame {
         menu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarMenuActionPerformed
+
+    private void txtBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBusquedaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBusquedaActionPerformed
+
+    private void btnBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBusquedaActionPerformed
+        // TODO add your handling code here:
+        
+        buscarPersonas();
+    }//GEN-LAST:event_btnBusquedaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -97,8 +151,15 @@ public class Consultas extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBusqueda;
     private javax.swing.JButton btnRegresarMenu;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField txtBusqueda;
     // End of variables declaration//GEN-END:variables
+
+    
 }

@@ -40,23 +40,19 @@ public class Licencia extends Tramite implements Serializable {
     private String discapacitado;
     //Lo produce el sistema
     private String estado;
-    //Lo produce el sistema
-    private int numeroLic;
     //Se calcula solo(en teoria)
-    private double costo;
+    //private double costo;
 
     public Licencia() {
     }
 
-    public Licencia(Integer id, Vigencia vigencia, Date fechaExpedicion, Date fechaVencimiento, String discapacitado, String estado, int numeroLic, double costo) {
+    public Licencia(Integer id, Vigencia vigencia, Date fechaExpedicion, Date fechaVencimiento, String discapacitado, String estado) {
         this.id = id;
         this.vigencia = vigencia;
         this.fechaExpedicion = fechaExpedicion;
         this.fechaVencimiento = fechaVencimiento;
         this.discapacitado = discapacitado;
         this.estado = estado;
-        this.numeroLic = numeroLic;
-        this.costo = costo;
     }
 
     public Integer getId() {
@@ -124,21 +120,13 @@ public class Licencia extends Tramite implements Serializable {
         this.estado = estado;
     }
 
-    public int getNumeroLic() {
-        return numeroLic;
-    }
-
-    public void setNumeroLic(int numeroLic) {
-        this.numeroLic = numeroLic;
-    }
-
-    public double getCosto() {
-        return costo;
-    }
-
-    public void setCosto(double costo) {
-        this.costo = costo;
-    }
+//    public double getCosto() {
+//        return costo;
+//    }
+//
+//    public void setCosto(double costo) {
+//        this.costo = costo;
+//    }
 
     public Date getFechaVencimiento() {
         return fechaVencimiento;

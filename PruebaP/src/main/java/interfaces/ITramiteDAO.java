@@ -4,10 +4,21 @@
  */
 package interfaces;
 
+import dominio.Persona;
+import java.util.List;
+
 /**
  *
  * @author hoshi
  */
 public interface ITramiteDAO {
+    
+    public List<Persona>  llamarNombres();
+    
+    public List<Persona>  llamarRFC();
+    
+    public List<Persona>  llamarFechaNacimiento();
+    
+    //public void llamarTipo();
     
 }
