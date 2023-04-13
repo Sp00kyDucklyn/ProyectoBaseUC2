@@ -7,11 +7,13 @@ package dominio;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 /**
@@ -21,10 +23,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "placas")
 @DiscriminatorValue("placa")
+@PrimaryKeyJoinColumn(name="id_tramite")
 public class Placa extends Tramite implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_placa")
     private Integer id;
     
     @Basic

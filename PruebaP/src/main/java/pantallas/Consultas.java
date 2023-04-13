@@ -4,6 +4,17 @@
  */
 package pantallas;
 
+import dao.TramiteDAO;
+import dominio.Tramite;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author xfs85
@@ -13,13 +24,42 @@ public class Consultas extends javax.swing.JFrame {
     /**
      * Creates new form Consultas
      */
+        private JTable tblResultados;
     public Consultas() {
         initComponents();
     }
     
-    private void buscarPersonas() {
-       
+    private void buscarTramites() {
+        String busqueda = txtBusqueda.getText();
+        TramiteDAO tramiteDAO = new TramiteDAO();
+        List<Tramite> resultados = new ArrayList<>();
+
+        // Realizar la consulta utilizando CriteriaBuilder según la opción seleccionada en cmbSeleccion
+        if (cmbSeleccion.getSelectedItem().equals("nombres")) {
+             resultados = tramiteDAO.buscarNombre(busqueda);
+        } else if (cmbSeleccion.getSelectedItem().equals("rfc")) {
+            resultados = tramiteDAO.buscarRfc(busqueda);
+        } else if (cmbSeleccion.getSelectedItem().equals("fecha nacimiento")) {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                Date fechaNacimiento = sdf.parse(busqueda);
+                resultados = tramiteDAO.buscarFechaNacimiento(fechaNacimiento);
+            } catch (ParseException ex) {
+                JOptionPane.showMessageDialog(null, "La fecha de nacimiento ingresada no es válida. Formato válido: yyyy-MM-dd");
+            }
+        }
+
+        // Mostrar los resultados en el JTable
+        DefaultTableModel model = (DefaultTableModel) tblResultados.getModel();
+        model.setRowCount(0);
+        if (resultados != null) {
+            for (Tramite t : resultados) {
+                model.addRow(new Object[]{t.getId(), t.getTipo(), t.getFechaNacimiento()});
+            }
+        }
+
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -34,9 +74,7 @@ public class Consultas extends javax.swing.JFrame {
         btnBusqueda = new javax.swing.JButton();
         txtBusqueda = new javax.swing.JTextField();
         btnRegresarMenu = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        cmbSeleccion = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -71,23 +109,8 @@ public class Consultas extends javax.swing.JFrame {
         });
         jPanel1.add(btnRegresarMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 40, 30));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "nombres", "rfc", "fecha nacimiento" }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 90, 140, 30));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 860, 440));
+        cmbSeleccion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "nombres", "rfc", "fecha nacimiento" }));
+        jPanel1.add(cmbSeleccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 90, 140, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/Consultas.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -111,8 +134,7 @@ public class Consultas extends javax.swing.JFrame {
 
     private void btnBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBusquedaActionPerformed
         // TODO add your handling code here:
-        
-        buscarPersonas();
+        buscarTramites();
     }//GEN-LAST:event_btnBusquedaActionPerformed
 
     /**
@@ -153,11 +175,9 @@ public class Consultas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBusqueda;
     private javax.swing.JButton btnRegresarMenu;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cmbSeleccion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtBusqueda;
     // End of variables declaration//GEN-END:variables
 

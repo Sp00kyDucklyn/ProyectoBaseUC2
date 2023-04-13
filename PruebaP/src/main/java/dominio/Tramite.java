@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
@@ -29,12 +30,13 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "tramites")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance (strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "tipo_tramite", discriminatorType = DiscriminatorType.STRING)
 public class Tramite implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_tramite")
     private Integer id;
     
     @Basic
@@ -43,6 +45,7 @@ public class Tramite implements Serializable {
     private String apellidoP;
     private String apellidoM;
     private Date fechaNacimiento;
+    private String tipo;
     
     @OneToMany(mappedBy= "tramite", cascade=(CascadeType.REMOVE))
     private List<TramitePersona> TramitePersona;
@@ -50,21 +53,25 @@ public class Tramite implements Serializable {
     @ManyToOne()
     @JoinColumn(name = "idPersona", nullable = false)
     private Persona persona;
+    
+//    @ManyToMany(mappedBy = "tramites")
+//    private List<Persona>personas = new ArrayList<>();
+   
 
     public Tramite() {
     }
 
-    public Tramite(Integer id, String rfc, String nombre, String apellidoP, String apellidoM, Date fechaNacimiento, List<TramitePersona> TramitePersona, Persona persona) {
+    public Tramite(Integer id, String rfc, String nombre, String apellidoP, String apellidoM, Date fechaNacimiento, String tipo, List<TramitePersona> TramitePersona, Persona persona) {
         this.id = id;
         this.rfc = rfc;
         this.nombre = nombre;
         this.apellidoP = apellidoP;
         this.apellidoM = apellidoM;
         this.fechaNacimiento = fechaNacimiento;
+        this.tipo = tipo;
         this.TramitePersona = TramitePersona;
         this.persona = persona;
     }
-    
 
     public Integer getId() {
         return id;
@@ -138,6 +145,14 @@ public class Tramite implements Serializable {
 
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
    

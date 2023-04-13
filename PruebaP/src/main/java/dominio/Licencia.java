@@ -13,6 +13,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 /**
@@ -22,11 +25,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name="licencias")
 @DiscriminatorValue("licencia")
+@PrimaryKeyJoinColumn(name="id_tramite")
 public class Licencia extends Tramite implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_Licencia")
+    @Column(name = "id_licencia")
     private Integer id;
     
     @Basic
@@ -42,6 +46,8 @@ public class Licencia extends Tramite implements Serializable {
     private String estado;
     //Se calcula solo(en teoria)
     //private double costo;
+    
+    
 
     public Licencia() {
     }
@@ -55,10 +61,12 @@ public class Licencia extends Tramite implements Serializable {
         this.estado = estado;
     }
 
+    @Override
     public Integer getId() {
         return id;
     }
 
+    @Override
     public void setId(Integer id) {
         this.id = id;
     }

@@ -4,7 +4,11 @@
  */
 package interfaces;
 
+import dominio.Licencia;
 import dominio.Persona;
+import dominio.Placa;
+import dominio.Tramite;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -13,11 +17,11 @@ import java.util.List;
  */
 public interface ITramiteDAO {
     
-    public List<Persona>  llamarNombres();
-    
-    public List<Persona>  llamarRFC();
-    
-    public List<Persona>  llamarFechaNacimiento();
+    public List<Tramite> buscarRfc(String rfc);
+    public List<Tramite> buscarNombre(String nombre);
+    public List<Tramite> buscarFechaNacimiento(Date anioNacimiento);
+    public List<Licencia> buscarLicencias(String rfc);
+    public List<Placa> buscarPlacas(String rfc);
     
     //public void llamarTipo();
     
