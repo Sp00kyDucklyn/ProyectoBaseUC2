@@ -5,6 +5,7 @@
 package pantallas;
 
 import dao.LicenciaDAO;
+import dao.PersonaDAO;
 import dominio.Persona;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -25,8 +26,11 @@ public class SiLicencia extends javax.swing.JFrame {
     Persona persona = new Persona ();
     LicenciaDAO licenciaDAO = new LicenciaDAO();
     
-    public SiLicencia() {
+    public SiLicencia(Persona persona) {
         initComponents();
+        this.persona = persona;
+        lblRfc.setText(persona.getRfc());
+        
     }
     
     
@@ -44,9 +48,10 @@ public class SiLicencia extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnCancelarRegistro = new javax.swing.JButton();
         btnAceptarRegistro = new javax.swing.JButton();
-        btnBuscarRFC = new javax.swing.JButton();
-        txtRfc = new javax.swing.JTextField();
         lblCosto = new javax.swing.JLabel();
+        chDiscapacitado = new javax.swing.JCheckBox();
+        lblRfc = new javax.swing.JLabel();
+        lblDiscapacitado = new javax.swing.JLabel();
         cmbVigencia = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
@@ -60,25 +65,20 @@ public class SiLicencia extends javax.swing.JFrame {
         jPanel1.add(btnCancelarRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 460, -1, 30));
 
         btnAceptarRegistro.setText("Aceptar");
+        btnAceptarRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarRegistroActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnAceptarRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 460, -1, 30));
-
-        btnBuscarRFC.setText("Buscar RFC");
-        btnBuscarRFC.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarRFCActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnBuscarRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 159, -1, 30));
-
-        txtRfc.setBorder(null);
-        txtRfc.setOpaque(false);
-        txtRfc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtRfcActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 142, 210, 50));
         jPanel1.add(lblCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 370, 210, 30));
+
+        chDiscapacitado.setText("Discapacitado");
+        jPanel1.add(chDiscapacitado, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 260, -1, -1));
+        jPanel1.add(lblRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 210, 40));
+
+        lblDiscapacitado.setText("Tienes alguna discapacidad?");
+        jPanel1.add(lblDiscapacitado, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 200, -1, -1));
 
         cmbVigencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "1 año", "2 años", "3 años" }));
         cmbVigencia.addActionListener(new java.awt.event.ActionListener() {
@@ -99,47 +99,42 @@ public class SiLicencia extends javax.swing.JFrame {
 
     private void cmbVigenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbVigenciaActionPerformed
         // TODO add your handling code here:
+        String vigenciaS =(String) cmbVigencia.getSelectedItem();
+        boolean discapacidad = chDiscapacitado.isSelected();
+        
+        
+        if( vigenciaS.equals("1 año")){
+            
+            if(discapacidad){
+                lblCosto.setText("200");
+            }else{
+                lblCosto.setText("600");
+            }
+            
+        }else if(vigenciaS.equals("2 años")){
+            
+            if(discapacidad){
+                lblCosto.setText("500");
+            }else{
+                lblCosto.setText("900");
+            }
+            
+        }else if(vigenciaS.equals("3 años")){
+            
+            if(discapacidad){
+                lblCosto.setText("700");
+            }else{
+                lblCosto.setText("1100");
+            }
+            
+        }
         
     }//GEN-LAST:event_cmbVigenciaActionPerformed
 
-    private void txtRfcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRfcActionPerformed
+    private void btnAceptarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarRegistroActionPerformed
         // TODO add your handling code here:
-      
-    }//GEN-LAST:event_txtRfcActionPerformed
-
-    private void btnBuscarRFCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarRFCActionPerformed
-        // TODO add your handling code here:
-       String rfc = txtRfc.getText();
         
-        List<Persona> personas = licenciaDAO.llamarRFC(rfc);
-        Validaciones val = new Validaciones();
-        
-        // Verificar si se encontró alguna persona con el RFC buscado
-        if (personas.isEmpty()) {
-            val.mostrarMensaje("No se encontro el rfc", "Error", "Busqueda de rfc");
-            
-            int confirmacion = JOptionPane.YES_NO_CANCEL_OPTION;
-            JOptionPane.showConfirmDialog(this, "¿Quiere registrarlo?", "Registro", confirmacion);
-            
-            if(confirmacion == 1){
-                this.setVisible(false);
-                RegistroPersona registro = new RegistroPersona();
-                registro.setVisible(true);
-                this.dispose();
-                
-            } else if(confirmacion == 0){
-                this.setVisible(false);
-                MenuPrincipal menu = new MenuPrincipal();
-                menu.setVisible(true);
-                this.dispose();
-                
-            }else;
-            
-        } else {
-            Persona personaEncontrada = personas.get(0);
-            val.mostrarMensaje("Se encontró a la persona con el RFC ingresado: " + personaEncontrada.getNombre(), "Info", "Busqueda de rfc");
-        }
-    }//GEN-LAST:event_btnBuscarRFCActionPerformed
+    }//GEN-LAST:event_btnAceptarRegistroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,12 +173,13 @@ public class SiLicencia extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptarRegistro;
-    private javax.swing.JButton btnBuscarRFC;
     private javax.swing.JButton btnCancelarRegistro;
+    private javax.swing.JCheckBox chDiscapacitado;
     private javax.swing.JComboBox<String> cmbVigencia;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblCosto;
-    private javax.swing.JTextField txtRfc;
+    private javax.swing.JLabel lblDiscapacitado;
+    private javax.swing.JLabel lblRfc;
     // End of variables declaration//GEN-END:variables
 }

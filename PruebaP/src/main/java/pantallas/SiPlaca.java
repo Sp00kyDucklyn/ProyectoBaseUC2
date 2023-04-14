@@ -121,6 +121,7 @@ public class SiPlaca extends javax.swing.JFrame {
         btnSiguiente = new javax.swing.JButton();
         botonGuardar = new javax.swing.JButton();
         botonCancelar = new javax.swing.JButton();
+        btnRegresoSeleccionTramite = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -186,6 +187,14 @@ public class SiPlaca extends javax.swing.JFrame {
         });
         jPanel1.add(botonCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(395, 553, 180, 30));
 
+        btnRegresoSeleccionTramite.setText("jButton1");
+        btnRegresoSeleccionTramite.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresoSeleccionTramiteActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnRegresoSeleccionTramite, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 30, -1));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/SiPlaca.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 1000, 600));
 
@@ -228,6 +237,14 @@ public class SiPlaca extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
+    private void btnRegresoSeleccionTramiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresoSeleccionTramiteActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        SeleccionTramite seleccion = new SeleccionTramite();
+        seleccion.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnRegresoSeleccionTramiteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -266,6 +283,7 @@ public class SiPlaca extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonCancelar;
     private javax.swing.JButton botonGuardar;
+    private javax.swing.JButton btnRegresoSeleccionTramite;
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

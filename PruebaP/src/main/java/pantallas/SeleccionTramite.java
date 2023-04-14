@@ -23,10 +23,32 @@ public class SeleccionTramite extends javax.swing.JFrame {
         initComponents();
         //Necesito construir 4 botones
         //Dos paneles 
+        
+        txtRfcBuscar.setVisible(false);
+        
+        if(txtRfcBuscar.isShowing()){
+            btnRenovacion.setVisible(false);
+            btnRegistro.setVerifyInputWhenFocusTarget(false);
+        }
+        
         btnPersona.setVisible(false);
         btnVehiculo.setVisible(false);
+
+        btnLicencia.setVisible(false);
+        btnPlacas.setVisible(false);
     }
     
+    public String buscarRfc(String rfc){
+        //NO DEJAR QUE EL TXT SE PERMITAN ESCRIBIR CARACTERES NO ESPECIFICADOS FALTA
+        //FORZAR AL USUARIO ESCRIBIR 13 CARACTERES LISTO
+        if (txtRfcBuscar.equals(" ")) {
+            JOptionPane.showMessageDialog(this, "Por favor ingrese una palabra", "Búsqueda", JOptionPane.INFORMATION_MESSAGE);
+        } else if (!txtRfcBuscar.getText().contains("12")) {
+            JOptionPane.showMessageDialog(this, "Por favor ingrese 13 carácteres", "Búsqueda", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        return rfc;
+    }
     //Crear 2 paneles
     //Crear 4 botones 
     //Asignar acciones a los botones
@@ -52,6 +74,7 @@ public class SeleccionTramite extends javax.swing.JFrame {
     private void initComponents() {
 
         panOpciones = new javax.swing.JPanel();
+        txtRfcBuscar = new javax.swing.JTextField();
         btnRegistro = new javax.swing.JButton();
         btnPlacas = new javax.swing.JButton();
         btnPersona = new javax.swing.JButton();
@@ -67,6 +90,13 @@ public class SeleccionTramite extends javax.swing.JFrame {
 
         panOpciones.setPreferredSize(new java.awt.Dimension(800, 600));
         panOpciones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtRfcBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRfcBuscarKeyTyped(evt);
+            }
+        });
+        panOpciones.add(txtRfcBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 280, 220, 50));
 
         btnRegistro.setBorder(null);
         btnRegistro.setContentAreaFilled(false);
@@ -136,7 +166,7 @@ public class SeleccionTramite extends javax.swing.JFrame {
                 btnRenovacionActionPerformed(evt);
             }
         });
-        panOpciones.add(btnRenovacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, 190, 30));
+        panOpciones.add(btnRenovacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 190, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/Cuadro1 (1).png"))); // NOI18N
         panOpciones.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 1000, -1));
@@ -156,13 +186,15 @@ public class SeleccionTramite extends javax.swing.JFrame {
 
     private void btnRenovacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRenovacionActionPerformed
         // TODO add your handling code here:
-         if(btnRenovacion.isSelected()){
-            btnLicencia.setVisible(false);
-            btnPlacas.setVisible(false);
-        }else{
+        
+               if (!btnRenovacion.isSelected()) {
             btnLicencia.setVisible(true);
             btnPlacas.setVisible(true);
         }
+
+
+        
+        
     }//GEN-LAST:event_btnRenovacionActionPerformed
 
     private void btnRenovacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRenovacionMouseClicked
@@ -173,21 +205,32 @@ public class SeleccionTramite extends javax.swing.JFrame {
     private void btnVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVehiculoActionPerformed
         // TODO add your handling code here:
         //Recordar poner buscar persona por rfc con joption
-        PersonaDAO personaDAO = new PersonaDAO();
-        //PONER TXT.GETTEXT DENTRO DE DONDE ESTAN LAS COMILLAS AHORITA
-        //NO DEJAR QUE EL TXT SE PERMITAN ESCRIBIR CARACTERES NO ESPECIFICADOS,
-        //FORZAR AL USUARIO ESCRIBIR 13 CARACTERES
-        List <Persona> persona = personaDAO.buscarRfc("");
-        
-        if(persona.isEmpty()){
-            JOptionPane.showMessageDialog(this,"No encontro el rfc");
-            return;
+       
+        if (!btnVehiculo.isSelected()) {
+
+            txtRfcBuscar.setVisible(true);
+            if (!buscarRfc(txtRfcBuscar.getText()).isEmpty()) {
+
+                PersonaDAO personaDAO = new PersonaDAO();
+                //PONER TXT.GETTEXT DENTRO DE DONDE ESTAN LAS COMILLAS AHORITA LISTO
+
+                List<Persona> persona = personaDAO.buscarRfc(txtRfcBuscar.getText());
+
+                if (persona.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "No encontro el rfc");
+                    return;
+                }else{
+                    JOptionPane.showMessageDialog(this, "Se encontro el rfc");
+                    this.setVisible(false);
+                    SiPlaca vehiculo = new SiPlaca(persona.get(0));
+                    vehiculo.setVisible(true);
+                    this.dispose();
+                 }
+
+            }
+
         }
-        
-        this.setVisible(false);
-        SiPlaca vehiculo = new SiPlaca(persona.get(0));
-        vehiculo.setVisible(true);
-        this.dispose();
+     
     }//GEN-LAST:event_btnVehiculoActionPerformed
 
     private void btnRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistroMouseClicked
@@ -199,13 +242,12 @@ public class SeleccionTramite extends javax.swing.JFrame {
 
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
         // TODO add your handling code here:   
-        if(btnRegistro.isSelected()){
-            btnPersona.setVisible(false);
-            btnVehiculo.setVisible(false);
-        }else{
+        
+        if (!btnRegistro.isSelected()) {
             btnPersona.setVisible(true);
+            
             btnVehiculo.setVisible(true);
-        }
+        } 
     }//GEN-LAST:event_btnRegistroActionPerformed
 
     private void btnPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonaActionPerformed
@@ -218,19 +260,66 @@ public class SeleccionTramite extends javax.swing.JFrame {
 
     private void btnPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlacasActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
-        SiPlaca2 placa = new SiPlaca2();
-        placa.setVisible(true);
-        this.dispose();
+         if (!btnPlacas.isSelected()) {
+
+            txtRfcBuscar.setVisible(true);
+            if (!buscarRfc(txtRfcBuscar.getText()).isEmpty()) {
+
+                PersonaDAO personaDAO = new PersonaDAO();
+                //PONER TXT.GETTEXT DENTRO DE DONDE ESTAN LAS COMILLAS AHORITA LISTO
+
+                List<Persona> persona = personaDAO.buscarRfc(txtRfcBuscar.getText());
+
+                if (persona.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "No encontro el rfc");
+                    return;
+                } else {
+                    JOptionPane.showMessageDialog(this, "Se encontro el rfc");
+                    txtRfcBuscar.setVisible(true);
+                    this.setVisible(false);
+                    SiPlaca2 placa = new SiPlaca2();
+                    placa.setVisible(true);
+                    this.dispose();
+                 }
+
+            }
+         }
+
     }//GEN-LAST:event_btnPlacasActionPerformed
 
     private void btnLicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLicenciaActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
-        SiLicencia licencia = new SiLicencia();
-        licencia.setVisible(true);
-        this.dispose();
+          if (!btnLicencia.isSelected()) {
+
+            txtRfcBuscar.setVisible(true);
+            if (!buscarRfc(txtRfcBuscar.getText()).isEmpty()) {
+
+                PersonaDAO personaDAO = new PersonaDAO();
+                //PONER TXT.GETTEXT DENTRO DE DONDE ESTAN LAS COMILLAS AHORITA LISTO
+
+                List<Persona> persona = personaDAO.buscarRfc(txtRfcBuscar.getText());
+
+                if (persona.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "No encontro el rfc");
+                    return;
+                } else {
+                    JOptionPane.showMessageDialog(this, "Se encontro el rfc");
+                    txtRfcBuscar.setVisible(true);
+                    this.setVisible(false);
+                    SiLicencia licencia = new SiLicencia(persona.get(0));
+                    licencia.setVisible(true);
+                    this.dispose();
+                 }
+
+            }
+         }
+       
     }//GEN-LAST:event_btnLicenciaActionPerformed
+
+    private void txtRfcBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRfcBuscarKeyTyped
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_txtRfcBuscarKeyTyped
 
     /**
      * @param args the command line arguments
@@ -277,5 +366,6 @@ public class SeleccionTramite extends javax.swing.JFrame {
     private javax.swing.JButton btnVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel panOpciones;
+    private javax.swing.JTextField txtRfcBuscar;
     // End of variables declaration//GEN-END:variables
 }

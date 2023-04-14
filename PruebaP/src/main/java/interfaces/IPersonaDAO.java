@@ -30,5 +30,7 @@ public interface IPersonaDAO {
     public List<Tramite> listaTramite();
 
     public List<Vehiculo> listaVehiculo();
+    
+    public List<Persona> buscarRfcEstado(String rfc);
           
 }

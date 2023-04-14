@@ -4,17 +4,81 @@
  */
 package pantallas;
 
+import dao.TramiteDAO;
+import dominio.Licencia;
+import dominio.Persona;
+import dominio.Placa;
+import dominio.Tramite;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author xfs85
  */
 public class GeneracionReportes extends javax.swing.JFrame {
 
+    TramiteDAO tramiteDAO = new TramiteDAO();
+
     /**
      * Creates new form GeneracionReportes
      */
     public GeneracionReportes() {
         initComponents();
+        buscarTramites();
+    }
+    
+    public void buscarTramites(){
+        
+        List <Tramite> tramites = tramiteDAO.listaTramite(txtFechaInicio.getDate(), txtFechaFin.getDate(),chLicencia.isSelected(), chPlaca.isSelected());
+        
+//        List <Tramite> tramites2 = tramiteDAO.listaTramiteC(chLicencia.isSelected(), chLicencia.isSelected());
+        
+        if (txtNombre.getText().equals("")) {
+
+            List<Tramite> listaNombre = new ArrayList<Tramite>();
+
+            for (Tramite t : tramites) {
+                Persona persona = t.getPersona();
+                String n = persona.getNombre() + " "
+                        + persona.getApellidoP() + " " + persona.getApellidoM();
+                if (n.toLowerCase().contains(txtNombre.getText().toLowerCase())) {
+                    listaNombre.add(t);
+                }
+
+            }
+            tramites = listaNombre;
+
+        }
+        
+        
+        DefaultTableModel model = (DefaultTableModel) tblResultados.getModel();
+        model.setRowCount(0);
+        
+        if (tramites != null) {
+            for (int i = 0; i < tramites.size(); i++) {
+                Object [] datos = new Object[model.getColumnCount()];
+                if(tramites.get(i) instanceof Licencia){
+                    datos[0] = "licencia";
+                }
+                if(tramites.get(i) instanceof Placa){
+                    datos[0] = "placa";
+                    
+                }
+                
+                datos[1] = tramites.get(i).getFechaExpedicion();
+                Persona persona = tramites.get(i).getPersona();
+                String n = persona.getNombre() + " "
+                        + persona.getApellidoP() + " " + persona.getApellidoM();
+                datos[2]= n;
+                datos [3] = tramites.get(i).getCosto();
+                
+                model.addRow(datos);
+            }
+                
+            
+        }
     }
 
     /**
@@ -27,7 +91,19 @@ public class GeneracionReportes extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        btnGenerarReporte = new javax.swing.JButton();
+        chLicencia = new javax.swing.JCheckBox();
+        lblNombre = new javax.swing.JLabel();
         btnRegresarMenu = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        btnBuscarReportes = new javax.swing.JButton();
+        chPlaca = new javax.swing.JCheckBox();
+        txtFechaFin = new com.toedter.calendar.JDateChooser();
+        txtFechaInicio = new com.toedter.calendar.JDateChooser();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblResultados = new javax.swing.JTable();
+        txtNombre = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -35,6 +111,21 @@ public class GeneracionReportes extends javax.swing.JFrame {
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1000, 600));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnGenerarReporte.setBorder(null);
+        btnGenerarReporte.setContentAreaFilled(false);
+        jPanel1.add(btnGenerarReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(923, 540, 60, 40));
+
+        chLicencia.setText("Licencia");
+        chLicencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chLicenciaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(chLicencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 50, -1, -1));
+
+        lblNombre.setText("Nombre");
+        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, -1));
 
         btnRegresarMenu.setBorder(null);
         btnRegresarMenu.setContentAreaFilled(false);
@@ -44,6 +135,45 @@ public class GeneracionReportes extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnRegresarMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 40, 30));
+
+        jLabel3.setText("Periodo:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, -1, -1));
+
+        btnBuscarReportes.setBorder(null);
+        btnBuscarReportes.setContentAreaFilled(false);
+        btnBuscarReportes.setOpaque(false);
+        btnBuscarReportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarReportesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnBuscarReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 90, 30, 30));
+
+        chPlaca.setText("Placa");
+        jPanel1.add(chPlaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 90, -1, -1));
+        jPanel1.add(txtFechaFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(415, 140, 120, -1));
+        jPanel1.add(txtFechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 120, -1));
+
+        tblResultados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Tipo trámite", "Fecha", "Nombre", "Costo"
+            }
+        ));
+        jScrollPane1.setViewportView(tblResultados);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 860, 400));
+
+        txtNombre.setBorder(null);
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 410, 30));
+
+        jLabel4.setText("&");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 140, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/GeneraciónReportes.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -60,6 +190,15 @@ public class GeneracionReportes extends javax.swing.JFrame {
         menu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarMenuActionPerformed
+
+    private void chLicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chLicenciaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chLicenciaActionPerformed
+
+    private void btnBuscarReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarReportesActionPerformed
+        // TODO add your handling code here:
+        buscarTramites();
+    }//GEN-LAST:event_btnBuscarReportesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -97,8 +236,20 @@ public class GeneracionReportes extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscarReportes;
+    private javax.swing.JButton btnGenerarReporte;
     private javax.swing.JButton btnRegresarMenu;
+    private javax.swing.JCheckBox chLicencia;
+    private javax.swing.JCheckBox chPlaca;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblNombre;
+    private javax.swing.JTable tblResultados;
+    private com.toedter.calendar.JDateChooser txtFechaFin;
+    private com.toedter.calendar.JDateChooser txtFechaInicio;
+    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }
