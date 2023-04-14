@@ -40,15 +40,12 @@ public class Tramite implements Serializable {
     private Integer id;
     
     @Basic
-    private String rfc;
-    private String nombre;
-    private String apellidoP;
-    private String apellidoM;
-    private Date fechaNacimiento;
-    private String tipo;
+    private int costo;
+    private Date fechaExpedicion;
+    private String estado;
     
-    @OneToMany(mappedBy= "tramite", cascade=(CascadeType.REMOVE))
-    private List<TramitePersona> TramitePersona;
+//    @OneToMany(mappedBy= "tramite", cascade=(CascadeType.REMOVE))
+//    private List<TramitePersona> TramitePersona;
     
     @ManyToOne()
     @JoinColumn(name = "idPersona", nullable = false)
@@ -61,15 +58,10 @@ public class Tramite implements Serializable {
     public Tramite() {
     }
 
-    public Tramite(Integer id, String rfc, String nombre, String apellidoP, String apellidoM, Date fechaNacimiento, String tipo, List<TramitePersona> TramitePersona, Persona persona) {
-        this.id = id;
-        this.rfc = rfc;
-        this.nombre = nombre;
-        this.apellidoP = apellidoP;
-        this.apellidoM = apellidoM;
-        this.fechaNacimiento = fechaNacimiento;
-        this.tipo = tipo;
-        this.TramitePersona = TramitePersona;
+    public Tramite(int costo, Date fechaExpedicion, String estado, Persona persona) {
+        this.costo = costo;
+        this.fechaExpedicion = fechaExpedicion;
+        this.estado = estado;
         this.persona = persona;
     }
 
@@ -91,13 +83,7 @@ public class Tramite implements Serializable {
 //        this.personas = personas;
 //    }
 
-    public List<TramitePersona> getTramitePersona() {
-        return TramitePersona;
-    }
-
-    public void setTramitePersona(List<TramitePersona> TramitePersona) {
-        this.TramitePersona = TramitePersona;
-    }
+   
 
     public Persona getPersona() {
         return persona;
@@ -107,53 +93,31 @@ public class Tramite implements Serializable {
         this.persona = persona;
     }
 
-    public String getRfc() {
-        return rfc;
+    public int getCosto() {
+        return costo;
     }
 
-    public void setRfc(String rfc) {
-        this.rfc = rfc;
+    public void setCosto(int costo) {
+        this.costo = costo;
     }
 
-    public String getNombre() {
-        return nombre;
+    public Date getFechaExpedicion() {
+        return fechaExpedicion;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setFechaExpedicion(Date fechaExpedicion) {
+        this.fechaExpedicion = fechaExpedicion;
     }
 
-    public String getApellidoP() {
-        return apellidoP;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setApellidoP(String apellidoP) {
-        this.apellidoP = apellidoP;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
-    public String getApellidoM() {
-        return apellidoM;
-    }
-
-    public void setApellidoM(String apellidoM) {
-        this.apellidoM = apellidoM;
-    }
-
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
+  
 
    
     

@@ -4,7 +4,11 @@
  */
 package pantallas;
 
+import dao.PersonaDAO;
+import dominio.Persona;
+import java.util.List;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -122,7 +126,6 @@ public class SeleccionTramite extends javax.swing.JFrame {
 
         btnRenovacion.setBorder(null);
         btnRenovacion.setContentAreaFilled(false);
-        btnRenovacion.setOpaque(false);
         btnRenovacion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnRenovacionMouseClicked(evt);
@@ -169,8 +172,20 @@ public class SeleccionTramite extends javax.swing.JFrame {
 
     private void btnVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVehiculoActionPerformed
         // TODO add your handling code here:
+        //Recordar poner buscar persona por rfc con joption
+        PersonaDAO personaDAO = new PersonaDAO();
+        //PONER TXT.GETTEXT DENTRO DE DONDE ESTAN LAS COMILLAS AHORITA
+        //NO DEJAR QUE EL TXT SE PERMITAN ESCRIBIR CARACTERES NO ESPECIFICADOS,
+        //FORZAR AL USUARIO ESCRIBIR 13 CARACTERES
+        List <Persona> persona = personaDAO.buscarRfc("");
+        
+        if(persona.isEmpty()){
+            JOptionPane.showMessageDialog(this,"No encontro el rfc");
+            return;
+        }
+        
         this.setVisible(false);
-        SiPlaca vehiculo = new SiPlaca();
+        SiPlaca vehiculo = new SiPlaca(persona.get(0));
         vehiculo.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVehiculoActionPerformed

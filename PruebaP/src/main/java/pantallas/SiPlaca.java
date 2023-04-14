@@ -25,10 +25,12 @@ import utileria.Validaciones;
 public class SiPlaca extends javax.swing.JFrame {
 
     VehiculoDAO vehiculoDAO = new VehiculoDAO();
+    private Persona persona;
     /**
      * Creates new form SiPlaca
      */
-    public SiPlaca() {
+    public SiPlaca(Persona persona) {
+        this.persona = persona;
         initComponents();
     }
 
@@ -42,14 +44,14 @@ public class SiPlaca extends javax.swing.JFrame {
 //            return;
         }
         
-        String numSerie = datosFormulario.get("numSerie");
+         String numSerie = datosFormulario.get("numSerie");
          String marca = datosFormulario.get("marca");
          String linea = datosFormulario.get("linea");
          String color = datosFormulario.get("color");
          String anio = datosFormulario.get("anio");
          
 
-         Vehiculo vehiculo = new Vehiculo(numSerie, marca, linea, color, anio);
+         Vehiculo vehiculo = new Vehiculo(numSerie, marca, linea, color, anio,persona);
 
          return vehiculo;
     }

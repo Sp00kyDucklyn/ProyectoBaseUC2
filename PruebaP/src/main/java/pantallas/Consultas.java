@@ -4,8 +4,13 @@
  */
 package pantallas;
 
+import dao.PersonaDAO;
 import dao.TramiteDAO;
+import dominio.Persona;
 import dominio.Tramite;
+import interfaces.IPersonaDAO;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,26 +29,37 @@ public class Consultas extends javax.swing.JFrame {
     /**
      * Creates new form Consultas
      */
-        private JTable tblResultados;
+//    private JTable tblResultados;
     public Consultas() {
         initComponents();
+        buscarPersonas();
+        btnBusqueda.addActionListener(new ActionListener(){
+            
+            public void actionPerformed(ActionEvent e){
+                
+            }
+        }
+        );
+        
+        
     }
     
-    private void buscarTramites() {
+    private void buscarPersonas() {
         String busqueda = txtBusqueda.getText();
-        TramiteDAO tramiteDAO = new TramiteDAO();
-        List<Tramite> resultados = new ArrayList<>();
-
+        IPersonaDAO personaDAO = new PersonaDAO();
+        List<Persona> resultados = new ArrayList<>();
+        resultados = personaDAO.listaPersonas();
+        
         // Realizar la consulta utilizando CriteriaBuilder según la opción seleccionada en cmbSeleccion
-        if (cmbSeleccion.getSelectedItem().equals("nombres")) {
-             resultados = tramiteDAO.buscarNombre(busqueda);
+        if (cmbSeleccion.getSelectedItem().equals("nombre")) {
+             resultados = personaDAO.buscarNombre(busqueda);
         } else if (cmbSeleccion.getSelectedItem().equals("rfc")) {
-            resultados = tramiteDAO.buscarRfc(busqueda);
+            resultados = personaDAO.buscarRfc(busqueda);
         } else if (cmbSeleccion.getSelectedItem().equals("fecha nacimiento")) {
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 Date fechaNacimiento = sdf.parse(busqueda);
-                resultados = tramiteDAO.buscarFechaNacimiento(fechaNacimiento);
+                resultados = personaDAO.buscarFechaNacimiento(fechaNacimiento);
             } catch (ParseException ex) {
                 JOptionPane.showMessageDialog(null, "La fecha de nacimiento ingresada no es válida. Formato válido: yyyy-MM-dd");
             }
@@ -53,8 +69,8 @@ public class Consultas extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tblResultados.getModel();
         model.setRowCount(0);
         if (resultados != null) {
-            for (Tramite t : resultados) {
-                model.addRow(new Object[]{t.getId(), t.getTipo(), t.getFechaNacimiento()});
+            for (Persona p : resultados) {
+                model.addRow(new Object[]{p.getFechaNa(), p.getNombre(), p.getRfc()});
             }
         }
 
@@ -75,6 +91,8 @@ public class Consultas extends javax.swing.JFrame {
         txtBusqueda = new javax.swing.JTextField();
         btnRegresarMenu = new javax.swing.JButton();
         cmbSeleccion = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblResultados = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -109,8 +127,21 @@ public class Consultas extends javax.swing.JFrame {
         });
         jPanel1.add(btnRegresarMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 40, 30));
 
-        cmbSeleccion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "nombres", "rfc", "fecha nacimiento" }));
+        cmbSeleccion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "nombre", "rfc", "fecha nacimiento" }));
         jPanel1.add(cmbSeleccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 90, 140, 30));
+
+        tblResultados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Fecha Nacimiento", "Nombre", "Rfc"
+            }
+        ));
+        jScrollPane1.setViewportView(tblResultados);
+        tblResultados.getAccessibleContext().setAccessibleParent(tblResultados);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 860, 440));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/Consultas.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -134,7 +165,9 @@ public class Consultas extends javax.swing.JFrame {
 
     private void btnBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBusquedaActionPerformed
         // TODO add your handling code here:
-        buscarTramites();
+        buscarPersonas();
+
+
     }//GEN-LAST:event_btnBusquedaActionPerformed
 
     /**
@@ -178,6 +211,8 @@ public class Consultas extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbSeleccion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblResultados;
     private javax.swing.JTextField txtBusqueda;
     // End of variables declaration//GEN-END:variables
 

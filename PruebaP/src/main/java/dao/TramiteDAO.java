@@ -38,7 +38,7 @@ public class TramiteDAO implements ITramiteDAO{
     }
 
 
-    public List<Tramite> buscarTramites(String rfc, String nombre, Date anioNacimiento) {
+    public List<Tramite> buscarTramites(String rfc,String nombre, Date anioNacimiento) {
         EntityManager em = getEntityManager();
        
        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
@@ -48,19 +48,22 @@ public class TramiteDAO implements ITramiteDAO{
         
         List<Predicate> predicates = new ArrayList<>();
         
-        if (rfc != null && !rfc.isEmpty()) {
-            predicates.add(criteriaBuilder.equal(root.get("rfc"), rfc));
-        }
         
-        if (nombre != null && !nombre.isEmpty()) {
-            predicates.add(criteriaBuilder.like(root.get("nombre"), "%" + nombre + "%"));
-        }
+            
+            if (rfc != null && !rfc.isEmpty()) {
+                predicates.add(criteriaBuilder.equal(root.get("rfc"), rfc));
+            }
+       
+            if (nombre != null && !nombre.isEmpty()) {
+                predicates.add(criteriaBuilder.like(root.get("nombre"), "%" + nombre + "%"));
+            }
         
-        if (anioNacimiento != null) {
-            predicates.add(criteriaBuilder.equal(
-                    criteriaBuilder.function("year", Integer.class, root.get("fechaNacimiento")),
-                    criteriaBuilder.function("year", Integer.class, criteriaBuilder.literal(anioNacimiento))));
-        }
+            if (anioNacimiento != null) {
+                predicates.add(criteriaBuilder.equal(
+                        criteriaBuilder.function("year", Integer.class, root.get("fechaNacimiento")),
+                        criteriaBuilder.function("year", Integer.class, criteriaBuilder.literal(anioNacimiento))));
+            }
+        
         
         criteriaQuery.where(predicates.toArray(new Predicate[0]));
         
@@ -170,9 +173,17 @@ public class TramiteDAO implements ITramiteDAO{
         return typedQuery.getResultList();
     }
 
-    
+    @Override
+    public List<Tramite> tramites() {
+        EntityManager em = getEntityManager();
 
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+        CriteriaQuery<Tramite> criteriaQuery = criteriaBuilder.createQuery(Tramite.class);
 
-   
-    
+        TypedQuery<Tramite> typedQuery = em.createQuery(criteriaQuery);
+
+        return typedQuery.getResultList();
+
+    }
+
 }

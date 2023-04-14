@@ -48,13 +48,13 @@ public class Persona implements Serializable {
    
     private String telefono;
     
-    @OneToMany(mappedBy = "persona", cascade = (CascadeType.REMOVE))
-    private List<TramitePersona> TramitePersona;
+//    @OneToMany(mappedBy = "persona", cascade = (CascadeType.REMOVE))
+//    private List<TramitePersona> TramitePersona;
     
     @OneToMany(mappedBy="persona", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Vehiculo> vehiculos;
     
-    @OneToMany(mappedBy = "persona")
+    @OneToMany(mappedBy = "persona", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Tramite> tramites;
 
     public Persona() {
@@ -67,21 +67,17 @@ public class Persona implements Serializable {
         this.apellidoM = apellidoM;
         this.fechaNa = fechaNa;
         this.telefono = telefono;
+        this.tramites = new ArrayList<>();
+        this.vehiculos = new ArrayList<>();
     }
-
-    public Persona(Integer id, String rfc ,String nombre, String apellidoP, String apellidoM, Date fechaNa, String telefono, List<TramitePersona> TramitePersona, List<Vehiculo> vehiculos) {
-        this.id = id;
-        this.rfc = rfc;
-        this.nombre = nombre;
-        this.apellidoP = apellidoP;
-        this.apellidoM = apellidoM;
-        this.fechaNa = fechaNa;
-        this.telefono = telefono;
-        this.TramitePersona = TramitePersona;
-        this.vehiculos = vehiculos;
-    }
-
     
+     public void agregaVehiculo(Vehiculo vehiculo){
+        vehiculos.add(vehiculo);
+    }
+
+    public void agregaTramite(Tramite tramite){
+        tramites.add(tramite);
+    }
 
 
 //    public Persona(Integer id, String nombre, String apellidoP, String apellidoM, Date fechaNa, String telefono) {
@@ -148,14 +144,6 @@ public class Persona implements Serializable {
 
     public void setVehiculos(List<Vehiculo> vehiculos) {
         this.vehiculos = vehiculos;
-    }
-
-    public List<TramitePersona> getTramitePersona() {
-        return TramitePersona;
-    }
-
-    public void setTramitePersona(List<TramitePersona> TramitePersona) {
-        this.TramitePersona = TramitePersona;
     }
 
     public String getRfc() {

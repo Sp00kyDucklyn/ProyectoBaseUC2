@@ -22,6 +22,7 @@ public interface ITramiteDAO {
     public List<Tramite> buscarFechaNacimiento(Date anioNacimiento);
     public List<Licencia> buscarLicencias(String rfc);
     public List<Placa> buscarPlacas(String rfc);
+    public List<Tramite> tramites();
     
     //public void llamarTipo();
     

@@ -8,12 +8,18 @@ import dominio.Persona;
 import dominio.Tramite;
 import dominio.Vehiculo;
 import interfaces.IPersonaDAO;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -58,6 +64,90 @@ public class PersonaDAO implements IPersonaDAO{
     @Override
     public List<Vehiculo> listaVehiculo() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Persona> buscarRfc(String rfc) {
+        EntityManager em = getEntityManager();
+       
+       CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+        CriteriaQuery<Persona> criteriaQuery = criteriaBuilder.createQuery(Persona.class);
+        Root<Persona> root = criteriaQuery.from(Persona.class);
+        criteriaQuery.select(root);
+        
+        List<Predicate> predicates = new ArrayList<>();
+        
+        if (rfc != null && !rfc.isEmpty()) {
+            predicates.add(criteriaBuilder.like(root.get("rfc"), "%" + rfc + "%"));
+        }
+        
+        
+        criteriaQuery.where(predicates.toArray(new Predicate[0]));
+        
+        TypedQuery<Persona> typedQuery = em.createQuery(criteriaQuery);
+        
+        return typedQuery.getResultList();
+    }
+
+    @Override
+    public List<Persona> buscarNombre(String nombre) {
+        EntityManager em = getEntityManager();
+       
+       CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+        CriteriaQuery<Persona> criteriaQuery = criteriaBuilder.createQuery(Persona.class);
+        Root<Persona> root = criteriaQuery.from(Persona.class);
+        criteriaQuery.select(root);
+        
+        List<Predicate> predicates = new ArrayList<>();
+        
+        
+        if (nombre != null && !nombre.isEmpty()) {
+            predicates.add(criteriaBuilder.like(root.get("nombre"), "%" + nombre + "%"));
+        }
+        
+        
+        criteriaQuery.where(predicates.toArray(new Predicate[0]));
+        
+        TypedQuery<Persona> typedQuery = em.createQuery(criteriaQuery);
+        
+        return typedQuery.getResultList();
+    }
+
+    @Override
+    public List<Persona> buscarFechaNacimiento(Date anioNacimiento) {
+         EntityManager em = getEntityManager();
+       
+       CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+        CriteriaQuery<Persona> criteriaQuery = criteriaBuilder.createQuery(Persona.class);
+        Root<Persona> root = criteriaQuery.from(Persona.class);
+        criteriaQuery.select(root);
+        
+        List<Predicate> predicates = new ArrayList<>();
+       
+        if (anioNacimiento != null) {
+            predicates.add(criteriaBuilder.equal(
+                    criteriaBuilder.function("year", Integer.class, root.get("fechaNa")),
+                    criteriaBuilder.function("year", Integer.class, criteriaBuilder.literal(anioNacimiento))));
+        }
+        
+        criteriaQuery.where(predicates.toArray(new Predicate[0]));
+        
+        TypedQuery<Persona> typedQuery = em.createQuery(criteriaQuery);
+        
+        return typedQuery.getResultList();
+    }
+    
+    @Override
+    public List<Persona> listaPersonas() {
+        EntityManager em = getEntityManager();
+
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+        CriteriaQuery<Persona> criteriaQuery = criteriaBuilder.createQuery(Persona.class);
+
+        TypedQuery<Persona> typedQuery = em.createQuery(criteriaQuery);
+
+        return typedQuery.getResultList();
+
     }
     
 }

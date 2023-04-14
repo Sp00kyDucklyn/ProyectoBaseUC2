@@ -6,6 +6,7 @@ package dominio;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -35,32 +37,35 @@ public class Vehiculo implements Serializable {
     private String anio;
     
     @ManyToOne
+    @JoinColumn(name= "idPersona")
     private Persona persona;
     
-    @OneToOne
-    (cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    private Placa placa;
+    @OneToMany(mappedBy="vehiculos", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<Placa> placas;
 
     public Vehiculo() {
     }
 
-    public Vehiculo(String numSerie, String marca, String linea, String color, String anio) {
-        this.numSerie = numSerie;
-        this.marca = marca;
-        this.linea = linea;
-        this.color = color;
-        this.anio = anio;
-    }
-
-    public Vehiculo(Integer id, String numSerie, String marca, String linea, String color, String anio, Persona persona, Placa placa) {
-        this.id = id;
+    public Vehiculo(String numSerie, String marca, String linea, String color, String anio, Persona persona, List<Placa> placas) {
         this.numSerie = numSerie;
         this.marca = marca;
         this.linea = linea;
         this.color = color;
         this.anio = anio;
         this.persona = persona;
-        this.placa = placa;
+        this.placas = placas;
+    }
+
+   
+
+    public Vehiculo( String numSerie, String marca, String linea, String color, String anio, Persona persona) {
+        
+        this.numSerie = numSerie;
+        this.marca = marca;
+        this.linea = linea;
+        this.color = color;
+        this.anio = anio;
+        this.persona = persona;
     }
 
     
@@ -138,20 +143,20 @@ public class Vehiculo implements Serializable {
         this.persona = persona;
     }
 
-    public Placa getPlaca() {
-        return placa;
-    }
-
-    public void setPlaca(Placa placa) {
-        this.placa = placa;
-    }
-
     public String getNumSerie() {
         return numSerie;
     }
 
     public void setNumSerie(String numSerie) {
         this.numSerie = numSerie;
+    }
+
+    public List<Placa> getPlacas() {
+        return placas;
+    }
+
+    public void setPlacas(List<Placa> placas) {
+        this.placas = placas;
     }
     
     

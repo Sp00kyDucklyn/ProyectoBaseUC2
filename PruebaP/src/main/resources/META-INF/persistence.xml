@@ -7,7 +7,6 @@
     <class>dominio.Persona</class>
     <class>dominio.Placa</class>
     <class>dominio.Licencia</class>
-    <class>dominio.TramitePersona</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/tramites?serverTimezone=UTC"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
