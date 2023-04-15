@@ -4,6 +4,7 @@
  */
 package pantallas;
 
+import Encriptar.Encriptar;
 import dao.PersonaDAO;
 import dao.TramiteDAO;
 import dominio.Persona;
@@ -50,16 +51,37 @@ public class Consultas extends javax.swing.JFrame {
         List<Persona> resultados = new ArrayList<>();
         resultados = personaDAO.listaPersonas();
         
+
+        resultados = personaDAO.desencriptarPersonaLista(resultados);
         // Realizar la consulta utilizando CriteriaBuilder según la opción seleccionada en cmbSeleccion
         if (cmbSeleccion.getSelectedItem().equals("nombre")) {
-             resultados = personaDAO.buscarNombre(busqueda);
+//             resultados = personaDAO.buscarNombre(busqueda);
+            
+            if (!txtBusqueda.getText().equals("")) {
+
+                List<Persona> listaNombre = new ArrayList<Persona>();
+
+                for (Persona p : resultados) {
+                    String n = p.getNombre() + " "
+                            + p.getApellidoP() + " " + p.getApellidoM();
+                    if (n.toLowerCase().contains(txtBusqueda.getText().toLowerCase())) {
+                        listaNombre.add(p);
+                    }
+
+                }
+                resultados = listaNombre;
+
+            }
+             
         } else if (cmbSeleccion.getSelectedItem().equals("rfc")) {
             resultados = personaDAO.buscarRfc(busqueda);
+            resultados = personaDAO.desencriptarPersonaLista(resultados);
         } else if (cmbSeleccion.getSelectedItem().equals("fecha nacimiento")) {
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 Date fechaNacimiento = sdf.parse(busqueda);
                 resultados = personaDAO.buscarFechaNacimiento(fechaNacimiento);
+                resultados = personaDAO.desencriptarPersonaLista(resultados);
             } catch (ParseException ex) {
                 JOptionPane.showMessageDialog(null, "La fecha de nacimiento ingresada no es válida. Formato válido: yyyy-MM-dd");
             }
@@ -70,7 +92,9 @@ public class Consultas extends javax.swing.JFrame {
         model.setRowCount(0);
         if (resultados != null) {
             for (Persona p : resultados) {
-                model.addRow(new Object[]{p.getFechaNa(), p.getNombre(), p.getRfc()});
+                String n = p.getNombre() + " "
+                        + p.getApellidoP() + " " + p.getApellidoM();
+                model.addRow(new Object[]{p.getFechaNa(), n, p.getRfc()});
             }
         }
 
@@ -114,6 +138,11 @@ public class Consultas extends javax.swing.JFrame {
         txtBusqueda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBusquedaActionPerformed(evt);
+            }
+        });
+        txtBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBusquedaKeyReleased(evt);
             }
         });
         jPanel1.add(txtBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 430, 30));
@@ -170,6 +199,11 @@ public class Consultas extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_btnBusquedaActionPerformed
+
+    private void txtBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyReleased
+        // TODO add your handling code here:
+        buscarPersonas();
+    }//GEN-LAST:event_txtBusquedaKeyReleased
 
     /**
      * @param args the command line arguments

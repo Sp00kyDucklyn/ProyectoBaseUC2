@@ -76,7 +76,6 @@ public class Tramite implements Serializable {
     }
 
 
-
 //    public List<Persona> getPersonas() {
 //        return personas;
 //    }

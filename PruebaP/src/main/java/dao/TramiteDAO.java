@@ -4,6 +4,7 @@
  */
 package dao;
 
+import Encriptar.Encriptar;
 import dominio.Licencia;
 import dominio.Persona;
 import dominio.Placa;
@@ -137,5 +138,24 @@ public class TramiteDAO implements ITramiteDAO{
         
     }
 
+    public List<Tramite> desencriptarPersonaTramite(List<Tramite> lista) {
+        Encriptar encriptacion = new Encriptar();
+        List<Persona> personasDesencriptadas = new ArrayList<>(); // crea una lista auxiliar de personas
+        List<Tramite> lista_tramitePersona = new ArrayList<>(); // crea una lista de trámites
+
+        for (Tramite tramite : lista) {
+            Persona persona = tramite.getPersona(); // obtiene la persona del trámite
+
+            if (!personasDesencriptadas.contains(persona)) { // si la persona no está en la lista auxiliar
+                personasDesencriptadas.add(persona); // agrega la persona a la lista auxiliar
+                persona.setNombre(encriptacion.desencriptar(persona.getNombre()));
+                persona.setApellidoP(encriptacion.desencriptar(persona.getApellidoP()));
+                persona.setApellidoM(encriptacion.desencriptar(persona.getApellidoM()));
+            }
+            lista_tramitePersona.add(tramite); // agrega el trámite a la lista
+        }
+
+        return lista_tramitePersona;
+    }
 
 }

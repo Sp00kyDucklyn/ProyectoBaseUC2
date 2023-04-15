@@ -18,6 +18,7 @@ import java.util.List;
 public interface ITramiteDAO {
     
     public List<Tramite> listaTramite(Date periodoI, Date periodoF,boolean licencia, boolean placa);
+    public List<Tramite> desencriptarPersonaTramite(List<Tramite> lista);
     //public void llamarTipo();
     
 }

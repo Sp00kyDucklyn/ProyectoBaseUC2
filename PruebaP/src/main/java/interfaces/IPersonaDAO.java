@@ -32,5 +32,7 @@ public interface IPersonaDAO {
     public List<Vehiculo> listaVehiculo();
     
     public List<Persona> buscarRfcEstado(String rfc);
+    
+    public List<Persona> desencriptarPersonaLista(List<Persona> personas);
           
 }

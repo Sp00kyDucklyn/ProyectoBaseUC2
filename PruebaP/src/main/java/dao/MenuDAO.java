@@ -4,6 +4,7 @@
  */
 package dao;
 
+import Encriptar.Encriptar;
 import interfaces.IMenuDAO;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -37,13 +38,14 @@ public class MenuDAO implements IMenuDAO{
        //agregarTramites();
        //agregarTramitesL();
        //agregarTramitesV();
-       agregarVehiculos();
+       //agregarVehiculos();
     }
 
     @Override
     public void agregarPersonas() {
          EntityManager em = getEntityManager();
        em.getTransaction().begin();
+       Encriptar encriptacion = new Encriptar();
 //       EntityManager.getTransaction().begin();
        
        StoredProcedureQuery storedProcedure = em.createStoredProcedureQuery("insert_persona");
@@ -84,7 +86,20 @@ public class MenuDAO implements IMenuDAO{
             {"Fuentes", "Vega", "2000-04-25", "Andres", "LOEJ800515FUE","2227773456"},
             {"Benitez", "Hernandez", "1998-01-13", "Jazmin", "LOEJ800515BEN","4448881234"}};
         
-          for (int i = 0; i < personas.length; i++) {
+         for (int i = 0; i < personas.length; i++) {
+             String encript0 = encriptacion.encriptar(personas [i][0]);
+             personas [i][0] = encript0;
+             
+             String encript1 = encriptacion.encriptar(personas [i][1]);
+             personas [i][1] = encript1;
+             
+             String encript = encriptacion.encriptar(personas [i][3]);
+             personas [i][3] = encript;
+             System.out.println(personas [i][3]);
+             
+        }
+        
+         for (int i = 0; i < personas.length; i++) {
             
             storedProcedure.setParameter(1, personas[i][0]);
             storedProcedure.setParameter(2, personas[i][1]);

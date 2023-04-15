@@ -44,7 +44,6 @@ public class PersonaDAO implements IPersonaDAO{
     public void crearPersona(Persona persona) {
        EntityManager em = getEntityManager();
        
-        
         Encriptar en= new Encriptar();
         String nombre=en.encriptar(persona.getNombre());
         String apellidoP= en.encriptar(persona.getApellidoP());
@@ -94,7 +93,6 @@ public class PersonaDAO implements IPersonaDAO{
         if (rfc != null && !rfc.isEmpty()) {
             predicates.add(criteriaBuilder.like(root.get("rfc"), "%" + rfc + "%"));
         }
-        
         
         criteriaQuery.where(predicates.toArray(new Predicate[0]));
         
@@ -182,5 +180,20 @@ public class PersonaDAO implements IPersonaDAO{
         persona.setNombre(nombre);
         persona.setApellidoP(apellidoP);
         persona.setApellidoM(apellidoM);
+    }
+    
+    @Override
+    public List<Persona> desencriptarPersonaLista(List<Persona> personas) {
+        Encriptar en = new Encriptar();
+        
+        for (Persona persona : personas) {
+            String nombre = en.desencriptar(persona.getNombre());
+            String apellidoP = en.desencriptar(persona.getApellidoP());
+            String apellidoM = en.desencriptar(persona.getApellidoM());
+            persona.setNombre(nombre);
+            persona.setApellidoP(apellidoP);
+            persona.setApellidoM(apellidoM);
+        }
+        return personas;
     }
 }

@@ -4,11 +4,14 @@
  */
 package pantallas;
 
+import dao.PersonaDAO;
 import dao.TramiteDAO;
 import dominio.Licencia;
 import dominio.Persona;
 import dominio.Placa;
 import dominio.Tramite;
+import interfaces.IPersonaDAO;
+import interfaces.ITramiteDAO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -30,12 +33,13 @@ public class GeneracionReportes extends javax.swing.JFrame {
     }
     
     public void buscarTramites(){
-        
+        ITramiteDAO tramiteDAO = new TramiteDAO();
         List <Tramite> tramites = tramiteDAO.listaTramite(txtFechaInicio.getDate(), txtFechaFin.getDate(),chLicencia.isSelected(), chPlaca.isSelected());
         
 //        List <Tramite> tramites2 = tramiteDAO.listaTramiteC(chLicencia.isSelected(), chLicencia.isSelected());
+        tramites = tramiteDAO.desencriptarPersonaTramite(tramites);
         
-        if (txtNombre.getText().equals("")) {
+        if (!txtNombre.getText().equals("")) {
 
             List<Tramite> listaNombre = new ArrayList<Tramite>();
 
@@ -48,7 +52,9 @@ public class GeneracionReportes extends javax.swing.JFrame {
                 }
 
             }
+            
             tramites = listaNombre;
+            
 
         }
         
