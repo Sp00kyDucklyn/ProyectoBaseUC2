@@ -17,13 +17,7 @@ import java.util.List;
  */
 public interface ITramiteDAO {
     
-    public List<Tramite> buscarRfc(String rfc);
-    public List<Tramite> buscarNombre(String nombre);
-    public List<Tramite> buscarFechaNacimiento(Date anioNacimiento);
-    public List<Licencia> buscarLicencias(String rfc);
-    public List<Placa> buscarPlacas(String rfc);
-    public List<Tramite> tramites();
-    
+    public List<Tramite> listaTramite(Date periodoI, Date periodoF,boolean licencia, boolean placa);
     //public void llamarTipo();
     
 }

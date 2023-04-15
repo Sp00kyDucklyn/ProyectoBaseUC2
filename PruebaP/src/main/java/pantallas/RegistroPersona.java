@@ -48,7 +48,7 @@ public class RegistroPersona extends javax.swing.JFrame {
          String apellidoP = datosFormulario.get("apellidoP");
          String apellidoM = datosFormulario.get("apellidoM");
          Date fechaNa = new SimpleDateFormat("yyyy-MM-dd").parse(datosFormulario.get("fechaNa"));
-         String telefono = datosFormulario.get("telefono");
+         String telefono = datosFormulario.get("numTelefono");
          
          Persona persona = new Persona(rfc, nombre , apellidoP, apellidoM, fechaNa, telefono);
 
@@ -277,8 +277,8 @@ public class RegistroPersona extends javax.swing.JFrame {
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        SiLicencia licencia = new SiLicencia();
-        licencia.setVisible(true);
+//        SiLicencia licencia = new SiLicencia();
+//        licencia.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
