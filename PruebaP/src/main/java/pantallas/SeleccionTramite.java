@@ -4,6 +4,7 @@
  */
 package pantallas;
 
+import dao.LicenciaDAO;
 import dao.PersonaDAO;
 import dominio.Persona;
 import java.util.List;

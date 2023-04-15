@@ -37,7 +37,7 @@ public class Vehiculo implements Serializable {
     private String anio;
     
     @ManyToOne
-    @JoinColumn(name= "idPersona")
+    @JoinColumn(name= "PERSONA_ID_PERSONA", nullable = false)
     private Persona persona;
     
     @OneToMany(mappedBy="vehiculos", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})

@@ -15,6 +15,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import utileria.Validaciones;
 
@@ -26,6 +28,7 @@ public class SiPlaca extends javax.swing.JFrame {
 
     VehiculoDAO vehiculoDAO = new VehiculoDAO();
     private Persona persona;
+
     /**
      * Creates new form SiPlaca
      */
@@ -34,73 +37,71 @@ public class SiPlaca extends javax.swing.JFrame {
         initComponents();
     }
 
-    public Vehiculo agregarVehiculo() throws ParseException{
+    public Vehiculo agregarVehiculo() throws ParseException {
         //Extrer datos del formulario
-        HashMap<String,String> datosFormulario = this.extraerDatosFormulario();
+        HashMap<String, String> datosFormulario = this.extraerDatosFormulario();
         //Validar datos del vehiculo //Puede existir clase validaciones
         List<String> erroresValidacion = this.validarDatosFormulario(datosFormulario);
-        if(!erroresValidacion.isEmpty()){
+        if (!erroresValidacion.isEmpty()) {
             this.mostrarErroresValidacion(erroresValidacion);
 //            return;
         }
-        
-         String numSerie = datosFormulario.get("numSerie");
-         String marca = datosFormulario.get("marca");
-         String linea = datosFormulario.get("linea");
-         String color = datosFormulario.get("color");
-         String anio = datosFormulario.get("anio");
-         
 
-         Vehiculo vehiculo = new Vehiculo(numSerie, marca, linea, color, anio,persona);
+        String numSerie = datosFormulario.get("numSerie");
+        String marca = datosFormulario.get("marca");
+        String linea = datosFormulario.get("linea");
+        String color = datosFormulario.get("color");
+        String anio = datosFormulario.get("anio");
 
-         return vehiculo;
+        Vehiculo vehiculo = new Vehiculo(numSerie, marca, linea, color, anio, persona);
+
+        return vehiculo;
     }
-    
-    private void mostrarErroresValidacion(List<String> erroresValidacion){
+
+    private void mostrarErroresValidacion(List<String> erroresValidacion) {
         //Nos va a concatenar los errores y nos pondra un enter
         String mensaje = String.join("\n", erroresValidacion);
         JOptionPane.showMessageDialog(this, mensaje, "Errores de validacion", JOptionPane.WARNING_MESSAGE);
     }
-    
+
     //Poner en variables individuales lo que estaba en las cajas
     //De texto
     //Uso de diccionarios, con llaves y values, asi el dia que esto cambie
     //Sea mas solido
-    private HashMap<String,String> extraerDatosFormulario(){
+    private HashMap<String, String> extraerDatosFormulario() {
         String numSerie = txtNumSerie.getText();
         String marca = txtMarca.getText();
         String linea = txtLinea.getText();
         String color = txtColor.getText();
         String anio = txtAnio.getText();
-        
-       
+
         //Diciendole llave y valor de cada llave
-        HashMap<String,String> datosFormulario = new HashMap<>();
+        HashMap<String, String> datosFormulario = new HashMap<>();
         datosFormulario.put("numSerie", numSerie);
         datosFormulario.put("marca", marca);
         datosFormulario.put("linea", linea);
         datosFormulario.put("color", color);
         datosFormulario.put("anio", anio);
-        
+
         //Estos datos se extraen como strings y posteriormente se validan
         return datosFormulario;
     }
-    
+
 //    //Es mejor hacer un metodo de validar por cada uno de los datos del hashmap
-    private List<String> validarDatosFormulario(HashMap<String, String> datosFormulario){
-        
+    private List<String> validarDatosFormulario(HashMap<String, String> datosFormulario) {
+
         List<String> erroresValidacion = new LinkedList<>();
         String numSerie = datosFormulario.get("numSerie");
-        if(Validaciones.esTextoVacio(numSerie)){
+        if (Validaciones.esTextoVacio(numSerie)) {
             erroresValidacion.add("El numero de serie esta vacio");
         }
-        
-        if(!Validaciones.validarCadena(numSerie)){
+
+        if (!Validaciones.validarCadena(numSerie)) {
             erroresValidacion.add("El numero de serie no cumple el formato correcto");
         }
 
-         return erroresValidacion;
-       
+        return erroresValidacion;
+
     }
 
     /**
@@ -212,21 +213,31 @@ public class SiPlaca extends javax.swing.JFrame {
     }//GEN-LAST:event_txtMarcaActionPerformed
 
     private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
-        try {
-            vehiculoDAO.crearVehiculo(this.agregarVehiculo());
-        } catch (ParseException ex) {
-            Logger.getLogger(SiPlaca.class.getName()).log(Level.SEVERE, null, ex);
-        }
-      
+        List<String> erroresValidacion = new LinkedList<>();
+        String numSerie = txtNumSerie.getText();
         Validaciones val = new Validaciones();
-        val.mostrarMensaje("Se agrego exitosamente", "Info", "Guardado Correctamente ");
+        if (Validaciones.esTextoVacio(numSerie) || !Validaciones.validarCadena(numSerie)) {
+            JOptionPane.showMessageDialog(this, "El numero de serie no cumple con el formato correcto");
+
+        } else {
+            try {
+                vehiculoDAO.crearVehiculo(this.agregarVehiculo());
+            } catch (ParseException ex) {
+                Logger.getLogger(SiPlaca.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            val.mostrarMensaje("Se agrego exitosamente", "Info", "Guardado Correctamente ");
+        }
+            
+
+
+            
     }//GEN-LAST:event_botonGuardarActionPerformed
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
         this.setVisible(false);
-         SeleccionTramite seleccion = new SeleccionTramite();
-         seleccion.setVisible(true);
-         this.dispose();
+        SeleccionTramite seleccion = new SeleccionTramite();
+        seleccion.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_botonCancelarActionPerformed
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
