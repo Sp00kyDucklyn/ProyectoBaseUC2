@@ -33,14 +33,20 @@ public class MenuDAO implements IMenuDAO{
         return entityManagerFactory.createEntityManager();
     }
 
+    /**
+     * 
+     */
     public void llamarProcedimiento() {
        agregarPersonas();
-       //agregarTramites();
-       //agregarTramitesL();
-       //agregarTramitesV();
-       //agregarVehiculos();
+       //agregarVehiculos(); FALTA STORED PROCEDURE
+       //agregarTramites(); FALTA STORED PROCEDURE
+       //agregarTramitesL();    FALTA STORED PROCEDURE
+       //agregarTramitesV();    FALTA STORED PROCEDURE
     }
 
+    /**
+     * 
+     */
     @Override
     public void agregarPersonas() {
          EntityManager em = getEntityManager();
@@ -95,7 +101,6 @@ public class MenuDAO implements IMenuDAO{
              
              String encript = encriptacion.encriptar(personas [i][3]);
              personas [i][3] = encript;
-             System.out.println(personas [i][3]);
              
         }
         
@@ -145,62 +150,41 @@ public class MenuDAO implements IMenuDAO{
        //Color
        storedProcedure.registerStoredProcedureParameter(2, String.class, ParameterMode.IN);
        //Año
-       storedProcedure.registerStoredProcedureParameter(3, Date.class, ParameterMode.IN);
+       storedProcedure.registerStoredProcedureParameter(3, String.class, ParameterMode.IN);
        //Marca
        storedProcedure.registerStoredProcedureParameter(4, String.class, ParameterMode.IN);
        //NumSerie
        storedProcedure.registerStoredProcedureParameter(5, String.class, ParameterMode.IN);
        //idPersona
-       storedProcedure.registerStoredProcedureParameter(6, String.class, ParameterMode.IN);
+       storedProcedure.registerStoredProcedureParameter(6, Integer.class, ParameterMode.IN);
        
         
 
         //Establecemos los valores de entrada con un arreglo que ya tiene 
         //A todas las personas a establecer
        String[][] vehiculos = {
-            {"Toyota Camry", "Rojo", "2003-04-12", "Toyota", "1G1YY26U055000000","1"},
-            {"Honda Accord", "Rosa", "1990-04-12", "Honda", "JTHBJ46G272000000","2"},
-            {"Chevrolet Malibu", "Verde", "1985-04-12", "Chevrolet", "JHMCG5650XC000000","3"},
-            {"Ford Mustang", "Azul", "1977-04-12", "Ford", "1B3ES56C91D000000","4"},
-            {"BMW 3 Series", "Gris", "1999-04-12", "BMW", "JF1GD70626L000000","5"},
-            {"Mercedes-Benz C-Class", "Blanco", "2020-04-12", "Mercedes-Benz", "1FAFP56S23A000000","6"},
-            {"Audi A4", "Negro", "1975-04-12", "Audi", "KMHDN46D24U000000","7"},
-            {"Nissan Altima", "Naranja", "2005-04-12", "Nissan", "KL1TD66E59B000000","8"},
-            {"Hyundai Elantra", "Azul Clarito", "1994-04-12", "Hyundai", "2G1FP32G322000000","9"},
-            {"Kia Optima", "Rojo", "1992-04-12", "Kia", "5N1AT2MT5FC000000","10"},
-            {"Toyota Camry", "Rosa", "1979-04-12", "Toyota", "1G1YY26U055000001","11"},
-            {"Honda Accord", "Blanco", "2001-04-12", "Honda", "JTHBJ46G272000001","12"},
-            {"Chevrolet Malibu", "Gris", "1988-04-12", "Chevrolet", "JHMCG5650XC000001","13"},
-            {"Ford Mustang", "Negro", "1972-04-12", "Ford", "1B3ES56C91D000001","14"},
-            {"BMW 3 Series", "Verde", "2008-04-12", "BMW", "JF1GD70626L000001","15"},
-            {"Mercedes-Benz C-Class", "Azul", "1981-04-12", "Mercedes-Benz", "1FAFP56S23A000001","16"},
-            {"Audi A4", "Azul Clarito", "1996-04-12", "Audi", "KMHDN46D24U000001","17"},
-            {"Nissan Altima", "Naranja", "1970-04-12", "Nissan", "KL1TD66E59B000001","18"},
-            {"Hyundai Elantra", "Azul", "2000-04-12", "Hyundai", "2G1FP32G322000001","19"},
-            {"Kia Optima", "Verde", "1998-04-12", "Kia", "5N1AT2MT5FC000001","20"}};
+            {"Toyota Camry", "Rojo", "2003", "Toyota", "ABC-123","1"},
+            {"Honda Accord", "Rosa", "1990", "Honda", "ABC-456","2"},
+            {"Chevrolet Malibu", "Verde", "1985", "Chevrolet", "ABC-789","3"},
+            {"Ford Mustang", "Azul", "1977", "Ford", "DFG-123","4"},
+            {"BMW 3 Series", "Gris", "1999", "BMW", "DFG-456","5"},
+            };
        
        
         for (int i = 0; i < vehiculos.length; i++) {
             
             storedProcedure.setParameter(1, vehiculos[i][0]);
             storedProcedure.setParameter(2, vehiculos[i][1]);
-
-            String fechaString = vehiculos[i][2]; // fecha en formato "yyyy-MM-dd"
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            Date fecha;
-            try {
-                fecha = format.parse(fechaString);
-                storedProcedure.setParameter(3, fecha);
-            } catch (ParseException ex) {
-                Logger.getLogger(MenuDAO.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println("Excepcion");
-            }
-        
+            storedProcedure.setParameter(3, vehiculos[i][2]);
             storedProcedure.setParameter(4, vehiculos[i][3]);
             storedProcedure.setParameter(5, vehiculos[i][4]);
-            storedProcedure.setParameter(6, vehiculos[i][5]);
             
-           
+            Integer id = 0;
+            String idPersona = vehiculos[i][5];
+            String idString = id.toString();
+            idPersona = idString;
+            storedProcedure.setParameter(6, idPersona);
+            
             // Ejecutamos el procedimiento almacenado
             storedProcedure.execute();
         }
@@ -221,61 +205,107 @@ public class MenuDAO implements IMenuDAO{
        StoredProcedureQuery storedProcedure = em.createStoredProcedureQuery("insert_tramites");
        
        //Insertamos los parametros
-       //Apellido paterno
+       //tipo_tramite
        storedProcedure.registerStoredProcedureParameter(1, String.class, ParameterMode.IN);
-       //Apellido materno
-       storedProcedure.registerStoredProcedureParameter(2, String.class, ParameterMode.IN);
-       //Fecha nacimiento
-       storedProcedure.registerStoredProcedureParameter(3, Date.class, ParameterMode.IN);
-       //Nombre
-       storedProcedure.registerStoredProcedureParameter(4, String.class, ParameterMode.IN);
-       //RFC
-       storedProcedure.registerStoredProcedureParameter(5, String.class, ParameterMode.IN);
-       //Tipo
-       storedProcedure.registerStoredProcedureParameter(6, String.class, ParameterMode.IN);
-        
+       //costo
+       storedProcedure.registerStoredProcedureParameter(2, Integer.class, ParameterMode.IN);
+       //estado
+       storedProcedure.registerStoredProcedureParameter(3, String.class, ParameterMode.IN);
+       //fechaexpedicion
+       storedProcedure.registerStoredProcedureParameter(4, Date.class, ParameterMode.IN);
+       //fechavencimiento x verse
+       storedProcedure.registerStoredProcedureParameter(5, Date.class, ParameterMode.IN);
+       //idPersona
+       storedProcedure.registerStoredProcedureParameter(6, Integer.class, ParameterMode.IN);
+       
         String[][] tramites = {
-            {"Valenzuela", "Tarazon", "2003-05-10", "Oscar", "LOEJ800515TAR","licencia"},
-            {"Garcia", "Lopez", "1990-02-14", "Maria", "LOEJ800515GAR","licencia"},
-            {"Gonzalez", "Perez", "1985-10-22", "Pedro", "LOEJ800515GON","licencia"},
-            {"Martinez", "Sanchez", "1977-06-05", "Luis", "LOEJ800515MAR","licencia"},
-            {"Hernandez", "Rivera", "1999-12-30", "Ana", "LOEJ800515HER","licencia"},
-            {"Diaz", "Vazquez", "1983-09-17", "Juan", "LOEJ800515DIA","licencia"},
-            {"Romero", "Castillo", "1975-01-01", "Elena", "LOEJ800515ROM","licencia"},
-            {"Ramirez", "Gutierrez", "2005-08-08", "Miguel", "LOEJ800515RAM","placas"},
-            {"Torres", "Lopez", "1994-04-20", "Sofia", "LOEJ800515TOR","placas"},
-            {"Guzman", "Santos", "1992-11-12", "Carlos", "LOEJ800515GUZ","placas"},
-            {"Castro", "Rojas", "1979-07-26", "Laura", "LOEJ800515CAS","placas"},
-            {"Reyes", "Fernandez", "2001-03-18", "David", "LOEJ800515REY","licencia"},
-            {"Mendoza", "Pineda", "1988-12-05", "Jose", "LOEJ800515MEN","licencia"},
-            {"Ramos", "Torres", "1972-02-29", "Carmen", "LOEJ800515RAM","licencia"},
-            {"Sosa", "Lopez", "2008-11-17", "Diego", "LOEJ800515SOS","licencia"},
-            {"Orozco", "Castillo", "1981-05-15", "Fernanda", "LOEJ800515ORO","licencia"},
-            {"Chavez", "Mendez", "1996-09-02", "Gabriel", "LOEJ800515CHA","licencia"},
-            {"Medina", "Santos", "1970-07-07", "Adriana", "LOEJ800515MED","licencia"},
-            {"Fuentes", "Vega", "2000-04-25", "Andres", "LOEJ800515FUE","licencia"},
-            {"Benitez", "Hernandez", "1998-01-13", "Jazmin", "LOEJ800515BEN","licencia"}};
+            {"licencia", "600", "activo", "1"},//1
+            {"licencia", "900", "activo", "2"},
+            {"licencia", "1100", "activo", "3"},
+            {"licencia", "600", "activo", "4"},
+            {"licencia", "900", "activo", "5"},
+            {"licencia", "1100", "activo", "6"},
+            {"licencia", "600", "activo", "7"},
+            {"licencia", "900", "activo", "8"},
+            {"licencia", "1100", "activo", "9"},
+            {"licencia", "600", "activo", "10"},
+            {"licencia", "900", "activo", "11"},
+            {"licencia", "1100", "activo", "12"},
+            {"licencia", "600", "activo", "13"},
+            {"licencia", "900", "activo", "14"},
+            {"licencia", "1100", "activo", "15"},
+            {"licencia", "1100", "desactivo", "16"},
+            {"licencia", "1100", "desactivo", "17"},
+            {"licencia", "1100", "desactivo", "18"},
+            {"licencia", "1100", "desactivo", "19"},
+            {"licencia", "1100", "desactivo", "20"},
+            {"placa", "1500", "activo", "1"},
+            {"placa", "1000", "activo", "2"},
+            {"placa", "1500", "activo", "3"},
+            {"placa", "1000", "activo", "4"},
+            {"placa", "1000", "activo", "5"}};//25
+        
+        Date[][] fechas = {
+            {new Date(),new Date(2024-04-18)},//1
+            {new Date(),new Date(2024-04-18)},
+            {new Date(),new Date(2024-04-18)},
+            {new Date(),new Date(2024-04-18)},
+            {new Date(),new Date(2024-04-18)},//5
+            {new Date(),new Date(2024-04-18)},
+            {new Date(),new Date(2024-04-18)},
+            {new Date(),new Date(2024-04-18)},
+            {new Date(),new Date(2024-04-18)},
+            {new Date(),new Date(2024-04-18)},//10
+            {new Date(),new Date(2025-04-18)},
+            {new Date(),new Date(2025-04-18)},
+            {new Date(),new Date(2025-04-18)},
+            {new Date(),new Date(2025-04-18)},
+            {new Date(),new Date(2025-04-18)},//15
+            {new Date(),new Date(2026-04-18)},
+            {new Date(),new Date(2026-04-18)},
+            {new Date(),new Date(2026-04-18)},
+            {new Date(),new Date(2026-04-18)},
+            {new Date(),new Date(2026-04-18)},//20
+            {new Date(),new Date(2024-04-18)},
+            {new Date(),new Date(2024-04-18)},
+            {new Date(),new Date(2024-04-18)},
+            {new Date(),new Date(2024-04-18)},
+            {new Date(),new Date(2024-04-18)}};//25
+        
         
        
-                for (int i = 0; i < tramites.length; i++) {
+            for (int i = 0; i < tramites.length; i++) {
             
             storedProcedure.setParameter(1, tramites[i][0]);
-            storedProcedure.setParameter(2, tramites[i][1]);
-
-            String fechaString = tramites[i][2]; // fecha en formato "yyyy-MM-dd"
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            Date fecha;
-            try {
-                fecha = format.parse(fechaString);
-                storedProcedure.setParameter(3, fecha);
-            } catch (ParseException ex) {
-                Logger.getLogger(MenuDAO.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println("Excepcion");
-            }
-        
-            storedProcedure.setParameter(4, tramites[i][3]);
-            storedProcedure.setParameter(5, tramites[i][4]);
-            storedProcedure.setParameter(6, tramites[i][5]);
+            
+            Integer costo = 0;
+            String costoTramite = tramites[i][1];
+            String costoString = costo.toString();
+            costoTramite = costoString;
+            
+            storedProcedure.setParameter(2, costoTramite);
+            
+//            storedProcedure.setParameter(2, tramites[i][1]);
+            storedProcedure.setParameter(3, tramites[i][2]);
+//            String fechaString = tramites[i][2]; // fecha en formato "yyyy-MM-dd"
+//            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//            Date fecha;
+//            try {
+//                fecha = format.parse(fechaString);
+//                storedProcedure.setParameter(3, fecha);
+//            } catch (ParseException ex) {
+//                Logger.getLogger(MenuDAO.class.getName()).log(Level.SEVERE, null, ex);
+//                System.out.println("Excepcion");
+//            }
+            
+            storedProcedure.setParameter(4, fechas[i][3]);
+            storedProcedure.setParameter(5, fechas[i][4]);
+            Integer id = 0;
+            String idPersona = tramites[i][5];
+            String idString = id.toString();
+            idPersona = idString;
+            
+            storedProcedure.setParameter(6, idPersona);
             
              
             // Ejecutamos el procedimiento almacenado
@@ -297,60 +327,41 @@ public class MenuDAO implements IMenuDAO{
        
        StoredProcedureQuery storedProcedure = em.createStoredProcedureQuery("insert_tramites_herencia_licencia");
        
-        //Estado
+       //idTramite
         storedProcedure.registerStoredProcedureParameter(1, String.class, ParameterMode.IN);
-        //FechaExpedicion
-        storedProcedure.registerStoredProcedureParameter(2, Date.class, ParameterMode.IN);
-        //FechaVencimiento
-        storedProcedure.registerStoredProcedureParameter(3, Date.class, ParameterMode.IN);
-
-        //NumeroPlacas
-        storedProcedure.registerStoredProcedureParameter(4, String.class, ParameterMode.IN);
+        //numPlacasnu
+        storedProcedure.registerStoredProcedureParameter(2, String.class, ParameterMode.IN);
+        //idVehiculo
+        storedProcedure.registerStoredProcedureParameter(3, String.class, ParameterMode.IN);
 
         //Establecemos los valores de entrada con un arreglo que ya tiene 
         //A todas las personas a establecer
        
        String[][] placas ={
-            {"activo", "2023-04-10", "2026-04-10", "323456"},
-            {"activo", "2023-04-10", "2026-04-10", "323458"},
-            {"desactivo", "2021-04-10", "2023-04-10", "323457"},
-            {"activo", "2023-04-10", "2025-04-10", "323459"},
-            {"activo", "2023-04-10", "2024-04-10", "323451"},
-            {"desactivo", "2022-04-10", "2023-04-10", "323452"},
-            {"activo", "2023-04-10", "2024-04-10", "323453"},
-            {"desactivo", "2022-04-10", "2023-04-10", "323454"},
-            {"activo", "2023-04-10", "2024-04-10", "323455"},
-            {"activo", "2023-04-10", "2024-04-10", "323433"},
-            {"activo", "2023-04-10", "2024-04-10", "323431"},
-            {"desactivo", "2021-04-10", "2022-04-10", "323432"},
-            {"activo", "2023-04-10", "2024-04-10", "323434"},
-            {"desactivo", "2022-04-10", "2023-04-10", "323436"},
-            {"activo", "2023-04-10", "2024-04-10", "323437"},
-            {"desactivo", "2021-04-10", "2022-04-10", "323438"},
-            {"activo", "2023-04-10", "2025-04-10", "323439"},
-            {"activo", "2023-04-10", "2025-04-10", "323435"},
-            {"desactivo", "2021-04-10", "2022-04-10", "323443"},
-            {"activo", "2023-04-10", "2025-04-10", "323449"}
+            {"1", "123456", "1"},
+            {"2", "123789", "2"},
+            {"3", "123123", "3"},
+            {"4", "789456", "4"},
+            {"5", "456123", "5"}
             };
        
                 
                for (int b = 0; b < placas.length; b++) {
 
-               
-                storedProcedure.setParameter(1, placas[b][0]);
+                   Integer idTramite = 0;
+                   String idTramiteString = placas[b][0];
+                   String idString = idTramite.toString();
+                   idTramiteString = idString;
+                storedProcedure.setParameter(1,idTramiteString);
 
-                String fechaStringP = placas[b][2];
-                SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
-                Date fecha2;
-                try {
-                    fecha2 = format2.parse(fechaStringP);
-                    storedProcedure.setParameter(2, fecha2);
-                    storedProcedure.setParameter(3, fecha2);
-                } catch (ParseException ex) {
-                    Logger.getLogger(MenuDAO.class.getName()).log(Level.SEVERE, null, ex);
-                    System.out.println("Excepcion");
-                }
-                storedProcedure.setParameter(4, placas[b][3]);
+                storedProcedure.setParameter(2, placas[b][1]);
+                
+                Integer idVehiculo = 0;
+                   String idVehiculoString = placas[b][2];
+                   String idStringV = idVehiculo.toString();
+                   idVehiculoString = idStringV;
+                   
+                storedProcedure.setParameter(3, idVehiculoString);
                 storedProcedure.execute();
             }
         
@@ -369,60 +380,49 @@ public class MenuDAO implements IMenuDAO{
 //       EntityManager.getTransaction().begin();
        
        StoredProcedureQuery storedProcedure = em.createStoredProcedureQuery("insert_tramites_herencia_licencia");
-            //Discapacitado
+           
+            //id_tramites
             storedProcedure.registerStoredProcedureParameter(1, String.class, ParameterMode.IN);
-            //Estado
+            //Discapacitado
             storedProcedure.registerStoredProcedureParameter(2, String.class, ParameterMode.IN);
-            //FechaExpedicion
-            storedProcedure.registerStoredProcedureParameter(3, Date.class, ParameterMode.IN);
-            //FechaVencimiento
-            storedProcedure.registerStoredProcedureParameter(4, Date.class, ParameterMode.IN);
             //Vigencia
-            storedProcedure.registerStoredProcedureParameter(5, String.class, ParameterMode.IN);
+            storedProcedure.registerStoredProcedureParameter(3, String.class, ParameterMode.IN);
 
         //Establecemos los valores de entrada con un arreglo que ya tiene 
         //A todas las personas a establecer
        
        String[][] licencias ={
-            {"no", "activo", "2023-04-10", "2026-04-10", "3"},
-            {"no", "activo", "2023-04-10", "2026-04-10", "3"},
-            {"no", "desactivo", "2021-04-10", "2023-04-10", "2"},
-            {"no", "activo", "2023-04-10", "2025-04-10", "2"},
-            {"no", "activo", "2023-04-10", "2024-04-10", "1"},
-            {"no", "desactivo", "2022-04-10", "2023-04-10", "1"},
-            {"si", "activo", "2023-04-10", "2024-04-10", "1"},
-            {"no", "desactivo", "2022-04-10", "2023-04-10", "1"},
-            {"si", "activo", "2023-04-10", "2024-04-10", "1"},
-            {"no", "activo", "2023-04-10", "2024-04-10", "1"},
-            {"si", "activo", "2023-04-10", "2024-04-10", "1"},
-            {"no", "desactivo", "2021-04-10", "2022-04-10", "1"},
-            {"no", "activo", "2023-04-10", "2024-04-10", "1"},
-            {"si", "desactivo", "2022-04-10", "2023-04-10", "1"},
-            {"si", "activo", "2023-04-10", "2024-04-10", "1"},
-            {"no", "desactivo", "2021-04-10", "2022-04-10", "1"},
-            {"si", "activo", "2023-04-10", "2025-04-10", "2"},
-            {"no", "activo", "2023-04-10", "2025-04-10", "2"},
-            {"si", "desactivo", "2021-04-10", "2022-04-10", "1"},
-            {"no", "activo", "2023-04-10", "2025-04-10", "2"}
+            {"1","no", "1"},
+            {"2","no","1"},
+            {"3","no","1"},
+            {"4","no","1"},
+            {"5","no","1"},
+            {"6","no","1"},
+            {"7","no","1"},
+            {"8","no","1"},
+            {"9","no","1"},
+            {"10","no", "1"},
+            {"11","no","2"},
+            {"12","no", "2"},
+            {"13","no","2"},
+            {"14","no","2"},
+            {"15","no","2"},
+            {"16","no", "3"},
+            {"17","no","3"},
+            {"18","no", "3"},
+            {"19","no","3"},
+            {"20","no","3"}
             };
        
         for (int a = 0; a < licencias.length; a++) {
            
+             Integer id = 0;
+            String idTramite = licencias[a][2];
+            String idString = id.toString();
+            idTramite = idString;
             storedProcedure.setParameter(1, licencias[a][0]);
             storedProcedure.setParameter(2, licencias[a][1]);
-
-            String fechaString = licencias[a][2];
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            Date fecha;
-            try {
-                fecha = format.parse(fechaString);
-                storedProcedure.setParameter(3, fecha);
-                storedProcedure.setParameter(4, fecha);
-            } catch (ParseException ex) {
-                Logger.getLogger(MenuDAO.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println("Excepcion");
-            }
-                storedProcedure.setParameter(5, licencias[a][4]);
+            storedProcedure.setParameter(3, idTramite);
                 
             storedProcedure.execute();
        

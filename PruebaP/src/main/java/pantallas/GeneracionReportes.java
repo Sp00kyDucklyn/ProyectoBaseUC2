@@ -6,44 +6,59 @@ package pantallas;
 
 import dao.PersonaDAO;
 import dao.TramiteDAO;
+import dominio.JasperReporte;
 import dominio.Licencia;
 import dominio.Persona;
 import dominio.Placa;
 import dominio.Tramite;
 import interfaces.IPersonaDAO;
 import interfaces.ITramiteDAO;
+import java.io.InputStream;
+import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 /**
  *
- * @author xfs85
+ * @author Carmen & Raul
  */
 public class GeneracionReportes extends javax.swing.JFrame {
 
     TramiteDAO tramiteDAO = new TramiteDAO();
-
+    private List<Tramite> listaPDF;
     /**
      * Creates new form GeneracionReportes
      */
     public GeneracionReportes() {
         initComponents();
+        this.listaPDF = new ArrayList<Tramite>();
         buscarTramites();
     }
     
     public void buscarTramites(){
         ITramiteDAO tramiteDAO = new TramiteDAO();
-        List <Tramite> tramites = tramiteDAO.listaTramite(txtFechaInicio.getDate(), txtFechaFin.getDate(),chLicencia.isSelected(), chPlaca.isSelected());
+        listaPDF= tramiteDAO.listaTramite(txtFechaInicio.getDate(), txtFechaFin.getDate(),chLicencia.isSelected(), chPlaca.isSelected());
         
 //        List <Tramite> tramites2 = tramiteDAO.listaTramiteC(chLicencia.isSelected(), chLicencia.isSelected());
-        tramites = tramiteDAO.desencriptarPersonaTramite(tramites);
+        listaPDF = tramiteDAO.desencriptarPersonaTramite(listaPDF);
         
         if (!txtNombre.getText().equals("")) {
 
             List<Tramite> listaNombre = new ArrayList<Tramite>();
 
-            for (Tramite t : tramites) {
+            for (Tramite t : listaPDF) {
                 Persona persona = t.getPersona();
                 String n = persona.getNombre() + " "
                         + persona.getApellidoP() + " " + persona.getApellidoM();
@@ -53,7 +68,7 @@ public class GeneracionReportes extends javax.swing.JFrame {
 
             }
             
-            tramites = listaNombre;
+            listaPDF = listaNombre;
             
 
         }
@@ -62,23 +77,23 @@ public class GeneracionReportes extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tblResultados.getModel();
         model.setRowCount(0);
         
-        if (tramites != null) {
-            for (int i = 0; i < tramites.size(); i++) {
+        if (listaPDF != null) {
+            for (int i = 0; i < listaPDF.size(); i++) {
                 Object [] datos = new Object[model.getColumnCount()];
-                if(tramites.get(i) instanceof Licencia){
+                if(listaPDF.get(i) instanceof Licencia){
                     datos[0] = "licencia";
                 }
-                if(tramites.get(i) instanceof Placa){
+                if(listaPDF.get(i) instanceof Placa){
                     datos[0] = "placa";
                     
                 }
                 
-                datos[1] = tramites.get(i).getFechaExpedicion();
-                Persona persona = tramites.get(i).getPersona();
+                datos[1] = listaPDF.get(i).getFechaExpedicion();
+                Persona persona = listaPDF.get(i).getPersona();
                 String n = persona.getNombre() + " "
                         + persona.getApellidoP() + " " + persona.getApellidoM();
                 datos[2]= n;
-                datos [3] = tramites.get(i).getCosto();
+                datos [3] = listaPDF.get(i).getCosto();
                 
                 model.addRow(datos);
             }
@@ -120,6 +135,11 @@ public class GeneracionReportes extends javax.swing.JFrame {
 
         btnGenerarReporte.setBorder(null);
         btnGenerarReporte.setContentAreaFilled(false);
+        btnGenerarReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarReporteActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnGenerarReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(923, 540, 60, 40));
 
         chLicencia.setText("Licencia");
@@ -147,7 +167,6 @@ public class GeneracionReportes extends javax.swing.JFrame {
 
         btnBuscarReportes.setBorder(null);
         btnBuscarReportes.setContentAreaFilled(false);
-        btnBuscarReportes.setOpaque(false);
         btnBuscarReportes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarReportesActionPerformed(evt);
@@ -187,6 +206,7 @@ public class GeneracionReportes extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegresarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarMenuActionPerformed
@@ -205,6 +225,63 @@ public class GeneracionReportes extends javax.swing.JFrame {
         // TODO add your handling code here:
         buscarTramites();
     }//GEN-LAST:event_btnBuscarReportesActionPerformed
+
+    private void btnGenerarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarReporteActionPerformed
+        // TODO add your handling code here:
+        int opcion = JOptionPane.showConfirmDialog(null, "¿Está seguro de ejecutar este comando?", "Confirmar", JOptionPane.YES_NO_OPTION);
+
+        if (opcion == JOptionPane.YES_OPTION) {
+            List<JasperReporte> pdf = new ArrayList<JasperReporte>();
+            if (listaPDF.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "La tabla esta vacia");
+                return;
+            }
+            for (Tramite tramite : listaPDF) {
+                 JasperReporte reporte = new JasperReporte();
+                 Persona persona = tramite.getPersona();
+                 String nombreCompleto = persona.getNombre()+" "+persona.getApellidoP()+" "+persona.getApellidoM();
+                if (tramite instanceof Placa) {
+                    reporte.setTipoTramite("placa");
+                }
+                if (tramite instanceof Licencia) {
+                    reporte.setTipoTramite("licencia");
+                }else{
+                    reporte.setTipoTramite("sabradios");
+                }
+
+                reporte.setNombre(nombreCompleto);
+                reporte.setCosto(String.valueOf(tramite.getCosto()));
+                reporte.setPeriodo(tramite.getFechaExpedicion().toString());
+                
+                pdf.add(reporte);
+            }
+            try {
+                
+                Map parametro = new HashMap();
+                
+                LocalDateTime fechaHoraActual = LocalDateTime.now();
+                DateTimeFormatter formatEscrito = DateTimeFormatter.ofPattern("dd 'de' MMMM 'de' yyyy, hh:mm a");
+                String fechaHoraEscrita = fechaHoraActual.format(formatEscrito);
+                parametro.put("fecha_generacion",fechaHoraEscrita);
+                
+                parametro.put("historial", "Reporte General");
+                
+                JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(pdf);
+
+                // Cargar el archivo JRXML del reporte
+                InputStream reportFile = getClass().getResourceAsStream("/reportePDF_1.jrxml");
+                JasperReport jasperReport = JasperCompileManager.compileReport(reportFile);
+
+                // Llenar el reporte con los datos
+                JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,  parametro, beanColDataSource);
+
+                // Visualizar el reporte
+                JasperExportManager.exportReportToPdfFile(jasperPrint, "./reporteTramites.pdf");
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }//GEN-LAST:event_btnGenerarReporteActionPerformed
 
     /**
      * @param args the command line arguments
