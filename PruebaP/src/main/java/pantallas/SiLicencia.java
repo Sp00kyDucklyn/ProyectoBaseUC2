@@ -6,8 +6,11 @@ package pantallas;
 
 import dao.LicenciaDAO;
 import dao.PersonaDAO;
+import dominio.Licencia;
 import dominio.Persona;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -23,18 +26,57 @@ public class SiLicencia extends javax.swing.JFrame {
     /**
      * Creates new form SiLicencia
      */
-    Persona persona = new Persona ();
+    Persona persona = new Persona();
     LicenciaDAO licenciaDAO = new LicenciaDAO();
-    
+
     public SiLicencia(Persona persona) {
         initComponents();
         this.persona = persona;
         lblRfc.setText(persona.getRfc());
-        
+
     }
-    
-    
-    
+
+    public Licencia agregarLicencia() throws ParseException {
+        //Extrer datos del formulario
+        HashMap<String, String> datosFormulario = this.extraerDatosFormulario();
+        //Validar datos del videojuego //Puede existir clase validaciones
+        List<String> erroresVaidacion = this.validarDatosFormulario(datosFormulario);
+        if (!erroresVaidacion.isEmpty()) {
+            this.mostrarErroresValidacion(erroresVaidacion);
+        }
+
+        String vigencia = datosFormulario.get("vigencia");
+        Date fechaExpedicion = new Date();
+        String discapacitado = datosFormulario.get("discapacitado");
+        String costo = datosFormulario.get("costo");
+        String estado = datosFormulario.get("estado");
+        
+        Licencia licencia = new Licencia(vigencia, fechaVencimiento, discapacitado, costo, fechaExpedicion, estado, persona);
+
+        return licencia;
+    }
+
+    private void mostrarErroresValidacion(List<String> erroresVaidacion) {
+        //Nos va a concatenar los errores y nos pondra un enter
+        String mensaje = String.join("\n", erroresVaidacion);
+        JOptionPane.showMessageDialog(this, mensaje, "Errores de validacion", JOptionPane.WARNING_MESSAGE);
+    }
+
+    private HashMap<String, String> extraerDatosFormulario() {
+        String vigencia = (String) cmbVigencia.getSelectedItem();
+        String costo = lblCosto.getText();
+       
+        
+        HashMap<String, String> datosFormulario = new HashMap<>();
+        datosFormulario.put("vigencia", vigencia);
+        datosFormulario.put("costo", costo);
+
+        return datosFormulario;
+    }
+
+    private List<String> validarDatosFormulario(HashMap<String, String> datosFormulario) {
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,6 +95,8 @@ public class SiLicencia extends javax.swing.JFrame {
         lblRfc = new javax.swing.JLabel();
         lblDiscapacitado = new javax.swing.JLabel();
         cmbVigencia = new javax.swing.JComboBox<>();
+        txtFechaVencimiento = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -88,6 +132,13 @@ public class SiLicencia extends javax.swing.JFrame {
         });
         jPanel1.add(cmbVigencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 110, -1));
 
+        txtFechaVencimiento.setBorder(null);
+        jPanel1.add(txtFechaVencimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 300, 110, 20));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setText("Fecha de Vencimiento: ");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, -1, -1));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/SiLicencia.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -99,41 +150,57 @@ public class SiLicencia extends javax.swing.JFrame {
 
     private void cmbVigenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbVigenciaActionPerformed
         // TODO add your handling code here:
-        String vigenciaS =(String) cmbVigencia.getSelectedItem();
+        String vigenciaS = (String) cmbVigencia.getSelectedItem();
         boolean discapacidad = chDiscapacitado.isSelected();
+        Date fechaVencimiento = new Date();
+SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+String fechaVencimientoString = formatoFecha.format(fechaVencimiento);
         
-        
-        if( vigenciaS.equals("1 año")){
-            
-            if(discapacidad){
+
+        if (vigenciaS.equals("1 año")) {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(fechaVencimiento);
+            calendar.add(Calendar.YEAR, 1);
+            fechaVencimiento = calendar.getTime();
+            fechaVencimientoString = txtFechaVencimiento.getText();
+            if (discapacidad) {
                 lblCosto.setText("200");
-            }else{
+
+            } else {
                 lblCosto.setText("600");
             }
-            
-        }else if(vigenciaS.equals("2 años")){
-            
-            if(discapacidad){
+
+        } else if (vigenciaS.equals("2 años")) {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(fechaVencimiento);
+            calendar.add(Calendar.YEAR, 2);
+            fechaVencimiento = calendar.getTime();
+
+            if (discapacidad) {
                 lblCosto.setText("500");
-            }else{
+            } else {
                 lblCosto.setText("900");
             }
-            
-        }else if(vigenciaS.equals("3 años")){
-            
-            if(discapacidad){
+
+        } else if (vigenciaS.equals("3 años")) {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(fechaVencimiento);
+            calendar.add(Calendar.YEAR, 3);
+            fechaVencimiento = calendar.getTime();
+
+            if (discapacidad) {
                 lblCosto.setText("700");
-            }else{
+            } else {
                 lblCosto.setText("1100");
             }
-            
+
         }
-        
+
     }//GEN-LAST:event_cmbVigenciaActionPerformed
 
     private void btnAceptarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarRegistroActionPerformed
-        // TODO add your handling code here:
-        
+
+
     }//GEN-LAST:event_btnAceptarRegistroActionPerformed
 
     /**
@@ -177,9 +244,11 @@ public class SiLicencia extends javax.swing.JFrame {
     private javax.swing.JCheckBox chDiscapacitado;
     private javax.swing.JComboBox<String> cmbVigencia;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblCosto;
     private javax.swing.JLabel lblDiscapacitado;
     private javax.swing.JLabel lblRfc;
+    private javax.swing.JTextField txtFechaVencimiento;
     // End of variables declaration//GEN-END:variables
 }

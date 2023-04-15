@@ -40,7 +40,7 @@ public class Tramite implements Serializable {
     private Integer id;
     
     @Basic
-    private int costo;
+    private String costo;
     private Date fechaExpedicion;
     private Date fechaVencimiento;
     private String estado;
@@ -59,7 +59,7 @@ public class Tramite implements Serializable {
     public Tramite() {
     }
 
-    public Tramite(int costo, Date fechaVencimiento,Date fechaExpedicion, String estado, Persona persona) {
+    public Tramite(String costo, Date fechaVencimiento,Date fechaExpedicion, String estado, Persona persona) {
         this.costo = costo;
         this.fechaVencimiento = fechaVencimiento;
         this.fechaExpedicion = fechaExpedicion;
@@ -94,11 +94,11 @@ public class Tramite implements Serializable {
         this.persona = persona;
     }
 
-    public int getCosto() {
+    public String getCosto() {
         return costo;
     }
 
-    public void setCosto(int costo) {
+    public void setCosto(String costo) {
         this.costo = costo;
     }
 

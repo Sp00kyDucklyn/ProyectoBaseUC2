@@ -244,7 +244,7 @@ public class SiPlaca extends javax.swing.JFrame {
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        SiPlaca2 placa = new SiPlaca2();
+        SiPlaca2 placa = new SiPlaca2(persona);
         placa.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnSiguienteActionPerformed

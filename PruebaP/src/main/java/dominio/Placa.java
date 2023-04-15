@@ -46,7 +46,7 @@ public class Placa extends Tramite implements Serializable{
     public Placa() {
     }
 
-    public Placa(Date fechaVencimiento, String numPlacaNu, int costo, Date fechaExpedicion, String estado, Persona persona) {
+    public Placa(Date fechaVencimiento, String numPlacaNu, String costo, Date fechaExpedicion, String estado, Persona persona) {
         super(costo, fechaVencimiento,fechaExpedicion, estado, persona);
         this.numPlacaNu = numPlacaNu;
     }

@@ -4,6 +4,13 @@
  */
 package pantallas;
 
+import dao.PlacaDAO;
+import dominio.Persona;
+import dominio.Vehiculo;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JComboBox;
+
 /**
  *
  * @author xfs85
@@ -13,10 +20,30 @@ public class SiPlaca2 extends javax.swing.JFrame {
     /**
      * Creates new form SiPlaca2
      */
-    public SiPlaca2() {
+    Persona persona = new Persona();
+    PlacaDAO pdao = new PlacaDAO();
+    
+    public SiPlaca2(Persona persona) {
         initComponents();
+        this.persona = persona;
+        rfc.setText(persona.getRfc());
+        crearCmbVehiculos(cmbVehiculos);
     }
 
+    private void crearCmbVehiculos(JComboBox cmbVehiculos){
+        pdao.crearCmbVehiculos(cmbVehiculos);
+         cmbVehiculos.addActionListener(new ActionListener() {
+             
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Obtener el vehículo seleccionado
+        Vehiculo vehiculos = (Vehiculo) cmbVehiculos.getSelectedItem();
+        if(vehiculos != null){
+            costo.setText("1500");
+        }
+            }
+        });
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,24 +54,69 @@ public class SiPlaca2 extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        cmbVehiculos = new javax.swing.JComboBox<>();
+        btnGuardar = new javax.swing.JButton();
+        rfc = new javax.swing.JLabel();
+        costo = new javax.swing.JLabel();
+        btnRenovar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1000, 612));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1000, 612));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/SiPlaca2.png"))); // NOI18N
+        cmbVehiculos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { null }));
+        cmbVehiculos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbVehiculosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cmbVehiculos, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, 210, 40));
+
+        btnGuardar.setBorder(null);
+        btnGuardar.setContentAreaFilled(false);
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 470, 180, 30));
+
+        rfc.setToolTipText("");
+        jPanel1.add(rfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 160, 30));
+        jPanel1.add(costo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 390, 190, 30));
+
+        btnRenovar.setContentAreaFilled(false);
+        btnRenovar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRenovarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnRenovar, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 280, 180, 30));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/SiPlaca2 (1).png"))); // NOI18N
         jLabel1.setText("jLabel1");
         jLabel1.setPreferredSize(new java.awt.Dimension(1000, 612));
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -280, -1, 880));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 602));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 2, -1, 630));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnRenovarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRenovarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRenovarActionPerformed
+
+    private void cmbVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbVehiculosActionPerformed
+        
+    }//GEN-LAST:event_cmbVehiculosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -82,7 +154,12 @@ public class SiPlaca2 extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnRenovar;
+    private javax.swing.JComboBox<String> cmbVehiculos;
+    private javax.swing.JLabel costo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel rfc;
     // End of variables declaration//GEN-END:variables
 }

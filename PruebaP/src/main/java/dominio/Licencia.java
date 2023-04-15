@@ -35,7 +35,7 @@ public class Licencia extends Tramite implements Serializable {
     
     @Basic
     //Lo pone el usuario
-    private int vigencia;
+    private String vigencia;
     //Lo calcula el sistema
     //Lo pongo yo en registro persona
     private String discapacitado;
@@ -45,17 +45,17 @@ public class Licencia extends Tramite implements Serializable {
     public Licencia() {
     }
 
-    public Licencia(int vigencia, Date fechaVencimiento, String discapacitado, int costo, Date fechaExpedicion, String estado, Persona persona) {
+    public Licencia(String vigencia, Date fechaVencimiento, String discapacitado, String costo, Date fechaExpedicion, String estado, Persona persona) {
         super(costo, fechaVencimiento ,fechaExpedicion, estado, persona);
         this.vigencia = vigencia;
         this.discapacitado = discapacitado;
     }
 
-    public int getVigencia() {
+    public String getVigencia() {
         return vigencia;
     }
 
-    public void setVigencia(int vigencia) {
+    public void setVigencia(String vigencia) {
         this.vigencia = vigencia;
     }
 

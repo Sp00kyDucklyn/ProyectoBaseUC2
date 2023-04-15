@@ -4,10 +4,21 @@
  */
 package interfaces;
 
+import dominio.Persona;
+import dominio.Placa;
+import dominio.Vehiculo;
+import java.util.List;
+import javax.swing.JComboBox;
+
 /**
  *
  * @author hoshi
  */
 public interface IPlacaDAO {
     
+    public void crearPlaca(Placa placa);
+    
+    public List<Persona> llamarRFC(String rfc);
+    
+    public void crearCmbVehiculos(JComboBox<Vehiculo> cmbVehiculos);
 }

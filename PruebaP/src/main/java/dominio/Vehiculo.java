@@ -97,10 +97,7 @@ public class Vehiculo implements Serializable {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "dominio.Vehiculos[ id=" + id + " ]";
-    }
+
 
     public String getMarca() {
         return marca;
@@ -158,6 +155,12 @@ public class Vehiculo implements Serializable {
     public void setPlacas(List<Placa> placas) {
         this.placas = placas;
     }
+
+    @Override
+    public String toString() {
+        return "numSerie: " + numSerie + ", marca: " + marca + ", linea: " + linea + ", color: " + color + ", anio:" + anio + '}';
+    }
+    
     
     
 }
