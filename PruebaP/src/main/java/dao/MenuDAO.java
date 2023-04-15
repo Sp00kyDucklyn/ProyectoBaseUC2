@@ -38,10 +38,10 @@ public class MenuDAO implements IMenuDAO{
      */
     public void llamarProcedimiento() {
        agregarPersonas();
-       //agregarVehiculos(); FALTA STORED PROCEDURE
-       //agregarTramites(); FALTA STORED PROCEDURE
-       //agregarTramitesL();    FALTA STORED PROCEDURE
-       //agregarTramitesV();    FALTA STORED PROCEDURE
+       agregarVehiculos(); //FALTA STORED PROCEDURE
+       agregarTramites(); //FALTA STORED PROCEDURE
+       agregarTramitesL();    //FALTA STORED PROCEDURE
+       agregarTramitesV();   // FALTA STORED PROCEDURE
     }
 
     /**
@@ -142,7 +142,7 @@ public class MenuDAO implements IMenuDAO{
         em.getTransaction().begin();
 //       EntityManager.getTransaction().begin();
        
-       StoredProcedureQuery storedProcedure = em.createStoredProcedureQuery("insert_vehiculo");
+       StoredProcedureQuery storedProcedure = em.createStoredProcedureQuery("insert_vehiculos");
        
        //Insertamos los parametros
        //Linea
@@ -179,11 +179,10 @@ public class MenuDAO implements IMenuDAO{
             storedProcedure.setParameter(4, vehiculos[i][3]);
             storedProcedure.setParameter(5, vehiculos[i][4]);
             
-            Integer id = 0;
+            int id = 0;
             String idPersona = vehiculos[i][5];
-            String idString = id.toString();
-            idPersona = idString;
-            storedProcedure.setParameter(6, idPersona);
+            id = Integer.parseInt(idPersona);
+            storedProcedure.setParameter(6, id);
             
             // Ejecutamos el procedimiento almacenado
             storedProcedure.execute();
@@ -278,12 +277,13 @@ public class MenuDAO implements IMenuDAO{
             
             storedProcedure.setParameter(1, tramites[i][0]);
             
-            Integer costo = 0;
-            String costoTramite = tramites[i][1];
-            String costoString = costo.toString();
-            costoTramite = costoString;
+           
             
-            storedProcedure.setParameter(2, costoTramite);
+            int cost = 0;
+            String costoStr = tramites[i][1];
+            cost = Integer.parseInt(costoStr);
+            
+            storedProcedure.setParameter(2, cost);
             
 //            storedProcedure.setParameter(2, tramites[i][1]);
             storedProcedure.setParameter(3, tramites[i][2]);
@@ -298,14 +298,14 @@ public class MenuDAO implements IMenuDAO{
 //                System.out.println("Excepcion");
 //            }
             
-            storedProcedure.setParameter(4, fechas[i][3]);
-            storedProcedure.setParameter(5, fechas[i][4]);
-            Integer id = 0;
-            String idPersona = tramites[i][5];
-            String idString = id.toString();
-            idPersona = idString;
+            storedProcedure.setParameter(4, fechas[i][0]);
+            storedProcedure.setParameter(5, fechas[i][1]);
+           
+            int id = 0;
+            String idPersona = tramites[i][3];
+            id = Integer.parseInt(idPersona);
             
-            storedProcedure.setParameter(6, idPersona);
+            storedProcedure.setParameter(6, id);
             
              
             // Ejecutamos el procedimiento almacenado
@@ -325,10 +325,10 @@ public class MenuDAO implements IMenuDAO{
         em.getTransaction().begin();
 //       EntityManager.getTransaction().begin();
        
-       StoredProcedureQuery storedProcedure = em.createStoredProcedureQuery("insert_tramites_herencia_licencia");
+       StoredProcedureQuery storedProcedure = em.createStoredProcedureQuery("insert_tramites_placas");
        
        //idTramite
-        storedProcedure.registerStoredProcedureParameter(1, String.class, ParameterMode.IN);
+        storedProcedure.registerStoredProcedureParameter(1, Integer.class, ParameterMode.IN);
         //numPlacasnu
         storedProcedure.registerStoredProcedureParameter(2, String.class, ParameterMode.IN);
         //idVehiculo
@@ -338,30 +338,23 @@ public class MenuDAO implements IMenuDAO{
         //A todas las personas a establecer
        
        String[][] placas ={
-            {"1", "123456", "1"},
-            {"2", "123789", "2"},
-            {"3", "123123", "3"},
-            {"4", "789456", "4"},
-            {"5", "456123", "5"}
+            {"21", "123456", "1"},
+            {"22", "123789", "2"},
+            {"23", "123123", "3"},
+            {"24", "789456", "4"},
+            {"25", "456123", "5"}
             };
        
                 
                for (int b = 0; b < placas.length; b++) {
 
-                   Integer idTramite = 0;
-                   String idTramiteString = placas[b][0];
-                   String idString = idTramite.toString();
-                   idTramiteString = idString;
-                storedProcedure.setParameter(1,idTramiteString);
+                   int idTramite = 0;
+                   String idTramiteStr = placas[b][0];
+                   idTramite = Integer.parseInt(idTramiteStr);
+                   storedProcedure.setParameter(1, idTramite);
 
-                storedProcedure.setParameter(2, placas[b][1]);
-                
-                Integer idVehiculo = 0;
-                   String idVehiculoString = placas[b][2];
-                   String idStringV = idVehiculo.toString();
-                   idVehiculoString = idStringV;
-                   
-                storedProcedure.setParameter(3, idVehiculoString);
+                   storedProcedure.setParameter(2, placas[b][1]);
+                storedProcedure.setParameter(3, placas[b][2]);
                 storedProcedure.execute();
             }
         
@@ -379,10 +372,10 @@ public class MenuDAO implements IMenuDAO{
         em.getTransaction().begin();
 //       EntityManager.getTransaction().begin();
        
-       StoredProcedureQuery storedProcedure = em.createStoredProcedureQuery("insert_tramites_herencia_licencia");
+       StoredProcedureQuery storedProcedure = em.createStoredProcedureQuery("insert_tramites_licencia");
            
             //id_tramites
-            storedProcedure.registerStoredProcedureParameter(1, String.class, ParameterMode.IN);
+            storedProcedure.registerStoredProcedureParameter(1, Integer.class, ParameterMode.IN);
             //Discapacitado
             storedProcedure.registerStoredProcedureParameter(2, String.class, ParameterMode.IN);
             //Vigencia
@@ -416,13 +409,13 @@ public class MenuDAO implements IMenuDAO{
        
         for (int a = 0; a < licencias.length; a++) {
            
-             Integer id = 0;
-            String idTramite = licencias[a][2];
-            String idString = id.toString();
-            idTramite = idString;
-            storedProcedure.setParameter(1, licencias[a][0]);
+            int idTramite = 0;
+                   String idTramiteStr = licencias[a][0];
+                   idTramite = Integer.parseInt(idTramiteStr);
+                   
+            storedProcedure.setParameter(1, idTramite);
             storedProcedure.setParameter(2, licencias[a][1]);
-            storedProcedure.setParameter(3, idTramite);
+            storedProcedure.setParameter(3, licencias[a][2]);
                 
             storedProcedure.execute();
        
