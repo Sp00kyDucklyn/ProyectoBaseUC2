@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5eea83b4-0ca5-445d-a28a-38d5c40c4929">
 	<property name="ireport.zoom" value="1.6105100000000019"/>
-	<property name="ireport.x" value="28"/>
-	<property name="ireport.y" value="211"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="fecha_generacion" class="java.lang.String"/>
 	<field name="tipoTramite" class="java.lang.String"/>
 	<field name="nombre" class="java.lang.String"/>
@@ -21,7 +21,7 @@
 				<text><![CDATA[REPORTE TRAMITE]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="38" y="22" width="100" height="20" uuid="72f93a09-2ebe-4ce5-baf7-15187b3b9b1d"/>
+				<reportElement x="0" y="22" width="167" height="20" uuid="72f93a09-2ebe-4ce5-baf7-15187b3b9b1d"/>
 				<textFieldExpression><![CDATA[$P{fecha_generacion}]]></textFieldExpression>
 			</textField>
 		</band>
@@ -99,7 +99,7 @@
 	<pageFooter>
 		<band height="54" splitType="Stretch">
 			<textField>
-				<reportElement x="216" y="16" width="150" height="20" uuid="9233783a-ed8b-4a25-8c4b-5a885b1eae3b"/>
+				<reportElement x="232" y="17" width="150" height="20" uuid="9233783a-ed8b-4a25-8c4b-5a885b1eae3b"/>
 				<textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 		</band>
