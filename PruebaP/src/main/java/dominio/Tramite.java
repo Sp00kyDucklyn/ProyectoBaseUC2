@@ -42,6 +42,7 @@ public class Tramite implements Serializable {
     @Basic
     private int costo;
     private Date fechaExpedicion;
+    private Date fechaVencimiento;
     private String estado;
     
 //    @OneToMany(mappedBy= "tramite", cascade=(CascadeType.REMOVE))
@@ -58,8 +59,9 @@ public class Tramite implements Serializable {
     public Tramite() {
     }
 
-    public Tramite(int costo, Date fechaExpedicion, String estado, Persona persona) {
+    public Tramite(int costo, Date fechaVencimiento,Date fechaExpedicion, String estado, Persona persona) {
         this.costo = costo;
+        this.fechaVencimiento = fechaVencimiento;
         this.fechaExpedicion = fechaExpedicion;
         this.estado = estado;
         this.persona = persona;
@@ -115,6 +117,14 @@ public class Tramite implements Serializable {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public Date getFechaVencimiento() {
+        return fechaVencimiento;
+    }
+
+    public void setFechaVencimiento(Date fechaVencimiento) {
+        this.fechaVencimiento = fechaVencimiento;
     }
 
   

@@ -37,7 +37,6 @@ public class Licencia extends Tramite implements Serializable {
     //Lo pone el usuario
     private int vigencia;
     //Lo calcula el sistema
-    private Date fechaVencimiento;
     //Lo pongo yo en registro persona
     private String discapacitado;
     
@@ -47,9 +46,8 @@ public class Licencia extends Tramite implements Serializable {
     }
 
     public Licencia(int vigencia, Date fechaVencimiento, String discapacitado, int costo, Date fechaExpedicion, String estado, Persona persona) {
-        super(costo, fechaExpedicion, estado, persona);
+        super(costo, fechaVencimiento ,fechaExpedicion, estado, persona);
         this.vigencia = vigencia;
-        this.fechaVencimiento = fechaVencimiento;
         this.discapacitado = discapacitado;
     }
 
@@ -77,13 +75,5 @@ public class Licencia extends Tramite implements Serializable {
 //    public void setCosto(double costo) {
 //        this.costo = costo;
 //    }
-
-    public Date getFechaVencimiento() {
-        return fechaVencimiento;
-    }
-
-    public void setFechaVencimiento(Date fechaVencimiento) {
-        this.fechaVencimiento = fechaVencimiento;
-    }
     
 }

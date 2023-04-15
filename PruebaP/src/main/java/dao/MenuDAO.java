@@ -34,10 +34,10 @@ public class MenuDAO implements IMenuDAO{
 
     public void llamarProcedimiento() {
        agregarPersonas();
-       agregarTramites();
-       agregarTramitesL();
-       agregarTramitesV();
-       //agregarVehiculos();
+       //agregarTramites();
+       //agregarTramitesL();
+       //agregarTramitesV();
+       agregarVehiculos();
     }
 
     @Override

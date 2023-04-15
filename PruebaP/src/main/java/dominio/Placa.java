@@ -35,7 +35,6 @@ public class Placa extends Tramite implements Serializable{
 //    private Integer id;
     
     @Basic
-    private Date fechaVencimiento;
     private String numPlacaNu;
     //private double costo;
     
@@ -48,19 +47,8 @@ public class Placa extends Tramite implements Serializable{
     }
 
     public Placa(Date fechaVencimiento, String numPlacaNu, int costo, Date fechaExpedicion, String estado, Persona persona) {
-        super(costo, fechaExpedicion, estado, persona);
-        this.fechaVencimiento = fechaVencimiento;
+        super(costo, fechaVencimiento,fechaExpedicion, estado, persona);
         this.numPlacaNu = numPlacaNu;
-    }
-    
-    
-
-    public Date getFechaVencimiento() {
-        return fechaVencimiento;
-    }
-
-    public void setFechaVencimiento(Date fechaVencimiento) {
-        this.fechaVencimiento = fechaVencimiento;
     }
 
     public String getNumPlacaNu() {
