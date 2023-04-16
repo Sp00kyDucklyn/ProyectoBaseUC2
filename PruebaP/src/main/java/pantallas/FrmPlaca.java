@@ -15,15 +15,15 @@ import javax.swing.JComboBox;
  *
  * @author xfs85
  */
-public class SiPlaca2 extends javax.swing.JFrame {
+public class FrmPlaca extends javax.swing.JFrame {
 
     /**
-     * Creates new form SiPlaca2
+     * Creates new form FrmPlaca
      */
     Persona persona = new Persona();
     PlacaDAO pdao = new PlacaDAO();
     
-    public SiPlaca2(Persona persona) {
+    public FrmPlaca(Persona persona) {
         initComponents();
         this.persona = persona;
         rfc.setText(persona.getRfc());
@@ -67,7 +67,6 @@ public class SiPlaca2 extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(1000, 612));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        cmbVehiculos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { null }));
         cmbVehiculos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbVehiculosActionPerformed(evt);
@@ -135,20 +134,20 @@ public class SiPlaca2 extends javax.swing.JFrame {
 //                }
 //            }
 //        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(SiPlaca2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrmPlaca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(SiPlaca2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrmPlaca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(SiPlaca2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrmPlaca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(SiPlaca2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrmPlaca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
 //        //</editor-fold>
 //
 //        /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                new SiPlaca2().setVisible(true);
+//                new FrmPlaca().setVisible(true);
 //            }
 //        });
 //    }

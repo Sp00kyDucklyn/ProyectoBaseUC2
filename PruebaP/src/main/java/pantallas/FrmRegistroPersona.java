@@ -21,14 +21,14 @@ import utileria.Validaciones;
  *
  * @author xfs85
  */
-public class RegistroPersona extends javax.swing.JFrame {
+public class FrmRegistroPersona extends javax.swing.JFrame {
     
     PersonaDAO personaDAO = new PersonaDAO();
 //    Validaciones val = new Validaciones();
     /**
      * Creates new form RegistroPersona
      */
-    public RegistroPersona() {
+    public FrmRegistroPersona() {
         initComponents();
     }
     
@@ -261,7 +261,7 @@ public class RegistroPersona extends javax.swing.JFrame {
             //Crear objeto Persona
             personaDAO.crearPersona(this.agregarPersona());
         } catch (ParseException ex) {
-            Logger.getLogger(RegistroPersona.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FrmRegistroPersona.class.getName()).log(Level.SEVERE, null, ex);
         }
 //        control.guardar(nombreM, raza, color,observaciones,alergico,atencion, 
 //                nombreD, celular);
@@ -271,7 +271,7 @@ public class RegistroPersona extends javax.swing.JFrame {
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
          this.setVisible(false);
-         SeleccionTramite seleccion = new SeleccionTramite();
+         FrmSeleccionTramite seleccion = new FrmSeleccionTramite();
          seleccion.setVisible(true);
          this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
@@ -289,7 +289,7 @@ public class RegistroPersona extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(this, "Esta opción lo regresara al menú principal");
             
             this.setVisible(false);
-            MenuPrincipal menu= new MenuPrincipal();
+            FrmMenu menu= new FrmMenu();
             menu.setVisible(true);
             this.dispose();
         }
@@ -310,7 +310,7 @@ public class RegistroPersona extends javax.swing.JFrame {
                 }else{
                     JOptionPane.showMessageDialog(this, "Se encontro el rfc");
                     this.setVisible(false);
-                    SiLicencia licencia = new SiLicencia(persona.get(0));
+                    FrmLicencia licencia = new FrmLicencia(persona.get(0));
                     licencia.setVisible(true);
                     this.dispose();
                  }
@@ -336,20 +336,20 @@ public class RegistroPersona extends javax.swing.JFrame {
 //                }
 //            }
 //        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(RegistroPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrmRegistroPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(RegistroPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrmRegistroPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(RegistroPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrmRegistroPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(RegistroPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrmRegistroPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
 //        //</editor-fold>
 //
 //        /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                new RegistroPersona().setVisible(true);
+//                new FrmRegistroPersona().setVisible(true);
 //            }
 //        });
 //    }

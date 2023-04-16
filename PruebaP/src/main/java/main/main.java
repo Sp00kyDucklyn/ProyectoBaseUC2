@@ -13,7 +13,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import pantallas.MenuPrincipal;
+import pantallas.FrmMenu;
 
 /**
  *
@@ -29,7 +29,7 @@ public class main {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuPrincipal().setVisible(true);
+                new FrmMenu().setVisible(true);
             }
         });
         

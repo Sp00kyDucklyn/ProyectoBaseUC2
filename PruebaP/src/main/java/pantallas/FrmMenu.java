@@ -10,12 +10,12 @@ import dao.MenuDAO;
  *
  * @author xfs85
  */
-public class MenuPrincipal extends javax.swing.JFrame {
+public class FrmMenu extends javax.swing.JFrame {
 
     /**
      * Creates new form MenuPrincipal
      */
-    public MenuPrincipal() {
+    public FrmMenu() {
        
         initComponents();
     }
@@ -76,7 +76,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jPanel2.add(btnGeneracionReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 170, 40));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 110, 210, 290));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 110, 210, 380));
 
         btnSalir.setContentAreaFilled(false);
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -119,14 +119,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void btnRealizacionTramiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizacionTramiteActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        SeleccionTramite seleccion = new SeleccionTramite();
+        FrmSeleccionTramite seleccion = new FrmSeleccionTramite();
         seleccion.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRealizacionTramiteActionPerformed
 
     private void btnConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaActionPerformed
         // TODO add your handling code here:
-        Consultas cons = new Consultas();
+        FrmConsultas cons = new FrmConsultas();
         this.setVisible(false);
         cons.setVisible(true);
         this.dispose();
@@ -134,7 +134,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void btnGeneracionReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGeneracionReporteActionPerformed
         // TODO add your handling code here:
-        GeneracionReportes repor = new GeneracionReportes();
+        FrmReportes repor = new FrmReportes();
         this.setVisible(false);
         repor.setVisible(true);
         this.dispose();
@@ -157,20 +157,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
 //                }
 //            }
 //        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrmMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrmMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrmMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrmMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
 //        //</editor-fold>
 //
 //        /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                new MenuPrincipal().setVisible(true);
+//                new FrmMenu().setVisible(true);
 //            }
 //        });
 //    }

@@ -24,7 +24,7 @@ import utileria.Validaciones;
  *
  * @author xfs85
  */
-public class SiPlaca extends javax.swing.JFrame {
+public class FrmRegistroVehiculo extends javax.swing.JFrame {
 
     VehiculoDAO vehiculoDAO = new VehiculoDAO();
     private Persona persona;
@@ -32,7 +32,7 @@ public class SiPlaca extends javax.swing.JFrame {
     /**
      * Creates new form SiPlaca
      */
-    public SiPlaca(Persona persona) {
+    public FrmRegistroVehiculo(Persona persona) {
         this.persona = persona;
         initComponents();
     }
@@ -224,7 +224,7 @@ public class SiPlaca extends javax.swing.JFrame {
             try {
                 vehiculoDAO.crearVehiculo(this.agregarVehiculo());
             } catch (ParseException ex) {
-                Logger.getLogger(SiPlaca.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(FrmRegistroVehiculo.class.getName()).log(Level.SEVERE, null, ex);
             }
             val.mostrarMensaje("Se agrego exitosamente", "Info", "Guardado Correctamente ");
         }
@@ -236,7 +236,7 @@ public class SiPlaca extends javax.swing.JFrame {
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
         this.setVisible(false);
-        SeleccionTramite seleccion = new SeleccionTramite();
+        FrmSeleccionTramite seleccion = new FrmSeleccionTramite();
         seleccion.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_botonCancelarActionPerformed
@@ -244,7 +244,7 @@ public class SiPlaca extends javax.swing.JFrame {
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        SiPlaca2 placa = new SiPlaca2(persona);
+        FrmPlaca placa = new FrmPlaca(persona);
         placa.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnSiguienteActionPerformed
@@ -252,7 +252,7 @@ public class SiPlaca extends javax.swing.JFrame {
     private void btnRegresoSeleccionTramiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresoSeleccionTramiteActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        SeleccionTramite seleccion = new SeleccionTramite();
+        FrmSeleccionTramite seleccion = new FrmSeleccionTramite();
         seleccion.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresoSeleccionTramiteActionPerformed
@@ -274,20 +274,20 @@ public class SiPlaca extends javax.swing.JFrame {
 //                }
 //            }
 //        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(SiPlaca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrmRegistroVehiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(SiPlaca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrmRegistroVehiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(SiPlaca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrmRegistroVehiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(SiPlaca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrmRegistroVehiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
 //        //</editor-fold>
 //
 //        /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                new SiPlaca().setVisible(true);
+//                new FrmRegistroVehiculo().setVisible(true);
 //            }
 //        });
 //    }

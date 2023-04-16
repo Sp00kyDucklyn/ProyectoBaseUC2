@@ -153,5 +153,13 @@ public class Persona implements Serializable {
     public void setRfc(String rfc) {
         this.rfc = rfc;
     }
+
+    public List<Tramite> getTramites() {
+        return tramites;
+    }
+
+    public void setTramites(List<Tramite> tramites) {
+        this.tramites = tramites;
+    }
     
 }

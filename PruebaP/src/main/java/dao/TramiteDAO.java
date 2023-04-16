@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -169,6 +170,43 @@ public class TramiteDAO implements ITramiteDAO{
         } finally {
             em.close();
         }
+    }
+
+    @Override
+    public void estadoTramite(int id_tramite) {
+        EntityManager em = getEntityManager();
+        EntityTransaction transaccion = em.getTransaction();
+        transaccion.begin(); 
+        
+        Persona persona = new Persona();
+                
+        Tramite tramite = em.find(Tramite.class,id_tramite);
+        if(tramite.getFechaVencimiento().after(tramite.getFechaVencimiento())){
+            tramite.setEstado("desactivo"); //actualizar el nombre
+            
+        }else if(tramite.getFechaVencimiento().before(tramite.getFechaVencimiento())){
+            tramite.setEstado("activo");
+        }
+        
+
+        em.merge(tramite); //actualizar la entidad en la base de datos
+
+        transaccion.commit(); //confirmar la transacción
+    }
+
+    @Override
+    public List<Tramite> listaTramiteL(Date periodoI, Date periodoF, String estado, String costo) {
+      EntityManager em = getEntityManager();
+
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+        CriteriaQuery<Tramite> criteriaQuery = criteriaBuilder.createQuery(Tramite.class);
+        Root<Tramite> root = criteriaQuery.from(Tramite.class);
+        criteriaQuery.select(root);
+        
+        TypedQuery<Tramite> typedQuery = em.createQuery(criteriaQuery);
+
+        return typedQuery.getResultList();
+        
     }
 
 }

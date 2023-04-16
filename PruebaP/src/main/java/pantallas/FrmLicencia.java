@@ -6,6 +6,7 @@ package pantallas;
 
 import dao.LicenciaDAO;
 import dao.PersonaDAO;
+import dao.TramiteDAO;
 import interfaces.ILicenciaDAO;
 import dominio.Licencia;
 import dominio.Persona;
@@ -25,16 +26,16 @@ import utileria.Validaciones;
  *
  * @author xfs85
  */
-public class SiLicencia extends javax.swing.JFrame {
+public class FrmLicencia extends javax.swing.JFrame {
 
     /**
-     * Creates new form SiLicencia
+     * Creates new form FrmLicencia
      */
     Persona persona = new Persona();
     Tramite tramite = new Tramite();
     LicenciaDAO licenciaDAO = new LicenciaDAO();
 
-    public SiLicencia(Persona persona) {
+    public FrmLicencia(Persona persona) {
         initComponents();
         this.persona = persona;
         lblRfc.setText(persona.getRfc());
@@ -70,7 +71,6 @@ public class SiLicencia extends javax.swing.JFrame {
         String mensaje = String.join("\n", erroresVaidacion);
         JOptionPane.showMessageDialog(this, mensaje, "Errores de validacion", JOptionPane.WARNING_MESSAGE);
     }
-
     
     private void calculaFecha(){
         
@@ -142,15 +142,14 @@ public class SiLicencia extends javax.swing.JFrame {
         }
     }
     
-    private void estado(){
+    private void estadoActivo(){
         Date fecha = new Date();
         if(fecha.compareTo(new Date())==0){
             lblEstado.setText("activo");
         }else{
-            
         }
+       
     }
-    
     
     private HashMap<String, String> extraerDatosFormulario() {
         String vigencia = (String) cmbVigencia.getSelectedItem();
@@ -170,6 +169,13 @@ public class SiLicencia extends javax.swing.JFrame {
         return datosFormulario;
     }
 
+    public String buscarRfc(String rfc) {
+        //NO DEJAR QUE EL TXT SE PERMITAN ESCRIBIR CARACTERES NO ESPECIFICADOS FALTA
+        //FORZAR AL USUARIO ESCRIBIR 13 CARACTERES LISTO
+        lblRfc.getText();
+
+        return rfc;
+    }
 //    private List<String> validarDatosFormulario(HashMap<String, String> datosFormulario) {
 //
 //    }
@@ -189,8 +195,8 @@ public class SiLicencia extends javax.swing.JFrame {
         lblCosto = new javax.swing.JLabel();
         chDiscapacitado = new javax.swing.JCheckBox();
         lblRfc = new javax.swing.JLabel();
-        lblDiscapacitado = new javax.swing.JLabel();
         lblFechaVencimiento = new javax.swing.JLabel();
+        btnHistorialLicencia = new javax.swing.JButton();
         cmbVigencia = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -219,13 +225,23 @@ public class SiLicencia extends javax.swing.JFrame {
         jPanel1.add(btnAceptarRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 460, -1, 30));
         jPanel1.add(lblCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 370, 210, 30));
 
-        chDiscapacitado.setText("Discapacitado");
-        jPanel1.add(chDiscapacitado, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 260, -1, -1));
+        chDiscapacitado.setText("Discapacidad");
+        chDiscapacitado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chDiscapacitadoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(chDiscapacitado, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 260, -1, -1));
         jPanel1.add(lblRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 210, 40));
-
-        lblDiscapacitado.setText("Tienes alguna discapacidad?");
-        jPanel1.add(lblDiscapacitado, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 200, -1, -1));
         jPanel1.add(lblFechaVencimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 360, 300, 40));
+
+        btnHistorialLicencia.setText("Historial Licencia");
+        btnHistorialLicencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHistorialLicenciaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnHistorialLicencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 460, -1, -1));
 
         cmbVigencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "1 año", "2 años", "3 años" }));
         cmbVigencia.addActionListener(new java.awt.event.ActionListener() {
@@ -255,13 +271,30 @@ public class SiLicencia extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.calculaCosto();
         this.calculaFecha();
-        this.estado();
+        this.estadoActivo();
     }//GEN-LAST:event_cmbVigenciaActionPerformed
 
     private void btnAceptarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarRegistroActionPerformed
         ILicenciaDAO licenciaDAO = new LicenciaDAO();
          try {
            // Crear objeto Persona
+//            if(!buscarRfc(lblRfc.getText()).isEmpty()){
+//                PersonaDAO personaDAO = new PersonaDAO();
+//                //PONER TXT.GETTEXT DENTRO DE DONDE ESTAN LAS COMILLAS AHORITA LISTO
+//
+//                List<Persona> persona = personaDAO.buscarRfc(lblRfc.getText());
+//                
+//                if(!persona.equals(0)){
+//                    TramiteDAO tramiteDAO = new TramiteDAO();
+//                    List<Tramite> tramite = tramiteDAO.estadoTramite(FRAMEBITS);
+//                }else{
+//                    
+//                }
+//
+//            }
+                
+           
+            
              licenciaDAO.crearLicencia(this.agregarLicencia());
              Validaciones val = new Validaciones();
              val.mostrarMensaje("Se guardo exitosamente", "Info", "Guardado Correctamente");
@@ -269,12 +302,12 @@ public class SiLicencia extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(this, "Trámite completado, regresemos al inicio :)","Regreso inicio",si);
              if(si==0){
                  this.setVisible(false);
-                 MenuPrincipal menu= new MenuPrincipal();
+                 FrmMenu menu= new FrmMenu();
                  menu.setVisible(true);
                  this.dispose();
              }
         } catch (ParseException ex) {
-            Logger.getLogger(RegistroPersona.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FrmRegistroPersona.class.getName()).log(Level.SEVERE, null, ex);
             Validaciones val = new Validaciones();
             val.mostrarMensaje("No se completo el guardado", "Error", "Error, intente de nuevo");
         }
@@ -294,11 +327,40 @@ public class SiLicencia extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(this, "Esta opción lo regresara al menú principal");
             
             this.setVisible(false);
-            MenuPrincipal menu= new MenuPrincipal();
+            FrmMenu menu= new FrmMenu();
             menu.setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_btnCancelarRegistroActionPerformed
+
+    private void chDiscapacitadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chDiscapacitadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chDiscapacitadoActionPerformed
+
+    private void btnHistorialLicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialLicenciaActionPerformed
+        // TODO add your handling code here:
+        if (!buscarRfc(lblRfc.getText()).isEmpty()) {
+
+                PersonaDAO personaDAO = new PersonaDAO();
+                //PONER TXT.GETTEXT DENTRO DE DONDE ESTAN LAS COMILLAS AHORITA LISTO
+
+                List<Persona> persona = personaDAO.buscarRfc(lblRfc.getText());
+
+                if (persona.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "No encontro el rfc");
+                    return;
+             } else {
+                JOptionPane.showMessageDialog(this, "Se encontro el rfc");
+                this.setVisible(false);
+                FrHistorialLicencias historial = new FrHistorialLicencias(persona.get(0));
+                historial.setVisible(true);
+                this.dispose();
+            }
+
+        }
+
+        
+    }//GEN-LAST:event_btnHistorialLicenciaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -317,20 +379,20 @@ public class SiLicencia extends javax.swing.JFrame {
 //                }
 //            }
 //        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(SiLicencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrmLicencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(SiLicencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrmLicencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(SiLicencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrmLicencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(SiLicencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrmLicencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
 //        </editor-fold>
 //
 //        /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                new SiLicencia().setVisible(true);
+//                new FrmLicencia().setVisible(true);
 //            }
 //        });
 //    }
@@ -338,13 +400,13 @@ public class SiLicencia extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptarRegistro;
     private javax.swing.JButton btnCancelarRegistro;
+    private javax.swing.JButton btnHistorialLicencia;
     private javax.swing.JCheckBox chDiscapacitado;
     private javax.swing.JComboBox<String> cmbVigencia;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblCosto;
-    private javax.swing.JLabel lblDiscapacitado;
     private javax.swing.JLabel lblEstado;
     private javax.swing.JLabel lblFechaVencimiento;
     private javax.swing.JLabel lblRfc;

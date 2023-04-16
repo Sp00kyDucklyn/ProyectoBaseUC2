@@ -7,6 +7,7 @@ package pantallas;
 import Encriptar.Encriptar;
 import dao.PersonaDAO;
 import dao.TramiteDAO;
+import dominio.JButtonTableCellRenderer;
 import dominio.Persona;
 import dominio.Tramite;
 import interfaces.IPersonaDAO;
@@ -17,34 +18,48 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
  * @author xfs85
  */
-public class Consultas extends javax.swing.JFrame {
+public class FrmConsultas extends javax.swing.JFrame {
 
     /**
-     * Creates new form Consultas
+     * Creates new form FrmConsultas
      */
+              JButtonTableCellRenderer buttonRenderer = new JButtonTableCellRenderer();
+
 //    private JTable tblResultados;
-    public Consultas() {
+    public FrmConsultas() {
         initComponents();
         buscarPersonas();
-        btnBusqueda.addActionListener(new ActionListener(){
-            
-            public void actionPerformed(ActionEvent e){
-                
-            }
-        }
-        );
+//         buttonRenderer.addActionListener((e) -> {
+//            //Importante lo que va aqui
+//            //El codigo se va a ejecutar ya que se le de click al boton
+//            mostrarPantallaFrmPersona();
+//        });
         
-        
+
+        buttonRenderer.addActionListener((ActionEvent e) -> {
+            System.out.println("popo");
+            mostrarPantallaFrmPersona();
+        });
     }
-    
+
+    private void mostrarPantallaFrmPersona() {
+        this.setVisible(false);
+        FrmPersona frmPersona = new FrmPersona();
+        frmPersona.setVisible(true);
+        this.dispose();
+    }
+
     private void buscarPersonas() {
         String busqueda = txtBusqueda.getText();
         IPersonaDAO personaDAO = new PersonaDAO();
@@ -86,21 +101,30 @@ public class Consultas extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "La fecha de nacimiento ingresada no es válida. Formato válido: yyyy-MM-dd");
             }
         }
+        // Crear instancia del renderer de botón
 
+// Agregar el renderer de botón a la última columna de la tabla
+        //TableColumn column = tblResultados.getColumnModel().getColumn(tblResultados.getColumnCount() - 1);
+        //column.setCellRenderer(buttonRenderer);
+        
         // Mostrar los resultados en el JTable
         DefaultTableModel model = (DefaultTableModel) tblResultados.getModel();
+        TableColumn column = tblResultados.getColumnModel().getColumn(tblResultados.getColumnCount() - 1);
+        column.setCellRenderer(buttonRenderer);
         model.setRowCount(0);
         if (resultados != null) {
             for (Persona p : resultados) {
                 String n = p.getNombre() + " "
                         + p.getApellidoP() + " " + p.getApellidoM();
-                model.addRow(new Object[]{p.getFechaNa(), n, p.getRfc()});
-            }
-        }
+                model.addRow(new Object[]{p.getFechaNa(), n, p.getRfc(),buttonRenderer});
 
     }
 
-
+        }
+    }
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -164,10 +188,25 @@ public class Consultas extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Fecha Nacimiento", "Nombre", "Rfc"
+                "Fecha Nacimiento", "Nombre", "Rfc", "Selección Persona"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblResultados.setColumnSelectionAllowed(true);
+        tblResultados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblResultadosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblResultados);
+        tblResultados.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tblResultados.getAccessibleContext().setAccessibleParent(tblResultados);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 860, 440));
@@ -184,7 +223,7 @@ public class Consultas extends javax.swing.JFrame {
     private void btnRegresarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarMenuActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        MenuPrincipal menu = new MenuPrincipal();
+        FrmMenu menu = new FrmMenu();
         menu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarMenuActionPerformed
@@ -197,13 +236,16 @@ public class Consultas extends javax.swing.JFrame {
         // TODO add your handling code here:
         buscarPersonas();
 
-
     }//GEN-LAST:event_btnBusquedaActionPerformed
 
     private void txtBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyReleased
         // TODO add your handling code here:
         buscarPersonas();
     }//GEN-LAST:event_txtBusquedaKeyReleased
+
+    private void tblResultadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblResultadosMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblResultadosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -222,20 +264,20 @@ public class Consultas extends javax.swing.JFrame {
 //                }
 //            }
 //        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(Consultas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrmConsultas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(Consultas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrmConsultas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(Consultas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrmConsultas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(Consultas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrmConsultas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
 //        //</editor-fold>
 //
 //        /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                new Consultas().setVisible(true);
+//                new FrmConsultas().setVisible(true);
 //            }
 //        });
 //    }

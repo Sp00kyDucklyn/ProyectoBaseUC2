@@ -15,12 +15,12 @@ import javax.swing.JOptionPane;
  *
  * @author xfs85
  */
-public class SeleccionTramite extends javax.swing.JFrame {
+public class FrmSeleccionTramite extends javax.swing.JFrame {
 
     /**
      * Creates new form SeleccionTramite
      */
-    public SeleccionTramite() {
+    public FrmSeleccionTramite() {
         initComponents();
         //Necesito construir 4 botones
         //Dos paneles 
@@ -73,7 +73,6 @@ public class SeleccionTramite extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panOpciones.setPreferredSize(new java.awt.Dimension(800, 600));
@@ -167,7 +166,7 @@ public class SeleccionTramite extends javax.swing.JFrame {
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
          this.setVisible(false);
-         MenuPrincipal menu = new MenuPrincipal();
+         FrmMenu menu = new FrmMenu();
          menu.setVisible(true);
          this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
@@ -210,7 +209,7 @@ public class SeleccionTramite extends javax.swing.JFrame {
                 }else{
                     JOptionPane.showMessageDialog(this, "Se encontro el rfc");
                     this.setVisible(false);
-                    SiPlaca vehiculo = new SiPlaca(persona.get(0));
+                    FrmRegistroVehiculo vehiculo = new FrmRegistroVehiculo(persona.get(0));
                     vehiculo.setVisible(true);
                     this.dispose();
                  }
@@ -265,7 +264,7 @@ public class SeleccionTramite extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Se encontro el rfc");
                     txtRfcBuscar.setVisible(true);
                     this.setVisible(false);
-                    SiPlaca2 placa = new SiPlaca2(persona.get(0));
+                    FrmPlaca placa = new FrmPlaca(persona.get(0));
                     placa.setVisible(true);
                     this.dispose();
                  }
@@ -294,7 +293,7 @@ public class SeleccionTramite extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Se encontro el rfc");
                     txtRfcBuscar.setVisible(true);
                     this.setVisible(false);
-                    SiLicencia licencia = new SiLicencia(persona.get(0));
+                    FrmLicencia licencia = new FrmLicencia(persona.get(0));
                     licencia.setVisible(true);
                     this.dispose();
                  }
@@ -326,20 +325,20 @@ public class SeleccionTramite extends javax.swing.JFrame {
 //                }
 //            }
 //        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(SeleccionTramite.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrmSeleccionTramite.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(SeleccionTramite.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrmSeleccionTramite.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(SeleccionTramite.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrmSeleccionTramite.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(SeleccionTramite.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrmSeleccionTramite.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
 //        //</editor-fold>
 //
 //        /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                new SeleccionTramite().setVisible(true);
+//                new FrmSeleccionTramite().setVisible(true);
 //            }
 //        });
 //    }

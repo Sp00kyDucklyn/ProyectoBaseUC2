@@ -69,7 +69,13 @@ public class PersonaDAO implements IPersonaDAO{
 
     @Override
     public List<Tramite> listaTramite() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Persona persona = new Persona();
+        if(persona.getTramites()!=null){
+            
+        }else if(persona.getTramites()!=null){
+            
+        }
+         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
@@ -81,7 +87,7 @@ public class PersonaDAO implements IPersonaDAO{
     public List<Persona> buscarRfc(String rfc) {
         EntityManager em = getEntityManager();
        
-       CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<Persona> criteriaQuery = criteriaBuilder.createQuery(Persona.class);
         Root<Persona> root = criteriaQuery.from(Persona.class);
         criteriaQuery.select(root);

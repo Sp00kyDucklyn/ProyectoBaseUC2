@@ -34,14 +34,14 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
  *
  * @author Carmen & Raul
  */
-public class GeneracionReportes extends javax.swing.JFrame {
+public class FrmReportes extends javax.swing.JFrame {
 
     TramiteDAO tramiteDAO = new TramiteDAO();
     private List<Tramite> listaPDF;
     /**
      * Creates new form GeneracionReportes
      */
-    public GeneracionReportes() {
+    public FrmReportes() {
         initComponents();
         this.listaPDF = new ArrayList<Tramite>();
         buscarTramites();
@@ -212,7 +212,7 @@ public class GeneracionReportes extends javax.swing.JFrame {
     private void btnRegresarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarMenuActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        MenuPrincipal menu = new MenuPrincipal();
+        FrmMenu menu = new FrmMenu();
         menu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarMenuActionPerformed
@@ -300,20 +300,20 @@ public class GeneracionReportes extends javax.swing.JFrame {
 //                }
 //            }
 //        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(GeneracionReportes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrmReportes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(GeneracionReportes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrmReportes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(GeneracionReportes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrmReportes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(GeneracionReportes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrmReportes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
 //        //</editor-fold>
 //
 //        /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                new GeneracionReportes().setVisible(true);
+//                new FrmReportes().setVisible(true);
 //            }
 //        });
 //    }
