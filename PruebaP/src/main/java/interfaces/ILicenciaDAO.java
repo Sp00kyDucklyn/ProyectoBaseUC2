@@ -6,6 +6,7 @@ package interfaces;
 
 import dominio.Licencia;
 import dominio.Persona;
+import dominio.Tramite;
 import java.util.List;
 
 /**

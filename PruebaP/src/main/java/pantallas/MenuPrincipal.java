@@ -118,8 +118,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void btnRealizacionTramiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizacionTramiteActionPerformed
         // TODO add your handling code here:
-        SeleccionTramite seleccion = new SeleccionTramite();
         this.setVisible(false);
+        SeleccionTramite seleccion = new SeleccionTramite();
         seleccion.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRealizacionTramiteActionPerformed

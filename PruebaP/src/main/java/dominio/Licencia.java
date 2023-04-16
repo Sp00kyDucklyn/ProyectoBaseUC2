@@ -51,6 +51,12 @@ public class Licencia extends Tramite implements Serializable {
         this.discapacitado = discapacitado;
     }
 
+    public Licencia(String vigencia, String discapacitado, Integer id, String costo, Date fechaExpedicion, Date fechaVencimiento, String estado, Persona persona) {
+        super(id, costo, fechaExpedicion, fechaVencimiento, estado, persona);
+        this.vigencia = vigencia;
+        this.discapacitado = discapacitado;
+    }
+    
     public String getVigencia() {
         return vigencia;
     }

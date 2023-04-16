@@ -158,4 +158,17 @@ public class TramiteDAO implements ITramiteDAO{
         return lista_tramitePersona;
     }
 
+    @Override
+    public void crearTramite(Tramite tramite) {
+            EntityManager em = getEntityManager();
+
+        try {
+            em.getTransaction().begin();
+            em.persist(tramite);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+    }
+
 }

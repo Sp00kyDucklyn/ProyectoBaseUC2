@@ -154,7 +154,14 @@ public class RegistroPersona extends javax.swing.JFrame {
 //         
          return erroresValidacion;
     }
+    
+    public String buscarRfc(String rfc){
+        //NO DEJAR QUE EL TXT SE PERMITAN ESCRIBIR CARACTERES NO ESPECIFICADOS FALTA
+        //FORZAR AL USUARIO ESCRIBIR 13 CARACTERES LISTO
+        txtRfc.getText();
 
+        return rfc;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -271,15 +278,45 @@ public class RegistroPersona extends javax.swing.JFrame {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
+        int si_no=  JOptionPane.showConfirmDialog(this, "¿Seguro que desea cancelar este trámite?","Cancelar", JOptionPane.YES_NO_OPTION);
         
+        if(si_no == 1){
+            
+            this.setVisible(true);
+           
+            
+        }else if(si_no == 0){
+             JOptionPane.showMessageDialog(this, "Esta opción lo regresara al menú principal");
+            
+            this.setVisible(false);
+            MenuPrincipal menu= new MenuPrincipal();
+            menu.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
-//        SiLicencia licencia = new SiLicencia();
-//        licencia.setVisible(true);
-        this.dispose();
+         if (!buscarRfc(txtRfc.getText()).isEmpty()) {
+
+                PersonaDAO personaDAO = new PersonaDAO();
+                //PONER TXT.GETTEXT DENTRO DE DONDE ESTAN LAS COMILLAS AHORITA LISTO
+
+                List<Persona> persona = personaDAO.buscarRfc(txtRfc.getText());
+
+                if (persona.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "No encontro el rfc");
+                    return;
+                }else{
+                    JOptionPane.showMessageDialog(this, "Se encontro el rfc");
+                    this.setVisible(false);
+                    SiLicencia licencia = new SiLicencia(persona.get(0));
+                    licencia.setVisible(true);
+                    this.dispose();
+                 }
+
+            }
+        
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     /**

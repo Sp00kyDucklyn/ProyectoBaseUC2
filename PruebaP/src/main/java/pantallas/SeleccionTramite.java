@@ -50,20 +50,7 @@ public class SeleccionTramite extends javax.swing.JFrame {
 
         return rfc;
     }
-    //Crear 2 paneles
-    //Crear 4 botones 
-    //Asignar acciones a los botones
-//    public void initComponentsCustom(){
-//        JButton btnPlacas = new JButton();
-//        //C:\Users\hoshi\Documents\PruebaProyecto\Prueba1\PruebaP\src\main\resources\imagenesPantallas\placas.png
-//        btnPlacas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/imagenesPantallas/placas.png")));
-//        
-//        panOpciones.add(btnPlacas);
-//    }
-//    
-//    public void mostrarBotones(){
-//        
-//    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.

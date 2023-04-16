@@ -207,7 +207,7 @@ public class MenuDAO implements IMenuDAO{
        //tipo_tramite
        storedProcedure.registerStoredProcedureParameter(1, String.class, ParameterMode.IN);
        //costo
-       storedProcedure.registerStoredProcedureParameter(2, Integer.class, ParameterMode.IN);
+       storedProcedure.registerStoredProcedureParameter(2, String.class, ParameterMode.IN);
        //estado
        storedProcedure.registerStoredProcedureParameter(3, String.class, ParameterMode.IN);
        //fechaexpedicion
@@ -276,14 +276,9 @@ public class MenuDAO implements IMenuDAO{
             for (int i = 0; i < tramites.length; i++) {
             
             storedProcedure.setParameter(1, tramites[i][0]);
-            
            
             
-            int cost = 0;
-            String costoStr = tramites[i][1];
-            cost = Integer.parseInt(costoStr);
-            
-            storedProcedure.setParameter(2, cost);
+            storedProcedure.setParameter(2, tramites[i][1]);
             
 //            storedProcedure.setParameter(2, tramites[i][1]);
             storedProcedure.setParameter(3, tramites[i][2]);

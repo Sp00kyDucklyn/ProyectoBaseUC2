@@ -67,6 +67,26 @@ public class Tramite implements Serializable {
         this.persona = persona;
     }
 
+    public Tramite(String costo, Date fechaExpedicion, Persona persona) {
+        this.costo = costo;
+        this.fechaExpedicion = fechaExpedicion;
+        this.persona = persona;
+    }
+
+    public Tramite(Integer id, String costo, Date fechaExpedicion, Date fechaVencimiento, String estado, Persona persona) {
+        this.id = id;
+        this.costo = costo;
+        this.fechaExpedicion = fechaExpedicion;
+        this.fechaVencimiento = fechaVencimiento;
+        this.estado = estado;
+        this.persona = persona;
+    }
+
+
+    public Tramite(Integer id) {
+        this.id = id;
+    }
+
     public Integer getId() {
         return id;
     }

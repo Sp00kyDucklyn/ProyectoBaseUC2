@@ -6,6 +6,7 @@ package dao;
 
 import dominio.Licencia;
 import dominio.Persona;
+import dominio.Tramite;
 import interfaces.ILicenciaDAO;
 import java.util.List;
 import javax.persistence.EntityManager;
