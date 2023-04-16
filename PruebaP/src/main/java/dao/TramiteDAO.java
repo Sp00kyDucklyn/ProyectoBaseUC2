@@ -4,7 +4,7 @@
  */
 package dao;
 
-import Encriptar.Encriptar;
+import encripta.Encriptar;
 import dominio.Licencia;
 import dominio.Persona;
 import dominio.Placa;

@@ -18,7 +18,7 @@ import pantallas.FrmPersona;
  * @author hoshi
  */
 public class JButtonTableCellRenderer extends JButton implements TableCellRenderer{
-    
+   
     private final JButton button;
     
     public JButtonTableCellRenderer() {
@@ -30,19 +30,17 @@ public class JButtonTableCellRenderer extends JButton implements TableCellRender
         });
     }
 
-    
     @Override
-     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-        return button;
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+       
+        if( value instanceof JButton){
+            JButton btn = (JButton) value;
+            return btn;
+        }
+        return getTableCellRendererComponent(table, value, isSelected, hasFocus,row, column);
     }
-      private void mostrarPantallaFrmPersona() {
-        //Esta forma es mas flexible
-        //this.setVisible(false);
-        FrmPersona frmPersona = new FrmPersona();
-        frmPersona.setVisible(true);
-//        //Forma anonima de llamar al formato
-//        new AgregarVideojuegoForm().setVisible(true);
-    }
+    
+ 
 }
     
 

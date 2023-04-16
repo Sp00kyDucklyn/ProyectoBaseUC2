@@ -4,7 +4,7 @@
  */
 package dao;
 
-import Encriptar.Encriptar;
+import encripta.Encriptar;
 import interfaces.IMenuDAO;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

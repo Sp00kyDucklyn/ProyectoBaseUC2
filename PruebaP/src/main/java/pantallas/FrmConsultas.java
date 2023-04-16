@@ -4,7 +4,7 @@
  */
 package pantallas;
 
-import Encriptar.Encriptar;
+import encripta.Encriptar;
 import dao.PersonaDAO;
 import dao.TramiteDAO;
 import dominio.JButtonTableCellRenderer;
@@ -47,15 +47,13 @@ public class FrmConsultas extends javax.swing.JFrame {
 //        });
         
 
-        buttonRenderer.addActionListener((ActionEvent e) -> {
-            System.out.println("popo");
-            mostrarPantallaFrmPersona();
-        });
+      
     }
 
     private void mostrarPantallaFrmPersona() {
+        Persona persona = new Persona();
         this.setVisible(false);
-        FrmPersona frmPersona = new FrmPersona();
+        FrmPersona frmPersona = new FrmPersona(persona);
         frmPersona.setVisible(true);
         this.dispose();
     }
@@ -104,22 +102,24 @@ public class FrmConsultas extends javax.swing.JFrame {
         // Crear instancia del renderer de botón
 
 // Agregar el renderer de botón a la última columna de la tabla
-        //TableColumn column = tblResultados.getColumnModel().getColumn(tblResultados.getColumnCount() - 1);
-        //column.setCellRenderer(buttonRenderer);
-        
-        // Mostrar los resultados en el JTable
-        DefaultTableModel model = (DefaultTableModel) tblResultados.getModel();
         TableColumn column = tblResultados.getColumnModel().getColumn(tblResultados.getColumnCount() - 1);
         column.setCellRenderer(buttonRenderer);
+        
+        // Mostrar los resultados en el JTable
+         
+        DefaultTableModel model = (DefaultTableModel) tblResultados.getModel();
+//        TableColumn column = tblResultados.getColumnModel().getColumn(tblResultados.getColumnCount() - 1);
+//        column.setCellRenderer(buttonRenderer);
         model.setRowCount(0);
         if (resultados != null) {
             for (Persona p : resultados) {
+
                 String n = p.getNombre() + " "
                         + p.getApellidoP() + " " + p.getApellidoM();
-                model.addRow(new Object[]{p.getFechaNa(), n, p.getRfc(),buttonRenderer});
+                model.addRow(new Object[]{p.getFechaNa(), n, p.getRfc(), new JButton("Seleccionar")});
 
-    }
-
+            }
+            
         }
     }
     
@@ -245,6 +245,12 @@ public class FrmConsultas extends javax.swing.JFrame {
 
     private void tblResultadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblResultadosMouseClicked
         // TODO add your handling code here:
+        
+        int column = tblResultados.getColumnModel().getColumnIndexAtX(evt.getX());
+        int row = evt.getY()/tblResultados.getRowHeight();
+        
+        
+        
     }//GEN-LAST:event_tblResultadosMouseClicked
 
     /**
