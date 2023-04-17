@@ -1,4 +1,4 @@
-/*
+ /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
@@ -6,7 +6,9 @@ package pantallas;
 
 import dao.LicenciaDAO;
 import dao.PersonaDAO;
+import dao.VehiculoDAO;
 import dominio.Persona;
+import dominio.Vehiculo;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -240,36 +242,40 @@ public class FrmSeleccionTramite extends javax.swing.JFrame {
     private void btnPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonaActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        RegistroPersona registro = new RegistroPersona();
+        FrmRegistroPersona registro = new FrmRegistroPersona();
         registro.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnPersonaActionPerformed
 
     private void btnPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlacasActionPerformed
         // TODO add your handling code here:
+        
          if (!btnPlacas.isSelected()) {
-
+             JOptionPane.showMessageDialog(this, "Ingrese su número de serie");
+             
             txtRfcBuscar.setVisible(true);
             if (!buscarRfc(txtRfcBuscar.getText()).isEmpty()) {
 
-                PersonaDAO personaDAO = new PersonaDAO();
+                VehiculoDAO vehiculoDAO = new VehiculoDAO();
                 //PONER TXT.GETTEXT DENTRO DE DONDE ESTAN LAS COMILLAS AHORITA LISTO
 
-                List<Persona> persona = personaDAO.buscarRfc(txtRfcBuscar.getText());
+                List<Vehiculo> vehiculo = vehiculoDAO.buscarNumSerie(txtRfcBuscar.getText());
 
-                if (persona.isEmpty()) {
+                if (vehiculo.isEmpty()) {
                     JOptionPane.showMessageDialog(this, "No encontro el rfc");
                     return;
                 } else {
                     JOptionPane.showMessageDialog(this, "Se encontro el rfc");
                     txtRfcBuscar.setVisible(true);
                     this.setVisible(false);
+                    FrmPlaca placa = new FrmPlaca(vehiculo.get(0));
+                    placa.setVisible(true);
 //<<<<<<< HEAD:PruebaP/src/main/java/pantallas/FrmSeleccionTramite.java
-                    FrmPlaca placa = new FrmPlaca(persona.get(0));
+//                    FrmPlaca placa = new FrmPlaca(vehiculo.get(0));
 //=======
 //                    FrmPlaca placa = new  FrmPlaca(persona.get(0));
 //>>>>>>> main:PruebaP/src/main/java/pantallas/SeleccionTramite.java
-                    placa.setVisible(true);
+//                    placa.setVisible(true);
                     this.dispose();
                  }
 

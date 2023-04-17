@@ -52,6 +52,10 @@ public class Tramite implements Serializable {
     @JoinColumn(name = "idPersona", nullable = false)
     private Persona persona;
     
+//    @ManyToOne()
+//    @JoinColumn(name = "idPersona", nullable = false)
+//    private Vehiculo vehiculo;
+    
 //    @ManyToMany(mappedBy = "tramites")
 //    private List<Persona>personas = new ArrayList<>();
    
@@ -66,6 +70,16 @@ public class Tramite implements Serializable {
         this.estado = estado;
         this.persona = persona;
     }
+
+    public Tramite(Integer id, String costo, Date fechaExpedicion, Date fechaVencimiento, String estado) {
+        this.id = id;
+        this.costo = costo;
+        this.fechaExpedicion = fechaExpedicion;
+        this.fechaVencimiento = fechaVencimiento;
+        this.estado = estado;
+    }
+    
+    
 
     public Tramite(String costo, Date fechaExpedicion, Persona persona) {
         this.costo = costo;

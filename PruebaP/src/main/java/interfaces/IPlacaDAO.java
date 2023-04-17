@@ -23,4 +23,6 @@ public interface IPlacaDAO {
     public void crearCmbVehiculos(JComboBox<Vehiculo> cmbVehiculos);
     
     public String generarNumeroPlaca();
+    
+    public List<Placa> llamarListaPlacas(int placa);
 }

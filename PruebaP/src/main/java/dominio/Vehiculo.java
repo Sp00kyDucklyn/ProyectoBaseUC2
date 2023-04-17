@@ -39,8 +39,11 @@ public class Vehiculo implements Serializable, Cloneable {
     @ManyToOne
     @JoinColumn(name = "PERSONA_ID_PERSONA", nullable = false)
     private Persona persona;
+    
+//    @OneToMany(mappedBy = "persona", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+//    private List<Tramite> tramites;
 
-    @OneToMany(mappedBy = "vehiculos", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToMany(mappedBy = "vehiculo", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Placa> placas;
 
     public Vehiculo() {
@@ -64,6 +67,12 @@ public class Vehiculo implements Serializable, Cloneable {
         this.color = color;
         this.anio = anio;
         this.persona = persona;
+    }
+    
+    
+    
+     public void agregaPlaca(Placa placa){
+        placas.add(placa);
     }
 
     public Integer getId() {

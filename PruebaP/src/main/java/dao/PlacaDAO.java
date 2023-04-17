@@ -54,7 +54,7 @@ public class PlacaDAO implements IPlacaDAO{
 
     @Override
     public List<Persona> llamarRFC(String rfc) {
-         EntityManager em = getEntityManager();
+        EntityManager em = getEntityManager();
         CriteriaBuilder cb = em.getCriteriaBuilder();
 
         // Crear objeto CriteriaQuery para especificar el resultado de la consulta
@@ -107,6 +107,28 @@ public class PlacaDAO implements IPlacaDAO{
         em.close();
     return numeroSerie;
 }
+
+    @Override
+    public List<Placa> llamarListaPlacas(int nuSerie) {
+        
+        EntityManager em = getEntityManager();
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+
+        // Crear objeto CriteriaQuery para especificar el resultado de la consulta
+        CriteriaQuery<Placa> cq = cb.createQuery(Placa.class);
+
+        // Especificar la tabla sobre la que se realizará la consulta
+        Root<Placa> placa = cq.from(Placa.class);
+
+        // Especificar la condición de la consulta (en este caso, que el RFC sea igual al ingresado por el usuario)
+        cq.where(cb.equal(placa.get("numPlacaNu"), nuSerie));
+
+        // Ejecutar la consulta y obtener el resultado
+        List<Placa> placas = em.createQuery(cq).getResultList();
+
+        return placas;
+        
+    }
 
     }
     

@@ -33,6 +33,7 @@ public class FrmRegistroVehiculo extends javax.swing.JFrame {
 
     /**
      * Creates new form SiPlaca
+     * @param persona
      */
     public FrmRegistroVehiculo(Persona persona) {
         this.persona = persona;
@@ -104,6 +105,11 @@ public class FrmRegistroVehiculo extends javax.swing.JFrame {
 
         return erroresValidacion;
 
+    }
+    
+       private String buscarNumSerie(String numSerie) {
+        txtNumSerie.getText();
+        return numSerie;
     }
 
     /**
@@ -324,8 +330,5 @@ public class FrmRegistroVehiculo extends javax.swing.JFrame {
     private javax.swing.JTextField txtNumSerie;
     // End of variables declaration//GEN-END:variables
 
-    private String buscarNumSerie(String numSerie) {
-        txtNumSerie.getText();
-        return numSerie;
-    }
+ 
 }

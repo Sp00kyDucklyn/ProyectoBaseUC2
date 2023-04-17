@@ -38,25 +38,25 @@ public class Placa extends Tramite implements Serializable{
     private String numPlacaNu;
     //private double costo;
     
-     @ManyToOne
-    (cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinColumn(name = "id_vehiculo")
-    private Vehiculo vehiculos;
+    private Vehiculo vehiculo;
 
     public Placa() {
     }
 
-    public Placa(Date fechaVencimiento, String numPlacaNu, String costo, Date fechaExpedicion, String estado, Persona persona) {
-        super(costo, fechaVencimiento,fechaExpedicion, estado, persona);
+    public Placa(String numPlacaNu, Vehiculo vehiculos, Integer id, String costo, Date fechaExpedicion, Date fechaVencimiento, String estado, Persona persona) {
+        super(id, costo, fechaExpedicion, fechaVencimiento, estado, persona);
         this.numPlacaNu = numPlacaNu;
+        this.vehiculo = vehiculos;
     }
 
-    public Placa(String numPlacaNu, Vehiculo vehiculos, String costo, Date fechaVencimiento, Date fechaExpedicion, String estado, Persona persona) {
-        super(costo, fechaVencimiento, fechaExpedicion, estado, persona);
+    public Placa(String numPlacaNu, Integer id, String costo, Date fechaExpedicion, Date fechaVencimiento, String estado) {
+        super(id, costo, fechaExpedicion, fechaVencimiento, estado);
         this.numPlacaNu = numPlacaNu;
-        this.vehiculos = vehiculos;
     }
-
+    
+    
     
     public String getNumPlacaNu() {
         return numPlacaNu;
@@ -66,6 +66,7 @@ public class Placa extends Tramite implements Serializable{
         this.numPlacaNu = numPlacaNu;
     }
 
+    
 //    public double getCosto() {
 //        return costo;
 //    }
@@ -73,5 +74,13 @@ public class Placa extends Tramite implements Serializable{
 //    public void setCosto(double costo) {
 //        this.costo = costo;
 //    }
+
+    public Vehiculo getVehiculo() {
+        return vehiculo;
+    }
+
+    public void setVehiculo(Vehiculo vehiculo) {
+        this.vehiculo = vehiculo;
+    }
     
 }
