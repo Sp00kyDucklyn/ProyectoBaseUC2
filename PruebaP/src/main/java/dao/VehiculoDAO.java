@@ -4,11 +4,19 @@
  */
 package dao;
 
+import dominio.Persona;
 import dominio.Vehiculo;
 import interfaces.IVehiculoDAO;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -36,6 +44,30 @@ public class VehiculoDAO implements IVehiculoDAO{
         }finally{
             em.close();
         }
+    }
+
+    @Override
+    public List<Vehiculo> buscarNumSerie(String numSerie) {
+        EntityManager em = getEntityManager();
+       
+       CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+        CriteriaQuery<Vehiculo> criteriaQuery = criteriaBuilder.createQuery(Vehiculo.class);
+        Root<Vehiculo> root = criteriaQuery.from(Vehiculo.class);
+        criteriaQuery.select(root);
+        
+        
+        
+        List<Predicate> predicates = new ArrayList<>();
+        
+        if (numSerie != null && !numSerie.isEmpty()) {
+            predicates.add(criteriaBuilder.like(root.get("numSerie"), "%" + numSerie + "%"));
+        }
+        
+        criteriaQuery.where(predicates.toArray(new Predicate[0]));
+        
+        TypedQuery<Vehiculo> typedQuery = em.createQuery(criteriaQuery);
+        
+        return typedQuery.getResultList();
     }
     
     

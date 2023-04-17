@@ -23,24 +23,24 @@ import javax.persistence.OneToOne;
  * @author hoshi
  */
 @Entity
-public class Vehiculo implements Serializable {
+public class Vehiculo implements Serializable, Cloneable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
+
     @Basic
     private String numSerie;
     private String marca;
     private String linea;
     private String color;
     private String anio;
-    
+
     @ManyToOne
-    @JoinColumn(name= "PERSONA_ID_PERSONA", nullable = false)
+    @JoinColumn(name = "PERSONA_ID_PERSONA", nullable = false)
     private Persona persona;
-    
-    @OneToMany(mappedBy="vehiculos", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+
+    @OneToMany(mappedBy = "vehiculos", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Placa> placas;
 
     public Vehiculo() {
@@ -56,10 +56,8 @@ public class Vehiculo implements Serializable {
         this.placas = placas;
     }
 
-   
+    public Vehiculo(String numSerie, String marca, String linea, String color, String anio, Persona persona) {
 
-    public Vehiculo( String numSerie, String marca, String linea, String color, String anio, Persona persona) {
-        
         this.numSerie = numSerie;
         this.marca = marca;
         this.linea = linea;
@@ -68,7 +66,6 @@ public class Vehiculo implements Serializable {
         this.persona = persona;
     }
 
-    
     public Integer getId() {
         return id;
     }
@@ -96,8 +93,6 @@ public class Vehiculo implements Serializable {
         }
         return true;
     }
-
-
 
     public String getMarca() {
         return marca;
@@ -131,7 +126,6 @@ public class Vehiculo implements Serializable {
         this.anio = anio;
     }
 
-
     public Persona getPersona() {
         return persona;
     }
@@ -160,7 +154,10 @@ public class Vehiculo implements Serializable {
     public String toString() {
         return "numSerie: " + numSerie + ", marca: " + marca + ", linea: " + linea + ", color: " + color + ", anio:" + anio + '}';
     }
-    
-    
-    
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
 }

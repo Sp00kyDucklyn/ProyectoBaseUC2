@@ -6,10 +6,21 @@ package pantallas;
 
 import dao.PlacaDAO;
 import dominio.Persona;
+import dominio.Placa;
 import dominio.Vehiculo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import utileria.Validaciones;
 
 /**
  *
@@ -21,29 +32,115 @@ public class SiPlaca2 extends javax.swing.JFrame {
      * Creates new form SiPlaca2
      */
     Persona persona = new Persona();
+    Vehiculo vehiculo = new Vehiculo();
     PlacaDAO pdao = new PlacaDAO();
-    
-    public SiPlaca2(Persona persona) {
+
+    public SiPlaca2(Persona persona, Vehiculo vehiculo) {
         initComponents();
         this.persona = persona;
+        this.vehiculo = vehiculo;
+       
         rfc.setText(persona.getRfc());
-        crearCmbVehiculos(cmbVehiculos);
+        numSerie.setText(vehiculo.getNumSerie());
+        lblCosto.setText("1500");
+        calculaFecha();
+        generarNumPlacas();
+        cmbVehiculos.setVisible(false);
+        //crearCmbVehiculos(cmbVehiculos);
     }
 
-    private void crearCmbVehiculos(JComboBox cmbVehiculos){
+    private Placa agregarPlaca() throws ParseException {
+
+        HashMap<String, String> datosFormulario = this.extraerDatosFormulario();
+        String numPlacaNu = lblPlacas.getText();
+        Date fechaExpedicion = new Date();
+
+        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+        String fechaVen = datosFormulario.get("fechaVencimiento");
+        Date fechaVencimiento = formatoDelTexto.parse(fechaVen);
+
+        String costo = lblCosto.getText();
+        String estado = datosFormulario.get("estado");
+        
+        //Vehiculo vehiculoSeleccionado = (Vehiculo) cmbVehiculos.getSelectedItem();
+        Placa placa = new Placa(numPlacaNu, vehiculo, costo, fechaVencimiento, fechaExpedicion, estado, persona);
+
+        return placa;
+    }
+
+    private void crearCmbVehiculos(JComboBox cmbVehiculos) {
         pdao.crearCmbVehiculos(cmbVehiculos);
-         cmbVehiculos.addActionListener(new ActionListener() {
-             
+        cmbVehiculos.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Obtener el vehículo seleccionado
-        Vehiculo vehiculos = (Vehiculo) cmbVehiculos.getSelectedItem();
-        if(vehiculos != null){
-            costo.setText("1500");
-        }
+                Vehiculo vehiculos = (Vehiculo) cmbVehiculos.getSelectedItem();
+                if (vehiculos != null) {
+                    lblCosto.setText("1500");
+                }
             }
         });
     }
+
+    private void estado() {
+        Date fecha = new Date();
+        if (fecha.compareTo(new Date()) == 0) {
+            lblEstado.setText("activo");
+        } else {
+
+        }
+    }
+
+    private HashMap<String, String> extraerDatosFormulario() {
+        String estado = lblEstado.getText();
+        String fechaVencimiento = lblFechaVencimiento.getText();
+
+        HashMap<String, String> datosFormulario = new HashMap<>();
+        datosFormulario.put("estado", estado);
+        datosFormulario.put("fechaVencimiento", fechaVencimiento);
+
+        return datosFormulario;
+    }
+
+    private void calculaFecha() {
+
+        Date fechaExpedicion = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fechaExpedicion);
+
+        int suma = fechaExpedicion.getYear() + 1;
+        calendar.add(Calendar.YEAR, 1);
+        Date fechaVencimiento = calendar.getTime();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String fechaVencimientoString = sdf.format(fechaVencimiento);
+        lblFechaVencimiento.setText(fechaVencimientoString);
+    }
+    
+    private void generarNumPlacas(){
+        int numeros = 0;
+        String numero;
+        final String cadena = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        final int longitud = 3;
+        StringBuilder sb = new StringBuilder();
+        
+        for(int i = 0; i < longitud; i++){
+        double aleatorio = Math.random() * cadena.length();
+        int posicion = (int) aleatorio;
+        char letra = cadena.charAt(posicion);
+        sb.append(letra);
+    }
+        numeros = (int) (Math.random() * 1000 + 99);
+        numero = String.valueOf(numeros);
+        
+        lblPlacas.setText(sb.toString() + "-" + numero);
+        
+        if(lblPlacas.getText().length() != 7){
+            generarNumPlacas();
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -54,26 +151,31 @@ public class SiPlaca2 extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        numSerie = new javax.swing.JLabel();
         cmbVehiculos = new javax.swing.JComboBox<>();
         btnGuardar = new javax.swing.JButton();
         rfc = new javax.swing.JLabel();
-        costo = new javax.swing.JLabel();
-        btnRenovar = new javax.swing.JButton();
+        lblCosto = new javax.swing.JLabel();
+        lblPlacas = new javax.swing.JLabel();
+        lblFechaVencimiento = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        lblEstado = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1000, 612));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(numSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, 180, 30));
 
-        cmbVehiculos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { null }));
         cmbVehiculos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbVehiculosActionPerformed(evt);
             }
         });
-        jPanel1.add(cmbVehiculos, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, 210, 40));
+        jPanel1.add(cmbVehiculos, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 210, 40));
 
         btnGuardar.setBorder(null);
         btnGuardar.setContentAreaFilled(false);
@@ -85,21 +187,27 @@ public class SiPlaca2 extends javax.swing.JFrame {
         jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 470, 180, 30));
 
         rfc.setToolTipText("");
-        jPanel1.add(rfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 160, 30));
-        jPanel1.add(costo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 390, 190, 30));
+        jPanel1.add(rfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 190, 30));
+        jPanel1.add(lblCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 390, 190, 30));
 
-        btnRenovar.setContentAreaFilled(false);
-        btnRenovar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRenovarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnRenovar, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 280, 180, 30));
+        lblPlacas.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jPanel1.add(lblPlacas, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 206, 160, 50));
+        jPanel1.add(lblFechaVencimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 280, 90, 20));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/SiPlaca2 (1).png"))); // NOI18N
-        jLabel1.setText("jLabel1");
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel3.setText("Numero de placas:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 180, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setText("Fecha de Vencimiento:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 280, -1, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/SiPlaca2 (2).png"))); // NOI18N
         jLabel1.setPreferredSize(new java.awt.Dimension(1000, 612));
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -280, -1, 880));
+
+        lblEstado.setText("jLabel2");
+        jPanel1.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 270, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 2, -1, 630));
 
@@ -107,15 +215,29 @@ public class SiPlaca2 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
+        this.estado();
+        try {
+            pdao.crearPlaca(this.agregarPlaca());
+            Validaciones val = new Validaciones();
+            val.mostrarMensaje("Se guardo exitosamente", "Info", "Guardado Correctamente");
+             int si= JOptionPane.YES_OPTION;
+             JOptionPane.showMessageDialog(this, "Trámite completado, regresemos al inicio :)","Regreso inicio",si);
+             if(si==0){
+                 this.setVisible(false);
+                 MenuPrincipal menu= new MenuPrincipal();
+                 menu.setVisible(true);
+                 this.dispose();
+             }
+        } catch (ParseException ex) {
+            Logger.getLogger(SiPlaca2.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        Validaciones val = new Validaciones();
+        val.mostrarMensaje("Se guardo exitosamente", "Info", "Guardado Correctamente");
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void btnRenovarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRenovarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRenovarActionPerformed
-
     private void cmbVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbVehiculosActionPerformed
-        
+
     }//GEN-LAST:event_cmbVehiculosActionPerformed
 
     /**
@@ -155,11 +277,16 @@ public class SiPlaca2 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton btnRenovar;
     private javax.swing.JComboBox<String> cmbVehiculos;
-    private javax.swing.JLabel costo;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblCosto;
+    private javax.swing.JLabel lblEstado;
+    private javax.swing.JLabel lblFechaVencimiento;
+    private javax.swing.JLabel lblPlacas;
+    private javax.swing.JLabel numSerie;
     private javax.swing.JLabel rfc;
     // End of variables declaration//GEN-END:variables
 }

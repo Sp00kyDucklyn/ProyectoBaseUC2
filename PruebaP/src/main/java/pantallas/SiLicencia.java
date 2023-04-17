@@ -33,7 +33,7 @@ public class SiLicencia extends javax.swing.JFrame {
     Persona persona = new Persona();
     Tramite tramite = new Tramite();
     LicenciaDAO licenciaDAO = new LicenciaDAO();
-
+    Licencia licencia = new Licencia();
     public SiLicencia(Persona persona) {
         initComponents();
         this.persona = persona;

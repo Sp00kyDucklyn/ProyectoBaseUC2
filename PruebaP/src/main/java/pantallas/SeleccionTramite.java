@@ -265,7 +265,7 @@ public class SeleccionTramite extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Se encontro el rfc");
                     txtRfcBuscar.setVisible(true);
                     this.setVisible(false);
-                    SiPlaca2 placa = new SiPlaca2(persona.get(0));
+                    RenovacionPlacas placa = new RenovacionPlacas(persona.get(0));
                     placa.setVisible(true);
                     this.dispose();
                  }
