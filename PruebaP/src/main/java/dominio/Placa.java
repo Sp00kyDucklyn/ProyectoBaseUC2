@@ -51,6 +51,13 @@ public class Placa extends Tramite implements Serializable{
         this.numPlacaNu = numPlacaNu;
     }
 
+    public Placa(String numPlacaNu, Vehiculo vehiculos, String costo, Date fechaVencimiento, Date fechaExpedicion, String estado, Persona persona) {
+        super(costo, fechaVencimiento, fechaExpedicion, estado, persona);
+        this.numPlacaNu = numPlacaNu;
+        this.vehiculos = vehiculos;
+    }
+
+    
     public String getNumPlacaNu() {
         return numPlacaNu;
     }

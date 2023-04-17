@@ -35,18 +35,16 @@ public class FrmConsultas extends javax.swing.JFrame {
      * Creates new form FrmConsultas
      */
               JButtonTableCellRenderer buttonRenderer = new JButtonTableCellRenderer();
+              JButton btn = new JButton ("Seleccion");
+              List<Persona> resultados = new ArrayList<>();
 
 //    private JTable tblResultados;
     public FrmConsultas() {
         initComponents();
         buscarPersonas();
-//         buttonRenderer.addActionListener((e) -> {
-//            //Importante lo que va aqui
-//            //El codigo se va a ejecutar ya que se le de click al boton
-//            mostrarPantallaFrmPersona();
-//        });
+//         
+        tblResultados.setDefaultRenderer(Object.class, buttonRenderer);
         
-
       
     }
 
@@ -61,7 +59,6 @@ public class FrmConsultas extends javax.swing.JFrame {
     private void buscarPersonas() {
         String busqueda = txtBusqueda.getText();
         IPersonaDAO personaDAO = new PersonaDAO();
-        List<Persona> resultados = new ArrayList<>();
         resultados = personaDAO.listaPersonas();
         
 
@@ -102,8 +99,8 @@ public class FrmConsultas extends javax.swing.JFrame {
         // Crear instancia del renderer de botón
 
 // Agregar el renderer de botón a la última columna de la tabla
-        TableColumn column = tblResultados.getColumnModel().getColumn(tblResultados.getColumnCount() - 1);
-        column.setCellRenderer(buttonRenderer);
+//        TableColumn column = tblResultados.getColumnModel().getColumn(tblResultados.getColumnCount() - 1);
+//        column.setCellRenderer(buttonRenderer);
         
         // Mostrar los resultados en el JTable
          
@@ -116,7 +113,7 @@ public class FrmConsultas extends javax.swing.JFrame {
 
                 String n = p.getNombre() + " "
                         + p.getApellidoP() + " " + p.getApellidoM();
-                model.addRow(new Object[]{p.getFechaNa(), n, p.getRfc(), new JButton("Seleccionar")});
+                model.addRow(new Object[]{p.getFechaNa(), n, p.getRfc(), btn});
 
             }
             
@@ -245,10 +242,27 @@ public class FrmConsultas extends javax.swing.JFrame {
 
     private void tblResultadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblResultadosMouseClicked
         // TODO add your handling code here:
-        
-        int column = tblResultados.getColumnModel().getColumnIndexAtX(evt.getX());
-        int row = evt.getY()/tblResultados.getRowHeight();
-        
+        int columna;
+        int row;
+//        int column = tblResultados.getColumnModel().getColumnIndexAtX(evt.getX());
+//        int row = evt.getY()/tblResultados.getRowHeight();
+        columna = tblResultados.getColumnModel().getColumnIndexAtX(evt.getX());
+        row = evt.getY() / tblResultados.getRowHeight();
+       
+        if (columna <= tblResultados.getColumnCount() && columna >= 0 && row <= tblResultados.getRowCount() && row >= 0) {
+            Object objeto = tblResultados.getValueAt(row, columna);
+            if (objeto instanceof JButton) {
+                ((JButton) objeto).doClick();
+                JButton boton = (JButton) objeto;
+                if (boton.equals(btn)) {
+                    this.setVisible(false);
+                    FrmPersona persona = new FrmPersona(resultados.get(row));
+                    persona.setVisible(true);
+                    this.dispose();
+
+                }
+            }
+        }
         
         
     }//GEN-LAST:event_tblResultadosMouseClicked

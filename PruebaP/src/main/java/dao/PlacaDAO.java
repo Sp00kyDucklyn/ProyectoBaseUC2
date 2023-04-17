@@ -18,6 +18,9 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.swing.JComboBox;
+import javax.persistence.EntityManager;
+import javax.persistence.StoredProcedureQuery;
+
 
 /**
  *
@@ -26,6 +29,7 @@ import javax.swing.JComboBox;
 public class PlacaDAO implements IPlacaDAO{
 
     private EntityManagerFactory entityManagerFactory = null;
+    
     
     public PlacaDAO() {
         entityManagerFactory = Persistence.createEntityManagerFactory("conexionPU");
@@ -90,7 +94,21 @@ public class PlacaDAO implements IPlacaDAO{
              System.out.println("No se pudo obtener la lista de vehiculos");
         }
     }
-    
-    
-    
+
+    @Override
+    public String generarNumeroPlaca() {
+      EntityManager em = getEntityManager();
+      em.getTransaction().begin();
+    StoredProcedureQuery storedProcedure = em.createStoredProcedureQuery("generar_numero_placa");
+    storedProcedure.execute();
+    String numeroSerie = (String) storedProcedure.getOutputParameterValue(1);
+    em.getTransaction().commit();
+        
+        em.close();
+    return numeroSerie;
 }
+
+    }
+    
+    
+    

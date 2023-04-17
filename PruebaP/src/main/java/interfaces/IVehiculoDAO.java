@@ -5,6 +5,7 @@
 package interfaces;
 
 import dominio.Vehiculo;
+import java.util.List;
 
 /**
  *
@@ -12,5 +13,5 @@ import dominio.Vehiculo;
  */
 public interface IVehiculoDAO {
     public void crearVehiculo(Vehiculo vehiculo);
-    
+    public List<Vehiculo> buscarNumSerie(String numSerie);
 }

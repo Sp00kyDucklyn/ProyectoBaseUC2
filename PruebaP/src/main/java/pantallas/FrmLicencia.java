@@ -34,8 +34,13 @@ public class FrmLicencia extends javax.swing.JFrame {
     Persona persona = new Persona();
     Tramite tramite = new Tramite();
     LicenciaDAO licenciaDAO = new LicenciaDAO();
+//<<<<<<< HEAD:PruebaP/src/main/java/pantallas/FrmLicencia.java
 
-    public FrmLicencia(Persona persona) {
+//    public FrmLicencia(Persona persona) {
+////=======
+//    Licencia licencia = new Licencia();
+        public FrmLicencia(Persona persona) {
+//>>>>>>> main:PruebaP/src/main/java/pantallas/SiLicencia.java
         initComponents();
         this.persona = persona;
         lblRfc.setText(persona.getRfc());

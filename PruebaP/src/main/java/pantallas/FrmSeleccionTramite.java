@@ -264,7 +264,11 @@ public class FrmSeleccionTramite extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Se encontro el rfc");
                     txtRfcBuscar.setVisible(true);
                     this.setVisible(false);
+//<<<<<<< HEAD:PruebaP/src/main/java/pantallas/FrmSeleccionTramite.java
                     FrmPlaca placa = new FrmPlaca(persona.get(0));
+//=======
+//                    FrmPlaca placa = new  FrmPlaca(persona.get(0));
+//>>>>>>> main:PruebaP/src/main/java/pantallas/SeleccionTramite.java
                     placa.setVisible(true);
                     this.dispose();
                  }

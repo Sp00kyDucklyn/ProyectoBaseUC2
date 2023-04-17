@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.UIManager;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 import pantallas.FrmPersona;
 
@@ -17,19 +18,8 @@ import pantallas.FrmPersona;
  *
  * @author hoshi
  */
-public class JButtonTableCellRenderer extends JButton implements TableCellRenderer{
-   
-    private final JButton button;
-    
-    public JButtonTableCellRenderer() {
-        button = new JButton("Selección");
-       
-        button.addActionListener((ActionEvent e) -> {
-            // Acción que se realiza al hacer clic en el botón
-            System.out.println("popo");
-        });
-    }
-
+public class JButtonTableCellRenderer extends DefaultTableCellRenderer {
+  
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
        
@@ -37,7 +27,7 @@ public class JButtonTableCellRenderer extends JButton implements TableCellRender
             JButton btn = (JButton) value;
             return btn;
         }
-        return getTableCellRendererComponent(table, value, isSelected, hasFocus,row, column);
+        return super.getTableCellRendererComponent(table, value, isSelected, hasFocus,row, column);
     }
     
  

@@ -21,4 +21,6 @@ public interface IPlacaDAO {
     public List<Persona> llamarRFC(String rfc);
     
     public void crearCmbVehiculos(JComboBox<Vehiculo> cmbVehiculos);
+    
+    public String generarNumeroPlaca();
 }

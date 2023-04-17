@@ -29,8 +29,8 @@ public class FrmPersona extends javax.swing.JFrame {
         personaDAO.desencriptarPersona(persona);
         String n = persona.getNombre() + " "
                 + persona.getApellidoP() + " " + persona.getApellidoM();
-        lblNombrePersona.setText(n);
-        lblNombre.setText(text);
+//        lblNombrePersona.setText(n);
+        lblNombre.setText(n);
         lblRfc.setText(persona.getRfc());
         Date fecha_actual = persona.getFechaNa();
         SimpleDateFormat formato_fecha = new SimpleDateFormat("yyyy-MM-dd");

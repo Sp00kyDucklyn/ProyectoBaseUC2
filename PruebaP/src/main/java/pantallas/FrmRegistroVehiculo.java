@@ -7,6 +7,7 @@ package pantallas;
 import dao.VehiculoDAO;
 import dominio.Persona;
 import dominio.Vehiculo;
+import interfaces.IVehiculoDAO;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,6 +29,7 @@ public class FrmRegistroVehiculo extends javax.swing.JFrame {
 
     VehiculoDAO vehiculoDAO = new VehiculoDAO();
     private Persona persona;
+    private Vehiculo vehiculo;
 
     /**
      * Creates new form SiPlaca
@@ -228,10 +230,8 @@ public class FrmRegistroVehiculo extends javax.swing.JFrame {
             }
             val.mostrarMensaje("Se agrego exitosamente", "Info", "Guardado Correctamente ");
         }
-            
 
 
-            
     }//GEN-LAST:event_botonGuardarActionPerformed
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
@@ -243,10 +243,28 @@ public class FrmRegistroVehiculo extends javax.swing.JFrame {
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
-        FrmPlaca placa = new FrmPlaca(persona);
-        placa.setVisible(true);
-        this.dispose();
+//<<<<<<< HEAD:PruebaP/src/main/java/pantallas/FrmRegistroVehiculo.java
+//        this.setVisible(false);
+//        FrmPlaca placa = new FrmPlaca(persona);
+//        placa.setVisible(true);
+//        this.dispose();
+//=======
+        if (!buscarNumSerie(txtNumSerie.getText()).isEmpty()) {
+            IVehiculoDAO vehiculoDAO = new VehiculoDAO();
+
+            List<Vehiculo> vehiculos = vehiculoDAO.buscarNumSerie(txtNumSerie.getText());
+            if (vehiculos.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No encontro el numero de serie");
+            } else {
+                JOptionPane.showMessageDialog(this, "Se encontro el numero de serie");
+                this.setVisible(false);
+                FrmPlaca placa = new FrmPlaca(vehiculos.get(0));
+                placa.setVisible(true);
+                this.dispose();
+            }
+        }
+
+//>>>>>>> main:PruebaP/src/main/java/pantallas/SiPlaca.java
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void btnRegresoSeleccionTramiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresoSeleccionTramiteActionPerformed
@@ -305,4 +323,9 @@ public class FrmRegistroVehiculo extends javax.swing.JFrame {
     private javax.swing.JTextField txtMarca;
     private javax.swing.JTextField txtNumSerie;
     // End of variables declaration//GEN-END:variables
+
+    private String buscarNumSerie(String numSerie) {
+        txtNumSerie.getText();
+        return numSerie;
+    }
 }
