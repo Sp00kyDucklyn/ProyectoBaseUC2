@@ -54,9 +54,9 @@ public class FrmPlaca extends javax.swing.JFrame {
         numSerie.setText(vehiculo.getNumSerie());
         
         if (pdao.llamarListaPlacas(vehiculo.getId()) == null) {
-            lblCosto.setText("1000");
-        } else if(vehiculo.getPlacas() != null){
             lblCosto.setText("1500");
+        } else if(vehiculo.getPlacas() != null){
+            lblCosto.setText("1000");
         }
         
         calculaFecha();
