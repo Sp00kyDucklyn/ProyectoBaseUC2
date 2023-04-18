@@ -97,9 +97,11 @@ public class Validaciones {
         return matcher.matches();
     } 
    
-     
-
-
-    
-    
+   public static boolean validarRFC(String rfc) {
+    // Expresión regular para validar el formato de RFC
+    Pattern pattern = Pattern.compile("^[A-Z]{4}[0-9]{6}[A-Z0-9]{3}$");
+    Matcher matcher = pattern.matcher(rfc);
+    return matcher.matches();
+   
+    }
 }

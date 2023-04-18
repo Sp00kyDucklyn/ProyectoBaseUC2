@@ -74,7 +74,7 @@ public class LicenciaDAO implements ILicenciaDAO {
 
     @Override
     public void licenciaVigente() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+  
     }
 
 }

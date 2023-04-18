@@ -39,34 +39,48 @@ public class FrmPlaca extends javax.swing.JFrame {
     Vehiculo vehiculo = new Vehiculo();
     VehiculoDAO vehiculoDAO = new VehiculoDAO();
     PlacaDAO pdao = new PlacaDAO();
+    Placa placa = new Placa();
+    String fuente;
+    
 //    Placa placa = new Placa();
 //<<<<<<< HEAD:PruebaP/src/main/java/pantallas/FrmPlaca.java
-//    
-    public FrmPlaca(Vehiculo vehiculo) {
+//  
+    
+   
+    public FrmPlaca(String fuente,Vehiculo vehiculo) {
 //=======
 //
 //    public SiPlaca2(Persona persona, Vehiculo vehiculo) {
 //>>>>>>> main:PruebaP/src/main/java/pantallas/SiPlaca2.java
         initComponents();
+        this.fuente = fuente;
         this.vehiculo = vehiculo;
-       
+        
+        
         rfc.setText(vehiculo.getPersona().getRfc());
         numSerie.setText(vehiculo.getNumSerie());
-        
-        if (pdao.llamarListaPlacas(vehiculo.getId()) == null) {
-            lblCosto.setText("1500");
-        } else if(vehiculo.getPlacas() != null){
-            lblCosto.setText("1000");
-        }
+        generarNumPlacas();
+//        if (pdao.llamarListaPlacas(vehiculo.getId()) == null) {
+//            lblCosto.setText("1500");
+//        } else if(vehiculo.getPlacas() != null){
+//            lblCosto.setText("1000");
+//        }
+         
+          if(fuente.equals("agregar")){
+              lblCosto.setText("1500");
+          }else if(fuente.equals("renovar")){
+              lblCosto.setText("1000");
+          }
         
         calculaFecha();
-        generarNumPlacas();
+        
         cmbVehiculos.setVisible(false);
         //crearCmbVehiculos(cmbVehiculos);
     }
 
     private Placa agregarPlaca() throws ParseException {
-
+        
+        
         HashMap<String, String> datosFormulario = this.extraerDatosFormulario();
         String numPlacaNu = lblPlacas.getText();
         Date fechaExpedicion = new Date();
@@ -86,7 +100,7 @@ public class FrmPlaca extends javax.swing.JFrame {
             placa = new Placa(numPlacaNu,tramite.getId(), costo, fechaVencimiento,fechaExpedicion, estado);
             return placa;
         }else if(vehiculo.getPlacas() != null){
-             placa = new Placa(numPlacaNu, vehiculo, tramite.getId() ,costo, fechaVencimiento, fechaExpedicion, estado, vehiculo.getPersona());
+             placa = new Placa(numPlacaNu, vehiculo, tramite.getId(), costo, fechaExpedicion, fechaVencimiento, estado, vehiculo.getPersona());
              return placa;
         }
        
@@ -189,8 +203,8 @@ public class FrmPlaca extends javax.swing.JFrame {
         lblCosto = new javax.swing.JLabel();
         lblPlacas = new javax.swing.JLabel();
         lblFechaVencimiento = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnHistorial = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         lblEstado = new javax.swing.JLabel();
 
@@ -226,14 +240,24 @@ public class FrmPlaca extends javax.swing.JFrame {
         jPanel1.add(lblPlacas, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 280, 160, 50));
         jPanel1.add(lblFechaVencimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 380, 200, 40));
 
-        jButton2.setBorder(null);
-        jButton2.setContentAreaFilled(false);
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 470, 180, 30));
+        btnHistorial.setBorder(null);
+        btnHistorial.setContentAreaFilled(false);
+        btnHistorial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHistorialActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnHistorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 470, 180, 30));
 
-        jButton1.setToolTipText("");
-        jButton1.setBorder(null);
-        jButton1.setContentAreaFilled(false);
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 470, 170, 30));
+        btnCancelar.setToolTipText("");
+        btnCancelar.setBorder(null);
+        btnCancelar.setContentAreaFilled(false);
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 470, 170, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/SiPlaca2 (1).png"))); // NOI18N
         jLabel1.setPreferredSize(new java.awt.Dimension(1000, 600));
@@ -250,6 +274,7 @@ public class FrmPlaca extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         estadoActivo();
+        
 //        calculaCosto();
         
         
@@ -278,6 +303,20 @@ public class FrmPlaca extends javax.swing.JFrame {
     private void cmbVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbVehiculosActionPerformed
 
     }//GEN-LAST:event_cmbVehiculosActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        FrmSeleccionTramite sm = new FrmSeleccionTramite();
+        this.setVisible(false); 
+        sm.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialActionPerformed
+        FrHistorialPlacas hp = new FrHistorialPlacas(persona);
+        this.setVisible(false);
+        hp.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnHistorialActionPerformed
 
     /**
      * @param args the command line arguments
@@ -315,10 +354,10 @@ public class FrmPlaca extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnHistorial;
     private javax.swing.JComboBox<String> cmbVehiculos;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblCosto;

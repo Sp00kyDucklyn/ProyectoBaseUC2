@@ -266,8 +266,23 @@ public class FrmRegistroPersona extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-       
-        try {
+       String rfc = txtRfc.getText();
+       Validaciones val = new Validaciones();
+       PersonaDAO personaDAO = new PersonaDAO();
+        List<Persona> persona = personaDAO.buscarRfc(txtRfc.getText());
+        
+        if(txtRfc.getText().isEmpty() || txtNombre.getText().isEmpty() || txtApellidoM.getText().isEmpty() || txtApellidoP.getText().isEmpty() || txtFechaNa.getDate() == null
+         || txtNumT.getText().isEmpty()){
+           JOptionPane.showMessageDialog(this, "Error: Existen campos vacios");
+           
+       }else if(txtFechaNa.getDate().after(new Date())){
+           JOptionPane.showMessageDialog(this, "Ingrese una fecha valida");
+       }else if(!Validaciones.validarRFC(rfc)){
+           JOptionPane.showMessageDialog(this, "Error: RFC en formato NO valido");
+       }else if(!persona.isEmpty()){
+           JOptionPane.showMessageDialog(this, "RFC repetido, ingrese otro");
+       }else{
+           try {
             //Crear objeto Persona
             personaDAO.crearPersona(this.agregarPersona());
         } catch (ParseException ex) {
@@ -275,8 +290,10 @@ public class FrmRegistroPersona extends javax.swing.JFrame {
         }
 //        control.guardar(nombreM, raza, color,observaciones,alergico,atencion, 
 //                nombreD, celular);
-        Validaciones val = new Validaciones();
+        
         val.mostrarMensaje("Se guardo exitosamente", "Info", "Guardado Correctamente");
+       }
+        
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed

@@ -80,15 +80,18 @@ public class FrmLicencia extends javax.swing.JFrame {
     private void calculaFecha(){
         
         Date fechaExpedicion = new Date();
+        Date date = new Date();
+        
         String vigenciaS = (String) cmbVigencia.getSelectedItem();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(fechaExpedicion);
+        Date fechaVencimiento = calendar.getTime();
         
         if (vigenciaS.equals("1 año")) {
             
             int suma = fechaExpedicion.getYear()+1;
             calendar.add(Calendar.YEAR, 1);
-            Date fechaVencimiento = calendar.getTime();
+            
             
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String fechaVencimientoString = sdf.format(fechaVencimiento);
@@ -96,7 +99,7 @@ public class FrmLicencia extends javax.swing.JFrame {
 
         } else if (vigenciaS.equals("2 años")) {
             calendar.add(Calendar.YEAR, 2);
-            Date fechaVencimiento = calendar.getTime();
+           
             
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String fechaVencimientoString = sdf.format(fechaVencimiento);
@@ -104,11 +107,15 @@ public class FrmLicencia extends javax.swing.JFrame {
             
         } else if (vigenciaS.equals("3 años")) {
             calendar.add(Calendar.YEAR, 3);
-            Date fechaVencimiento = calendar.getTime();
+            
             
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String fechaVencimientoString = sdf.format(fechaVencimiento);
             lblFechaVencimiento.setText(fechaVencimientoString);
+        }
+        
+        if(date.after(fechaVencimiento)){
+            lblEstado.setText("Desactivado");
         }
         
     }
@@ -149,12 +156,16 @@ public class FrmLicencia extends javax.swing.JFrame {
     
     private void estadoActivo(){
         Date fecha = new Date();
+       
         if(fecha.compareTo(new Date())==0){
             lblEstado.setText("activo");
         }else{
+            lblEstado.setText("desactivado");
         }
        
     }
+    
+   
     
     private HashMap<String, String> extraerDatosFormulario() {
         String vigencia = (String) cmbVigencia.getSelectedItem();
