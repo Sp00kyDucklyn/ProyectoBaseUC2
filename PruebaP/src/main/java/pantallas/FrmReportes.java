@@ -114,9 +114,7 @@ public class FrmReportes extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnGenerarReporte = new javax.swing.JButton();
         chLicencia = new javax.swing.JCheckBox();
-        lblNombre = new javax.swing.JLabel();
         btnRegresarMenu = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         btnBuscarReportes = new javax.swing.JButton();
         chPlaca = new javax.swing.JCheckBox();
         txtFechaFin = new com.toedter.calendar.JDateChooser();
@@ -124,7 +122,6 @@ public class FrmReportes extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblResultados = new javax.swing.JTable();
         txtNombre = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -133,6 +130,7 @@ public class FrmReportes extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(1000, 600));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnGenerarReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/Group 6.png"))); // NOI18N
         btnGenerarReporte.setBorder(null);
         btnGenerarReporte.setContentAreaFilled(false);
         btnGenerarReporte.addActionListener(new java.awt.event.ActionListener() {
@@ -140,18 +138,14 @@ public class FrmReportes extends javax.swing.JFrame {
                 btnGenerarReporteActionPerformed(evt);
             }
         });
-        jPanel1.add(btnGenerarReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(923, 540, 60, 40));
+        jPanel1.add(btnGenerarReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 530, 80, 60));
 
-        chLicencia.setText("Licencia");
         chLicencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chLicenciaActionPerformed(evt);
             }
         });
-        jPanel1.add(chLicencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 50, -1, -1));
-
-        lblNombre.setText("Nombre");
-        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, -1));
+        jPanel1.add(chLicencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 80, -1, -1));
 
         btnRegresarMenu.setBorder(null);
         btnRegresarMenu.setContentAreaFilled(false);
@@ -162,9 +156,6 @@ public class FrmReportes extends javax.swing.JFrame {
         });
         jPanel1.add(btnRegresarMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 40, 30));
 
-        jLabel3.setText("Periodo:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, -1, -1));
-
         btnBuscarReportes.setBorder(null);
         btnBuscarReportes.setContentAreaFilled(false);
         btnBuscarReportes.addActionListener(new java.awt.event.ActionListener() {
@@ -173,11 +164,9 @@ public class FrmReportes extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnBuscarReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 90, 30, 30));
-
-        chPlaca.setText("Placa");
-        jPanel1.add(chPlaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 90, -1, -1));
-        jPanel1.add(txtFechaFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(415, 140, 120, -1));
-        jPanel1.add(txtFechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 120, -1));
+        jPanel1.add(chPlaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 80, -1, -1));
+        jPanel1.add(txtFechaFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 140, 20));
+        jPanel1.add(txtFechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 150, 20));
 
         tblResultados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -192,15 +181,12 @@ public class FrmReportes extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblResultados);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 860, 400));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 860, 430));
 
         txtNombre.setBorder(null);
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 410, 30));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 410, 30));
 
-        jLabel4.setText("&");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 140, -1, -1));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/GeneraciónReportes.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/GeneraciónReportes (1).png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -325,11 +311,8 @@ public class FrmReportes extends javax.swing.JFrame {
     private javax.swing.JCheckBox chLicencia;
     private javax.swing.JCheckBox chPlaca;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblNombre;
     private javax.swing.JTable tblResultados;
     private com.toedter.calendar.JDateChooser txtFechaFin;
     private com.toedter.calendar.JDateChooser txtFechaInicio;

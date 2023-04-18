@@ -189,24 +189,25 @@ public class FrmPlaca extends javax.swing.JFrame {
         lblCosto = new javax.swing.JLabel();
         lblPlacas = new javax.swing.JLabel();
         lblFechaVencimiento = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         lblEstado = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1000, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1000, 612));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(numSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, 180, 30));
+        jPanel1.add(numSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, 180, 30));
 
         cmbVehiculos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbVehiculosActionPerformed(evt);
             }
         });
-        jPanel1.add(cmbVehiculos, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 210, 40));
+        jPanel1.add(cmbVehiculos, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 180, 210, 40));
 
         btnGuardar.setBorder(null);
         btnGuardar.setContentAreaFilled(false);
@@ -215,27 +216,28 @@ public class FrmPlaca extends javax.swing.JFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 470, 180, 30));
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 470, 180, 30));
 
         rfc.setToolTipText("");
         jPanel1.add(rfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 190, 30));
         jPanel1.add(lblCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 390, 190, 30));
 
         lblPlacas.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jPanel1.add(lblPlacas, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 206, 160, 50));
-        jPanel1.add(lblFechaVencimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 280, 90, 20));
+        jPanel1.add(lblPlacas, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 280, 160, 50));
+        jPanel1.add(lblFechaVencimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 380, 200, 40));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel3.setText("Numero de placas:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 180, -1, -1));
+        jButton2.setBorder(null);
+        jButton2.setContentAreaFilled(false);
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 470, 180, 30));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel2.setText("Fecha de Vencimiento:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 280, -1, -1));
+        jButton1.setToolTipText("");
+        jButton1.setBorder(null);
+        jButton1.setContentAreaFilled(false);
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 470, 170, 30));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/SiPlaca2 (2).png"))); // NOI18N
-        jLabel1.setPreferredSize(new java.awt.Dimension(1000, 612));
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -280, -1, 880));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/SiPlaca2 (1).png"))); // NOI18N
+        jLabel1.setPreferredSize(new java.awt.Dimension(1000, 600));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -140, 1020, 860));
 
         lblEstado.setText("jLabel2");
         jPanel1.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 270, -1, -1));
@@ -243,6 +245,7 @@ public class FrmPlaca extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 2, -1, 630));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
@@ -314,9 +317,9 @@ public class FrmPlaca extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JComboBox<String> cmbVehiculos;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblCosto;
     private javax.swing.JLabel lblEstado;

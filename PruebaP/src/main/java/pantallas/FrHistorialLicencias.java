@@ -14,6 +14,7 @@ import dominio.Tramite;
 import interfaces.ITramiteDAO;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -84,11 +85,13 @@ public class FrHistorialLicencias extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblResultados = new javax.swing.JTable();
-        lblHistorialLicencia = new javax.swing.JLabel();
         lblNombrePersona = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         lblRfc = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1000, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tblResultados.setModel(new javax.swing.table.DefaultTableModel(
@@ -101,17 +104,46 @@ public class FrHistorialLicencias extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblResultados);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(65, 114, 910, 460));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 860, 440));
+        getContentPane().add(lblNombrePersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 350, 40));
 
-        lblHistorialLicencia.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 24)); // NOI18N
-        lblHistorialLicencia.setText("HISTORIAL LICENCIA");
-        getContentPane().add(lblHistorialLicencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 40, -1, -1));
-        getContentPane().add(lblNombrePersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 200, 40));
-        getContentPane().add(lblRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 40, 220, 40));
+        jButton1.setActionCommand("");
+        jButton1.setBorder(null);
+        jButton1.setContentAreaFilled(false);
+        jButton1.setOpaque(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 40, 30));
+        getContentPane().add(lblRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 80, 220, 40));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/Consultas_1.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        PersonaDAO personaDAO = new PersonaDAO();
+                //PONER TXT.GETTEXT DENTRO DE DONDE ESTAN LAS COMILLAS AHORITA LISTO
+
+                List<Persona> persona = personaDAO.buscarRfc(lblRfc.getText());
+
+                if (persona.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "No encontro el rfc");
+                    return;
+                }else{
+                    JOptionPane.showMessageDialog(this, "Se encontro el rfc");
+                    this.setVisible(false);
+                    FrmLicencia licencia = new FrmLicencia(persona.get(0));
+                    licencia.setVisible(true);
+                    this.dispose();
+                 }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -149,8 +181,9 @@ public class FrHistorialLicencias extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblHistorialLicencia;
     private javax.swing.JLabel lblNombrePersona;
     private javax.swing.JLabel lblRfc;
     private javax.swing.JTable tblResultados;

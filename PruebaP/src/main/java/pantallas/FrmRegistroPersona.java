@@ -186,7 +186,7 @@ public class FrmRegistroPersona extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 600));
-        setPreferredSize(new java.awt.Dimension(1010, 650));
+        setPreferredSize(new java.awt.Dimension(1000, 600));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -194,20 +194,30 @@ public class FrmRegistroPersona extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtNumT.setBorder(null);
-        jPanel1.add(txtNumT, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 370, 200, 40));
-        jPanel1.add(txtFechaNa, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 370, 200, 40));
+        jPanel1.add(txtNumT, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 350, 190, 30));
+        jPanel1.add(txtFechaNa, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 200, 30));
 
         txtNombre.setBorder(null);
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 200, 40));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 200, 30));
 
         txtApellidoP.setBorder(null);
-        jPanel1.add(txtApellidoP, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, 200, 40));
+        jPanel1.add(txtApellidoP, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 190, 30));
 
         txtRfc.setBorder(null);
-        jPanel1.add(txtRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, 200, 40));
+        txtRfc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRfcActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 160, 190, 30));
 
         txtApellidoM.setBorder(null);
-        jPanel1.add(txtApellidoM, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 280, 200, 40));
+        txtApellidoM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtApellidoMActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtApellidoM, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 260, 190, 30));
 
         btnSiguiente.setBorder(null);
         btnSiguiente.setContentAreaFilled(false);
@@ -216,7 +226,7 @@ public class FrmRegistroPersona extends javax.swing.JFrame {
                 btnSiguienteActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 550, 50, 40));
+        jPanel1.add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 520, 50, 40));
 
         btnVolver.setContentAreaFilled(false);
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
@@ -224,7 +234,7 @@ public class FrmRegistroPersona extends javax.swing.JFrame {
                 btnVolverActionPerformed(evt);
             }
         });
-        jPanel1.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 30, 20));
+        jPanel1.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 30, 20));
 
         btnCancelar.setBorderPainted(false);
         btnCancelar.setContentAreaFilled(false);
@@ -233,7 +243,7 @@ public class FrmRegistroPersona extends javax.swing.JFrame {
                 btnCancelarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(343, 529, 200, 40));
+        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 470, 200, 40));
 
         btnGuardar.setBorder(null);
         btnGuardar.setBorderPainted(false);
@@ -243,9 +253,9 @@ public class FrmRegistroPersona extends javax.swing.JFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 533, 180, 30));
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 470, 180, 30));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/Registro Personas.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/Registro Personas (2).png"))); // NOI18N
         jLabel1.setPreferredSize(new java.awt.Dimension(1000, 650));
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
 
@@ -318,6 +328,14 @@ public class FrmRegistroPersona extends javax.swing.JFrame {
             }
         
     }//GEN-LAST:event_btnSiguienteActionPerformed
+
+    private void txtApellidoMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoMActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtApellidoMActionPerformed
+
+    private void txtRfcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRfcActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtRfcActionPerformed
 
     /**
      * @param args the command line arguments

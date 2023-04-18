@@ -134,6 +134,7 @@ public class FrmRegistroVehiculo extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1000, 650));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -156,7 +157,7 @@ public class FrmRegistroVehiculo extends javax.swing.JFrame {
                 txtMarcaActionPerformed(evt);
             }
         });
-        jPanel1.add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 330, 200, 40));
+        jPanel1.add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 330, 200, 30));
 
         txtLinea.setToolTipText("");
         txtLinea.setBorder(null);
@@ -184,7 +185,7 @@ public class FrmRegistroVehiculo extends javax.swing.JFrame {
                 botonGuardarActionPerformed(evt);
             }
         });
-        jPanel1.add(botonGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 553, 170, 30));
+        jPanel1.add(botonGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 530, 170, 30));
 
         botonCancelar.setBorder(null);
         botonCancelar.setContentAreaFilled(false);
@@ -193,15 +194,16 @@ public class FrmRegistroVehiculo extends javax.swing.JFrame {
                 botonCancelarActionPerformed(evt);
             }
         });
-        jPanel1.add(botonCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(395, 553, 180, 30));
+        jPanel1.add(botonCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 530, 180, 30));
 
-        btnRegresoSeleccionTramite.setText("jButton1");
+        btnRegresoSeleccionTramite.setBorder(null);
+        btnRegresoSeleccionTramite.setContentAreaFilled(false);
         btnRegresoSeleccionTramite.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresoSeleccionTramiteActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRegresoSeleccionTramite, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 30, -1));
+        jPanel1.add(btnRegresoSeleccionTramite, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 40, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/SiPlaca.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 1000, 600));

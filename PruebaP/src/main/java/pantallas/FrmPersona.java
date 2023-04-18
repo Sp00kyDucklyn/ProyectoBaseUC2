@@ -48,40 +48,26 @@ public class FrmPersona extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         lblTelefono = new javax.swing.JLabel();
         lblRfc = new javax.swing.JLabel();
         lblFechaNa = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1000, 600));
+        setPreferredSize(new java.awt.Dimension(1000, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(lblTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 470, 190, 40));
+        getContentPane().add(lblRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, 170, 40));
+        getContentPane().add(lblFechaNa, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 170, 40));
+        getContentPane().add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 200, 30));
 
-        jLabel1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 24)); // NOI18N
-        jLabel1.setText("INFORMACIÓN PERSONA");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, 310, 59));
-
-        jLabel2.setText("Nombre completo:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, -1, -1));
-
-        jLabel3.setText("Fecha nacimiento:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, -1, -1));
-
-        jLabel4.setText("Rfc:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, -1, -1));
-
-        jLabel5.setText("Telefono:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 340, -1, -1));
-        getContentPane().add(lblTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 330, 100, 30));
-        getContentPane().add(lblRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 270, 110, 30));
-        getContentPane().add(lblFechaNa, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, 90, 30));
-        getContentPane().add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 130, 80, 20));
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/Registro Personas (1).png"))); // NOI18N
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, -1, -1));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -120,11 +106,7 @@ public class FrmPersona extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel lblFechaNa;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblRfc;

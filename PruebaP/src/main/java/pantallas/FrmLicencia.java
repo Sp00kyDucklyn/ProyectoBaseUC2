@@ -203,7 +203,6 @@ public class FrmLicencia extends javax.swing.JFrame {
         lblFechaVencimiento = new javax.swing.JLabel();
         btnHistorialLicencia = new javax.swing.JButton();
         cmbVigencia = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         lblEstado = new javax.swing.JLabel();
 
@@ -213,40 +212,42 @@ public class FrmLicencia extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(1000, 621));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnCancelarRegistro.setText("Cancelar");
+        btnCancelarRegistro.setBorder(null);
+        btnCancelarRegistro.setContentAreaFilled(false);
         btnCancelarRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarRegistroActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCancelarRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 460, -1, 30));
+        jPanel1.add(btnCancelarRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 450, 170, 30));
 
-        btnAceptarRegistro.setText("Aceptar");
+        btnAceptarRegistro.setBorder(null);
+        btnAceptarRegistro.setContentAreaFilled(false);
         btnAceptarRegistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAceptarRegistroActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAceptarRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 460, -1, 30));
+        jPanel1.add(btnAceptarRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 450, 170, 30));
         jPanel1.add(lblCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 370, 210, 30));
 
-        chDiscapacitado.setText("Discapacidad");
         chDiscapacitado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chDiscapacitadoActionPerformed(evt);
             }
         });
-        jPanel1.add(chDiscapacitado, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 260, -1, -1));
+        jPanel1.add(chDiscapacitado, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 250, -1, -1));
         jPanel1.add(lblRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 210, 40));
-        jPanel1.add(lblFechaVencimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 360, 300, 40));
+        jPanel1.add(lblFechaVencimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 360, 300, 40));
 
-        btnHistorialLicencia.setText("Historial Licencia");
+        btnHistorialLicencia.setBorder(null);
+        btnHistorialLicencia.setContentAreaFilled(false);
         btnHistorialLicencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHistorialLicenciaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnHistorialLicencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 460, -1, -1));
+        jPanel1.add(btnHistorialLicencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 450, 170, 30));
 
         cmbVigencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "1 año", "2 años", "3 años" }));
         cmbVigencia.addActionListener(new java.awt.event.ActionListener() {
@@ -254,13 +255,10 @@ public class FrmLicencia extends javax.swing.JFrame {
                 cmbVigenciaActionPerformed(evt);
             }
         });
-        jPanel1.add(cmbVigencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 110, -1));
+        jPanel1.add(cmbVigencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 250, 110, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel2.setText("Fecha de Vencimiento: ");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 330, -1, -1));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/SiLicencia.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/SiLicencia (1).png"))); // NOI18N
+        jLabel1.setPreferredSize(new java.awt.Dimension(1000, 600));
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         lblEstado.setText("jLabel3");
@@ -409,7 +407,6 @@ public class FrmLicencia extends javax.swing.JFrame {
     private javax.swing.JCheckBox chDiscapacitado;
     private javax.swing.JComboBox<String> cmbVigencia;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblCosto;
     private javax.swing.JLabel lblEstado;

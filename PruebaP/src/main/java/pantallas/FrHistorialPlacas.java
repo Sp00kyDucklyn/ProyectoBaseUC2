@@ -84,9 +84,9 @@ public class FrHistorialPlacas extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblResultados = new javax.swing.JTable();
-        lblHistorialLicencia = new javax.swing.JLabel();
         lblNombrePersona = new javax.swing.JLabel();
         lblRfc = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -101,13 +101,12 @@ public class FrHistorialPlacas extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblResultados);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(65, 114, 910, 460));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 860, 440));
+        getContentPane().add(lblNombrePersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 350, 40));
+        getContentPane().add(lblRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 80, 220, 40));
 
-        lblHistorialLicencia.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 24)); // NOI18N
-        lblHistorialLicencia.setText("HISTORIAL LICENCIA");
-        getContentPane().add(lblHistorialLicencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 40, -1, -1));
-        getContentPane().add(lblNombrePersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 200, 40));
-        getContentPane().add(lblRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 40, 220, 40));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/Consultas (1).png"))); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -149,8 +148,8 @@ public class FrHistorialPlacas extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblHistorialLicencia;
     private javax.swing.JLabel lblNombrePersona;
     private javax.swing.JLabel lblRfc;
     private javax.swing.JTable tblResultados;

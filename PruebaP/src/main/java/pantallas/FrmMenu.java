@@ -95,7 +95,7 @@ public class FrmMenu extends javax.swing.JFrame {
         });
         jPanel1.add(btnAgregadaMasiva, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 519, 130, 50));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/MenuPrincipal (2).png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/MenuPrincipal (3).png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 1010, 600));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 602));

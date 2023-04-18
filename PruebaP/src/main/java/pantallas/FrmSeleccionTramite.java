@@ -75,6 +75,7 @@ public class FrmSeleccionTramite extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(790, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panOpciones.setPreferredSize(new java.awt.Dimension(800, 600));
@@ -101,38 +102,42 @@ public class FrmSeleccionTramite extends javax.swing.JFrame {
         });
         panOpciones.add(btnRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 230, 200, 30));
 
-        btnPlacas.setText("Placas");
+        btnPlacas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/placas.png"))); // NOI18N
+        btnPlacas.setContentAreaFilled(false);
         btnPlacas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPlacasActionPerformed(evt);
             }
         });
-        panOpciones.add(btnPlacas, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 440, -1, -1));
+        panOpciones.add(btnPlacas, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 430, 140, -1));
 
-        btnPersona.setText("Persona");
+        btnPersona.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/Persona.png"))); // NOI18N
+        btnPersona.setContentAreaFilled(false);
         btnPersona.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPersonaActionPerformed(evt);
             }
         });
-        panOpciones.add(btnPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 440, -1, -1));
+        panOpciones.add(btnPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 430, 140, -1));
 
-        btnLicencia.setText("Licencia");
+        btnLicencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/licencia.png"))); // NOI18N
         btnLicencia.setToolTipText("");
+        btnLicencia.setContentAreaFilled(false);
         btnLicencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLicenciaActionPerformed(evt);
             }
         });
-        panOpciones.add(btnLicencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 440, -1, -1));
+        panOpciones.add(btnLicencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 140, -1));
 
-        btnVehiculo.setText("Vehiculo");
+        btnVehiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/Vehiculo.png"))); // NOI18N
+        btnVehiculo.setContentAreaFilled(false);
         btnVehiculo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVehiculoActionPerformed(evt);
             }
         });
-        panOpciones.add(btnVehiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 440, -1, -1));
+        panOpciones.add(btnVehiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 430, 140, -1));
 
         btnVolver.setText("jButton1");
         btnVolver.setContentAreaFilled(false);
