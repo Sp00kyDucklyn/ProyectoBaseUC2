@@ -163,7 +163,13 @@ public class FrmReportes extends javax.swing.JFrame {
                 btnBuscarReportesActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBuscarReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 90, 30, 30));
+        jPanel1.add(btnBuscarReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 80, 30, 30));
+
+        chPlaca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chPlacaActionPerformed(evt);
+            }
+        });
         jPanel1.add(chPlaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 80, -1, -1));
         jPanel1.add(txtFechaFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 140, 20));
         jPanel1.add(txtFechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 150, 20));
@@ -268,6 +274,10 @@ public class FrmReportes extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnGenerarReporteActionPerformed
+
+    private void chPlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chPlacaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chPlacaActionPerformed
 
     /**
      * @param args the command line arguments
