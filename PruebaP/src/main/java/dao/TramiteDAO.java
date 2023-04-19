@@ -188,6 +188,8 @@ public class TramiteDAO implements ITramiteDAO{
             tramite.setEstado("activo");
         }
         
+        
+        
 
         em.merge(tramite); //actualizar la entidad en la base de datos
 

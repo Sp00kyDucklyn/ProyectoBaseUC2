@@ -4,6 +4,7 @@
  */
 package pantallas;
 
+import dao.TramiteDAO;
 import dao.VehiculoDAO;
 import dominio.Persona;
 import dominio.Vehiculo;
@@ -111,6 +112,8 @@ public class FrmRegistroVehiculo extends javax.swing.JFrame {
         txtNumSerie.getText();
         return numSerie;
     }
+       
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -223,20 +226,25 @@ public class FrmRegistroVehiculo extends javax.swing.JFrame {
     }//GEN-LAST:event_txtMarcaActionPerformed
 
     private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
-
+       
         List<String> erroresValidacion = new LinkedList<>();
+        List<Vehiculo> vehiculos = vehiculoDAO.buscarNumSerie(txtNumSerie.getText());
         String numSerie = txtNumSerie.getText();
         Validaciones val = new Validaciones();
+        TramiteDAO tdao = new TramiteDAO();
+        VehiculoDAO vdao = new VehiculoDAO();
         if (Validaciones.esTextoVacio(numSerie) || !Validaciones.validarCadena(numSerie)) {
             JOptionPane.showMessageDialog(this, "El numero de serie no cumple con el formato correcto");
 
-        } else {
+        } else if(vehiculos.isEmpty()){
             try {
                 vehiculoDAO.crearVehiculo(this.agregarVehiculo());
             } catch (ParseException ex) {
                 Logger.getLogger(FrmRegistroVehiculo.class.getName()).log(Level.SEVERE, null, ex);
             }
             val.mostrarMensaje("Se agrego exitosamente", "Info", "Guardado Correctamente ");
+        }else {
+          JOptionPane.showMessageDialog(this, "Numero de serie existente, ingrese otro");
         }
 
 
@@ -266,7 +274,7 @@ public class FrmRegistroVehiculo extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Se encontro el numero de serie");
                 this.setVisible(false);
-                FrmPlaca placa = new FrmPlaca(vehiculos.get(0));
+                FrmPlaca placa = new FrmPlaca("agregar",vehiculos.get(0));
                 placa.setVisible(true);
                 this.dispose();
             }

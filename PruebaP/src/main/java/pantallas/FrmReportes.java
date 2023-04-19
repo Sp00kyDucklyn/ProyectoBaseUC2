@@ -14,13 +14,13 @@ import dominio.Tramite;
 import interfaces.IPersonaDAO;
 import interfaces.ITramiteDAO;
 import java.io.InputStream;
-import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -44,11 +44,12 @@ public class FrmReportes extends javax.swing.JFrame {
     public FrmReportes() {
         initComponents();
         this.listaPDF = new ArrayList<Tramite>();
-        buscarTramites();
+        
     }
     
     public void buscarTramites(){
         ITramiteDAO tramiteDAO = new TramiteDAO();
+        
         listaPDF= tramiteDAO.listaTramite(txtFechaInicio.getDate(), txtFechaFin.getDate(),chLicencia.isSelected(), chPlaca.isSelected());
         
 //        List <Tramite> tramites2 = tramiteDAO.listaTramiteC(chLicencia.isSelected(), chLicencia.isSelected());
@@ -102,6 +103,15 @@ public class FrmReportes extends javax.swing.JFrame {
         }
     }
 
+    private void validarFechas(){
+        Date fechaInicial = txtFechaInicio.getDate();
+        Date fechaFinal = txtFechaFin.getDate();
+     
+        
+        if(fechaFinal.before(fechaInicial) || fechaInicial.after(new Date())){
+            JOptionPane.showMessageDialog(this, "Error: Periodo invalido");
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -164,12 +174,15 @@ public class FrmReportes extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnBuscarReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 80, 30, 30));
+<<<<<<< HEAD
 
         chPlaca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chPlacaActionPerformed(evt);
             }
         });
+=======
+>>>>>>> main
         jPanel1.add(chPlaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 80, -1, -1));
         jPanel1.add(txtFechaFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 140, 20));
         jPanel1.add(txtFechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 150, 20));
@@ -215,7 +228,12 @@ public class FrmReportes extends javax.swing.JFrame {
 
     private void btnBuscarReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarReportesActionPerformed
         // TODO add your handling code here:
-        buscarTramites();
+        validarFechas();
+        if(chPlaca.isSelected() || chLicencia.isSelected() || !txtNombre.getText().isEmpty()){
+            buscarTramites();
+        }else{
+            
+        }
     }//GEN-LAST:event_btnBuscarReportesActionPerformed
 
     private void btnGenerarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarReporteActionPerformed

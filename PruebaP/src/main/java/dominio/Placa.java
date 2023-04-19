@@ -58,6 +58,7 @@ public class Placa extends Tramite implements Serializable{
     
     
     
+    
     public String getNumPlacaNu() {
         return numPlacaNu;
     }
@@ -82,5 +83,11 @@ public class Placa extends Tramite implements Serializable{
     public void setVehiculo(Vehiculo vehiculo) {
         this.vehiculo = vehiculo;
     }
+
+    @Override
+    public String toString() {
+        return "Placa actual: " + numPlacaNu;
+    }
+ 
     
 }

@@ -6,12 +6,15 @@ package pantallas;
 
 import dao.LicenciaDAO;
 import dao.PersonaDAO;
+import dao.PlacaDAO;
 import dao.VehiculoDAO;
 import dominio.Persona;
+import dominio.Placa;
 import dominio.Vehiculo;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import utileria.Validaciones;
 
 /**
  *
@@ -46,11 +49,22 @@ public class FrmSeleccionTramite extends javax.swing.JFrame {
         //FORZAR AL USUARIO ESCRIBIR 13 CARACTERES LISTO
         if (txtRfcBuscar.equals(" ")) {
             JOptionPane.showMessageDialog(this, "Por favor ingrese una palabra", "Búsqueda", JOptionPane.INFORMATION_MESSAGE);
-        } else if (!txtRfcBuscar.getText().contains("12")) {
+        } else if (!txtRfcBuscar.getText().contains("13")) {
             JOptionPane.showMessageDialog(this, "Por favor ingrese 13 carácteres", "Búsqueda", JOptionPane.INFORMATION_MESSAGE);
         }
 
         return rfc;
+    }
+    public String buscarNumSerie(String numSerie){
+        //NO DEJAR QUE EL TXT SE PERMITAN ESCRIBIR CARACTERES NO ESPECIFICADOS FALTA
+        //FORZAR AL USUARIO ESCRIBIR 13 CARACTERES LISTO
+        if (txtRfcBuscar.equals(" ")) {
+            JOptionPane.showMessageDialog(this, "Por favor ingrese una palabra", "Búsqueda", JOptionPane.INFORMATION_MESSAGE);
+        } else if (!Validaciones.validarCadena(txtRfcBuscar.getText())) {
+            JOptionPane.showMessageDialog(this, "Por favor ingrese un formato valido (3 letras - 3 numeros)", "Búsqueda", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        return numSerie;
     }
 
 
@@ -222,6 +236,7 @@ public class FrmSeleccionTramite extends javax.swing.JFrame {
                  }
 
             }
+            
 
         }
      
@@ -259,22 +274,24 @@ public class FrmSeleccionTramite extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(this, "Ingrese su número de serie");
              
             txtRfcBuscar.setVisible(true);
-            if (!buscarRfc(txtRfcBuscar.getText()).isEmpty()) {
+            if (!buscarNumSerie(txtRfcBuscar.getText()).isEmpty()) {
 
                 VehiculoDAO vehiculoDAO = new VehiculoDAO();
+                PlacaDAO placaDAO = new PlacaDAO();
                 //PONER TXT.GETTEXT DENTRO DE DONDE ESTAN LAS COMILLAS AHORITA LISTO
 
                 List<Vehiculo> vehiculo = vehiculoDAO.buscarNumSerie(txtRfcBuscar.getText());
+                
 
                 if (vehiculo.isEmpty()) {
-                    JOptionPane.showMessageDialog(this, "No encontro el rfc");
+                    JOptionPane.showMessageDialog(this, "No encontro el numero de serie");
                     return;
                 } else {
-                    JOptionPane.showMessageDialog(this, "Se encontro el rfc");
+                    JOptionPane.showMessageDialog(this, "Se encontro el numero de serie");
                     txtRfcBuscar.setVisible(true);
                     this.setVisible(false);
-                    FrmPlaca placa = new FrmPlaca(vehiculo.get(0));
-                    placa.setVisible(true);
+                    FrmPlaca placas = new FrmPlaca("renovar",vehiculo.get(0));
+                    placas.setVisible(true);
 //<<<<<<< HEAD:PruebaP/src/main/java/pantallas/FrmSeleccionTramite.java
 //                    FrmPlaca placa = new FrmPlaca(vehiculo.get(0));
 //=======
