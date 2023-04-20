@@ -12,8 +12,4 @@ public interface IMenuDAO {
     
     public void llamarProcedimiento();
     public void agregarPersonas();
-    public void agregarVehiculos();
-    public void agregarTramites();
-    public void agregarTramitesV();
-    public void agregarTramitesL();
 }

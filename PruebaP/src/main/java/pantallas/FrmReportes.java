@@ -124,9 +124,9 @@ public class FrmReportes extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnGenerarReporte = new javax.swing.JButton();
         chLicencia = new javax.swing.JCheckBox();
+        chPlaca = new javax.swing.JCheckBox();
         btnRegresarMenu = new javax.swing.JButton();
         btnBuscarReportes = new javax.swing.JButton();
-        chPlaca = new javax.swing.JCheckBox();
         txtFechaFin = new com.toedter.calendar.JDateChooser();
         txtFechaInicio = new com.toedter.calendar.JDateChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -156,6 +156,7 @@ public class FrmReportes extends javax.swing.JFrame {
             }
         });
         jPanel1.add(chLicencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 80, -1, -1));
+        jPanel1.add(chPlaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 80, -1, -1));
 
         btnRegresarMenu.setBorder(null);
         btnRegresarMenu.setContentAreaFilled(false);
@@ -173,17 +174,7 @@ public class FrmReportes extends javax.swing.JFrame {
                 btnBuscarReportesActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBuscarReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 80, 30, 30));
-<<<<<<< HEAD
-
-        chPlaca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chPlacaActionPerformed(evt);
-            }
-        });
-=======
->>>>>>> main
-        jPanel1.add(chPlaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 80, -1, -1));
+        jPanel1.add(btnBuscarReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 80, 40, 40));
         jPanel1.add(txtFechaFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 140, 20));
         jPanel1.add(txtFechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 150, 20));
 
@@ -203,6 +194,11 @@ public class FrmReportes extends javax.swing.JFrame {
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 860, 430));
 
         txtNombre.setBorder(null);
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNombreKeyReleased(evt);
+            }
+        });
         jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 410, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/GeneraciónReportes (1).png"))); // NOI18N
@@ -293,9 +289,10 @@ public class FrmReportes extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnGenerarReporteActionPerformed
 
-    private void chPlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chPlacaActionPerformed
+    private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_chPlacaActionPerformed
+        buscarTramites();
+    }//GEN-LAST:event_txtNombreKeyReleased
 
     /**
      * @param args the command line arguments

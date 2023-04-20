@@ -366,7 +366,7 @@ public class FrmLicencia extends javax.swing.JFrame {
              } else {
                 JOptionPane.showMessageDialog(this, "Se encontro el rfc");
                 this.setVisible(false);
-                FrHistorialLicencias historial = new FrHistorialLicencias(persona.get(0));
+                FrHistorialLicencia historial = new FrHistorialLicencia(persona.get(0));
                 historial.setVisible(true);
                 this.dispose();
             }

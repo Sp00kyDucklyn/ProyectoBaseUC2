@@ -14,16 +14,17 @@ import dominio.Tramite;
 import interfaces.ITramiteDAO;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author hoshi
  */
-public class FrHistorialPlacas extends javax.swing.JFrame {
+public class FrHistorialPlaca extends javax.swing.JFrame {
 
     /**
-     * Creates new form FrHistorialLicencias
+     * Creates new form FrHistorialPlaca
      */
     Persona persona = new Persona();
     PersonaDAO personaDAO = new PersonaDAO();
@@ -32,7 +33,7 @@ public class FrHistorialPlacas extends javax.swing.JFrame {
     TramiteDAO tramiteDAO = new TramiteDAO();
     private List<Tramite> listaPDF;
     
-    public FrHistorialPlacas(Persona persona) {
+    public FrHistorialPlaca(Persona persona) {
 //        this.listaPDF = new ArrayList<Tramite>();
 
         initComponents();
@@ -58,11 +59,15 @@ public class FrHistorialPlacas extends javax.swing.JFrame {
         if (listaPDF != null) {
             for (int i = 0; i < listaPDF.size(); i++) {
                 Object [] datos = new Object[model.getColumnCount()];
-                if(listaPDF.get(i) instanceof Placa){
+                if(personaDAO.buscarRfc(lblRfc.getText())!=null){
+                    
+                     if(listaPDF.get(i) instanceof Placa){
                     datos[0] = listaPDF.get(i).getFechaExpedicion();
                     datos[1] = listaPDF.get(i).getFechaVencimiento();
                     datos[2] = listaPDF.get(i).getEstado();
                     datos[3] = listaPDF.get(i).getCosto();
+                    
+                }
                     
                 }
                 
@@ -85,9 +90,9 @@ public class FrHistorialPlacas extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblResultados = new javax.swing.JTable();
         lblNombrePersona = new javax.swing.JLabel();
-        lblRfc = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        lblRfc = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -104,28 +109,41 @@ public class FrHistorialPlacas extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 860, 440));
         getContentPane().add(lblNombrePersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 350, 40));
-        getContentPane().add(lblRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 80, 220, 40));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/Consultas (1).png"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        jButton1.setText("jButton1");
+        jButton1.setBorder(null);
+        jButton1.setContentAreaFilled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 23, 40, 30));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 40, 30));
+        getContentPane().add(lblRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 80, 220, 40));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/Consultas_1.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        FrmSeleccionTramite st = new FrmSeleccionTramite();
-        this.setVisible(true);
-        st.setVisible(true);
-        this.dispose();
+        // TODO add your handling code here:
+        PersonaDAO personaDAO = new PersonaDAO();
+                //PONER TXT.GETTEXT DENTRO DE DONDE ESTAN LAS COMILLAS AHORITA LISTO
+
+                List<Persona> persona = personaDAO.buscarRfc(lblRfc.getText());
+
+                if (persona.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "No encontro el rfc");
+                    return;
+                }else{
+                    JOptionPane.showMessageDialog(this, "Se encontro el rfc");
+                    this.setVisible(false);
+                    FrmLicencia licencia = new FrmLicencia(persona.get(0));
+                    licencia.setVisible(true);
+                    this.dispose();
+                 }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -145,27 +163,27 @@ public class FrHistorialPlacas extends javax.swing.JFrame {
 //                }
 //            }
 //        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(FrHistorialLicencias.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrHistorialPlaca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(FrHistorialLicencias.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrHistorialPlaca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(FrHistorialLicencias.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrHistorialPlaca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(FrHistorialLicencias.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(FrHistorialPlaca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
 //        //</editor-fold>
 //
 //        /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                new FrHistorialLicencias().setVisible(true);
+//                new FrHistorialPlaca().setVisible(true);
 //            }
 //        });
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblNombrePersona;
     private javax.swing.JLabel lblRfc;

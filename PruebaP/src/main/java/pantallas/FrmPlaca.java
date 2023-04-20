@@ -4,6 +4,7 @@
  */
 package pantallas;
 
+import dao.PersonaDAO;
 import dao.PlacaDAO;
 import dao.VehiculoDAO;
 import dominio.Persona;
@@ -312,10 +313,30 @@ public class FrmPlaca extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialActionPerformed
-        FrHistorialPlacas hp = new FrHistorialPlacas(persona);
-        this.setVisible(false);
-        hp.setVisible(true);
-        this.dispose();
+        if (!rfc.getText().isEmpty()) {
+
+                PersonaDAO personaDAO = new PersonaDAO();
+                //PONER TXT.GETTEXT DENTRO DE DONDE ESTAN LAS COMILLAS AHORITA LISTO
+
+                List<Persona> persona = personaDAO.buscarRfc(rfc.getText());
+
+                if (persona.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "No encontro el rfc");
+                    return;
+             } else {
+                JOptionPane.showMessageDialog(this, "Se encontro el rfc");
+                this.setVisible(false);
+                FrHistorialLicencia historial = new FrHistorialLicencia(persona.get(0));
+                historial.setVisible(true);
+                this.dispose();
+            }
+
+        }
+        
+//        FrHistorialPlaca hp = new FrHistorialPlaca(persona);
+//        this.setVisible(false);
+//        hp.setVisible(true);
+//        this.dispose();
     }//GEN-LAST:event_btnHistorialActionPerformed
 
     /**
