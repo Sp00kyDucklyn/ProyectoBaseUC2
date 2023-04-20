@@ -6,6 +6,7 @@ package dao;
 
 import dominio.Persona;
 import dominio.Placa;
+import dominio.Tramite;
 import dominio.Vehiculo;
 import interfaces.IPlacaDAO;
 import java.util.Iterator;
@@ -151,7 +152,7 @@ public class PlacaDAO implements IPlacaDAO{
             em.getTransaction().begin();
 
             // Verificar si existe una licencia vigente para el usuario
-            TypedQuery<Placa> consultaPlaca = em.createQuery("SELECT p FROM Placa p WHERE p.vehiculo.numSerie = :id AND p.estado = 'Vigentes'", Placa.class);
+            TypedQuery<Placa> consultaPlaca = em.createQuery("SELECT p FROM Placa p WHERE p.vehiculo.numSerie = :id AND p.estado = 'activo'", Placa.class);
             consultaPlaca.setParameter("numSerie", numSerie);
             Placa PlacaActiva = consultaPlaca.getSingleResult();
 
@@ -180,12 +181,56 @@ public class PlacaDAO implements IPlacaDAO{
 
             Placa placaCambiar = em.find(Placa.class, placa.getId());
 
-            placaCambiar.setEstado("Vencidas");
+            placaCambiar.setEstado("desactivo");
             em.merge(placaCambiar); //Agrega la nueva placa en la base de datos
             em.getTransaction().commit();
             return placa;
         } catch (Exception e) {
 
+            return null;
+        }
+    }
+    
+
+   public List<Tramite> obtenerPlacasVehiculo(Vehiculo vehiculo) {
+    EntityManager em = null;
+    try {
+        em = getEntityManager();
+        String numSerie = vehiculo.getNumSerie();
+        TypedQuery<Tramite> query = em.createQuery("SELECT p FROM Placa p WHERE p.numSerie = :numSerie AND p.estado = :estado", Tramite.class);
+        query.setParameter("numSerie", numSerie);
+        query.setParameter("estado", "ACTIVO");
+        List<Tramite> tramites = query.getResultList();
+        em.close();
+        return tramites;
+    } catch (Exception e) {
+        if (em != null && em.isOpen()) { // Verificar que el EntityManager esté abierto antes de cerrarlo
+            em.close();
+        }
+        return null;
+    }
+}
+
+
+
+    /**
+     * Metodo para actualizar la placa en la BD
+     * @param placa placa a actualizar en la BD
+     * @return placa actualizada 
+     */
+    public Placa actualizar(Placa placa) {
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+                em.merge(placa);
+            em.getTransaction().commit();
+            em.close();
+            return placa;
+        } catch (Exception e) {
+            if(em!=null){
+                em.close();
+            }
             return null;
         }
     }

@@ -35,7 +35,7 @@ public class FrmPersona extends javax.swing.JFrame {
     public FrmPersona(Persona persona) {
         initComponents();
         tramite.getPersona();
-        personaDAO.desencriptarPersona(persona);
+        //personaDAO.desencriptarPersona(persona);
         String n = persona.getNombre() + " "
                 + persona.getApellidoP() + " " + persona.getApellidoM();
 //        lblNombrePersona.setText(n);
@@ -61,16 +61,25 @@ public class FrmPersona extends javax.swing.JFrame {
         lblRfc = new javax.swing.JLabel();
         lblFechaNa = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 600));
-        setPreferredSize(new java.awt.Dimension(1000, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(lblTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 470, 190, 40));
         getContentPane().add(lblRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, 170, 40));
         getContentPane().add(lblFechaNa, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 170, 40));
         getContentPane().add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 200, 30));
+
+        jButton1.setBorder(null);
+        jButton1.setContentAreaFilled(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 50, 30));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/Registro Personas (1).png"))); // NOI18N
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, -1, -1));
@@ -79,9 +88,18 @@ public class FrmPersona extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        FrmConsultas cons = new FrmConsultas();
+        cons.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel lblFechaNa;
     private javax.swing.JLabel lblNombre;

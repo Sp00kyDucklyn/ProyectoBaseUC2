@@ -236,7 +236,6 @@ public class FrmPlaca extends javax.swing.JFrame {
             generarNumPlacas();
         }
     }
- 
    
 
     /**
@@ -330,16 +329,9 @@ public class FrmPlaca extends javax.swing.JFrame {
         estadoActivo();
         String numSerie = lblnumSerie.getText();
 //        calculaCosto();
+
+        
         List<Vehiculo> vehiculos = vdao.buscarNumSerie(numSerie);
-        if(!vehiculos.isEmpty()){
-          int  respuesta = JOptionPane.showConfirmDialog(this, "La placa está activa, ¿Desea desactivarla?", "Confirmacion", JOptionPane.YES_NO_OPTION);
-            if(respuesta == JOptionPane.YES_OPTION){
-                pdao.DesactivarPlaca(numSerie);
-                
-            }else{
-                return;
-            }
-            
             try {
             pdao.crearPlaca(this.agregarPlaca());
             Validaciones val = new Validaciones();
@@ -358,7 +350,7 @@ public class FrmPlaca extends javax.swing.JFrame {
             Validaciones val = new Validaciones();
             val.mostrarMensaje("Se guardo exitosamente", "Info", "Guardado Correctamente");
         }
-        }
+        
         
     
 

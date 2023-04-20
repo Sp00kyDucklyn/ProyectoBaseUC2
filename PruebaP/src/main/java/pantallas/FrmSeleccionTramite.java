@@ -10,6 +10,7 @@ import dao.PlacaDAO;
 import dao.VehiculoDAO;
 import dominio.Persona;
 import dominio.Placa;
+import dominio.Tramite;
 import dominio.Vehiculo;
 import java.util.List;
 import javax.swing.JButton;
@@ -299,7 +300,6 @@ public class FrmSeleccionTramite extends javax.swing.JFrame {
         
          if (!btnPlacas.isSelected()) {
              JOptionPane.showMessageDialog(this, "Ingrese su número de serie");
-             
             txtRfcBuscar.setVisible(true);
             if (!buscarNumSerie(txtRfcBuscar.getText()).isEmpty()) {
 
@@ -309,7 +309,6 @@ public class FrmSeleccionTramite extends javax.swing.JFrame {
 
                 List<Vehiculo> vehiculo = vehiculoDAO.buscarNumSerie(txtRfcBuscar.getText());
                 
-                
 
                 if (vehiculo.isEmpty()) {
                     JOptionPane.showMessageDialog(this, "No encontro el numero de serie");
@@ -317,26 +316,29 @@ public class FrmSeleccionTramite extends javax.swing.JFrame {
                 } else {
                     
                     txtRfcBuscar.setVisible(true);
-                    Vehiculo vehiculo1 = new Vehiculo();
-                    if (!vehiculo.isEmpty()) {
-                        if (vehiculo.contains("activo")) {
-                            JOptionPane.showMessageDialog(this, "Ya tiene placas activas,");
-                            vehiculoDAO.DesactivarPlaca(vehiculo1.getId());
-                        }
-
-                    }
-                    
+                  
                     JOptionPane.showMessageDialog(this, "Se encontro el numero de serie");
-                    this.setVisible(false);
-                    FrmPlaca placas = new FrmPlaca("renovar",vehiculo.get(0));
-                    placas.setVisible(true);
+
+                    List<Tramite> tramite = placaDAO.obtenerPlacasVehiculo(vehiculo.get(0));
+                    if (!vehiculo.isEmpty()) {
+                        int si_no = JOptionPane.showConfirmDialog(this, "Ya tiene placas activas, ¿desea cancelarlas?", "Cancelar", JOptionPane.YES_NO_OPTION);
+                        if (si_no == 0) {
+
+                            placaDAO.obtenerPlacasVehiculo(vehiculo.get(0));
+                            this.setVisible(false);
+                            FrmPlaca placas = new FrmPlaca("renovar", vehiculo.get(0));
+                            placas.setVisible(true);
+                            this.dispose();
+                            
+                        } 
+                    }
 //<<<<<<< HEAD:PruebaP/src/main/java/pantallas/FrmSeleccionTramite.java
 //                    FrmPlaca placa = new FrmPlaca(vehiculo.get(0));
 //=======
 //                    FrmPlaca placa = new  FrmPlaca(persona.get(0));
 //>>>>>>> main:PruebaP/src/main/java/pantallas/SeleccionTramite.java
 //                    placa.setVisible(true);
-                    this.dispose();
+                    
                  }
 
             }
@@ -363,12 +365,24 @@ public class FrmSeleccionTramite extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "No encontro el rfc");
                     return;
                 } else {
-                    JOptionPane.showMessageDialog(this, "Se encontro el rfc");
+                
                     txtRfcBuscar.setVisible(true);
-                    this.setVisible(false);
-                    FrmLicencia licencia = new FrmLicencia(persona.get(0));
-                    licencia.setVisible(true);
-                    this.dispose();
+                    JOptionPane.showMessageDialog(this, "Se encontro el rfc");
+                    
+                     if (!persona.isEmpty()) {
+                        int si_no = JOptionPane.showConfirmDialog(this, "Ya tiene licencia activas, ¿desea cancelarlas?", "Cancelar", JOptionPane.YES_NO_OPTION);
+                        if (si_no == 0) {
+
+                            //placaDAO.obtenerPlacasVehiculo(persona.get(0));
+                            this.setVisible(false);
+                            FrmLicencia licencia = new FrmLicencia(persona.get(0));
+                            licencia.setVisible(true);
+                            this.dispose();
+                            
+                        } 
+                    }
+                   
+                   ;
                  }
 
             }
