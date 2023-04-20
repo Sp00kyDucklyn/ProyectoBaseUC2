@@ -144,7 +144,7 @@ public class FrmRegistroPersona extends javax.swing.JFrame {
         if(Validaciones.esTextoVacio(numTelefono)){
             erroresValidacion.add("Un campo esta vacio");
         }
-        if(Validaciones.excedeLimite(numTelefono,50)){
+        if(Validaciones.excedeLimite(numTelefono,10)){
             erroresValidacion.add("Un campo excede el limite de caracteres");
         }
 //        String numeroT = datosFormulario.get("precio");
@@ -267,6 +267,7 @@ public class FrmRegistroPersona extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
        String rfc = txtRfc.getText();
+       String numTelefono = txtNumT.getText();
        Validaciones val = new Validaciones();
        PersonaDAO personaDAO = new PersonaDAO();
         List<Persona> persona = personaDAO.buscarRfc(txtRfc.getText());
@@ -281,6 +282,8 @@ public class FrmRegistroPersona extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(this, "Error: RFC en formato NO valido");
        }else if(!persona.isEmpty()){
            JOptionPane.showMessageDialog(this, "RFC repetido, ingrese otro");
+       }else if(!Validaciones.validarTelefono(numTelefono)){
+         JOptionPane.showMessageDialog(this, "Telefono escrito en un formato NO valido");
        }else{
            try {
             //Crear objeto Persona

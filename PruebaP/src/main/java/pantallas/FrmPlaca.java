@@ -94,14 +94,16 @@ public class FrmPlaca extends javax.swing.JFrame {
 
         String costo = lblCosto.getText();
         String estado = datosFormulario.get("estado");
-        
         Placa placa = new Placa();
         //Vehiculo vehiculoSeleccionado = (Vehiculo) cmbVehiculos.getSelectedItem();
         if(pdao.llamarListaPlacas(vehiculo.getId()) == null){
             placa = new Placa(numPlacaNu,tramite.getId(), costo, fechaVencimiento,fechaExpedicion, estado);
+            pdao.placaActiva(vehiculo.getId());
             return placa;
         }else if(vehiculo.getPlacas() != null){
+             pdao.DesactivarPlaca(vehiculo.getId());
              placa = new Placa(numPlacaNu, vehiculo, tramite.getId(), costo, fechaExpedicion, fechaVencimiento, estado, vehiculo.getPersona());
+             
              return placa;
         }
        
@@ -274,7 +276,7 @@ public class FrmPlaca extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        estadoActivo();
+        
         
 //        calculaCosto();
         

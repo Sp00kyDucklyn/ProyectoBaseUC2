@@ -44,6 +44,7 @@ public class FrmReportes extends javax.swing.JFrame {
     public FrmReportes() {
         initComponents();
         this.listaPDF = new ArrayList<Tramite>();
+        buscarTramites();
         
     }
     
@@ -110,7 +111,7 @@ public class FrmReportes extends javax.swing.JFrame {
         
         if(fechaFinal.before(fechaInicial) || fechaInicial.after(new Date())){
             JOptionPane.showMessageDialog(this, "Error: Periodo invalido");
-        }
+        } 
     }
     /**
      * This method is called from within the constructor to initialize the form.

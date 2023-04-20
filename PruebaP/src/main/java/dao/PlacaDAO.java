@@ -129,6 +129,52 @@ public class PlacaDAO implements IPlacaDAO{
         return placas;
         
     }
+    
+    @Override
+    public Placa placaActiva(int id_vehiculo) {
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+
+            // Verificar si existe una licencia vigente para el usuario
+            TypedQuery<Placa> consultaPlaca = em.createQuery("SELECT p FROM Placa p WHERE p.vehiculo.id = :id AND p.estado = 'Vigentes'", Placa.class);
+            consultaPlaca.setParameter("id", id_vehiculo);
+            Placa PlacaActiva = consultaPlaca.getSingleResult();
+
+            em.getTransaction().commit();
+
+            return PlacaActiva;
+        } catch (Exception e) {
+            return null;
+        } finally {
+            em.close();
+        }
+    }
+
+    /**
+     * Metodo que se encarga de desactivar placa del vehiculo
+     *
+     * @param id_vehiculo
+     * @return placa que se encuentre activa
+     */
+    @Override
+    public Placa DesactivarPlaca(int id_vehiculo) {
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            Placa placa = this.placaActiva(id_vehiculo);
+
+            Placa placaCambiar = em.find(Placa.class, placa.getId());
+
+            placaCambiar.setEstado("Vencidas");
+            em.merge(placaCambiar); //Agrega la nueva placa en la base de datos
+            em.getTransaction().commit();
+            return placa;
+        } catch (Exception e) {
+
+            return null;
+        }
+    }
 
     }
     

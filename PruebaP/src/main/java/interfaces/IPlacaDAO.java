@@ -25,4 +25,8 @@ public interface IPlacaDAO {
     public String generarNumeroPlaca();
     
     public List<Placa> llamarListaPlacas(int placa);
+    
+    public Placa placaActiva(int id_vehiculo);
+    
+    public Placa DesactivarPlaca(int id_vehiculo);
 }

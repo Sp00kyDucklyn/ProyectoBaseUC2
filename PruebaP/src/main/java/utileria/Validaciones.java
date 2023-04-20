@@ -104,4 +104,11 @@ public class Validaciones {
     return matcher.matches();
    
     }
+   
+   public static boolean validarTelefono(String telefono){
+      // Expresión regular para validar el formato de RFC
+    Pattern pattern = Pattern.compile("^{10}[0-9]$");
+    Matcher matcher = pattern.matcher(telefono);
+    return matcher.matches(); 
+   }
 }
