@@ -214,7 +214,7 @@ public class TramiteDAO implements ITramiteDAO{
         EntityTransaction transaccion = em.getTransaction();
         transaccion.begin(); 
         
-        Persona persona = new Persona();
+        //Persona persona = new Persona();
                 
         Tramite tramite = em.find(Tramite.class,id_tramite);
         if(tramite.getFechaVencimiento().after(tramite.getFechaVencimiento())){

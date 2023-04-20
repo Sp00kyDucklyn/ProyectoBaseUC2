@@ -291,13 +291,24 @@ public class FrmSeleccionTramite extends javax.swing.JFrame {
 
                 List<Vehiculo> vehiculo = vehiculoDAO.buscarNumSerie(txtRfcBuscar.getText());
                 
+                
 
                 if (vehiculo.isEmpty()) {
                     JOptionPane.showMessageDialog(this, "No encontro el numero de serie");
                     return;
                 } else {
-                    JOptionPane.showMessageDialog(this, "Se encontro el numero de serie");
+                    
                     txtRfcBuscar.setVisible(true);
+                    Vehiculo vehiculo1 = new Vehiculo();
+                    if (!vehiculo.isEmpty()) {
+                        if (vehiculo.contains("activo")) {
+                            JOptionPane.showMessageDialog(this, "Ya tiene placas activas,");
+                            vehiculoDAO.DesactivarPlaca(vehiculo1.getId());
+                        }
+
+                    }
+                    
+                    JOptionPane.showMessageDialog(this, "Se encontro el numero de serie");
                     this.setVisible(false);
                     FrmPlaca placas = new FrmPlaca("renovar",vehiculo.get(0));
                     placas.setVisible(true);
