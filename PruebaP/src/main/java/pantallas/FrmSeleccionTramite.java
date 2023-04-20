@@ -17,13 +17,13 @@ import javax.swing.JOptionPane;
 import utileria.Validaciones;
 
 /**
- *
+ * Pantalla de seleccion de tramites
  * @author xfs85
  */
 public class FrmSeleccionTramite extends javax.swing.JFrame {
 
     /**
-     * Creates new form SeleccionTramite
+     * Metodo constructor
      */
     public FrmSeleccionTramite() {
         initComponents();
@@ -43,7 +43,11 @@ public class FrmSeleccionTramite extends javax.swing.JFrame {
         btnLicencia.setVisible(false);
         btnPlacas.setVisible(false);
     }
-    
+    /**
+     * Metodo que se encarga de buscar el rfc de la persona
+     * @param rfc
+     * @return rfc de la persona
+     */
     public String buscarRfc(String rfc){
         //NO DEJAR QUE EL TXT SE PERMITAN ESCRIBIR CARACTERES NO ESPECIFICADOS FALTA
         //FORZAR AL USUARIO ESCRIBIR 13 CARACTERES LISTO
@@ -55,6 +59,11 @@ public class FrmSeleccionTramite extends javax.swing.JFrame {
 
         return rfc;
     }
+    /**
+     * Metodo que busca el numero de serie del vehiculo
+     * @param numSerie
+     * @return numero de serie
+     */
     public String buscarNumSerie(String numSerie){
         //NO DEJAR QUE EL TXT SE PERMITAN ESCRIBIR CARACTERES NO ESPECIFICADOS FALTA
         //FORZAR AL USUARIO ESCRIBIR 13 CARACTERES LISTO

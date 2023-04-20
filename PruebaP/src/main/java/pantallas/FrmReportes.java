@@ -32,7 +32,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.view.JasperViewer;
 
 /**
- *
+ * Pantalla de reportes
  * @author Carmen & Raul
  */
 public class FrmReportes extends javax.swing.JFrame {
@@ -40,7 +40,7 @@ public class FrmReportes extends javax.swing.JFrame {
     TramiteDAO tramiteDAO = new TramiteDAO();
     private List<Tramite> listaPDF;
     /**
-     * Creates new form GeneracionReportes
+     * Metodo constructor
      */
     public FrmReportes() {
         initComponents();
@@ -48,7 +48,9 @@ public class FrmReportes extends javax.swing.JFrame {
         buscarTramites();
         
     }
-    
+    /**
+     * Metodo que se encarga de buscar tramites
+     */
     public void buscarTramites(){
         ITramiteDAO tramiteDAO = new TramiteDAO();
         
@@ -104,15 +106,18 @@ public class FrmReportes extends javax.swing.JFrame {
             
         }
     }
-
+/**
+ * Metodo que se encarga de validar las fechas
+ */
     private void validarFechas(){
         Date fechaInicial = txtFechaInicio.getDate();
         Date fechaFinal = txtFechaFin.getDate();
      
-        
-        if(fechaFinal.before(fechaInicial) || fechaInicial.after(new Date())){
+        if(fechaFinal == null || fechaInicial == null){
+            return;
+        }else if(fechaFinal.before(fechaInicial) || fechaInicial.after(new Date())){
             JOptionPane.showMessageDialog(this, "Error: Periodo invalido");
-        } 
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.

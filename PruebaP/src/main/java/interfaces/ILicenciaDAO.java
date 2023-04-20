@@ -18,8 +18,5 @@ public interface ILicenciaDAO {
     public void crearLicencia(Licencia licencia);
     
     public List<Persona> llamarRFC(String rfc);
-    
-    public void costo();
-    
-    public void licenciaVigente();
+   
 }

@@ -23,7 +23,7 @@ import javax.swing.JOptionPane;
 import utileria.Validaciones;
 
 /**
- *
+ * Pantalla de vehiculo
  * @author xfs85
  */
 public class FrmRegistroVehiculo extends javax.swing.JFrame {
@@ -33,14 +33,19 @@ public class FrmRegistroVehiculo extends javax.swing.JFrame {
     private Vehiculo vehiculo;
 
     /**
-     * Creates new form SiPlaca
+     * Metodo constructor que recibe una persona
      * @param persona
      */
     public FrmRegistroVehiculo(Persona persona) {
         this.persona = persona;
         initComponents();
+        
     }
-
+/**
+ * Metodo que agrega vehiculos
+ * @return vehiculo
+ * @throws ParseException 
+ */
     public Vehiculo agregarVehiculo() throws ParseException {
         //Extrer datos del formulario
         HashMap<String, String> datosFormulario = this.extraerDatosFormulario();
@@ -61,17 +66,20 @@ public class FrmRegistroVehiculo extends javax.swing.JFrame {
 
         return vehiculo;
     }
-
+/**
+ * Metodo que muestra los errores de validacion
+ * @param erroresValidacion 
+ */
     private void mostrarErroresValidacion(List<String> erroresValidacion) {
         //Nos va a concatenar los errores y nos pondra un enter
         String mensaje = String.join("\n", erroresValidacion);
         JOptionPane.showMessageDialog(this, mensaje, "Errores de validacion", JOptionPane.WARNING_MESSAGE);
     }
 
-    //Poner en variables individuales lo que estaba en las cajas
-    //De texto
-    //Uso de diccionarios, con llaves y values, asi el dia que esto cambie
-    //Sea mas solido
+    /**
+     * Metodo que extrae los datos del form
+     * @return datos del formulario
+     */
     private HashMap<String, String> extraerDatosFormulario() {
         String numSerie = txtNumSerie.getText();
         String marca = txtMarca.getText();
@@ -91,7 +99,11 @@ public class FrmRegistroVehiculo extends javax.swing.JFrame {
         return datosFormulario;
     }
 
-//    //Es mejor hacer un metodo de validar por cada uno de los datos del hashmap
+    /**
+     * Metodo que valida los datos del formulario
+     * @param datosFormulario
+     * @return errores de validacion
+     */
     private List<String> validarDatosFormulario(HashMap<String, String> datosFormulario) {
 
         List<String> erroresValidacion = new LinkedList<>();
@@ -107,7 +119,11 @@ public class FrmRegistroVehiculo extends javax.swing.JFrame {
         return erroresValidacion;
 
     }
-    
+    /**
+     * Metodo que verifica el numero de serie
+     * @param numSerie
+     * @return 
+     */
        private String buscarNumSerie(String numSerie) {
         txtNumSerie.getText();
         return numSerie;
@@ -230,12 +246,19 @@ public class FrmRegistroVehiculo extends javax.swing.JFrame {
         List<String> erroresValidacion = new LinkedList<>();
         List<Vehiculo> vehiculos = vehiculoDAO.buscarNumSerie(txtNumSerie.getText());
         String numSerie = txtNumSerie.getText();
+        String marca = txtMarca.getText();
+        String linea = txtLinea.getText();
+        String color = txtColor.getText();
+        String anio = txtAnio.getText();
         Validaciones val = new Validaciones();
         TramiteDAO tdao = new TramiteDAO();
         VehiculoDAO vdao = new VehiculoDAO();
         if (Validaciones.esTextoVacio(numSerie) || !Validaciones.validarCadena(numSerie)) {
             JOptionPane.showMessageDialog(this, "El numero de serie no cumple con el formato correcto");
 
+        } else if(Validaciones.esTextoVacio(marca)|| Validaciones.esTextoVacio(linea) || Validaciones.esTextoVacio(color)||
+          Validaciones.esTextoVacio(anio)){
+            JOptionPane.showMessageDialog(this, "Existen campos vacios");
         } else if(vehiculos.isEmpty()){
             try {
                 vehiculoDAO.crearVehiculo(this.agregarVehiculo());
@@ -246,7 +269,6 @@ public class FrmRegistroVehiculo extends javax.swing.JFrame {
         }else {
           JOptionPane.showMessageDialog(this, "Numero de serie existente, ingrese otro");
         }
-
 
     }//GEN-LAST:event_botonGuardarActionPerformed
 

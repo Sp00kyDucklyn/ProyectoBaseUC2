@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * Pantalla del historial de placas
  * @author hoshi
  */
 public class FrHistorialPlaca extends javax.swing.JFrame {
@@ -37,6 +37,10 @@ public class FrHistorialPlaca extends javax.swing.JFrame {
     TramiteDAO tramiteDAO = new TramiteDAO();
     private List<Tramite> listaPDF;
     
+    /**
+     * Metodo constructor que recibe el vehiculo
+     * @param vehiculo 
+     */
     public FrHistorialPlaca(Vehiculo vehiculo) {
 //        this.listaPDF = new ArrayList<Tramite>();
 
@@ -52,6 +56,9 @@ public class FrHistorialPlaca extends javax.swing.JFrame {
         buscarTramites();
     }
     
+    /**
+     * Metodo que busca los tramites de placas
+     */
        public void buscarTramites(){
 //        ITramiteDAO tramiteDAO = new TramiteDAO();
         listaPDF= tramiteDAO.listaTramiteL(tramite.getFechaExpedicion(), tramite.getFechaVencimiento(),tramite.getCosto(),tramite.getEstado());

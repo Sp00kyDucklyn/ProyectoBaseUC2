@@ -32,6 +32,11 @@ public class FrmRegistroPersona extends javax.swing.JFrame {
         initComponents();
     }
     
+    /**
+     * Metodo que agrega la persona
+     * @return persona
+     * @throws ParseException 
+     */
      public Persona agregarPersona() throws ParseException{
         //Extrer datos del formulario
         HashMap<String,String> datosFormulario = this.extraerDatosFormulario();
@@ -55,6 +60,10 @@ public class FrmRegistroPersona extends javax.swing.JFrame {
          return persona;
     }
     
+     /**
+      * Metodo que muestra los errores de validacion
+      * @param erroresVaidacion 
+      */
     private void mostrarErroresValidacion(List<String> erroresVaidacion){
         //Nos va a concatenar los errores y nos pondra un enter
         String mensaje = String.join("\n", erroresVaidacion);
@@ -65,6 +74,10 @@ public class FrmRegistroPersona extends javax.swing.JFrame {
     //De texto
     //Uso de diccionarios, con llaves y values, asi el dia que esto cambie
     //Sea mas solido
+    /**
+     * Metodo que extrae los datos del form
+     * @return datos del formulario
+     */
     private HashMap<String,String> extraerDatosFormulario(){
         String nombre = txtNombre.getText();
         String apellidoP = txtApellidoP.getText();
@@ -94,6 +107,11 @@ public class FrmRegistroPersona extends javax.swing.JFrame {
         return datosFormulario;
     }
     
+    /**
+     * Metodo que valida los datos del formulario
+     * @param datosFormulario
+     * @return 
+     */
 //    //Es mejor hacer un metodo de validar por cada uno de los datos del hashmap
     private List<String> validarDatosFormulario(HashMap<String, String> datosFormulario){
         
@@ -155,6 +173,11 @@ public class FrmRegistroPersona extends javax.swing.JFrame {
          return erroresValidacion;
     }
     
+    /**
+     * Metodo que se encarga de buscar el rfc de la persona
+     * @param rfc
+     * @return 
+     */
     public String buscarRfc(String rfc){
         //NO DEJAR QUE EL TXT SE PERMITAN ESCRIBIR CARACTERES NO ESPECIFICADOS FALTA
         //FORZAR AL USUARIO ESCRIBIR 13 CARACTERES LISTO
@@ -186,7 +209,6 @@ public class FrmRegistroPersona extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 600));
-        setPreferredSize(new java.awt.Dimension(1000, 600));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -194,6 +216,11 @@ public class FrmRegistroPersona extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtNumT.setBorder(null);
+        txtNumT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNumTActionPerformed(evt);
+            }
+        });
         jPanel1.add(txtNumT, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 350, 190, 30));
         jPanel1.add(txtFechaNa, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 200, 30));
 
@@ -279,7 +306,7 @@ public class FrmRegistroPersona extends javax.swing.JFrame {
        }else if(txtFechaNa.getDate().after(new Date())){
            JOptionPane.showMessageDialog(this, "Ingrese una fecha valida");
        }else if(!Validaciones.validarRFC(rfc)){
-           JOptionPane.showMessageDialog(this, "Error: RFC en formato NO valido");
+           JOptionPane.showMessageDialog(this, "Error: RFC en formato NO valido (Debe ser: 4 letras, 6 numeros y 3 letras )");
        }else if(!persona.isEmpty()){
            JOptionPane.showMessageDialog(this, "RFC repetido, ingrese otro");
        }else if(!Validaciones.validarTelefono(numTelefono)){
@@ -356,6 +383,10 @@ public class FrmRegistroPersona extends javax.swing.JFrame {
     private void txtRfcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRfcActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtRfcActionPerformed
+
+    private void txtNumTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNumTActionPerformed
 
     /**
      * @param args the command line arguments

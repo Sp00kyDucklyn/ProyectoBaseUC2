@@ -26,7 +26,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 /**
- *
+ * Pantalla de consultas
  * @author xfs85
  */
 public class FrmConsultas extends javax.swing.JFrame {
@@ -39,6 +39,9 @@ public class FrmConsultas extends javax.swing.JFrame {
               List<Persona> resultados = new ArrayList<>();
 
 //    private JTable tblResultados;
+     /**
+      * Metodo constructor por omision
+      */
     public FrmConsultas() {
         initComponents();
         buscarPersonas();
@@ -47,7 +50,9 @@ public class FrmConsultas extends javax.swing.JFrame {
         
       
     }
-
+/**
+ * Metodo que se encarga de mostrar la pantalla de persona
+ */
     private void mostrarPantallaFrmPersona() {
         Persona persona = new Persona();
         this.setVisible(false);
@@ -55,7 +60,9 @@ public class FrmConsultas extends javax.swing.JFrame {
         frmPersona.setVisible(true);
         this.dispose();
     }
-
+/**
+ * Metodo que se encarga de buscar personas a consultar
+ */
     private void buscarPersonas() {
         String busqueda = txtBusqueda.getText();
         IPersonaDAO personaDAO = new PersonaDAO();

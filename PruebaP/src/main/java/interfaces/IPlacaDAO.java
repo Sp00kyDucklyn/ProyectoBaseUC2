@@ -22,11 +22,10 @@ public interface IPlacaDAO {
     
     public void crearCmbVehiculos(JComboBox<Vehiculo> cmbVehiculos);
     
-    public String generarNumeroPlaca();
     
     public List<Placa> llamarListaPlacas(int placa);
     
-    public Placa placaActiva(int id_vehiculo);
+    public Placa placaActiva(String numSerie);
     
-    public Placa DesactivarPlaca(int id_vehiculo);
+    public Placa DesactivarPlaca(String numSerie);
 }

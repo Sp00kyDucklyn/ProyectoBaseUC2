@@ -19,7 +19,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 /**
- *
+ * Clase que gestiona los vehiculos con patron DAO
  * @author hoshi
  */
 public class VehiculoDAO implements IVehiculoDAO{
@@ -33,6 +33,10 @@ public class VehiculoDAO implements IVehiculoDAO{
        return entityManagerFactory.createEntityManager();
     }
     
+    /**
+     * Metodo que crea el vehiculo
+     * @param vehiculo 
+     */
     @Override
     public void crearVehiculo(Vehiculo vehiculo) {
         EntityManager em = getEntityManager();
@@ -45,7 +49,11 @@ public class VehiculoDAO implements IVehiculoDAO{
             em.close();
         }
     }
-
+/**
+ * Metodo que se encarga de buscar el vehiculo por numero de serie
+ * @param numSerie
+ * @return 
+ */
     @Override
     public List<Vehiculo> buscarNumSerie(String numSerie) {
         EntityManager em = getEntityManager();

@@ -23,14 +23,16 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 /**
- *
+ * Clase que representa las personas con patron DAO
  * @author hoshi
  */
 public class PersonaDAO implements IPersonaDAO{
     
     private EntityManagerFactory entityManagerFactory = null;
     
-
+    /**
+     * Metodo que crea la conexion con la BD
+     */
     public PersonaDAO(){
         entityManagerFactory = Persistence.createEntityManagerFactory("conexionPU");
     }
@@ -39,7 +41,10 @@ public class PersonaDAO implements IPersonaDAO{
         return entityManagerFactory.createEntityManager();
     }
     
-
+/**
+ * Metodo que crea la persona
+ * @param persona 
+ */
     @Override
     public void crearPersona(Persona persona) {
        EntityManager em = getEntityManager();
@@ -67,6 +72,10 @@ public class PersonaDAO implements IPersonaDAO{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Metodo que lista los tramites de la persona
+     * @return 
+     */
     @Override
     public List<Tramite> listaTramite() {
         Persona persona = new Persona();
@@ -83,6 +92,11 @@ public class PersonaDAO implements IPersonaDAO{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Metodo que se encarga de buscar a una persona por el rfc
+     * @param rfc
+     * @return lista de personas
+     */
     @Override
     public List<Persona> buscarRfc(String rfc) {
         EntityManager em = getEntityManager();
@@ -107,6 +121,11 @@ public class PersonaDAO implements IPersonaDAO{
         return typedQuery.getResultList();
     }
 
+    /**
+     * Metodo que se encarga de buscar a la persona por su nombre
+     * @param nombre
+     * @return lista de personas
+     */
     @Override
     public List<Persona> buscarNombre(String nombre) {
         EntityManager em = getEntityManager();
@@ -130,7 +149,11 @@ public class PersonaDAO implements IPersonaDAO{
         
         return typedQuery.getResultList();
     }
-
+/**
+ * Metodo que se encarga de buscar a una persona por su año de nacimiento
+ * @param anioNacimiento
+ * @return lista de personas
+ */
     @Override
     public List<Persona> buscarFechaNacimiento(Date anioNacimiento) {
          EntityManager em = getEntityManager();
@@ -160,6 +183,10 @@ public class PersonaDAO implements IPersonaDAO{
         return typedQuery.getResultList();
     }
     
+    /**
+     * Metodo que se encarga de listar a las personas
+     * @return lista de personas
+     */
     @Override
     public List<Persona> listaPersonas() {
         EntityManager em = getEntityManager();
@@ -178,6 +205,10 @@ public class PersonaDAO implements IPersonaDAO{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    /**
+     * Metodo que se encarga de desencriptar la información de las personas
+     * @param persona 
+     */
     public void desencriptarPersona(Persona persona){
         Encriptar en= new Encriptar();
         String nombre=en.desencriptar(persona.getNombre());
@@ -188,6 +219,11 @@ public class PersonaDAO implements IPersonaDAO{
         persona.setApellidoM(apellidoM);
     }
     
+    /**
+     * Metodo que se encarga de desencriptar la lista de las personas
+     * @param personas
+     * @return personas
+     */
     @Override
     public List<Persona> desencriptarPersonaLista(List<Persona> personas) {
         Encriptar en = new Encriptar();

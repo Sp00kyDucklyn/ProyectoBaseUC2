@@ -25,13 +25,15 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 /**
- *
+ * Clase que representa los tramites con patron DAO
  * @author hoshi
  */
 public class TramiteDAO implements ITramiteDAO{
     
      private EntityManagerFactory entityManagerFactory = null;
-
+/**
+ * Metodo constructor que establece la conexion con la BD
+ */
     public TramiteDAO() {
         entityManagerFactory = Persistence.createEntityManagerFactory("conexionPU");
     }
@@ -40,7 +42,13 @@ public class TramiteDAO implements ITramiteDAO{
         return entityManagerFactory.createEntityManager();
     }
 
-
+/**
+ * Metodo que se encarga de buscar tramites
+ * @param rfc
+ * @param nombre
+ * @param anioNacimiento
+ * @return lista de tramites
+ */
     public List<Tramite> buscarTramites(String rfc,String nombre, Date anioNacimiento) {
         EntityManager em = getEntityManager();
        
@@ -74,7 +82,11 @@ public class TramiteDAO implements ITramiteDAO{
         
         return typedQuery.getResultList();
     }
-
+/**
+ * Metodo que se encarga de buscar metodos por nombre
+ * @param nombre
+ * @return lista de tramites
+ */
     public List<Tramite> buscarNombre(String nombre) {
         EntityManager em = getEntityManager();
        
@@ -98,7 +110,14 @@ public class TramiteDAO implements ITramiteDAO{
         return typedQuery.getResultList();
     }
 
-
+/**
+ * Metodo que lista los tramites
+ * @param periodoI
+ * @param periodoF
+ * @param licencia
+ * @param placa
+ * @return lista de tramites
+ */
     public List<Tramite> listaTramite(Date periodoI, Date periodoF,boolean licencia, boolean placa) {
         EntityManager em = getEntityManager();
 
@@ -138,7 +157,11 @@ public class TramiteDAO implements ITramiteDAO{
         return tramites;
         
     }
-
+/**
+ * Metodo que se encarga de desencriptar tramites
+ * @param lista
+ * @return tramites
+ */
     public List<Tramite> desencriptarPersonaTramite(List<Tramite> lista) {
         Encriptar encriptacion = new Encriptar();
         List<Persona> personasDesencriptadas = new ArrayList<>(); // crea una lista auxiliar de personas
@@ -159,6 +182,10 @@ public class TramiteDAO implements ITramiteDAO{
         return lista_tramitePersona;
     }
 
+    /**
+     * Metodo que crea tramites
+     * @param tramite 
+     */
     @Override
     public void crearTramite(Tramite tramite) {
             EntityManager em = getEntityManager();
@@ -172,6 +199,10 @@ public class TramiteDAO implements ITramiteDAO{
         }
     }
 
+    /**
+     * Metodo que gestiona el estado del tramite
+     * @param id_tramite 
+     */
     @Override
     public void estadoTramite(int id_tramite) {
         EntityManager em = getEntityManager();
@@ -196,6 +227,14 @@ public class TramiteDAO implements ITramiteDAO{
         transaccion.commit(); //confirmar la transacción
     }
 
+    /**
+     * Metodo que lista los tramites
+     * @param periodoI
+     * @param periodoF
+     * @param estado
+     * @param costo
+     * @return 
+     */
     @Override
     public List<Tramite> listaTramiteL(Date periodoI, Date periodoF, String estado, String costo) {
       EntityManager em = getEntityManager();

@@ -27,7 +27,7 @@ import javax.swing.JOptionPane;
 import utileria.Validaciones;
 
 /**
- *
+ * Pantalla de placas
  * @author xfs85
  */
 public class FrmPlaca extends javax.swing.JFrame {
@@ -43,11 +43,16 @@ public class FrmPlaca extends javax.swing.JFrame {
     Placa placa = new Placa();
     String fuente;
     
+    
 //    Placa placa = new Placa();
 //<<<<<<< HEAD:PruebaP/src/main/java/pantallas/FrmPlaca.java
 //  
     
-   
+   /**
+    * Metodo constructor que recibe vehiculo y la fuente donde se ingresa al frame
+    * @param fuente
+    * @param vehiculo 
+    */
     public FrmPlaca(String fuente,Vehiculo vehiculo) {
 //=======
 //
@@ -59,7 +64,8 @@ public class FrmPlaca extends javax.swing.JFrame {
         
         
         rfc.setText(vehiculo.getPersona().getRfc());
-        numSerie.setText(vehiculo.getNumSerie());
+        lblnumSerie.setText(vehiculo.getNumSerie());
+        pdao.placaActiva(lblnumSerie.getText());
         generarNumPlacas();
         
 //        if (pdao.llamarListaPlacas(vehiculo.getId()) == null) {
@@ -72,6 +78,8 @@ public class FrmPlaca extends javax.swing.JFrame {
               lblCosto.setText("1500");
           }else if(fuente.equals("renovar")){
               lblCosto.setText("1000");
+              lblPlacas.setText(placa.getNumPlacaNu());
+              
           }
         
         calculaFecha();
@@ -79,7 +87,12 @@ public class FrmPlaca extends javax.swing.JFrame {
         cmbVehiculos.setVisible(false);
         //crearCmbVehiculos(cmbVehiculos);
     }
-
+  
+/**
+ * Metodo que agrega la placa
+ * @return placa
+ * @throws ParseException 
+ */
     private Placa agregarPlaca() throws ParseException {
         
         
@@ -99,10 +112,10 @@ public class FrmPlaca extends javax.swing.JFrame {
         //Vehiculo vehiculoSeleccionado = (Vehiculo) cmbVehiculos.getSelectedItem();
         if(pdao.llamarListaPlacas(vehiculo.getId()) == null){
             placa = new Placa(numPlacaNu,tramite.getId(), costo, fechaVencimiento,fechaExpedicion, estado);
-            pdao.placaActiva(vehiculo.getId());
+            pdao.placaActiva(vehiculo.getNumSerie());
             return placa;
         }else if(vehiculo.getPlacas() != null){
-             pdao.DesactivarPlaca(vehiculo.getId());
+             pdao.DesactivarPlaca(vehiculo.getNumSerie());
              placa = new Placa(numPlacaNu, vehiculo, tramite.getId(), costo, fechaExpedicion, fechaVencimiento, estado, vehiculo.getPersona());
              
              return placa;
@@ -112,6 +125,10 @@ public class FrmPlaca extends javax.swing.JFrame {
         return placa;
     }
 
+    /**
+     * Metodo que agrega el combo box de vehiculos
+     * @param cmbVehiculos 
+     */
     private void crearCmbVehiculos(JComboBox cmbVehiculos) {
         pdao.crearCmbVehiculos(cmbVehiculos);
         cmbVehiculos.addActionListener(new ActionListener() {
@@ -127,6 +144,9 @@ public class FrmPlaca extends javax.swing.JFrame {
         });
     }
 
+    /**
+     * Metodo que establece el estado de las placas
+     */
   private void estadoActivo(){
         Date fecha = new Date();
         if(fecha.compareTo(new Date())==0){
@@ -136,6 +156,10 @@ public class FrmPlaca extends javax.swing.JFrame {
        
     }
 
+  /**
+   * Metodo que extrae los datos del formulario
+   * @return datos del formulario
+   */
     private HashMap<String, String> extraerDatosFormulario() {
         String estado = lblEstado.getText();
         String fechaVencimiento = lblFechaVencimiento.getText();
@@ -147,6 +171,10 @@ public class FrmPlaca extends javax.swing.JFrame {
         return datosFormulario;
     }
 
+    /**
+     * Metodo que calcula la fecha de expedicion y de vencimiento
+     * de la placa
+     */
     private void calculaFecha() {
 
         Date fechaExpedicion = new Date();
@@ -162,6 +190,9 @@ public class FrmPlaca extends javax.swing.JFrame {
         lblFechaVencimiento.setText(fechaVencimientoString);
     }
     
+    /**
+     * Metodo que genera el numero de placas
+     */
     private void generarNumPlacas(){
         int numeros = 0;
         String numero;
@@ -185,10 +216,7 @@ public class FrmPlaca extends javax.swing.JFrame {
         }
     }
  
-    private void calculaCosto() {
-       
-    }
-    
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -200,7 +228,7 @@ public class FrmPlaca extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        numSerie = new javax.swing.JLabel();
+        lblnumSerie = new javax.swing.JLabel();
         cmbVehiculos = new javax.swing.JComboBox<>();
         btnGuardar = new javax.swing.JButton();
         rfc = new javax.swing.JLabel();
@@ -218,7 +246,7 @@ public class FrmPlaca extends javax.swing.JFrame {
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1000, 612));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(numSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, 180, 30));
+        jPanel1.add(lblnumSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, 180, 30));
 
         cmbVehiculos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -277,12 +305,21 @@ public class FrmPlaca extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        
-        
+        VehiculoDAO vdao = new VehiculoDAO();
+        estadoActivo();
+        String numSerie = lblnumSerie.getText();
 //        calculaCosto();
-        
-        
-        try {
+        List<Vehiculo> vehiculos = vdao.buscarNumSerie(numSerie);
+        if(!vehiculos.isEmpty()){
+          int  respuesta = JOptionPane.showConfirmDialog(this, "La placa está activa, ¿Desea desactivarla?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+            if(respuesta == JOptionPane.YES_OPTION){
+                pdao.DesactivarPlaca(numSerie);
+                
+            }else{
+                return;
+            }
+            
+            try {
             pdao.crearPlaca(this.agregarPlaca());
             Validaciones val = new Validaciones();
             val.mostrarMensaje("Se guardo exitosamente", "Info", "Guardado Correctamente");
@@ -300,7 +337,9 @@ public class FrmPlaca extends javax.swing.JFrame {
             Validaciones val = new Validaciones();
             val.mostrarMensaje("Se guardo exitosamente", "Info", "Guardado Correctamente");
         }
-        System.out.println("Aún no funciona");
+        }
+        
+    
 
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -388,7 +427,7 @@ public class FrmPlaca extends javax.swing.JFrame {
     private javax.swing.JLabel lblEstado;
     private javax.swing.JLabel lblFechaVencimiento;
     private javax.swing.JLabel lblPlacas;
-    private javax.swing.JLabel numSerie;
+    private javax.swing.JLabel lblnumSerie;
     private javax.swing.JLabel rfc;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,13 +7,13 @@ package pantallas;
 import dao.MenuDAO;
 
 /**
- *
+ * Pantalla menú del programa
  * @author xfs85
  */
 public class FrmMenu extends javax.swing.JFrame {
 
     /**
-     * Creates new form MenuPrincipal
+     * Metodo constructor por omisión
      */
     public FrmMenu() {
        

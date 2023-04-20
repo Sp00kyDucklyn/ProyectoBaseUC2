@@ -10,7 +10,7 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
- *
+ * Clase que se encarga de la encriptación de datos
  * @author hoshi
  */
 public class Encriptar {

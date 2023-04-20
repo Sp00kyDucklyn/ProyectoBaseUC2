@@ -23,14 +23,16 @@ import javax.persistence.StoredProcedureQuery;
 
 
 /**
- *
+ * Clase que representa las placas en el patron DAO
  * @author hoshi
  */
 public class PlacaDAO implements IPlacaDAO{
 
     private EntityManagerFactory entityManagerFactory = null;
     
-    
+    /**
+     * Metodo constructor que crea la conexion con la BD
+     */
     public PlacaDAO() {
         entityManagerFactory = Persistence.createEntityManagerFactory("conexionPU");
 
@@ -39,7 +41,10 @@ public class PlacaDAO implements IPlacaDAO{
     public EntityManager getEntityManager() {
         return entityManagerFactory.createEntityManager();
     }
-    
+    /**
+     * Metodo que crea la placa
+     * @param placa 
+     */
     @Override
     public void crearPlaca(Placa placa) {
       EntityManager em = getEntityManager();
@@ -51,7 +56,11 @@ public class PlacaDAO implements IPlacaDAO{
             em.close();
         }
     }
-
+/**
+ * Metodo que se encarga de llamar a la persona dueña de la placa por el rfc
+ * @param rfc
+ * @return persona
+ */
     @Override
     public List<Persona> llamarRFC(String rfc) {
         EntityManager em = getEntityManager();
@@ -71,7 +80,10 @@ public class PlacaDAO implements IPlacaDAO{
 
         return personas;
     }
-
+/**
+ * Metodo que crea el combo box de vehiculos
+ * @param cmbVehiculos 
+ */
     @Override
     public void crearCmbVehiculos(JComboBox<Vehiculo> cmbVehiculos) {
         
@@ -95,19 +107,11 @@ public class PlacaDAO implements IPlacaDAO{
         }
     }
 
-    @Override
-    public String generarNumeroPlaca() {
-      EntityManager em = getEntityManager();
-      em.getTransaction().begin();
-    StoredProcedureQuery storedProcedure = em.createStoredProcedureQuery("generar_numero_placa");
-    storedProcedure.execute();
-    String numeroSerie = (String) storedProcedure.getOutputParameterValue(1);
-    em.getTransaction().commit();
-        
-        em.close();
-    return numeroSerie;
-}
-
+/**
+ * Metodo que se encarga de llamar la lista de placas
+ * @param nuSerie
+ * @return lista de placas
+ */
     @Override
     public List<Placa> llamarListaPlacas(int nuSerie) {
         
@@ -129,16 +133,20 @@ public class PlacaDAO implements IPlacaDAO{
         return placas;
         
     }
-    
+    /**
+     * Metodo que se encarga de activar la placa del vehiculo
+     * @param id_vehiculo
+     * @return placa activa
+     */
     @Override
-    public Placa placaActiva(int id_vehiculo) {
+    public Placa placaActiva(String numSerie) {
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
 
             // Verificar si existe una licencia vigente para el usuario
-            TypedQuery<Placa> consultaPlaca = em.createQuery("SELECT p FROM Placa p WHERE p.vehiculo.id = :id AND p.estado = 'Vigentes'", Placa.class);
-            consultaPlaca.setParameter("id", id_vehiculo);
+            TypedQuery<Placa> consultaPlaca = em.createQuery("SELECT p FROM Placa p WHERE p.vehiculo.numSerie = :id AND p.estado = 'Vigentes'", Placa.class);
+            consultaPlaca.setParameter("numSerie", numSerie);
             Placa PlacaActiva = consultaPlaca.getSingleResult();
 
             em.getTransaction().commit();
@@ -154,15 +162,15 @@ public class PlacaDAO implements IPlacaDAO{
     /**
      * Metodo que se encarga de desactivar placa del vehiculo
      *
-     * @param id_vehiculo
+     * @param numSerie
      * @return placa que se encuentre activa
      */
     @Override
-    public Placa DesactivarPlaca(int id_vehiculo) {
+    public Placa DesactivarPlaca(String numSerie) {
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
-            Placa placa = this.placaActiva(id_vehiculo);
+            Placa placa = this.placaActiva(numSerie);
 
             Placa placaCambiar = em.find(Placa.class, placa.getId());
 
@@ -175,6 +183,7 @@ public class PlacaDAO implements IPlacaDAO{
             return null;
         }
     }
+
 
     }
     

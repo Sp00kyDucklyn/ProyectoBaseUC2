@@ -23,7 +23,7 @@ import javax.swing.JOptionPane;
 import utileria.Validaciones;
 
 /**
- *
+ * Pantalla de licencia
  * @author xfs85
  */
 public class FrmLicencia extends javax.swing.JFrame {
@@ -39,6 +39,10 @@ public class FrmLicencia extends javax.swing.JFrame {
 //    public FrmLicencia(Persona persona) {
 ////=======
 //    Licencia licencia = new Licencia();
+    /**
+     * Metodo constructor que recibe una persona
+     * @param persona 
+     */
         public FrmLicencia(Persona persona) {
 //>>>>>>> main:PruebaP/src/main/java/pantallas/SiLicencia.java
         initComponents();
@@ -47,6 +51,11 @@ public class FrmLicencia extends javax.swing.JFrame {
 
     }
 
+        /**
+         * Metodo que agrega una licencia
+         * @return licencia creada
+         * @throws ParseException 
+         */
     public Licencia agregarLicencia() throws ParseException {
         //Extrer datos del formulario
         HashMap<String, String> datosFormulario = this.extraerDatosFormulario();
@@ -71,12 +80,19 @@ public class FrmLicencia extends javax.swing.JFrame {
         return licencia;
     }
 
+    /**
+     * Metodo que muestra los errores de validacion
+     * @param erroresVaidacion 
+     */
     private void mostrarErroresValidacion(List<String> erroresVaidacion) {
         //Nos va a concatenar los errores y nos pondra un enter
         String mensaje = String.join("\n", erroresVaidacion);
         JOptionPane.showMessageDialog(this, mensaje, "Errores de validacion", JOptionPane.WARNING_MESSAGE);
     }
-    
+   
+    /**
+     * Metodo que calcula las fechas segun la vigencia seleccionada
+     */
     private void calculaFecha(){
         
         Date fechaExpedicion = new Date();
@@ -120,6 +136,10 @@ public class FrmLicencia extends javax.swing.JFrame {
         
     }
 //    
+    /**
+     * Metodo que calcula el costo segun la vigencia seleccionada
+     */
+    
     private void calculaCosto(){
         String vigenciaS = (String) cmbVigencia.getSelectedItem();
         boolean discapacidad = chDiscapacitado.isSelected();
@@ -153,7 +173,9 @@ public class FrmLicencia extends javax.swing.JFrame {
 
         }
     }
-    
+    /**
+     * Metodo que establece el estado de la licencia
+     */
     private void estadoActivo(){
         Date fecha = new Date();
        
@@ -166,7 +188,9 @@ public class FrmLicencia extends javax.swing.JFrame {
     }
     
    
-    
+    /**
+     * Metodo que extrae los datos ingresados en el form
+     */
     private HashMap<String, String> extraerDatosFormulario() {
         String vigencia = (String) cmbVigencia.getSelectedItem();
         String dicapacitado = String.valueOf(chDiscapacitado.isSelected());
@@ -185,6 +209,11 @@ public class FrmLicencia extends javax.swing.JFrame {
         return datosFormulario;
     }
 
+    /**
+     * Metodo que busca el rfc
+     * @param rfc
+     * @return 
+     */
     public String buscarRfc(String rfc) {
         //NO DEJAR QUE EL TXT SE PERMITAN ESCRIBIR CARACTERES NO ESPECIFICADOS FALTA
         //FORZAR AL USUARIO ESCRIBIR 13 CARACTERES LISTO

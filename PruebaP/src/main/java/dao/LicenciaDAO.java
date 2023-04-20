@@ -17,13 +17,16 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 /**
- *
+ * Clase que se representa las licencias en el patron DAO
  * @author hoshi
  */
 public class LicenciaDAO implements ILicenciaDAO {
 
     private EntityManagerFactory entityManagerFactory = null;
 
+    /**
+     * Metodo constructor que crea la conexion con la BD
+     */
     public LicenciaDAO() {
         entityManagerFactory = Persistence.createEntityManagerFactory("conexionPU");
 
@@ -33,6 +36,10 @@ public class LicenciaDAO implements ILicenciaDAO {
         return entityManagerFactory.createEntityManager();
     }
 
+    /**
+     * Metodo que crea la licencia
+     * @param licencia 
+     */
     @Override
     public void crearLicencia(Licencia licencia) {
         EntityManager em = getEntityManager();
@@ -46,7 +53,11 @@ public class LicenciaDAO implements ILicenciaDAO {
         }
     }
  
-
+/**
+ * Metodo que llama la persona por rfc
+ * @param rfc
+ * @return 
+ */
     @Override
     public List<Persona> llamarRFC(String rfc) {
         EntityManager em = getEntityManager();
@@ -67,14 +78,6 @@ public class LicenciaDAO implements ILicenciaDAO {
         return personas;
     }
 
-    @Override
-    public void costo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void licenciaVigente() {
-  
-    }
+    
 
 }

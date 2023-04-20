@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- *
+ * Pantalla de persona
  * @author hoshi
  */
 public class FrmPersona extends javax.swing.JFrame {
@@ -22,11 +22,15 @@ public class FrmPersona extends javax.swing.JFrame {
     
     Tramite tramite = new Tramite();
     PersonaDAO personaDAO = new PersonaDAO();
-
+/**
+ * Metodo constructor que recibe un parametro, la persona que realiza
+ * el tramite
+ * @param persona 
+ */
     public FrmPersona(Persona persona) {
         initComponents();
         tramite.getPersona();
-//        personaDAO.desencriptarPersona(persona);
+        personaDAO.desencriptarPersona(persona);
         String n = persona.getNombre() + " "
                 + persona.getApellidoP() + " " + persona.getApellidoM();
 //        lblNombrePersona.setText(n);
@@ -51,25 +55,16 @@ public class FrmPersona extends javax.swing.JFrame {
         lblTelefono = new javax.swing.JLabel();
         lblRfc = new javax.swing.JLabel();
         lblFechaNa = new javax.swing.JLabel();
-        btnVolver = new javax.swing.JButton();
         lblNombre = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 600));
+        setPreferredSize(new java.awt.Dimension(1000, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(lblTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 470, 190, 40));
         getContentPane().add(lblRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, 170, 40));
         getContentPane().add(lblFechaNa, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 170, 40));
-
-        btnVolver.setBorder(null);
-        btnVolver.setContentAreaFilled(false);
-        btnVolver.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVolverActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 40, 30));
         getContentPane().add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 200, 30));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/Registro Personas (1).png"))); // NOI18N
@@ -78,14 +73,6 @@ public class FrmPersona extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-     
-     FrmConsultas fc = new FrmConsultas();
-     fc.setVisible(true);
-     this.setVisible(false);
-     this.dispose();
-    }//GEN-LAST:event_btnVolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -123,7 +110,6 @@ public class FrmPersona extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnVolver;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel lblFechaNa;
     private javax.swing.JLabel lblNombre;

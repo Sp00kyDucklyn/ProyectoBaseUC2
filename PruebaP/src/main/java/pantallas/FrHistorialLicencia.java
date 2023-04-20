@@ -17,7 +17,7 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * Pantalla del historial de licencia
  * @author hoshi
  */
 public class FrHistorialLicencia extends javax.swing.JFrame {
@@ -32,6 +32,10 @@ public class FrHistorialLicencia extends javax.swing.JFrame {
     TramiteDAO tramiteDAO = new TramiteDAO();
     private List<Tramite> listaPDF;
     
+    /**
+     * Constructor que recibe una persona
+     * @param persona 
+     */
     public FrHistorialLicencia(Persona persona) {
 //        this.listaPDF = new ArrayList<Tramite>();
 
@@ -46,6 +50,9 @@ public class FrHistorialLicencia extends javax.swing.JFrame {
             buscarTramites();
     }
     
+    /**
+     * Metodo que se encarga de buscar tramites
+     */
        public void buscarTramites(){
 //        ITramiteDAO tramiteDAO = new TramiteDAO();
         listaPDF= tramiteDAO.listaTramiteL(tramite.getFechaExpedicion(), tramite.getFechaVencimiento(),tramite.getCosto(),tramite.getEstado());

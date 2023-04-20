@@ -20,18 +20,27 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Clase que se encarga de las validaciones del sistema
  * @author hoshi
  */
 public class Validaciones {
-
+/**
+ * Metodo que valida si una campo de texto es vacio
+ * @param texto
+ * @return Condicion en caso de que sea vacio
+ */
     public static boolean esTextoVacio(String texto) {
         if (texto == null || texto.trim().isEmpty()) {
             return true;
         }
         return false;
     }
-
+/**
+ * Metodo que valida si un campo de texto excede el limite de caracteres
+ * @param texto
+ * @param limiteCaracteres
+ * @return 
+ */
     //Le puedo mandar numero de caracteres que permites
     public static boolean excedeLimite(String texto, int limiteCaracteres) {
         //Siempre checar lo de los nulls
@@ -41,7 +50,11 @@ public class Validaciones {
         }
         return false;
     }
-    
+    /**
+     * Metodo que valida que un campo de texto cumple con el formato de fecha
+     * @param texto
+     * @return condicion verdadero/falso
+     */
     public static boolean esFecha(String texto){
          try {
             Date.parse(texto);
@@ -61,7 +74,7 @@ public class Validaciones {
      * a entero
      *
      * @param texto
-     * @return
+     * @return true/false
      */
     public static boolean esEntero(String texto) {
         //Esto es para usar la excepcion de la clase integer
@@ -75,7 +88,12 @@ public class Validaciones {
             return false;
         }
     }
-
+/**
+ * Metodo que se encarga de mostrar un mensaje al usuario
+ * @param mensaje
+ * @param tipo
+ * @param titulo 
+ */
     public void mostrarMensaje(String mensaje, String tipo, String titulo) {
         JOptionPane optionPane = new JOptionPane(mensaje);
         if (tipo.equals("Info")) {
@@ -89,14 +107,22 @@ public class Validaciones {
         dialog.setVisible(true);
     }
     
-    // Esta validación nos puede ayudar en las placas y numero de serie 
-    // de un vehiculo
+ /**
+  * Metodo que se encarga de validar que una cadena cumple el formato requerido
+  * ideal para numero de serie y placas
+  * @param cadena
+  * @return matcher
+  */
    public static boolean validarCadena(String cadena) {
         Pattern pattern = Pattern.compile("^[A-Za-z]{3}-[0-9]{3}$");
         Matcher matcher = pattern.matcher(cadena);
         return matcher.matches();
     } 
-   
+   /**
+    * Metodo que valida si el rfc cumple con el formato debido
+    * @param rfc
+    * @return matcher
+    */
    public static boolean validarRFC(String rfc) {
     // Expresión regular para validar el formato de RFC
     Pattern pattern = Pattern.compile("^[A-Z]{4}[0-9]{6}[A-Z0-9]{3}$");
@@ -104,11 +130,24 @@ public class Validaciones {
     return matcher.matches();
    
     }
-   
-   public static boolean validarTelefono(String telefono){
-      // Expresión regular para validar el formato de RFC
-    Pattern pattern = Pattern.compile("^{10}[0-9]$");
-    Matcher matcher = pattern.matcher(telefono);
-    return matcher.matches(); 
-   }
+   /**
+    * Metodo que valida que un telefono cumple con el formato debido
+    * @param telefono
+    * @return matcher
+    */
+  public static boolean validarTelefono(String telefono) {
+    // Eliminar cualquier espacio o guión que pueda haber en el número
+    telefono = telefono.replace(" ", "").replace("-", "");
+    // Verificar que el número tenga exactamente 10 dígitos
+    if (telefono.length() != 10) {
+        return false;
+    }
+    // Verificar que todos los caracteres del número sean dígitos
+    for (int i = 0; i < telefono.length(); i++) {
+        if (!Character.isDigit(telefono.charAt(i))) {
+            return false;
+        }
+    }
+    return true;
+}
 }

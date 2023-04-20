@@ -23,6 +23,10 @@ import javax.persistence.Table;
  *
  * @author hoshi
  */
+/**
+ * Clase que representa una placa en la base de datos
+ * 
+ */
 @Entity
 @Table(name = "placas")
 @DiscriminatorValue(value = "placa")
@@ -41,16 +45,36 @@ public class Placa extends Tramite implements Serializable{
     @ManyToOne
     @JoinColumn(name = "id_vehiculo")
     private Vehiculo vehiculo;
-
+/**
+ * Constructor por omision
+ */
     public Placa() {
     }
-
+/**
+ * Metodo constructor que recibe todos los atributos de la placa
+ * @param numPlacaNu
+ * @param vehiculos
+ * @param id
+ * @param costo
+ * @param fechaExpedicion
+ * @param fechaVencimiento
+ * @param estado
+ * @param persona 
+ */
     public Placa(String numPlacaNu, Vehiculo vehiculos, Integer id, String costo, Date fechaExpedicion, Date fechaVencimiento, String estado, Persona persona) {
         super(id, costo, fechaExpedicion, fechaVencimiento, estado, persona);
         this.numPlacaNu = numPlacaNu;
         this.vehiculo = vehiculos;
     }
-
+/**
+ * Metodo constructor que recibe todos los atributos de la placa, excepto la persona
+ * @param numPlacaNu
+ * @param id
+ * @param costo
+ * @param fechaExpedicion
+ * @param fechaVencimiento
+ * @param estado 
+ */
     public Placa(String numPlacaNu, Integer id, String costo, Date fechaExpedicion, Date fechaVencimiento, String estado) {
         super(id, costo, fechaExpedicion, fechaVencimiento, estado);
         this.numPlacaNu = numPlacaNu;
@@ -58,11 +82,17 @@ public class Placa extends Tramite implements Serializable{
     
     
     
-    
+   /**
+    * Metodo que obtiene el numero de placa
+    * @return numero de placa
+    */ 
     public String getNumPlacaNu() {
         return numPlacaNu;
     }
-
+/**
+ * Metodo que establece el numero de la placa
+ * @param numPlacaNu 
+ */
     public void setNumPlacaNu(String numPlacaNu) {
         this.numPlacaNu = numPlacaNu;
     }
@@ -75,15 +105,24 @@ public class Placa extends Tramite implements Serializable{
 //    public void setCosto(double costo) {
 //        this.costo = costo;
 //    }
-
+/**
+ * Metodo que obtiene el vehiculo al que pertenecen las placas
+ * @return Vehiculo
+ */
     public Vehiculo getVehiculo() {
         return vehiculo;
     }
-
+/**
+ * Metodo que establece el vehiculo al que pertenecen las placas
+ * @param vehiculo 
+ */
     public void setVehiculo(Vehiculo vehiculo) {
         this.vehiculo = vehiculo;
     }
-
+/**
+ * Metodo que establece el vehiculo al que pertenecen las placas
+ * @return numero de la placa con el formato toString
+ */
     @Override
     public String toString() {
         return "Placa actual: " + numPlacaNu;

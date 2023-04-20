@@ -18,13 +18,16 @@ import javax.persistence.Persistence;
 import javax.persistence.StoredProcedureQuery;
 
 /**
- *
+ * Metodo que administra el menu con patron DAO
  * @author hoshi
  */
 public class MenuDAO implements IMenuDAO{
     
     private EntityManagerFactory entityManagerFactory = null;
 
+    /**
+     * Metodo constructor que crea la conexion con la BD
+     */
     public MenuDAO() {
         entityManagerFactory = Persistence.createEntityManagerFactory("conexionPU");
     }
@@ -34,7 +37,7 @@ public class MenuDAO implements IMenuDAO{
     }
 
     /**
-     * 
+     * Metodo encargado de llamar un procedimiento 
      */
     public void llamarProcedimiento() {
        agregarPersonas();
@@ -45,7 +48,8 @@ public class MenuDAO implements IMenuDAO{
     }
 
     /**
-     * 
+     * Metodo que se encarga de agregar personas de forma masiva
+     * utilizando un procedure
      */
     @Override
     public void agregarPersonas() {
