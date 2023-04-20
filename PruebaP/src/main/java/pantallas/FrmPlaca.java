@@ -35,12 +35,33 @@ public class FrmPlaca extends javax.swing.JFrame {
     /**
      * Creates new form FrmPlaca
      */
+    /**
+     * tramite
+     */
     Tramite tramite = new Tramite();
+    /**
+     * persona
+     */
     Persona persona = new Persona();
+    /**
+     * vehiculo
+     */
     Vehiculo vehiculo = new Vehiculo();
+    /**
+     * vehiculoDAO
+     */
     VehiculoDAO vehiculoDAO = new VehiculoDAO();
+    /**
+     * PlacaDAO
+     */
     PlacaDAO pdao = new PlacaDAO();
+    /**
+     * Placa
+     */
     Placa placa = new Placa();
+    /**
+     * fuente
+     */
     String fuente;
     
     
@@ -50,8 +71,8 @@ public class FrmPlaca extends javax.swing.JFrame {
     
    /**
     * Metodo constructor que recibe vehiculo y la fuente donde se ingresa al frame
-    * @param fuente
-    * @param vehiculo 
+    * @param fuente fuente de donde se ingresa al frame
+    * @param vehiculo vehiculo a tramitar placas
     */
     public FrmPlaca(String fuente,Vehiculo vehiculo) {
 //=======
@@ -90,8 +111,8 @@ public class FrmPlaca extends javax.swing.JFrame {
   
 /**
  * Metodo que agrega la placa
- * @return placa
- * @throws ParseException 
+ * @return placa 
+ * @throws ParseException excepcion
  */
     private Placa agregarPlaca() throws ParseException {
         
@@ -127,7 +148,7 @@ public class FrmPlaca extends javax.swing.JFrame {
 
     /**
      * Metodo que agrega el combo box de vehiculos
-     * @param cmbVehiculos 
+     * @param cmbVehiculos combo box de vehiculos
      */
     private void crearCmbVehiculos(JComboBox cmbVehiculos) {
         pdao.crearCmbVehiculos(cmbVehiculos);
@@ -342,18 +363,27 @@ public class FrmPlaca extends javax.swing.JFrame {
     
 
     }//GEN-LAST:event_btnGuardarActionPerformed
-
+/**
+ * combo
+ * @param evt evt 
+ */
     private void cmbVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbVehiculosActionPerformed
 
     }//GEN-LAST:event_cmbVehiculosActionPerformed
-
+/**
+ * btn cancelar
+ * @param evt evt
+ */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         FrmSeleccionTramite sm = new FrmSeleccionTramite();
         this.setVisible(false); 
         sm.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
-
+/**
+ * historial
+ * @param evt evt
+ */
     private void btnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialActionPerformed
         if (!rfc.getText().isEmpty()) {
 
@@ -381,41 +411,7 @@ public class FrmPlaca extends javax.swing.JFrame {
 //        this.dispose();
     }//GEN-LAST:event_btnHistorialActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(FrmPlaca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(FrmPlaca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(FrmPlaca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(FrmPlaca.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new FrmPlaca().setVisible(true);
-//            }
-//        });
-//    }
-
+  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;

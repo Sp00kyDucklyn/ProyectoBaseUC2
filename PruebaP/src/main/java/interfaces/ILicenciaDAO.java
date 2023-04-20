@@ -14,9 +14,16 @@ import java.util.List;
  * @author hoshi
  */
 public interface ILicenciaDAO {
-    
+    /**
+     * Metodo que crea la licencia
+     * @param licencia licencia 
+     */
     public void crearLicencia(Licencia licencia);
-    
+    /**
+     *Metodo que llama el rfc del cliente
+     * @param rfc rfc del cliente
+     * @return rfc del cliente
+     */
     public List<Persona> llamarRFC(String rfc);
    
 }

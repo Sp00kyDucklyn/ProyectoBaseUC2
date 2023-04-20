@@ -40,7 +40,7 @@ public class PersonaDAO implements IPersonaDAO{
 
     /**
      * Constructor que inicializa al entity manager
-     * @return Regresa
+     * @return Regresa entitymanager
      */
     public EntityManager getEntityManager() {
         return entityManagerFactory.createEntityManager();
@@ -198,7 +198,7 @@ public class PersonaDAO implements IPersonaDAO{
     
     /**
      * Metodo que se encarga de desencriptar la información de las personas
-     * @param persona 
+     * @param persona persona desencriptada
      */
     public void desencriptarPersona(Persona persona){
         Encriptar en= new Encriptar();
@@ -212,7 +212,7 @@ public class PersonaDAO implements IPersonaDAO{
     
     /**
      * Metodo que se encarga de desencriptar la lista de las personas
-     * @param personas
+     * @param personas lista de personas desencriptadas
      * @return personas
      */
     @Override

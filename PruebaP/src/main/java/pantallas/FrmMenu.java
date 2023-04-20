@@ -104,18 +104,27 @@ public class FrmMenu extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+ * salir 
+ * @param evt evt
+ */
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
-
+/**
+ * agregar masivo
+ * @param evt evt
+ */
     private void btnAgregadaMasivaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregadaMasivaActionPerformed
         // TODO add your handling code here:
         MenuDAO menu = new MenuDAO();
         menu.llamarProcedimiento();
     }//GEN-LAST:event_btnAgregadaMasivaActionPerformed
-
+/**
+ * reliazar tramite
+ * @param evt evt
+ */
     private void btnRealizacionTramiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizacionTramiteActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
@@ -123,7 +132,10 @@ public class FrmMenu extends javax.swing.JFrame {
         seleccion.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRealizacionTramiteActionPerformed
-
+/**
+ * btnConsulta
+ * @param evt evt
+ */
     private void btnConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaActionPerformed
         // TODO add your handling code here:
         FrmConsultas cons = new FrmConsultas();
@@ -131,7 +143,10 @@ public class FrmMenu extends javax.swing.JFrame {
         cons.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnConsultaActionPerformed
-
+/**
+ * generar reporte
+ * @param evt evt
+ */
     private void btnGeneracionReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGeneracionReporteActionPerformed
         // TODO add your handling code here:
         FrmReportes repor = new FrmReportes();
@@ -140,40 +155,6 @@ public class FrmMenu extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnGeneracionReporteActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(FrmMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(FrmMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(FrmMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(FrmMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new FrmMenu().setVisible(true);
-//            }
-//        });
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregadaMasiva;

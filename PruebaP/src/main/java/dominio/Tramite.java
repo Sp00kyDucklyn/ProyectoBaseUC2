@@ -37,12 +37,27 @@ public class Tramite implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_tramite")
+    /**
+     * Id
+     */
     private Integer id;
     
     @Basic
+    /**
+     * Costo
+     */
     private String costo;
+    /**
+     * Fecha de expedicion
+     */
     private Date fechaExpedicion;
+    /**
+     * fecha de vencimiento
+     */
     private Date fechaVencimiento;
+    /**
+     * estado
+     */
     private String estado;
     
 //    @OneToMany(mappedBy= "tramite", cascade=(CascadeType.REMOVE))
@@ -66,11 +81,11 @@ public class Tramite implements Serializable {
     }
 /**
  * Metodo constructor que recibe todos los atributos del tramite, excepto el id
- * @param costo
- * @param fechaVencimiento
- * @param fechaExpedicion
- * @param estado
- * @param persona 
+ * @param costo costo del tramite
+ * @param fechaVencimiento fecha de vencimiento del tramite
+ * @param fechaExpedicion fecha de expedicion del tramite
+ * @param estado estado del tramite
+ * @param persona persona que realiza el tramite
  */
     public Tramite(String costo, Date fechaVencimiento,Date fechaExpedicion, String estado, Persona persona) {
         this.costo = costo;
@@ -80,12 +95,12 @@ public class Tramite implements Serializable {
         this.persona = persona;
     }
 /**
- * Metodo constructor que recibe todos los atributos del tramite, excepto la persona
- * @param id
- * @param costo
- * @param fechaExpedicion
- * @param fechaVencimiento
- * @param estado 
+ * 
+ * @param  id id del tramite
+ * @param costo costo del tramite
+ * @param fechaExpedicion fecha de expedicion del tramite
+ * @param fechaVencimiento fecha de vencimiento del tramite
+ * @param estado estado del tramite
  */
     public Tramite(Integer id, String costo, Date fechaExpedicion, Date fechaVencimiento, String estado) {
         this.id = id;
@@ -98,9 +113,9 @@ public class Tramite implements Serializable {
     
 /**
  * Metodo constructor que recibe el costo, la fecha de expedicion y la persona que realiza el tramite
- * @param costo
- * @param fechaExpedicion
- * @param persona 
+ * @param costo costo del tramite
+ * @param fechaExpedicion fecha de expedicion del tramite
+ * @param persona persona que realiza el tramite
  */
     public Tramite(String costo, Date fechaExpedicion, Persona persona) {
         this.costo = costo;
@@ -109,12 +124,12 @@ public class Tramite implements Serializable {
     }
 /**
  * Metodo constructor que recibe todos los atributos del tramite
- * @param id
- * @param costo
- * @param fechaExpedicion
- * @param fechaVencimiento
- * @param estado
- * @param persona 
+ * @param id id del tramite
+ * @param costo costo del tramite
+ * @param fechaExpedicion fecha de expedicion del tramite
+ * @param fechaVencimiento fecha de vencimiento del tramite
+ * @param estado estado del tramite
+ * @param persona persona que realiza el tramite
  */
     public Tramite(Integer id, String costo, Date fechaExpedicion, Date fechaVencimiento, String estado, Persona persona) {
         this.id = id;
@@ -127,7 +142,7 @@ public class Tramite implements Serializable {
 
 /**
  * Metodo que obtiene el id del tramite 
- * @param id 
+ * @param id id del tramite
  */
     public Tramite(Integer id) {
         this.id = id;
@@ -141,7 +156,7 @@ public class Tramite implements Serializable {
     }
 /**
  * Metodo que establece el id del tramite
- * @param id 
+ * @param id id del tramite
  */
     public void setId(Integer id) {
         this.id = id;
@@ -159,14 +174,14 @@ public class Tramite implements Serializable {
    
 /**
  * Metodo que obtiene la persona que realiza el tramite
- * @return persona
+ * @return persona que realiza el tramite
  */
     public Persona getPersona() {
         return persona;
     }
 /**
  * Metodo que establece la persona que realiza el tramite
- * @param persona 
+ * @param persona que realiza el tramite
  */
     public void setPersona(Persona persona) {
         this.persona = persona;
@@ -180,7 +195,7 @@ public class Tramite implements Serializable {
     }
 /**
  * Metodo que establece el costo del tramite
- * @param costo 
+ * @param costo costo del tramite
  */
     public void setCosto(String costo) {
         this.costo = costo;
@@ -194,7 +209,7 @@ public class Tramite implements Serializable {
     }
 /**
  * Metodo que establece la fecha de expedicion del tramite
- * @param fechaExpedicion 
+ * @param fechaExpedicion fecha de expedicion del tramite
  */
     public void setFechaExpedicion(Date fechaExpedicion) {
         this.fechaExpedicion = fechaExpedicion;
@@ -208,7 +223,7 @@ public class Tramite implements Serializable {
     }
 /**
  * Metodo que establece el estado
- * @param estado 
+ * @param estado estado del tramite
  */
     public void setEstado(String estado) {
         this.estado = estado;
@@ -222,7 +237,7 @@ public class Tramite implements Serializable {
     }
 /**
  * Metodo que establece la fecha de vencimiento del tramite
- * @param fechaVencimiento 
+ * @param fechaVencimiento fecha de vencimiento del tramite
  */
     public void setFechaVencimiento(Date fechaVencimiento) {
         this.fechaVencimiento = fechaVencimiento;

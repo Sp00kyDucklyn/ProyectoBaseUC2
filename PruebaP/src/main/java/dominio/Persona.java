@@ -78,7 +78,7 @@ public class Persona implements Serializable {
     private List<Tramite> tramites;
 
     /**
-     * Constructor por omisión
+     * Constructor por omision
      */
     public Persona() {
     }
@@ -144,6 +144,10 @@ public class Persona implements Serializable {
         this.id = id;
     }
 
+    /**
+     * Metodo que obtiene el nombre de la persona
+     * @return nombre
+     */
     public String getNombre() {
         return nombre;
     }
@@ -225,21 +229,21 @@ public class Persona implements Serializable {
     }
 /**
  * Metodo que establece el telefono de la persona
- * @param telefono 
+ * @param telefono telefono de la persona
  */
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 /**
  * Metodo que obtiene la lista de vehiculos del cliente
- * @return vehiculo de la persona
+ * @return vehiculo de la persona 
  */
     public List<Vehiculo> getVehiculos() {
         return vehiculos;
     }
 /**
  * Metodo que establece un vehiculo en la lista de vehiculos del cliente
- * @param vehiculos
+ * @param vehiculos vehiculo de la persona
  */
     public void setVehiculos(List<Vehiculo> vehiculos) {
         this.vehiculos = vehiculos;
@@ -253,7 +257,7 @@ public class Persona implements Serializable {
     }
 /**
  * Metodo que establece el rfc de la persona
- * @param rfc 
+ * @param rfc rfc de la persona
  */
     public void setRfc(String rfc) {
         this.rfc = rfc;
@@ -267,7 +271,7 @@ public class Persona implements Serializable {
     }
 /**
  * metodo que establece los tramites en la lista de tramites de la persona
- * @param tramites 
+ * @param tramites tramites de la persona
  */
     public void setTramites(List<Tramite> tramites) {
         this.tramites = tramites;

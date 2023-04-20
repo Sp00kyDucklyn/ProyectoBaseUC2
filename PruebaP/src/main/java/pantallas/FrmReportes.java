@@ -33,11 +33,16 @@ import net.sf.jasperreports.view.JasperViewer;
 
 /**
  * Pantalla de reportes
- * @author Carmen & Raul
+ * @author Carmen
  */
 public class FrmReportes extends javax.swing.JFrame {
-
+/**
+ * tramiteDAO
+ */
     TramiteDAO tramiteDAO = new TramiteDAO();
+    /**
+     * LIST CLIENTES
+     */
     private List<Tramite> listaPDF;
     /**
      * Metodo constructor
@@ -216,7 +221,10 @@ public class FrmReportes extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+ * REGRESAR
+ * @param evt EVT
+ */
     private void btnRegresarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarMenuActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
@@ -224,11 +232,17 @@ public class FrmReportes extends javax.swing.JFrame {
         menu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarMenuActionPerformed
-
+/**
+ * LICENCIA
+ * @param evt evt
+ */
     private void chLicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chLicenciaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_chLicenciaActionPerformed
-
+/**
+ * buscar reportes
+ * @param evt evt
+ */
     private void btnBuscarReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarReportesActionPerformed
         // TODO add your handling code here:
         validarFechas();
@@ -238,7 +252,10 @@ public class FrmReportes extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_btnBuscarReportesActionPerformed
-
+/**
+ * generar reporte
+ * @param evt evt
+ */
     private void btnGenerarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarReporteActionPerformed
         // TODO add your handling code here:
         int opcion = JOptionPane.showConfirmDialog(null, "¿Está seguro de imprimir el pdf?", "Confirmar", JOptionPane.YES_NO_OPTION);
@@ -298,46 +315,15 @@ public class FrmReportes extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnGenerarReporteActionPerformed
-
+/**
+ * nombre txt
+ * @param evt evt
+ */
     private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
         // TODO add your handling code here:
         buscarTramites();
     }//GEN-LAST:event_txtNombreKeyReleased
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(FrmReportes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(FrmReportes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(FrmReportes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(FrmReportes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new FrmReportes().setVisible(true);
-//            }
-//        });
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarReportes;

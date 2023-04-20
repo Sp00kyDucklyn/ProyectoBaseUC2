@@ -26,7 +26,7 @@ import javax.swing.JOptionPane;
 public class Validaciones {
 /**
  * Metodo que valida si una campo de texto es vacio
- * @param texto
+ * @param texto texto a validar
  * @return Condicion en caso de que sea vacio
  */
     public static boolean esTextoVacio(String texto) {
@@ -37,9 +37,9 @@ public class Validaciones {
     }
 /**
  * Metodo que valida si un campo de texto excede el limite de caracteres
- * @param texto
- * @param limiteCaracteres
- * @return 
+ * @param texto texto a validar
+ * @param limiteCaracteres limite de caracteres admitidos
+ * @return condicion
  */
     //Le puedo mandar numero de caracteres que permites
     public static boolean excedeLimite(String texto, int limiteCaracteres) {
@@ -52,7 +52,7 @@ public class Validaciones {
     }
     /**
      * Metodo que valida que un campo de texto cumple con el formato de fecha
-     * @param texto
+     * @param texto texto a validar
      * @return condicion verdadero/falso
      */
     public static boolean esFecha(String texto){
@@ -73,7 +73,7 @@ public class Validaciones {
      * o no, se debe hacer un metodo aparte dentro de la clase para el conversor
      * a entero
      *
-     * @param texto
+     * @param texto texto a validar
      * @return true/false
      */
     public static boolean esEntero(String texto) {
@@ -90,9 +90,9 @@ public class Validaciones {
     }
 /**
  * Metodo que se encarga de mostrar un mensaje al usuario
- * @param mensaje
- * @param tipo
- * @param titulo 
+ * @param mensaje mensaje que se mostrara al usuario
+ * @param tipo tipo de mensaje
+ * @param titulo titulo del mensaje
  */
     public void mostrarMensaje(String mensaje, String tipo, String titulo) {
         JOptionPane optionPane = new JOptionPane(mensaje);
@@ -110,7 +110,7 @@ public class Validaciones {
  /**
   * Metodo que se encarga de validar que una cadena cumple el formato requerido
   * ideal para numero de serie y placas
-  * @param cadena
+  * @param cadena cadena a validar
   * @return matcher
   */
    public static boolean validarCadena(String cadena) {
@@ -120,7 +120,7 @@ public class Validaciones {
     } 
    /**
     * Metodo que valida si el rfc cumple con el formato debido
-    * @param rfc
+    * @param rfc rfc a validar
     * @return matcher
     */
    public static boolean validarRFC(String rfc) {
@@ -132,7 +132,7 @@ public class Validaciones {
     }
    /**
     * Metodo que valida que un telefono cumple con el formato debido
-    * @param telefono
+    * @param telefono telefono a validar
     * @return matcher
     */
   public static boolean validarTelefono(String telefono) {

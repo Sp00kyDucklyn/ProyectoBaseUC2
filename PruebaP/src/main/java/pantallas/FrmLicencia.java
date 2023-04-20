@@ -31,17 +31,26 @@ public class FrmLicencia extends javax.swing.JFrame {
     /**
      * Creates new form FrmLicencia
      */
+    /**
+     * persona
+     */
     Persona persona = new Persona();
+    /**
+     * tramite
+     */
     Tramite tramite = new Tramite();
+    /**
+     * licenciaDAO
+     */
     LicenciaDAO licenciaDAO = new LicenciaDAO();
-//<<<<<<< HEAD:PruebaP/src/main/java/pantallas/FrmLicencia.java
+
 
 //    public FrmLicencia(Persona persona) {
 ////=======
 //    Licencia licencia = new Licencia();
     /**
      * Metodo constructor que recibe una persona
-     * @param persona 
+     * @param persona persona que tramite licencia
      */
         public FrmLicencia(Persona persona) {
 //>>>>>>> main:PruebaP/src/main/java/pantallas/SiLicencia.java
@@ -54,7 +63,7 @@ public class FrmLicencia extends javax.swing.JFrame {
         /**
          * Metodo que agrega una licencia
          * @return licencia creada
-         * @throws ParseException 
+         * @throws ParseException excepcion
          */
     public Licencia agregarLicencia() throws ParseException {
         //Extrer datos del formulario
@@ -82,7 +91,7 @@ public class FrmLicencia extends javax.swing.JFrame {
 
     /**
      * Metodo que muestra los errores de validacion
-     * @param erroresVaidacion 
+     * @param erroresVaidacion errores de validacion
      */
     private void mostrarErroresValidacion(List<String> erroresVaidacion) {
         //Nos va a concatenar los errores y nos pondra un enter
@@ -211,8 +220,8 @@ public class FrmLicencia extends javax.swing.JFrame {
 
     /**
      * Metodo que busca el rfc
-     * @param rfc
-     * @return 
+     * @param rfc rfc de la persona
+     * @return rfc
      */
     public String buscarRfc(String rfc) {
         //NO DEJAR QUE EL TXT SE PERMITAN ESCRIBIR CARACTERES NO ESPECIFICADOS FALTA
@@ -309,14 +318,20 @@ public class FrmLicencia extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+ * cmbBox
+ * @param evt evt
+ */
     private void cmbVigenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbVigenciaActionPerformed
         // TODO add your handling code here:
         this.calculaCosto();
         this.calculaFecha();
         this.estadoActivo();
     }//GEN-LAST:event_cmbVigenciaActionPerformed
-
+/**
+ * aceptar registro
+ * @param evt evt
+ */
     private void btnAceptarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarRegistroActionPerformed
         ILicenciaDAO licenciaDAO = new LicenciaDAO();
          try {
@@ -356,7 +371,10 @@ public class FrmLicencia extends javax.swing.JFrame {
         }
       
     }//GEN-LAST:event_btnAceptarRegistroActionPerformed
-
+/**
+ * btnCancelar
+ * @param evt evt
+ */
     private void btnCancelarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarRegistroActionPerformed
         // TODO add your handling code here:
         int si_no=  JOptionPane.showConfirmDialog(this, "¿Seguro que desea cancelar este trámite?","Cancelar", JOptionPane.YES_NO_OPTION);
@@ -375,11 +393,17 @@ public class FrmLicencia extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_btnCancelarRegistroActionPerformed
-
+/**
+ * discapacitado
+ * @param evt evt
+ */
     private void chDiscapacitadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chDiscapacitadoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_chDiscapacitadoActionPerformed
-
+/**
+ * historial de licencias
+ * @param evt evt
+ */
     private void btnHistorialLicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialLicenciaActionPerformed
         // TODO add your handling code here:
         if (!buscarRfc(lblRfc.getText()).isEmpty()) {
@@ -405,40 +429,6 @@ public class FrmLicencia extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnHistorialLicenciaActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        <editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(FrmLicencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(FrmLicencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(FrmLicencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(FrmLicencia.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        </editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new FrmLicencia().setVisible(true);
-//            }
-//        });
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptarRegistro;

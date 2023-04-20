@@ -27,6 +27,7 @@ import javax.swing.table.TableColumn;
 
 /**
  * Pantalla de consultas
+ *
  * @author xfs85
  */
 public class FrmConsultas extends javax.swing.JFrame {
@@ -34,25 +35,34 @@ public class FrmConsultas extends javax.swing.JFrame {
     /**
      * Creates new form FrmConsultas
      */
-              JButtonTableCellRenderer buttonRenderer = new JButtonTableCellRenderer();
-              JButton btn = new JButton ("Seleccion");
-              List<Persona> resultados = new ArrayList<>();
+    /**
+     * JbuttonTable
+     */
+    JButtonTableCellRenderer buttonRenderer = new JButtonTableCellRenderer();
+    /**
+     * btn
+     */
+    JButton btn = new JButton("Seleccion");
+    /**
+     * lista de resultados
+     */
+    List<Persona> resultados = new ArrayList<>();
 
 //    private JTable tblResultados;
-     /**
-      * Metodo constructor por omision
-      */
+    /**
+     * Metodo constructor por omision
+     */
     public FrmConsultas() {
         initComponents();
         buscarPersonas();
 //         
         tblResultados.setDefaultRenderer(Object.class, buttonRenderer);
-        
-      
+
     }
-/**
- * Metodo que se encarga de mostrar la pantalla de persona
- */
+
+    /**
+     * Metodo que se encarga de mostrar la pantalla de persona
+     */
     private void mostrarPantallaFrmPersona() {
         Persona persona = new Persona();
         this.setVisible(false);
@@ -60,20 +70,20 @@ public class FrmConsultas extends javax.swing.JFrame {
         frmPersona.setVisible(true);
         this.dispose();
     }
-/**
- * Metodo que se encarga de buscar personas a consultar
- */
+
+    /**
+     * Metodo que se encarga de buscar personas a consultar
+     */
     private void buscarPersonas() {
         String busqueda = txtBusqueda.getText();
         IPersonaDAO personaDAO = new PersonaDAO();
         resultados = personaDAO.listaPersonas();
-        
 
         resultados = personaDAO.desencriptarPersonaLista(resultados);
         // Realizar la consulta utilizando CriteriaBuilder según la opción seleccionada en cmbSeleccion
         if (cmbSeleccion.getSelectedItem().equals("nombre")) {
 //             resultados = personaDAO.buscarNombre(busqueda);
-            
+
             if (!txtBusqueda.getText().equals("")) {
 
                 List<Persona> listaNombre = new ArrayList<Persona>();
@@ -89,7 +99,7 @@ public class FrmConsultas extends javax.swing.JFrame {
                 resultados = listaNombre;
 
             }
-             
+
         } else if (cmbSeleccion.getSelectedItem().equals("rfc")) {
             resultados = personaDAO.buscarRfc(busqueda);
             resultados = personaDAO.desencriptarPersonaLista(resultados);
@@ -108,9 +118,7 @@ public class FrmConsultas extends javax.swing.JFrame {
 // Agregar el renderer de botón a la última columna de la tabla
 //        TableColumn column = tblResultados.getColumnModel().getColumn(tblResultados.getColumnCount() - 1);
 //        column.setCellRenderer(buttonRenderer);
-        
         // Mostrar los resultados en el JTable
-         
         DefaultTableModel model = (DefaultTableModel) tblResultados.getModel();
 //        TableColumn column = tblResultados.getColumnModel().getColumn(tblResultados.getColumnCount() - 1);
 //        column.setCellRenderer(buttonRenderer);
@@ -123,12 +131,10 @@ public class FrmConsultas extends javax.swing.JFrame {
                 model.addRow(new Object[]{p.getFechaNa(), n, p.getRfc(), btn});
 
             }
-            
+
         }
     }
-    
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -223,7 +229,10 @@ public class FrmConsultas extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+ * Regresar al menu
+ * @param evt evt
+ */
     private void btnRegresarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarMenuActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
@@ -231,22 +240,34 @@ public class FrmConsultas extends javax.swing.JFrame {
         menu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarMenuActionPerformed
-
+/**
+ * busca accion txt
+ * @param evt evt
+ */
     private void txtBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBusquedaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBusquedaActionPerformed
-
+/**
+ * busqueda accion btn
+ * @param evt evt
+ */
     private void btnBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBusquedaActionPerformed
         // TODO add your handling code here:
         buscarPersonas();
 
     }//GEN-LAST:event_btnBusquedaActionPerformed
-
+/**
+ * a
+ * @param evt evt
+ */
     private void txtBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyReleased
         // TODO add your handling code here:
         buscarPersonas();
     }//GEN-LAST:event_txtBusquedaKeyReleased
-
+/**
+ * tabla de resultados
+ * @param evt evt
+ */
     private void tblResultadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblResultadosMouseClicked
         // TODO add your handling code here:
         int columna;
@@ -255,7 +276,7 @@ public class FrmConsultas extends javax.swing.JFrame {
 //        int row = evt.getY()/tblResultados.getRowHeight();
         columna = tblResultados.getColumnModel().getColumnIndexAtX(evt.getX());
         row = evt.getY() / tblResultados.getRowHeight();
-       
+
         if (columna <= tblResultados.getColumnCount() && columna >= 0 && row <= tblResultados.getRowCount() && row >= 0) {
             Object objeto = tblResultados.getValueAt(row, columna);
             if (objeto instanceof JButton) {
@@ -270,44 +291,9 @@ public class FrmConsultas extends javax.swing.JFrame {
                 }
             }
         }
-        
-        
-    }//GEN-LAST:event_tblResultadosMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(FrmConsultas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(FrmConsultas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(FrmConsultas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(FrmConsultas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new FrmConsultas().setVisible(true);
-//            }
-//        });
-//    }
+
+    }//GEN-LAST:event_tblResultadosMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBusqueda;
@@ -320,5 +306,4 @@ public class FrmConsultas extends javax.swing.JFrame {
     private javax.swing.JTextField txtBusqueda;
     // End of variables declaration//GEN-END:variables
 
-    
 }

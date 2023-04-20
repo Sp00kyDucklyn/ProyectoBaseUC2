@@ -31,7 +31,10 @@ public class MenuDAO implements IMenuDAO{
     public MenuDAO() {
         entityManagerFactory = Persistence.createEntityManagerFactory("conexionPU");
     }
-
+/**
+     * Método de la clase que regresa el entity manager
+     * @return Regresa el entity manager
+     */
     public EntityManager getEntityManager() {
         return entityManagerFactory.createEntityManager();
     }

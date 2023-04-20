@@ -39,7 +39,7 @@ public class VehiculoDAO implements IVehiculoDAO{
     
      /**
      * Constructor que inicializa al entity manager
-     * @return Regresa
+     * @return Regresa entity manager
      */
     public EntityManager getEntityManager(){
        return entityManagerFactory.createEntityManager();
@@ -64,7 +64,7 @@ public class VehiculoDAO implements IVehiculoDAO{
 /**
  * Metodo que se encarga de buscar el vehiculo por numero de serie
  * @param numSerie parametro numero serie
- * @return 
+ * @return numero de serie
  */
     @Override
     public List<Vehiculo> buscarNumSerie(String numSerie) {
@@ -90,7 +90,12 @@ public class VehiculoDAO implements IVehiculoDAO{
         return typedQuery.getResultList();
     }
     
-     
+     /**
+     * Metodo que se encarga de activar placa del vehiculo
+     *
+     * @param id_vehiculo id del vehiculo
+     * @return placa que se encuentre activa
+     */
     public Placa placaActiva(int id_vehiculo) {
         EntityManager em = getEntityManager();
         EntityTransaction transaccion = em.getTransaction();
@@ -116,8 +121,8 @@ public class VehiculoDAO implements IVehiculoDAO{
     /**
      * Metodo que se encarga de desactivar placa del vehiculo
      *
-     * @param id_vehiculo
-     * @return placa que se encuentre activa
+     * @param id_vehiculo id del vehiculo
+     * @return placa desactivada
      */
     public Placa DesactivarPlaca(int id_vehiculo) {
         EntityManager em = getEntityManager();

@@ -35,9 +35,15 @@ public class Licencia extends Tramite implements Serializable {
 //    private Integer id;
     @Basic
     //Lo pone el usuario
+    /**
+     * Vigencia
+     */
     private String vigencia;
     //Lo calcula el sistema
     //Lo pongo yo en registro persona
+    /**
+     * Discapacitado
+     */
     private String discapacitado;
 
     /**

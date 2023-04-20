@@ -41,7 +41,7 @@ public class PlacaDAO implements IPlacaDAO{
 
      /**
      * Constructor que inicializa al entity manager
-     * @return Regresa
+     * @return Regresa entity manager
      */
     public EntityManager getEntityManager() {
         return entityManagerFactory.createEntityManager();

@@ -37,11 +37,15 @@ public class Placa extends Tramite implements Serializable{
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    @Column(name = "id_placa")
 //    private Integer id;
-    
+    /**
+     * Numero de placss
+     */
     @Basic
     private String numPlacaNu;
     //private double costo;
-    
+    /**
+     * Vehiculo
+     */
     @ManyToOne
     @JoinColumn(name = "id_vehiculo")
     private Vehiculo vehiculo;
@@ -52,14 +56,14 @@ public class Placa extends Tramite implements Serializable{
     }
 /**
  * Metodo constructor que recibe todos los atributos de la placa
- * @param numPlacaNu
- * @param vehiculos
- * @param id
- * @param costo
- * @param fechaExpedicion
- * @param fechaVencimiento
- * @param estado
- * @param persona 
+ * @param numPlacaNu numero de placas del vehiculo
+ * @param vehiculos vehiculo al que pertenece la placa
+ * @param id id de la placa
+ * @param costo costo de la placa
+ * @param fechaExpedicion fecha de expedicion de la placa
+ * @param fechaVencimiento fecha de vencimiento de la placa
+ * @param estado estado de la placa
+ * @param persona persona a la que le pertenece la placa
  */
     public Placa(String numPlacaNu, Vehiculo vehiculos, Integer id, String costo, Date fechaExpedicion, Date fechaVencimiento, String estado, Persona persona) {
         super(id, costo, fechaExpedicion, fechaVencimiento, estado, persona);
@@ -68,12 +72,12 @@ public class Placa extends Tramite implements Serializable{
     }
 /**
  * Metodo constructor que recibe todos los atributos de la placa, excepto la persona
- * @param numPlacaNu
- * @param id
- * @param costo
- * @param fechaExpedicion
- * @param fechaVencimiento
- * @param estado 
+ * @param numPlacaNu numero de placa
+ * @param id id de la placa
+ * @param costo costo de la placa
+ * @param fechaExpedicion fecha de expedicion de la placa
+ * @param fechaVencimiento fecha de vencimiento de la placa
+ * @param estado estado de la placa
  */
     public Placa(String numPlacaNu, Integer id, String costo, Date fechaExpedicion, Date fechaVencimiento, String estado) {
         super(id, costo, fechaExpedicion, fechaVencimiento, estado);
@@ -91,7 +95,7 @@ public class Placa extends Tramite implements Serializable{
     }
 /**
  * Metodo que establece el numero de la placa
- * @param numPlacaNu 
+ * @param numPlacaNu numero de placa
  */
     public void setNumPlacaNu(String numPlacaNu) {
         this.numPlacaNu = numPlacaNu;
@@ -107,14 +111,14 @@ public class Placa extends Tramite implements Serializable{
 //    }
 /**
  * Metodo que obtiene el vehiculo al que pertenecen las placas
- * @return Vehiculo
+ * @return Vehiculo 
  */
     public Vehiculo getVehiculo() {
         return vehiculo;
     }
 /**
  * Metodo que establece el vehiculo al que pertenecen las placas
- * @param vehiculo 
+ * @param vehiculo vehiculo al que pertenece la placa
  */
     public void setVehiculo(Vehiculo vehiculo) {
         this.vehiculo = vehiculo;

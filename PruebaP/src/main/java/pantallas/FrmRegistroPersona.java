@@ -22,7 +22,9 @@ import utileria.Validaciones;
  * @author xfs85
  */
 public class FrmRegistroPersona extends javax.swing.JFrame {
-    
+    /**
+     * personadao
+     */
     PersonaDAO personaDAO = new PersonaDAO();
 //    Validaciones val = new Validaciones();
     /**
@@ -34,8 +36,8 @@ public class FrmRegistroPersona extends javax.swing.JFrame {
     
     /**
      * Metodo que agrega la persona
-     * @return persona
-     * @throws ParseException 
+     * @return persona 
+     * @throws ParseException excepcion
      */
      public Persona agregarPersona() throws ParseException{
         //Extrer datos del formulario
@@ -62,7 +64,7 @@ public class FrmRegistroPersona extends javax.swing.JFrame {
     
      /**
       * Metodo que muestra los errores de validacion
-      * @param erroresVaidacion 
+      * @param erroresVaidacion errores de validacion
       */
     private void mostrarErroresValidacion(List<String> erroresVaidacion){
         //Nos va a concatenar los errores y nos pondra un enter
@@ -109,8 +111,8 @@ public class FrmRegistroPersona extends javax.swing.JFrame {
     
     /**
      * Metodo que valida los datos del formulario
-     * @param datosFormulario
-     * @return 
+     * @param datosFormulario datos del formulario
+     * @return errores de validacion
      */
 //    //Es mejor hacer un metodo de validar por cada uno de los datos del hashmap
     private List<String> validarDatosFormulario(HashMap<String, String> datosFormulario){
@@ -175,8 +177,8 @@ public class FrmRegistroPersona extends javax.swing.JFrame {
     
     /**
      * Metodo que se encarga de buscar el rfc de la persona
-     * @param rfc
-     * @return 
+     * @param rfc rfc de la persona
+     * @return rfc de la persona
      */
     public String buscarRfc(String rfc){
         //NO DEJAR QUE EL TXT SE PERMITAN ESCRIBIR CARACTERES NO ESPECIFICADOS FALTA
@@ -291,7 +293,10 @@ public class FrmRegistroPersona extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+ * btn guardar
+ * @param evt evt
+ */
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
        String rfc = txtRfc.getText();
        String numTelefono = txtNumT.getText();
@@ -325,14 +330,20 @@ public class FrmRegistroPersona extends javax.swing.JFrame {
        }
         
     }//GEN-LAST:event_btnGuardarActionPerformed
-
+/**
+ * volver 
+ * @param evt evt
+ */
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
          this.setVisible(false);
          FrmSeleccionTramite seleccion = new FrmSeleccionTramite();
          seleccion.setVisible(true);
          this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
-
+/**
+ * cancelar 
+ * @param evt evt
+ */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         int si_no=  JOptionPane.showConfirmDialog(this, "¿Seguro que desea cancelar este trámite?","Cancelar", JOptionPane.YES_NO_OPTION);
@@ -351,7 +362,10 @@ public class FrmRegistroPersona extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_btnCancelarActionPerformed
-
+/**
+ * siguiente
+ * @param evt evt
+ */
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         // TODO add your handling code here:
          if (!buscarRfc(txtRfc.getText()).isEmpty()) {
@@ -375,53 +389,28 @@ public class FrmRegistroPersona extends javax.swing.JFrame {
             }
         
     }//GEN-LAST:event_btnSiguienteActionPerformed
-
+/**
+ * txtApellido
+ * @param evt evt
+ */
     private void txtApellidoMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoMActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtApellidoMActionPerformed
-
+/**
+ * tctRfc
+ * @param evt evt
+ */
     private void txtRfcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRfcActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtRfcActionPerformed
-
+/**
+ * txtNumT
+ * @param evt evt
+ */
     private void txtNumTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumTActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNumTActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(FrmRegistroPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(FrmRegistroPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(FrmRegistroPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(FrmRegistroPersona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new FrmRegistroPersona().setVisible(true);
-//            }
-//        });
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;

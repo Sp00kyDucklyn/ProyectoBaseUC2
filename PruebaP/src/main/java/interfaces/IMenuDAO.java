@@ -9,7 +9,12 @@ package interfaces;
  * @author hoshi
  */
 public interface IMenuDAO {
-    
+    /**
+     * Metodo que llama un procedimiento almacenado
+     */
     public void llamarProcedimiento();
+    /**
+     * Metodo que se encarga de agregar personas masivamente
+     */
     public void agregarPersonas();
 }

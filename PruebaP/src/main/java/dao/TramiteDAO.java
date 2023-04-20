@@ -41,7 +41,7 @@ public class TramiteDAO implements ITramiteDAO{
 
     /**
      * Constructor que inicializa al entity manager
-     * @return Regresa
+     * @return Regresa entity manager
      */
     public EntityManager getEntityManager() {
         return entityManagerFactory.createEntityManager();
@@ -238,7 +238,7 @@ public class TramiteDAO implements ITramiteDAO{
      * @param periodoF parametro periodo Fin
      * @param estado parametro estado
      * @param costo parametro costo
-     * @return 
+     * @return lista de tramites
      */
     @Override
     public List<Tramite> listaTramiteL(Date periodoI, Date periodoF, String estado, String costo) {

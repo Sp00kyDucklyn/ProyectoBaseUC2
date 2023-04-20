@@ -45,7 +45,7 @@ public class FrmSeleccionTramite extends javax.swing.JFrame {
     }
     /**
      * Metodo que se encarga de buscar el rfc de la persona
-     * @param rfc
+     * @param rfc rfc de la persona
      * @return rfc de la persona
      */
     public String buscarRfc(String rfc){
@@ -61,7 +61,7 @@ public class FrmSeleccionTramite extends javax.swing.JFrame {
     }
     /**
      * Metodo que busca el numero de serie del vehiculo
-     * @param numSerie
+     * @param numSerie numero de serie del vehiculo
      * @return numero de serie
      */
     public String buscarNumSerie(String numSerie){
@@ -213,12 +213,18 @@ public class FrmSeleccionTramite extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_btnRenovacionActionPerformed
-
+/**
+ * Renovacion
+ * @param evt evt 
+ */
     private void btnRenovacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRenovacionMouseClicked
         // TODO add your handling code here:
        
     }//GEN-LAST:event_btnRenovacionMouseClicked
-
+/**
+ * vrhiculo 
+ * @param evt evt
+ */
     private void btnVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVehiculoActionPerformed
         // TODO add your handling code here:
         //Recordar poner buscar persona por rfc con joption
@@ -250,14 +256,20 @@ public class FrmSeleccionTramite extends javax.swing.JFrame {
         }
      
     }//GEN-LAST:event_btnVehiculoActionPerformed
-
+/**
+ * registrar 
+ * @param evt evt
+ */
     private void btnRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistroMouseClicked
         // TODO add your handling code here:
        
             
         
     }//GEN-LAST:event_btnRegistroMouseClicked
-
+/**
+ * registro
+ * @param evt evt
+ */
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
         // TODO add your handling code here:   
         
@@ -267,7 +279,10 @@ public class FrmSeleccionTramite extends javax.swing.JFrame {
             btnVehiculo.setVisible(true);
         } 
     }//GEN-LAST:event_btnRegistroActionPerformed
-
+/**
+ * btn persona
+ * @param evt evt
+ */
     private void btnPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonaActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
@@ -275,7 +290,10 @@ public class FrmSeleccionTramite extends javax.swing.JFrame {
         registro.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnPersonaActionPerformed
-
+/**
+ * btnPlacass
+ * @param evt evt
+ */
     private void btnPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlacasActionPerformed
         // TODO add your handling code here:
         
@@ -325,7 +343,10 @@ public class FrmSeleccionTramite extends javax.swing.JFrame {
          }
 
     }//GEN-LAST:event_btnPlacasActionPerformed
-
+/**
+ * btnLicencia
+ * @param evt evt
+ */
     private void btnLicenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLicenciaActionPerformed
         // TODO add your handling code here:
           if (!btnLicencia.isSelected()) {
@@ -354,46 +375,15 @@ public class FrmSeleccionTramite extends javax.swing.JFrame {
          }
        
     }//GEN-LAST:event_btnLicenciaActionPerformed
-
+/**
+ * txtRfc
+ * @param evt evt
+ */
     private void txtRfcBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRfcBuscarKeyTyped
         // TODO add your handling code here:
         
     }//GEN-LAST:event_txtRfcBuscarKeyTyped
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(FrmSeleccionTramite.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(FrmSeleccionTramite.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(FrmSeleccionTramite.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(FrmSeleccionTramite.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new FrmSeleccionTramite().setVisible(true);
-//            }
-//        });
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLicencia;

@@ -27,22 +27,45 @@ public class Vehiculo implements Serializable, Cloneable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    /**
+     * id
+     */
     private Integer id;
 
     @Basic
+    /**
+     * numero de serie
+     */
     private String numSerie;
+    /**
+     * marca
+     */
     private String marca;
+    /**
+     * linea
+     */
     private String linea;
+    /**
+     * color
+     */
     private String color;
+    /**
+     * anio
+     */
     private String anio;
 
     @ManyToOne
     @JoinColumn(name = "PERSONA_ID_PERSONA", nullable = false)
+    /**
+     * persona
+     */
     private Persona persona;
     
 //    @OneToMany(mappedBy = "persona", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
 //    private List<Tramite> tramites;
-
+/**
+ * lista de placas
+ */
     @OneToMany(mappedBy = "vehiculo")
     private List<Placa> placas;
 /**
@@ -52,13 +75,13 @@ public class Vehiculo implements Serializable, Cloneable {
     }
 /**
  * Metodo constructor que recibe todos los atributos del vehiculo
- * @param numSerie
- * @param marca
- * @param linea
- * @param color
- * @param anio
- * @param persona
- * @param placas 
+ * @param numSerie numero de serie del vehiculo
+ * @param marca marca del vehiculo
+ * @param linea linea del vehiculo
+ * @param color color del vehiculo
+ * @param anio año del vehiculo
+ * @param persona persona a la que pertenece el vehiculo
+ * @param placas placa a la que pertenece el vehiculo
  */
     public Vehiculo(String numSerie, String marca, String linea, String color, String anio, Persona persona, List<Placa> placas) {
         this.numSerie = numSerie;
@@ -71,12 +94,12 @@ public class Vehiculo implements Serializable, Cloneable {
     }
 /**
  * Metodo constructor que recibe todos los atributos, excepto la lista de placas
- * @param numSerie
- * @param marca
- * @param linea
- * @param color
- * @param anio
- * @param persona 
+ * @param numSerie numero de serie del vehiculo
+ * @param marca marca del vehiculo
+ * @param linea linea del vehiculo
+ * @param color color del vehiculo
+ * @param anio año del vehiculo
+ * @param persona persona a la que pertenece el vehiculo
  */
     public Vehiculo(String numSerie, String marca, String linea, String color, String anio, Persona persona) {
 
@@ -91,7 +114,7 @@ public class Vehiculo implements Serializable, Cloneable {
     
     /**
      * Metodo que agrega la placa
-     * @param placa 
+     * @param placa placa del vehiculo
      */
      public void agregaPlaca(Placa placa){
         placas.add(placa);
@@ -105,7 +128,7 @@ public class Vehiculo implements Serializable, Cloneable {
     }
 /**
  * Metodo que establece el id del vehiculo
- * @param id 
+ * @param id id del vehiculo
  */
     public void setId(Integer id) {
         this.id = id;
@@ -121,7 +144,7 @@ public class Vehiculo implements Serializable, Cloneable {
     }
 /**
  * Metodo que establece la marca del vehiculo
- * @param marca 
+ * @param marca marca del vehiculo
  */
     public void setMarca(String marca) {
         this.marca = marca;
@@ -135,7 +158,7 @@ public class Vehiculo implements Serializable, Cloneable {
     }
 /**
  * Metodo que establece la linea del vehiculo
- * @param linea 
+ * @param linea linea del vehiculo
  */
     public void setLinea(String linea) {
         this.linea = linea;
@@ -150,21 +173,21 @@ public class Vehiculo implements Serializable, Cloneable {
 /**
  * 
  * Metodo que establece el color del vehiculo
- * @param color 
+ * @param color color del vehiculo
  */
     public void setColor(String color) {
         this.color = color;
     }
 /**
  * Metodo que obtiene el año del vehiculo
- * @return 
+ * @return año del vehiculo
  */
     public String getAnio() {
         return anio;
     }
 /**
  * Metodo que establece el año del vehiculo
- * @param anio 
+ * @param anio año del vehiculo
  */
     public void setAnio(String anio) {
         this.anio = anio;
@@ -178,7 +201,7 @@ public class Vehiculo implements Serializable, Cloneable {
     }
 /**
  * Metodo que establece la persona dueña del vehiculo
- * @param persona 
+ * @param persona persona a la que pertenece el vehiculo
  */
     public void setPersona(Persona persona) {
         this.persona = persona;
@@ -192,7 +215,7 @@ public class Vehiculo implements Serializable, Cloneable {
     }
 /**
  * Metodo que establece el numero de serie del vehiculo
- * @param numSerie 
+ * @param numSerie numero de serie del vehiculo
  */
     public void setNumSerie(String numSerie) {
         this.numSerie = numSerie;
@@ -206,7 +229,7 @@ public class Vehiculo implements Serializable, Cloneable {
     }
 /**
  * Metodo que establece las placas del vehiculo
- * @param placas 
+ * @param placas placas del vehiculo
  */
     public void setPlacas(List<Placa> placas) {
         this.placas = placas;

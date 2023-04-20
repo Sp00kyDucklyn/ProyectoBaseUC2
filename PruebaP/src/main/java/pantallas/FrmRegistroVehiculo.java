@@ -27,14 +27,22 @@ import utileria.Validaciones;
  * @author xfs85
  */
 public class FrmRegistroVehiculo extends javax.swing.JFrame {
-
+/**
+ * vehiculoDAO
+ */
     VehiculoDAO vehiculoDAO = new VehiculoDAO();
+    /**
+     * ¨persona
+     */
     private Persona persona;
+    /**
+     * vehiculo
+     */
     private Vehiculo vehiculo;
 
     /**
      * Metodo constructor que recibe una persona
-     * @param persona
+     * @param persona persona que hace el registro
      */
     public FrmRegistroVehiculo(Persona persona) {
         this.persona = persona;
@@ -44,7 +52,7 @@ public class FrmRegistroVehiculo extends javax.swing.JFrame {
 /**
  * Metodo que agrega vehiculos
  * @return vehiculo
- * @throws ParseException 
+ * @throws ParseException exception
  */
     public Vehiculo agregarVehiculo() throws ParseException {
         //Extrer datos del formulario
@@ -68,7 +76,7 @@ public class FrmRegistroVehiculo extends javax.swing.JFrame {
     }
 /**
  * Metodo que muestra los errores de validacion
- * @param erroresValidacion 
+ * @param erroresValidacion errores de validacion
  */
     private void mostrarErroresValidacion(List<String> erroresValidacion) {
         //Nos va a concatenar los errores y nos pondra un enter
@@ -101,7 +109,7 @@ public class FrmRegistroVehiculo extends javax.swing.JFrame {
 
     /**
      * Metodo que valida los datos del formulario
-     * @param datosFormulario
+     * @param datosFormulario datos del formulario
      * @return errores de validacion
      */
     private List<String> validarDatosFormulario(HashMap<String, String> datosFormulario) {
@@ -121,8 +129,8 @@ public class FrmRegistroVehiculo extends javax.swing.JFrame {
     }
     /**
      * Metodo que verifica el numero de serie
-     * @param numSerie
-     * @return 
+     * @param numSerie numero de serie
+     * @return nimero de serie
      */
        private String buscarNumSerie(String numSerie) {
         txtNumSerie.getText();
@@ -232,15 +240,24 @@ public class FrmRegistroVehiculo extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+ * numSerietxt
+ * @param evt 
+ */
     private void txtNumSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumSerieActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNumSerieActionPerformed
-
+/**
+ * marcatxt
+ * @param evt evt 
+ */
     private void txtMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMarcaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMarcaActionPerformed
-
+/**
+ * guardar btn
+ * @param evt evt
+ */
     private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
        
         List<String> erroresValidacion = new LinkedList<>();
@@ -271,14 +288,20 @@ public class FrmRegistroVehiculo extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_botonGuardarActionPerformed
-
+/**
+ * cancelar
+ * @param evt evt
+ */
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
         this.setVisible(false);
         FrmSeleccionTramite seleccion = new FrmSeleccionTramite();
         seleccion.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_botonCancelarActionPerformed
-
+/**
+ * btnSiguiente
+ * @param evt evt
+ */
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         // TODO add your handling code here:
 //<<<<<<< HEAD:PruebaP/src/main/java/pantallas/FrmRegistroVehiculo.java
@@ -304,7 +327,10 @@ public class FrmRegistroVehiculo extends javax.swing.JFrame {
 
 //>>>>>>> main:PruebaP/src/main/java/pantallas/SiPlaca.java
     }//GEN-LAST:event_btnSiguienteActionPerformed
-
+/**
+ * btnRegreso
+ * @param evt evt
+ */
     private void btnRegresoSeleccionTramiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresoSeleccionTramiteActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
@@ -313,41 +339,7 @@ public class FrmRegistroVehiculo extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnRegresoSeleccionTramiteActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(FrmRegistroVehiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(FrmRegistroVehiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(FrmRegistroVehiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(FrmRegistroVehiculo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new FrmRegistroVehiculo().setVisible(true);
-//            }
-//        });
-//    }
-
+ 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonCancelar;
     private javax.swing.JButton botonGuardar;
