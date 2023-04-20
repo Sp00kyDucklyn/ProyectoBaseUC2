@@ -7,10 +7,12 @@ package pantallas;
 import dao.LicenciaDAO;
 import dao.PersonaDAO;
 import dao.TramiteDAO;
+import dao.VehiculoDAO;
 import dominio.Licencia;
 import dominio.Persona;
 import dominio.Placa;
 import dominio.Tramite;
+import dominio.Vehiculo;
 import interfaces.ITramiteDAO;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,23 +30,26 @@ public class FrHistorialPlaca extends javax.swing.JFrame {
      */
     Persona persona = new Persona();
     PersonaDAO personaDAO = new PersonaDAO();
+    VehiculoDAO vehiculoDAO = new VehiculoDAO();
+    Vehiculo vehiculo = new Vehiculo();
     Tramite tramite = new Tramite();
-    LicenciaDAO licenciaDAO = new LicenciaDAO();
+    //LicenciaDAO licenciaDAO = new LicenciaDAO();
     TramiteDAO tramiteDAO = new TramiteDAO();
     private List<Tramite> listaPDF;
     
-    public FrHistorialPlaca(Persona persona) {
+    public FrHistorialPlaca(Vehiculo vehiculo) {
 //        this.listaPDF = new ArrayList<Tramite>();
 
         initComponents();
-        this.persona = persona;
-        lblRfc.setText(persona.getRfc());
+        //this.persona = persona;
+        this.vehiculo = vehiculo;
+        lblRfc.setText(vehiculo.getPersona().getRfc());
         tramite.getPersona();
-        personaDAO.desencriptarPersona(persona);
-         String n = persona.getNombre() + " "
-                        + persona.getApellidoP() + " " + persona.getApellidoM();
-         lblNombrePersona.setText(n);
-            buscarTramites();
+        personaDAO.desencriptarPersona(vehiculo.getPersona());
+         String n = vehiculo.getPersona().getNombre() + " "
+                        + vehiculo.getPersona().getApellidoP() + " " + vehiculo.getPersona().getApellidoM();
+        lblNombrePersona.setText(n);
+        buscarTramites();
     }
     
        public void buscarTramites(){

@@ -29,6 +29,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -235,7 +236,7 @@ public class FrmReportes extends javax.swing.JFrame {
 
     private void btnGenerarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarReporteActionPerformed
         // TODO add your handling code here:
-        int opcion = JOptionPane.showConfirmDialog(null, "¿Está seguro de ejecutar este comando?", "Confirmar", JOptionPane.YES_NO_OPTION);
+        int opcion = JOptionPane.showConfirmDialog(null, "¿Está seguro de imprimir el pdf?", "Confirmar", JOptionPane.YES_NO_OPTION);
 
         if (opcion == JOptionPane.YES_OPTION) {
             List<JasperReporte> pdf = new ArrayList<JasperReporte>();
@@ -253,7 +254,7 @@ public class FrmReportes extends javax.swing.JFrame {
                 if (tramite instanceof Licencia) {
                     reporte.setTipoTramite("licencia");
                 }else{
-                    reporte.setTipoTramite("sabradios");
+                    //reporte.setTipoTramite("sabradios");
                 }
 
                 reporte.setNombre(nombreCompleto);
@@ -281,9 +282,12 @@ public class FrmReportes extends javax.swing.JFrame {
 
                 // Llenar el reporte con los datos
                 JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,  parametro, beanColDataSource);
-
+                
+                
+                JasperViewer visu= new JasperViewer(jasperPrint, false);
+                visu.setVisible(true);
                 // Visualizar el reporte
-                JasperExportManager.exportReportToPdfFile(jasperPrint, "./reporteTramites.pdf");
+               // JasperExportManager.exportReportToPdfFile(jasperPrint, "./reporteTramites.pdf");
             } catch (Exception e) {
                 System.out.println(e);
             }

@@ -38,7 +38,7 @@ public class Placa extends Tramite implements Serializable{
     private String numPlacaNu;
     //private double costo;
     
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @ManyToOne
     @JoinColumn(name = "id_vehiculo")
     private Vehiculo vehiculo;
 

@@ -43,7 +43,7 @@ public class Vehiculo implements Serializable, Cloneable {
 //    @OneToMany(mappedBy = "persona", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
 //    private List<Tramite> tramites;
 
-    @OneToMany(mappedBy = "vehiculo", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToMany(mappedBy = "vehiculo")
     private List<Placa> placas;
 
     public Vehiculo() {

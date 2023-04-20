@@ -111,7 +111,7 @@ public class FrHistorialLicencia extends javax.swing.JFrame {
         getContentPane().add(lblNombrePersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, 350, 40));
         getContentPane().add(lblRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 80, 190, 40));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/Consultas (1).png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesPantallas/Consultas_1.png"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jButton1.setText("jButton1");

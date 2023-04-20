@@ -76,19 +76,19 @@
 				<reportElement x="382" y="0" width="100" height="20" uuid="c5c02ab7-2b83-41b5-93b6-8313c3b853e9"/>
 			</rectangle>
 			<textField>
-				<reportElement x="82" y="0" width="100" height="20" uuid="2ef897e3-8278-418e-91e9-94a605bd8bde"/>
+				<reportElement x="82" y="0" width="100" height="125" uuid="2ef897e3-8278-418e-91e9-94a605bd8bde"/>
 				<textFieldExpression><![CDATA[$F{tipoTramite}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="182" y="0" width="100" height="20" uuid="d464f46d-6c7c-40b8-9b62-2174cfda7714"/>
+				<reportElement x="182" y="0" width="100" height="125" uuid="d464f46d-6c7c-40b8-9b62-2174cfda7714"/>
 				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="282" y="0" width="100" height="20" uuid="648f9e2f-9ff5-46f6-bb7e-bb7c6642d108"/>
+				<reportElement x="282" y="0" width="100" height="125" uuid="648f9e2f-9ff5-46f6-bb7e-bb7c6642d108"/>
 				<textFieldExpression><![CDATA[$F{costo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="382" y="0" width="100" height="20" uuid="8ceddf3c-48c9-4c2b-bfaa-ffdcdcbb7e26"/>
+				<reportElement x="382" y="0" width="100" height="125" uuid="8ceddf3c-48c9-4c2b-bfaa-ffdcdcbb7e26"/>
 				<textFieldExpression><![CDATA[$F{periodo}]]></textFieldExpression>
 			</textField>
 		</band>
