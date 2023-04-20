@@ -23,19 +23,29 @@ import javax.persistence.criteria.Root;
  * @author hoshi
  */
 public class VehiculoDAO implements IVehiculoDAO{
+    
+    //Atributo de la clase que inicializa el entity manager en null
     private EntityManagerFactory entityManagerFactory = null;
 
+      /**
+     * Metodo que crea la conexion con la BD
+     */
     public VehiculoDAO() {
         entityManagerFactory = Persistence.createEntityManagerFactory("conexionPU");
     }
 
+    
+     /**
+     * Constructor que inicializa al entity manager
+     * @return Regresa
+     */
     public EntityManager getEntityManager(){
        return entityManagerFactory.createEntityManager();
     }
     
     /**
      * Metodo que crea el vehiculo
-     * @param vehiculo 
+     * @param vehiculo parametro vehiculo
      */
     @Override
     public void crearVehiculo(Vehiculo vehiculo) {
@@ -51,7 +61,7 @@ public class VehiculoDAO implements IVehiculoDAO{
     }
 /**
  * Metodo que se encarga de buscar el vehiculo por numero de serie
- * @param numSerie
+ * @param numSerie parametro numero serie
  * @return 
  */
     @Override

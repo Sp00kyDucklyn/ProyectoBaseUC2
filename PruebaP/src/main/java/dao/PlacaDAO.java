@@ -28,6 +28,7 @@ import javax.persistence.StoredProcedureQuery;
  */
 public class PlacaDAO implements IPlacaDAO{
 
+    //Atributo de la clase
     private EntityManagerFactory entityManagerFactory = null;
     
     /**
@@ -38,12 +39,17 @@ public class PlacaDAO implements IPlacaDAO{
 
     }
 
+     /**
+     * Constructor que inicializa al entity manager
+     * @return Regresa
+     */
     public EntityManager getEntityManager() {
         return entityManagerFactory.createEntityManager();
     }
+    
     /**
      * Metodo que crea la placa
-     * @param placa 
+     * @param placa parametro placa
      */
     @Override
     public void crearPlaca(Placa placa) {
@@ -58,7 +64,7 @@ public class PlacaDAO implements IPlacaDAO{
     }
 /**
  * Metodo que se encarga de llamar a la persona dueña de la placa por el rfc
- * @param rfc
+ * @param rfc parametro rfc
  * @return persona
  */
     @Override
@@ -82,7 +88,7 @@ public class PlacaDAO implements IPlacaDAO{
     }
 /**
  * Metodo que crea el combo box de vehiculos
- * @param cmbVehiculos 
+ * @param cmbVehiculos parametro comboBox
  */
     @Override
     public void crearCmbVehiculos(JComboBox<Vehiculo> cmbVehiculos) {
@@ -109,7 +115,7 @@ public class PlacaDAO implements IPlacaDAO{
 
 /**
  * Metodo que se encarga de llamar la lista de placas
- * @param nuSerie
+ * @param nuSerie parametro numero de serie
  * @return lista de placas
  */
     @Override
@@ -135,7 +141,7 @@ public class PlacaDAO implements IPlacaDAO{
     }
     /**
      * Metodo que se encarga de activar la placa del vehiculo
-     * @param id_vehiculo
+     * @param numSerie parametro numero de Serie
      * @return placa activa
      */
     @Override
@@ -162,7 +168,7 @@ public class PlacaDAO implements IPlacaDAO{
     /**
      * Metodo que se encarga de desactivar placa del vehiculo
      *
-     * @param numSerie
+     * @param numSerie parametro numero de Serie
      * @return placa que se encuentre activa
      */
     @Override

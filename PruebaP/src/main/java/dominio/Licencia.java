@@ -50,13 +50,13 @@ public class Licencia extends Tramite implements Serializable {
      * Metodo constructor que recibe todos los atributos de la licenciam, menos
      * el id
      *
-     * @param vigencia
-     * @param fechaVencimiento
-     * @param discapacitado
-     * @param costo
-     * @param fechaExpedicion
-     * @param estado
-     * @param persona
+     * @param vigencia parametro vigencia
+     * @param fechaVencimiento fechanacimiento
+     * @param discapacitado discapacitado
+     * @param costo costo
+     * @param fechaExpedicion fecha expedicion
+     * @param estado estado
+     * @param persona persona
      */
     public Licencia(String vigencia, Date fechaVencimiento, String discapacitado, String costo, Date fechaExpedicion, String estado, Persona persona) {
         super(costo, fechaVencimiento, fechaExpedicion, estado, persona);
@@ -67,14 +67,14 @@ public class Licencia extends Tramite implements Serializable {
     /**
      * Metodo constructor que recibe todos los atributos de la licencia
      *
-     * @param vigencia
-     * @param discapacitado
-     * @param id
-     * @param costo
-     * @param fechaExpedicion
-     * @param fechaVencimiento
-     * @param estado
-     * @param persona
+     * @param vigencia vigencia
+     * @param discapacitado discapacitado
+     * @param id id
+     * @param costo costo
+     * @param fechaExpedicion fechaExpedicion
+     * @param fechaVencimiento fechaVencimiento
+     * @param estado estado
+     * @param persona persona
      */
     public Licencia(String vigencia, String discapacitado, Integer id, String costo, Date fechaExpedicion, Date fechaVencimiento, String estado, Persona persona) {
         super(id, costo, fechaExpedicion, fechaVencimiento, estado, persona);
@@ -85,7 +85,7 @@ public class Licencia extends Tramite implements Serializable {
     /**
      * Metodo que obtiene la vigencia de la licencia
      *
-     * @return vigencia
+     * @return vigencia regresa vigencia
      */
     public String getVigencia() {
         return vigencia;
@@ -94,7 +94,7 @@ public class Licencia extends Tramite implements Serializable {
     /**
      * Metodo que establece la vigencia de la licencia
      *
-     * @param vigencia
+     * @param vigencia vigencia
      */
     public void setVigencia(String vigencia) {
         this.vigencia = vigencia;
@@ -102,14 +102,14 @@ public class Licencia extends Tramite implements Serializable {
 
     /**
      * Metodo que obtiene si la licencia es para persona discapacitada
-     * @return 
+     * @return regresa discapacitado
      */
     public String getDiscapacitado() {
         return discapacitado;
     }
 /**
  * Metodo que establece si la licencia es para persona discapacitada
- * @param discapacitado 
+ * @param discapacitado discapacitado
  */
     public void setDiscapacitado(String discapacitado) {
         this.discapacitado = discapacitado;

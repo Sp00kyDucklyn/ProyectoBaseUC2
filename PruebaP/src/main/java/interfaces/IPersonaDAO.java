@@ -17,7 +17,6 @@ import java.util.List;
 public interface IPersonaDAO {
     
   public void crearPersona(Persona persona);
-  public void datosFormulatio();
   
     public List<Persona> buscarRfc(String rfc);
 
@@ -28,10 +27,6 @@ public interface IPersonaDAO {
     public List<Persona> listaPersonas();
 
     public List<Tramite> listaTramite();
-
-    public List<Vehiculo> listaVehiculo();
-    
-    public List<Persona> buscarRfcEstado(String rfc);
     
     public List<Persona> desencriptarPersonaLista(List<Persona> personas);
           

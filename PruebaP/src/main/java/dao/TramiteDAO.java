@@ -30,6 +30,7 @@ import javax.persistence.criteria.Root;
  */
 public class TramiteDAO implements ITramiteDAO{
     
+    //Atributo de la clase
      private EntityManagerFactory entityManagerFactory = null;
 /**
  * Metodo constructor que establece la conexion con la BD
@@ -38,15 +39,19 @@ public class TramiteDAO implements ITramiteDAO{
         entityManagerFactory = Persistence.createEntityManagerFactory("conexionPU");
     }
 
+    /**
+     * Constructor que inicializa al entity manager
+     * @return Regresa
+     */
     public EntityManager getEntityManager() {
         return entityManagerFactory.createEntityManager();
     }
 
 /**
  * Metodo que se encarga de buscar tramites
- * @param rfc
- * @param nombre
- * @param anioNacimiento
+ * @param rfc parametro rfc
+ * @param nombre parametro nombre
+ * @param anioNacimiento parametro año nacimiento
  * @return lista de tramites
  */
     public List<Tramite> buscarTramites(String rfc,String nombre, Date anioNacimiento) {
@@ -84,7 +89,7 @@ public class TramiteDAO implements ITramiteDAO{
     }
 /**
  * Metodo que se encarga de buscar metodos por nombre
- * @param nombre
+ * @param nombre parametro nombre
  * @return lista de tramites
  */
     public List<Tramite> buscarNombre(String nombre) {
@@ -112,10 +117,10 @@ public class TramiteDAO implements ITramiteDAO{
 
 /**
  * Metodo que lista los tramites
- * @param periodoI
- * @param periodoF
- * @param licencia
- * @param placa
+ * @param periodoI parametro periodo Inicio
+ * @param periodoF parametro periodo Final
+ * @param licencia parametro licencia
+ * @param placa parametro placa
  * @return lista de tramites
  */
     public List<Tramite> listaTramite(Date periodoI, Date periodoF,boolean licencia, boolean placa) {
@@ -159,7 +164,7 @@ public class TramiteDAO implements ITramiteDAO{
     }
 /**
  * Metodo que se encarga de desencriptar tramites
- * @param lista
+ * @param lista parametro lista
  * @return tramites
  */
     public List<Tramite> desencriptarPersonaTramite(List<Tramite> lista) {
@@ -184,7 +189,7 @@ public class TramiteDAO implements ITramiteDAO{
 
     /**
      * Metodo que crea tramites
-     * @param tramite 
+     * @param tramite parametro tramite
      */
     @Override
     public void crearTramite(Tramite tramite) {
@@ -201,7 +206,7 @@ public class TramiteDAO implements ITramiteDAO{
 
     /**
      * Metodo que gestiona el estado del tramite
-     * @param id_tramite 
+     * @param id_tramite parametro id
      */
     @Override
     public void estadoTramite(int id_tramite) {
@@ -229,10 +234,10 @@ public class TramiteDAO implements ITramiteDAO{
 
     /**
      * Metodo que lista los tramites
-     * @param periodoI
-     * @param periodoF
-     * @param estado
-     * @param costo
+     * @param periodoI parametro periodo Inicio
+     * @param periodoF parametro periodo Fin
+     * @param estado parametro estado
+     * @param costo parametro costo
      * @return 
      */
     @Override

@@ -28,6 +28,7 @@ import javax.persistence.criteria.Root;
  */
 public class PersonaDAO implements IPersonaDAO{
     
+    //Atributo de la clase que inicializa el entity manager en null
     private EntityManagerFactory entityManagerFactory = null;
     
     /**
@@ -37,13 +38,17 @@ public class PersonaDAO implements IPersonaDAO{
         entityManagerFactory = Persistence.createEntityManagerFactory("conexionPU");
     }
 
+    /**
+     * Constructor que inicializa al entity manager
+     * @return Regresa
+     */
     public EntityManager getEntityManager() {
         return entityManagerFactory.createEntityManager();
     }
     
 /**
  * Metodo que crea la persona
- * @param persona 
+ * @param persona parametro persona
  */
     @Override
     public void crearPersona(Persona persona) {
@@ -66,15 +71,10 @@ public class PersonaDAO implements IPersonaDAO{
         em.close();
     }
     }
-    
-    @Override
-    public void datosFormulatio() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     /**
      * Metodo que lista los tramites de la persona
-     * @return 
+     * @return Regresa
      */
     @Override
     public List<Tramite> listaTramite() {
@@ -87,14 +87,10 @@ public class PersonaDAO implements IPersonaDAO{
          throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    @Override
-    public List<Vehiculo> listaVehiculo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     /**
      * Metodo que se encarga de buscar a una persona por el rfc
-     * @param rfc
+     * @param rfc parametro rfc
      * @return lista de personas
      */
     @Override
@@ -123,7 +119,7 @@ public class PersonaDAO implements IPersonaDAO{
 
     /**
      * Metodo que se encarga de buscar a la persona por su nombre
-     * @param nombre
+     * @param nombre parametro nombre
      * @return lista de personas
      */
     @Override
@@ -151,7 +147,7 @@ public class PersonaDAO implements IPersonaDAO{
     }
 /**
  * Metodo que se encarga de buscar a una persona por su año de nacimiento
- * @param anioNacimiento
+ * @param anioNacimiento parametro año de nacimiento
  * @return lista de personas
  */
     @Override
@@ -199,11 +195,6 @@ public class PersonaDAO implements IPersonaDAO{
         return typedQuery.getResultList();
 
     }
-
-    @Override
-    public List<Persona> buscarRfcEstado(String rfc) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
     /**
      * Metodo que se encarga de desencriptar la información de las personas
@@ -238,4 +229,5 @@ public class PersonaDAO implements IPersonaDAO{
         }
         return personas;
     }
+
 }

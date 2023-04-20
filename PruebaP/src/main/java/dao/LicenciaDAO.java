@@ -32,13 +32,17 @@ public class LicenciaDAO implements ILicenciaDAO {
 
     }
 
+    /**
+     * Método de la clase que regresa el entity manager
+     * @return Regresa el entity manager
+     */
     public EntityManager getEntityManager() {
         return entityManagerFactory.createEntityManager();
     }
 
     /**
      * Metodo que crea la licencia
-     * @param licencia 
+     * @param licencia //parametro licencia
      */
     @Override
     public void crearLicencia(Licencia licencia) {
@@ -55,8 +59,8 @@ public class LicenciaDAO implements ILicenciaDAO {
  
 /**
  * Metodo que llama la persona por rfc
- * @param rfc
- * @return 
+ * @param rfc parametro rfc
+ * @return regreso
  */
     @Override
     public List<Persona> llamarRFC(String rfc) {
